@@ -9,7 +9,7 @@
     <p>medios de pago <a href="#">Terminos y Condiciones</a></p>
     <div class="container">
   <button class="button">
-  <a href="index.php?pg=1009">
+  <a href="index.php?pg=10013">
     <p>tarjeta otros</p>
   </button>
 
