@@ -22,11 +22,11 @@
                         <label for="reg-log"></label>
                         <div class="card-3d-wrap mx-auto">
                             <div class="card-3d-wrapper">
-                                <div class="card-front">
+                                <div class="card-front" id="bx-login">
                                     <div class="center-wrap">
                                         <div class="section text-center">
                                             <h4 class="mb-4 pb-3">Iniciar Sesión</h4>
-                                            <form action="">
+                                            <form action="../home.php">
                                                 <div class="form-group">
                                                     <input type="text" class="form-style" placeholder="Usuario" name=""
                                                         id="" required>
@@ -47,7 +47,7 @@
                                                             d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1" />
                                                     </svg>
                                                 </div>
-                                                <input type="submit" value="Ingresar" class="btn mt-4">
+                                                <input type="submit" value="Ingresar" class="btn mt-4" id="">
                                             </form>
                                             <p class="mb-0 mt-4 text-center"><a href="vwRecContrasena.php" class="link">Olvido su
                                                     contraseña?</a></p>
@@ -59,7 +59,7 @@
                                     <div class="center-wrap">
                                         <div class="section text-center">
                                             <h4 class="mb-3 pb-3">Registrarme</h4>
-                                            <form action="">
+                                            <form action="#">
                                                 <div class="form-group">
                                                     <input type="text" class="form-style" placeholder="Nombre Completo" required>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -137,7 +137,7 @@
                                                             d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1" />
                                                     </svg>
                                                 </div>
-                                                <input type="submit" value="Registrar" class="btn mt-4">
+                                                <input type="submit" value="Registrar" class="btn mt-4" id="btn-registrar">
                                             </form>
                                         </div>
                                     </div>
@@ -149,6 +149,7 @@
             </div>
         </div>
     </div>
+    <script src="../JS/script.js"></script>
 </body>
 
 </html>

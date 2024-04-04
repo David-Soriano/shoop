@@ -22,4 +22,10 @@ function ocultarBx() {
     }
 }
 
+function insertText(text, id) {
+    document.getElementById(id).innerHTML = text;
+}
+
+let btnReg = document.getElementById('btn-registrar');
+let btnLog = document.getElementById('btn-log');
 ocultarBx();

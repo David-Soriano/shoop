@@ -31,6 +31,7 @@
 
         if (!in_array($pg, $excluirVistas)) {
             require_once ("views/vwSlider.php");
+            require_once ("views/vwMrdPrd.php");
             require_once ("views/vwTienda.php");
         }
         // Incluir otras vistas según el valor de $pg

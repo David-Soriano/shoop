@@ -62,7 +62,9 @@
                         </div>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae nam sequi qui sunt
                             quidem vel delectus similique</p>
-                        <p></p>
+                        <div>
+                            <p>Consulta nuestros <a href="index.php?pg=1015">Terminos y Condiciones</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
