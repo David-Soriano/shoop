@@ -179,5 +179,10 @@ grid-area: contact-form;
 }
 body{
     background-image: url(../IMG/Fondo2.jpg);
-    position: center;
-}
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+
+    }
