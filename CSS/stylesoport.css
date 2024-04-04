@@ -177,12 +177,5 @@ grid-area: email;
 .contact-form {
 grid-area: contact-form;
 }
-body{
-    background-image: url(../IMG/Fondo2.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    font-family: 'Arial', sans-serif;
-    height: 100vh;
 
-    }
+    

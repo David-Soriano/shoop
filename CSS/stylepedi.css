@@ -956,11 +956,3 @@
 .bb8:hover .bb8__head::after {
   background-position: 0 0 !important;
 }
-body{
-  background-image: url(../IMG/Fondo2.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    font-family: 'Arial', sans-serif;
-    height: 100vh;
-}

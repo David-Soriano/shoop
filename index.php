@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="CSS/subirprod.css">
     <link rel="stylesheet" href="CSS/recuredu.css">
     <link rel="stylesheet" href="CSS/stylepedi.css">
+    <link rel="stylesheet" href="CSS/styletarjeta.css">
     <title>Tienda G.I.L</title>
 </head>
 
@@ -26,12 +27,12 @@
         <?php
         $pg = isset($_GET["pg"]) ? $_GET["pg"] : NULL;
         // Incluir el slider solo si $pg no es igual a ciertos valores
-        if ($pg != "001" && $pg != "003" && $pg != "1001" && $pg != "1004" && $pg != "1005" && $pg != "1006" && $pg != "1007" && $pg != "1008") {
+        if ($pg != "001" && $pg != "003" && $pg != "1001" && $pg != "1004" && $pg != "1005" && $pg != "1006" && $pg != "1007" && $pg != "1008" && $pg != "10013") {
             require_once("views/vwSlider.php");
         }
 
         // Incluir la tienda solo si $pg no es igual a ciertos valores
-        if ($pg != "001" && $pg != "003" && $pg != "1001" && $pg != "1004" && $pg != "1005" && $pg != "1006" && $pg != "1007" && $pg != "1008") {
+        if ($pg != "001" && $pg != "003" && $pg != "1001" && $pg != "1004" && $pg != "1005" && $pg != "1006" && $pg != "1007" && $pg != "1008" && $pg != "10013") {
             require_once("views/vwTienda.php");
         }
 
@@ -54,6 +55,9 @@
             require_once("views/vwpagos.php");
         } else if ($pg == "1008") {
             require_once("views/vwpedido.php");
+        }
+         else if ($pg == "10013") {
+            require_once("views/vwtarjeta.php");
         }
         ?>
     </section>
