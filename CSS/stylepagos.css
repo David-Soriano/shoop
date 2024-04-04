@@ -3,73 +3,75 @@
     padding: 0;
     box-sizing: border-box;
   } */
-  
-  /* body {
+
+/* body {
     background-image: url(fondo.jpeg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
   }
    */
-  .form-register {
-    width: 400px;
- background-color: #fafafa;
-    padding: 30px;
-    margin: auto;
-    margin-top: 100px;
-    border-radius: 4px;
-    font-family: 'calibri';
-    color: rgb(5, 5, 5);
-    box-shadow: 7px 13px 37px #000;
-  }
-  
-  .form-register h4 {
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-  
-  .controls {
-    width: 100%;
-    background: #dfdada;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    border: 1px solid #fafafa;
-    font-family: 'calibri';
-    font-size: 18px;
-    color: rgb(14, 12, 12);
-  }
-  
-  .form-register p {
-    height: 40px;
-    text-align: center;
-    font-size: 18px;
-    line-height: 40px;
-  }
-  
-  .form-register a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .form-register a:hover {
-    color: rgb(0, 0, 0);
-    text-decoration: underline;
-  }
-  
-  .form-register .botons {
-    width: 100%;
-    background: #1f53c5;
-    border: none;
-    padding: 12px;
-    color: rgb(255, 247, 247);
-    margin: 16px 0;
-    font-size: 16px;
-  }
- img{
+.form-register {
+  width: 400px;
+  background-color: #fafafa;
+  padding: 30px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 4px;
+  font-family: 'calibri';
+  color: rgb(5, 5, 5);
+  box-shadow: 7px 13px 37px #000;
+}
+
+.form-register h4 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.controls {
+  width: 100%;
+  background: #dfdada;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  border: 1px solid #fafafa;
+  font-family: 'calibri';
+  font-size: 18px;
+  color: rgb(14, 12, 12);
+}
+
+.form-register p {
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 40px;
+}
+
+.form-register a {
+  color: white;
+  text-decoration: none;
+}
+
+.form-register a:hover {
+  color: rgb(0, 0, 0);
+  text-decoration: underline;
+}
+
+.form-register .botons {
+  width: 100%;
+  background: #1f53c5;
+  border: none;
+  padding: 12px;
+  color: rgb(255, 247, 247);
+  margin: 16px 0;
+  font-size: 16px;
+}
+
+img {
   width: 30px;
- }
- .btn-conteiner {
+}
+
+.btn-conteiner {
   display: flex;
   justify-content: center;
   --color-text: #ffffff;
@@ -93,7 +95,8 @@
   box-shadow: 0 0 0.2em 0 var(--color-background);
 }
 
-.btn-content:hover, .btn-content:focus {
+.btn-content:hover,
+.btn-content:focus {
   transition: 0.5s;
   -webkit-animation: btn-content 1s;
   animation: btn-content 1s;
@@ -119,7 +122,7 @@
   position: relative;
   top: 6%;
 }
-  
+
 /* SVG */
 #arrow-icon-one {
   transition: 0.4s;

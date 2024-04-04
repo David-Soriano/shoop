@@ -38,7 +38,7 @@
                 </a>
                 <div class="bx-prf-opcs" id="bx-opc-prf">
                     <ul>
-                        <li><a href="">Perfil</a></li>
+                        <li><a href="views/vwConfig.php">Perfil</a></li>
                         <li><a href="views/vwsubirprod.php">Vender</a></li>
                         <li><a href="views/vwLogin.php">Iniciar Sesió</a>n</li>
                         <li><a href="#">Cerrar Sesión</a></li>
