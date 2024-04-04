@@ -62,7 +62,7 @@
                 <div class="flex">
                     <div class="inputBox">
                         <span>exp year :</span>
-                        <input type="number" placeholder="2022">
+                        <input type="number" placeholder="2024">
                     </div>
                     <div class="inputBox">
                         <span>CVV :</span>
