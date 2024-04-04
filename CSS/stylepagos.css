@@ -100,7 +100,7 @@
     height: 50px;
     border-radius: 1em;
     background-size: 100%;
-    background: rgb(137,60,21);
+    background: rgb(102, 43, 13);
     background: linear-gradient(90deg, rgba(137,60,21,1) 0%, rgba(255,222,68,1) 17%, rgba(177,116,30,1) 24%, rgba(255,231,82,1) 40%, rgba(224,147,38,1) 50%, rgba(228,150,42,1) 59%, rgba(176,120,27,1) 70%, rgba(239,179,51,1) 85%, rgba(135,58,26,1) 100%);
     z-index: -1;
   }

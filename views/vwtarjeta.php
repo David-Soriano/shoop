@@ -56,7 +56,7 @@
                 </div>
                 <div class="inputBox">
                     <span>exp month :</span>
-                    <input type="text" placeholder="january">
+                    <input type="text" placeholder="january p">
                 </div>
 
                 <div class="flex">

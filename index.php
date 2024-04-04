@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="CSS/recuredu.css">
     <link rel="stylesheet" href="CSS/stylepedi.css">
     <link rel="stylesheet" href="CSS/styletarjeta.css">
+    <link rel="stylesheet" href="CSS/styletarjet a.css">
     <title>Tienda G.I.L</title>
 </head>
 
