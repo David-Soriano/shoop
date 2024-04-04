@@ -125,8 +125,8 @@
 														<span class="coin"></span>
 													</span>
 													<span class="text">confirmar </span>
-												</a>
-
+			
+</a>
 											</button>
 
 										</div>
