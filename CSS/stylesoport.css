@@ -178,5 +178,6 @@ grid-area: email;
 grid-area: contact-form;
 }
 body{
-    background-image: url(../IMG/Fondo.jpeg);
+    background-image: url(../IMG/Fondo2.jpg);
+    position: center;
 }
