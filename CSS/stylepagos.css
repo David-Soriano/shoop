@@ -3,177 +3,138 @@
     padding: 0;
     box-sizing: border-box;
   } */
-
-/* body {
+  
+  /* body {
     background-image: url(fondo.jpeg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
   }
    */
-.form-register {
-  width: 400px;
-  background-color: #fafafa;
-  padding: 30px;
-  margin: auto;
-  margin-top: 100px;
-  border-radius: 4px;
-  font-family: 'calibri';
-  color: rgb(5, 5, 5);
-  box-shadow: 7px 13px 37px #000;
-}
 
-.form-register h4 {
-  font-size: 22px;
-  margin-bottom: 20px;
-}
-
-.controls {
-  width: 100%;
-  background: #dfdada;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 16px;
-  border: 1px solid #fafafa;
-  font-family: 'calibri';
-  font-size: 18px;
-  color: rgb(14, 12, 12);
-}
-
-.form-register p {
-  height: 40px;
-  text-align: center;
-  font-size: 18px;
-  line-height: 40px;
-}
-
-.form-register a {
-  color: white;
-  text-decoration: none;
-}
-
-.form-register a:hover {
-  color: rgb(0, 0, 0);
-  text-decoration: underline;
-}
-
-.form-register .botons {
-  width: 100%;
-  background: #1f53c5;
-  border: none;
-  padding: 12px;
-  color: rgb(255, 247, 247);
-  margin: 16px 0;
-  font-size: 16px;
-}
-
-img {
-  width: 30px;
-}
-
-.btn-conteiner {
-  display: flex;
-  justify-content: center;
-  --color-text: #ffffff;
-  --color-background: #094a80;
-  --color-outline: #ff145b80;
-  --color-shadow: #00000080;
-}
-
-.btn-content {
-  display: flex;
-  align-items: center;
-  padding: 5px 30px;
-  text-decoration: none;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 30px;
-  color: var(--color-text);
-  background: var(--color-background);
-  transition: 1s;
-  border-radius: 100px;
-  box-shadow: 0 0 0.2em 0 var(--color-background);
-}
-
-.btn-content:hover,
-.btn-content:focus {
-  transition: 0.5s;
-  -webkit-animation: btn-content 1s;
-  animation: btn-content 1s;
-  outline: 0.1em solid transparent;
-  outline-offset: 0.2em;
-  box-shadow: 0 0 0.4em 0 var(--color-background);
-}
-
-.btn-content .icon-arrow {
-  transition: 0.5s;
-  margin-right: 0px;
-  transform: scale(0.6);
-}
-
-.btn-content:hover .icon-arrow {
-  transition: 0.5s;
-  margin-right: 25px;
-}
-
-.icon-arrow {
-  width: 20px;
-  margin-left: 15px;
-  position: relative;
-  top: 6%;
-}
-
-/* SVG */
-#arrow-icon-one {
-  transition: 0.4s;
-  transform: translateX(-60%);
-}
-
-#arrow-icon-two {
-  transition: 0.5s;
-  transform: translateX(-30%);
-}
-
-.btn-content:hover #arrow-icon-three {
-  animation: color_anim 1s infinite 0.2s;
-}
-
-.btn-content:hover #arrow-icon-one {
-  transform: translateX(0%);
-  animation: color_anim 1s infinite 0.6s;
-}
-
-.btn-content:hover #arrow-icon-two {
-  transform: translateX(0%);
-  animation: color_anim 1s infinite 0.4s;
-}
-
-/* SVG animations */
-@keyframes color_anim {
-  0% {
-    fill: white;
+   
+  .form-register {
+    width: 400px;
+ background-color: #fafafa;
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 4px;
+    font-family: 'calibri';
+    color: rgb(5, 5, 5);
+    box-shadow: 7px 13px 37px #000;
   }
-
-  50% {
-    fill: var(--color-background);
+  
+  .form-register h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
   }
-
-  100% {
-    fill: white;
+  
+  .controls {
+    width: 100%;
+    background: #dfdada;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #fafafa;
+    font-family: 'calibri';
+    font-size: 18px;
+    color: rgb(14, 12, 12);
   }
-}
-
-/* Button animations */
-@-webkit-keyframes btn-content {
-  0% {
-    outline: 0.2em solid var(--color-background);
-    outline-offset: 0;
+  
+  .form-register p {
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 40px;
   }
-}
-
-@keyframes btn-content {
-  0% {
-    outline: 0.2em solid var(--color-background);
-    outline-offset: 0;
+  
+  .form-register a {
+    color: white;
+    text-decoration: none;
   }
-}
+  
+  .form-register a:hover {
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
+  }
+  
+  .form-register .botons {
+    width: 100%;
+    background: #1f53c5;
+    border: none;
+    padding: 12px;
+    color: rgb(255, 247, 247);
+    margin: 16px 0;
+    font-size: 16px;
+  }
+  .container {
+    transition: 200ms ease;
+  }
+  
+  .button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 40px;
+    border-width: 0;
+    border-radius: 1em;
+    background-color: #19171C;
+    transition: 500ms ease;
+  }
+  
+  .button p {
+    font-size: 20px;
+    font-weight: bold;
+    background: rgb(137,60,21);
+    background: linear-gradient(90deg, rgba(137,60,21,1) 0%, rgba(255,222,68,1) 17%, rgba(177,116,30,1) 24%, rgba(255,231,82,1) 40%, rgba(224,147,38,1) 50%, rgba(228,150,42,1) 59%, rgba(176,120,27,1) 70%, rgba(239,179,51,1) 85%, rgba(135,58,26,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .button::before {
+    position: absolute;
+    content: '';
+    width: 190px;
+    height: 50px;
+    border-radius: 1em;
+    background-size: 100%;
+    background: rgb(102, 43, 13);
+    background: linear-gradient(90deg, rgba(137,60,21,1) 0%, rgba(255,222,68,1) 17%, rgba(177,116,30,1) 24%, rgba(255,231,82,1) 40%, rgba(224,147,38,1) 50%, rgba(228,150,42,1) 59%, rgba(176,120,27,1) 70%, rgba(239,179,51,1) 85%, rgba(135,58,26,1) 100%);
+    z-index: -1;
+  }
+  
+  .container:hover .button::before {
+    animation: golden 5s infinite alternate ease-in-out;
+  }
+  
+  .container:hover .button p {
+    animation: golden 5s infinite alternate ease-in-out;
+  }
+  
+  .container:active .button::before {
+    animation: golden 1s infinite alternate ease-in-out;
+  }
+  
+  .container:active .button p {
+    animation: golden 1s infinite alternate ease-in-out;
+  }
+  
+  @keyframes golden {
+    0% {
+      background-size: 100%;
+      background-position: 50%;
+    }
+  
+    50% {
+      background-size: 500%;
+      background-position: 0%;
+    }
+  
+    100% {
+      background-size: 200%;
+      background-position: 100%;
+    }
+  }
+  

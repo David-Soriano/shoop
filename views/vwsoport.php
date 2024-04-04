@@ -47,7 +47,7 @@
             </h3>
         </div>
         <div class="contact-form">
-            <form>
+            <form class="formsop">
                 <input placeholder="NOMBRE" type="text" /><input placeholder="Email" type="email" /><textarea
                     placeholder="En que podemos ayudarte" rows="4"></textarea><button type="button">ENVIAR </button>
             </form>

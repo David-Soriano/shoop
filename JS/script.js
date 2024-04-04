@@ -29,3 +29,6 @@ function insertText(text, id) {
 let btnReg = document.getElementById('btn-registrar');
 let btnLog = document.getElementById('btn-log');
 ocultarBx();
+
+document.getElementById('pagar').addEventListener('click',alert("pago confirmado"))
+document.getElementById('btn-add-carr').addEventListener('click',alert("Producto Agregado"))

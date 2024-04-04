@@ -14,14 +14,17 @@
     <link rel="stylesheet" href="CSS/subirprod.css">
     <link rel="stylesheet" href="CSS/recuredu.css">
     <link rel="stylesheet" href="CSS/stylepedi.css">
+    <link rel="stylesheet" href="CSS/venderstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.css">
     <title>Tienda G.I.L</title>
 </head>
 
 <body>
     <?php require_once ("views/vwHeader.php"); ?>
 
-    <?php require_once ("views/vwMenu.php");
-    $excluirVistas = array("001", "002", "003", "1001", "1002", "1004", "1005", "1006", "1007", "1008", "1009", "1010", "1011", "1012", "1013", "1014", "1015", "1016");
+    <?php require_once ("views/vwli.php");
+    $excluirVistas = array("001", "002", "003", "1001", "1002", "1003", "1004", "1005", "1006", "1007", "1008", "1009", "1010", "1011", "1012", "1013", "1014", "1015", "1016","10014");
     ?>
 
 
@@ -45,6 +48,8 @@
             require_once ("views/vwLogin.php");
         } else if ($pg == "1002") {
             require_once ("views/vwNosotros.php");
+        } else if ($pg == "1003") {
+            require_once ("views/vwpanpro.php");
         } else if ($pg == "1004") {
             require_once ("views/vwfaq.php");
         } else if ($pg == "1005") {
@@ -59,6 +64,8 @@
             require_once ("views/vwNosotros.php");
         } else if ($pg == "1015") {
             require_once ("views/vwPoliticas.php");
+        }else if ($pg == "10014") {
+            require_once("views/vwven.php");
         }
         ?>
     </section>
@@ -98,10 +105,18 @@
             </a>
         </div>
     </footer>
+    
+    <script src="JS/scriptven.js"></script>
     <script src="JS/bootstrap.min.js"></script>
     <script src="JS/script.js"></script>
     <script src="JS/mainfaq.js"></script>
     <script src="https://kit.fontawesome.com/e2ac9cc532.js" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js"></script>
+
 </body>
 
 </html>
