@@ -22,7 +22,6 @@
 
     <?php require_once("views/vwMenu.php") ?>
 
-    
         <?php
         $pg = isset($_GET["pg"]) ? $_GET["pg"] : NULL;
         // Incluir el slider solo si $pg no es igual a ciertos valores
