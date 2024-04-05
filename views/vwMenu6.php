@@ -1,3 +1,3 @@
 <li class="nav-item">
-    <a href="views/vwLogin.php" class="nav-link">Iniciar Sesión</a>
+    <a href="<?php echo $link6?>" class="nav-link">Iniciar Sesión</a>
 </li>

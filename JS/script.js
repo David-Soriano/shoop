@@ -63,17 +63,7 @@ window.addEventListener('load', function () {
         alert("Registrado con éxito");
     });
 });
-window.addEventListener("load", function () {
-    document.getElementById("venpro").addEventListener("click", function () {
-        alert("Producto subido exitosamente")
-    })
-    document.getElementById("btntrash").addEventListener("click", function () {
-        confirm("¿Está seguro de querer eliminar el producto?")
-    })
-    document.getElementById("btnedit").addEventListener("click", function () {
-        confirm("¿Está seguro de querer hacer cambios en el producto?")
-    })
-})
+
 
 window.addEventListener('load', function () {
     new DataTable('#tpro');

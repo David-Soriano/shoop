@@ -26,7 +26,7 @@
     ?>
     <nav class="nav-men">
     <ul class="men-hrz">
-        <?php echo insertMenu(1);?>
+        <?php echo insertMenu(1, "home.php?pg=1002", "#", "home.php?pg=1004", "home.php?pg=1005", "home.php?pg=1006", "views/vwpanpro.php");?>
     </ul>
 </nav>
     <section id="bx-section">
@@ -35,7 +35,7 @@
 
         if (!in_array($pg, $excluirVistas)) {
             require_once ("views/vwSlider.php");
-            require_once ("views/vwMrdPrd.php");
+            insertText("Productos hechos para ti");
             require_once ("views/vwTienda.php");
         }
         // Incluir otras vistas según el valor de $pg
@@ -62,8 +62,6 @@
             require_once ("views/vwpagos.php");
         } else if ($pg == "1008") {
             require_once ("views/vwpedido.php");
-        } else if ($pg == "1009") {
-            require_once ("views/vwNosotros.php");
         } else if ($pg == "1015") {
             require_once ("views/vwPoliticas.php");
         } else if ($pg == "10013") {

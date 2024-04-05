@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <br>
-                    <input type="submit" class="btn btn-primary" id="venpro" value="Enviar">
+                    <input type="button" class="btn btn-primary" id="venpro" value="Enviar">
                 </div>
             </div>
         </form>

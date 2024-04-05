@@ -1,5 +1,5 @@
 <div class="bx-pr-art-sg">
-        <h5><span id="title-mrart">Algunos Productos Similares</span></h5>
+        <h5><span id="title-mrart"><?php echo $title?></span></h5>
         <div class="row bx-art-sg">
             <button class="btn-direct" id="btn-left"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                     fill="currentColor" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">

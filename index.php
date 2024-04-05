@@ -28,7 +28,7 @@
     ?>
     <nav class="nav-men">
     <ul class="men-hrz">
-        <?php echo insertMenu2();?>
+        <?php echo insertMenu(2, "index.php?pg=1002", "#", "index.php?pg=1004", "index.php?pg=1005", "index.php?pg=10015", "views/vwLogin.php");?>
     </ul>
 
     <section id="bx-section">

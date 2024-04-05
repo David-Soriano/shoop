@@ -5,10 +5,10 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      width: 80%;
     }
     .video-container {
-      width: 80%;
-      max-width: 800px;
+      width: 100%;
     }
   </style>
   <div class="main-container">

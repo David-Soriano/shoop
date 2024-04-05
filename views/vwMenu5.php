@@ -1,3 +1,3 @@
 <li class="nav-item">
-    <a href="views/vwpanpro.php" class="nav-link">Vender</a>
+    <a href="<?php echo $link6?>" class="nav-link">Vender</a>
 </li>

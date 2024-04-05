@@ -1,1 +1,1 @@
-<li class="nav-item"><a class="nav-link" href="home.php">Productos</a></li>
+<li class="nav-item"><a class="nav-link" href="<?php echo $link2?>">Productos</a></li>

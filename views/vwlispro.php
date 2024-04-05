@@ -23,7 +23,7 @@
           </li>
         </ul>
         <div class="card-footer">
-          <button class="btn btn-primary">Enviar</button>
+          <button class="btn btn-primary" id="btn-conf-ped">Enviar</button>
         </div>
       </div>
     </div>
