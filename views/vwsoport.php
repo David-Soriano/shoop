@@ -1,5 +1,6 @@
 <!-- partial:index.partial.html -->
-    <div class="contact-form-container">
+    <section>
+<div class="contact-form-container">
         <div class="contact-us">
             <div class="contact-header">
                 <h1>
@@ -53,3 +54,4 @@
             </form>
         </div>
     </div>
+    

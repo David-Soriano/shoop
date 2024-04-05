@@ -1,62 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../CSS/stylepancon.css">
+  <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+  <title>Panel de control</title>
+</head>
 
-    <!-- Sidebar -->
+<body>
+  <div class="div">
     <div class="sidebar">
-        <h5>Productos</h5>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link text-black" href="#">Administrar Productos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-black" href="#">Añadir Nuevos Productos</a>
-            </li>
-        </ul>
-        <h5>Ordenes</h5>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link text-black" href="#">Listado de Pedidos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-black" href="#">Detalle de Pedidos</a>
-            </li>
-        </ul>
-        <h5>Inventario</h5>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link text-black" href="#">Lista de Inventarios</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-black" href="#">Añadir Nuevos Articulos</a>
-            </li>
-        </ul>
+      <h5>Ordenes</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link text-black" href="vwpanpro.php?vw=003">Listado de Pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="vwpanpro.php?vw=004">Detalle de Pedidos</a>
+        </li>
+      </ul>
+      <h5>Inventario</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link text-black" href="vwpanpro.php?vw=001">Lista de Inventarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="vwpanpro.php?vw=002">Añadir Nuevos Articulos</a>
+        </li>
+      </ul>
     </div>
 
-    <!-- Content -->
-    <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <!-- Sidebar content -->
-          </div>
-          <div class="col-md-9 mt-5">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title">Lista de Productos</h5>
-              </div>
-              <div class="card-body">
-                <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action">Producto 1</a>
-                  <a href="#" class="list-group-item list-group-item-action">Producto 2</a>
-                  <a href="#" class="list-group-item list-group-item-action">Producto 3</a>
-                </div>
-              </div>
-              <div class="card-footer">
-                <button class="btn btn-primary">Terminar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </body>
-    <!-- Bootstrap scripts -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  </div>
+  <!-- Content -->
+
+</body>
+
+</html>
+<!-- Bootstrap scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+<?php
+$vw = isset($_GET["vw"]) ? $_GET["vw"] : NULL;
+$excluirVistas = array("001", "002", "003", "004");
+if (!in_array($vw, $excluirVistas)) {
+  include ("vwDefPan.php");
+}
+?>
+
+<?php
+if ($vw == "001") {
+  require_once ("../views/vwTable.php");
+} else if ($vw == "002") {
+  require_once ("../views/vwven.php");
+} else if ($vw == "003") {
+  require_once ("../views/vwlispro.php");
+} else if ($vw == "004") {
+  require_once ("../views/vwDetPed.php");
+}
+?>

@@ -10,6 +10,18 @@
     background-position: center center;
     background-size: cover;
   } */
+  #bt-confirmar{
+    height: 50px;
+    width: 50px;
+    border-color: rgb(107, 19, 19);
+    background-color: #2929a7;
+    text-decoration: none;
+    color: #FFF;
+    border-radius: 10px;
+    padding: 1%;
+  }
+    
+  
 .session-title {
   padding: 30px;
   margin: 0px;

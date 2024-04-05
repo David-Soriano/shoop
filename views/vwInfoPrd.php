@@ -4,3 +4,4 @@
     <?PHP require_once ("vwCarPrd.php")?>
     <?PHP require_once ("vwDesPrd.php")?>
 </div>
+<script src="../JS/script.js"></script>

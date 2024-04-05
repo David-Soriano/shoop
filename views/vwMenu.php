@@ -12,7 +12,7 @@
         </li>
         <li class="nav-item"><a class="nav-link" href="index.php?pg=1002">Nosotros</a></li>
         <li class="nav-item">
-            Ayuda/PQR
+            Ayuda/FAQ
             <ul class="men-vrt">
                 <li><a href="index.php?pg=1004">Preguntas Frecuentes</a></li>
                 <li><a href="index.php?pg=1005">Recursos educativos</a></li>

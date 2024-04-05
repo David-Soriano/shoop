@@ -297,7 +297,7 @@ img {
     border-bottom: 2px solid #000;
 }
 
-.inf-perfil div ul li:nth-child(4):hover a{
+.inf-perfil div ul li:nth-child(3):hover a{
     color: #ea4949;
     border-bottom: 2px solid #ea4949;
 }
