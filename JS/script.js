@@ -31,7 +31,7 @@ function verificarLogin() {
             alert("Bienvenido")
             window.location = "../home.php"
         } else {
-            alert("Usuario o contraseña incorrecta")
+            alert("Usuario o contraseña incorrectas")
             
         }
     })
