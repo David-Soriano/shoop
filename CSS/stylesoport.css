@@ -11,6 +11,7 @@ box-sizing: border-box;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 4% 0;
 }
 .contact-form-container {
   background: #F4F3F3;

@@ -1,3 +1,12 @@
+.header{
+    background: #007bff;
+    margin: 0;
+    color: #FFF;
+}
+
+.header h1{
+    margin: 0;
+}
 .cuerpo {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -55,4 +64,31 @@
 
 .list-group-item-action:hover {
     background-color: #f5f5f5;
+}
+
+.list-primary{
+    display: flex;
+    gap: 5%;
+    list-style: none;
+}
+
+.list-primary li ul{
+    list-style: none;
+}
+
+.bx-list-detped{
+    text-align: center;
+    width: 80%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.bx-list-detped div{
+    outline: 1px solid gray;
+    border-radius: 10px;
+    padding: 1%;
+    background: #c5bebe38;
+    margin-left: 10%;
 }

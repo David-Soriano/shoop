@@ -11,6 +11,9 @@
 </head>
 
 <body>
+  <header class="header">
+    <h1>Panel de Productos</h1>
+  </header>
   <div class="div">
     <div class="sidebar">
       <h5>Ordenes</h5>
@@ -49,7 +52,7 @@
   } else if ($vw == "002") {
     require_once ("../views/vwven.php");
   } else if ($vw == "003") {
-    require_once ("../views/vwlispro.php");
+    require_once ("../views/vwListPed.php");
   } else if ($vw == "004") {
     require_once ("../views/vwDetPed.php");
   }
