@@ -1,46 +1,58 @@
 .cuerpo {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar-custom {
-            background-color: #007bff;
-            color: white;
-        }
-        .navbar-brand-custom {
-            color: white;
-            font-weight: bold;
-        }
-        .sidebar {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            height: 100vh;
-            float:left;
-            left: 0;
-            top: 0;
-            width: 200px;
-            overflow-y: auto;
-        }
-        .sidebar h5 {
-            margin: 0;
-            margin-bottom: 10px;
-        }
-        .content-container {
-            margin: 20px;
-            margin-left: 220px;
-            margin-top: 50px;
-        }
-        .card-custom {
-            margin-bottom: 20px;
-        }
-        .text-black {
-            color: black;
-        }
-        .list-group-item-action {
-            color: black;
-          }
-          
-          .list-group-item-action:hover {
-            background-color: #f5f5f5;
-          }
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-custom {
+    background-color: #007bff;
+    color: white;
+}
+
+.navbar-brand-custom {
+    color: white;
+    font-weight: bold;
+}
+
+.btn-danger a{
+    text-decoration: none;
+    color: #FFF;
+}
+.sidebar {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    float: left;
+    left: 0;
+    top: 0;
+    width: 200px;
+    overflow-y: auto;
+}
+
+.sidebar h5 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.content-container {
+    margin: 20px;
+    margin-left: 220px;
+    margin-top: 50px;
+}
+
+.card-custom {
+    margin-bottom: 20px;
+}
+
+.text-black {
+    color: black;
+}
+
+.list-group-item-action {
+    color: black;
+}
+
+.list-group-item-action:hover {
+    background-color: #f5f5f5;
+}

@@ -12,6 +12,7 @@
 <body>
   <div class="div">
     <div class="sidebar">
+      <button type="button" class="btn btn-danger"><a href="../home.php">Volver</a></button>
       <h5>Ordenes</h5>
       <ul class="nav flex-column">
         <li class="nav-item">
@@ -31,7 +32,6 @@
         </li>
       </ul>
     </div>
-
   </div>
   <!-- Content -->
 

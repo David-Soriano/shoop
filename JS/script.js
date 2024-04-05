@@ -45,12 +45,12 @@ ocultarBx();
 
 window.addEventListener('load', ()=>{
     document.getElementById('btn-logout').addEventListener('click', () =>{
-        confirm("Desea cerrar la sesiòn?")
+        confirm("¿Seguro que desea cerrar la sesión?")
     })
 })
 window.addEventListener('load', function () {
     document.getElementById('pagar').addEventListener('click', () => {
-        alert("pago confirmado");
+        alert("Pago Confirmado");
     });
 });
 window.addEventListener("load", function () {
@@ -60,7 +60,7 @@ window.addEventListener("load", function () {
 });
 window.addEventListener('load', function () {
     document.getElementById('btn-registrar').addEventListener('click', () => {
-        alert("Registrado con exito");
+        alert("Registrado con éxito");
     });
 });
 window.addEventListener("load", function () {
@@ -68,10 +68,10 @@ window.addEventListener("load", function () {
         alert("Producto subido exitosamente")
     })
     document.getElementById("btntrash").addEventListener("click", function () {
-        confirm("¿Esta seguro de querer eliminar el producto?")
+        confirm("¿Está seguro de querer eliminar el producto?")
     })
     document.getElementById("btnedit").addEventListener("click", function () {
-        confirm("¿Esta seguro de querer hacer cambios en el producto?")
+        confirm("¿Está seguro de querer hacer cambios en el producto?")
     })
 })
 

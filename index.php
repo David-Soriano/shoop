@@ -24,11 +24,11 @@
     <?php require_once("views/vwHeader.php"); ?>
 
     <?php include("controller/funciones.php");
-    $excluirVistas = array("001", "002", "003", "1001", "1002", "1004", "1005", "1006", "1007", "1008", "1009", "1010", "1011", "1012", "1013", "1014", "1015", "1016", "10013", "10014");
+    $excluirVistas = array("001", "002", "003", "1001", "1002", "1004", "1005", "1006", "1007", "1008", "1009", "1010", "1011", "1012", "1013", "1014", "1015", "1016", "10013", "10014", "10015");
     ?>
     <nav class="nav-men">
     <ul class="men-hrz">
-        <?php echo insertMenu(3);?>
+        <?php echo insertMenu2();?>
     </ul>
 
     <section id="bx-section">
@@ -61,11 +61,15 @@
         } else if ($pg == "1008") {
             require_once("views/vwpedido.php");
         } else if ($pg == "1009") {
-            require_once("views/vwNosotros.php");
+            require_once("views/vwfaq.php");
         } else if ($pg == "1015") {
             require_once("views/vwPoliticas.php");
         } else if ($pg == "10013") {
             require_once("views/vwtarjeta.php");
+        } else if ($pg == "10014") {
+            require_once("views/vwRecuredu.php");
+        } else if ($pg == "10015") {
+            require_once("views/vwsoport.php");
         }
         ?>
     </section>
