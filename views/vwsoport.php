@@ -1,5 +1,3 @@
-<!-- partial:index.partial.html -->
-    <section>
 <div class="contact-form-container">
         <div class="contact-us">
             <div class="contact-header">
@@ -24,7 +22,7 @@
                 </ul>
             </div>
         </div>
-        <div class="header">
+        <div class="bx-cabecera">
             <h1>
                 G.I.L Soporte y comunicación.
             </h1>

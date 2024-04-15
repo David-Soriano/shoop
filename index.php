@@ -6,16 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
-    <link rel="stylesheet" href="CSS/styleTienda.css">
-    <link rel="stylesheet" href="CSS/styleInfoPrd.css">
-    <link rel="stylesheet" href="CSS/stylefaq.css">
-    <link rel="stylesheet" href="CSS/stylesoport.css ">
-    <link rel="stylesheet" href="CSS/stylepagos.css ">
-    <link rel="stylesheet" href="CSS/stylepancon.css">
-    <link rel="stylesheet" href="CSS/subirprod.css">
-    <link rel="stylesheet" href="CSS/recuredu.css">
-    <link rel="stylesheet" href="CSS/stylepedi.css">
-    <link rel="stylesheet" href="CSS/styletarjeta.css">
+    <link rel="stylesheet" href="CSS/styleIndex.css">
 
     <title>Tienda G.I.L</title>
 </head>

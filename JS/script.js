@@ -38,11 +38,12 @@ function verificarLogin() {
 }
 
 window.addEventListener('load', verificarLogin)
-
-let btnReg = document.getElementById('btn-registrar');
-let btnLog = document.getElementById('btn-log');
-ocultarBx();
-
+window.addEventListener('load', ocultarBx)
+window.addEventListener('load', ()=>{
+    document.getElementById('btn-subreen').addEventListener('click', () =>{
+        confirm("¿Seguro que desea reenviar el correo?")
+    })
+})
 window.addEventListener('load', ()=>{
     document.getElementById('btn-logout').addEventListener('click', () =>{
         confirm("¿Seguro que desea cerrar la sesión?")
@@ -63,7 +64,6 @@ window.addEventListener('load', function () {
         alert("Registrado con éxito");
     });
 });
-
 
 window.addEventListener('load', function () {
     new DataTable('#tpro');
