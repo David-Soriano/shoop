@@ -35,6 +35,11 @@ header div #bx-icons{
 header .col a{
     font-size: 23px;
     color: #FFF;
+    transition: all 400ms;
+}
+
+header .col a:hover{
+    transform: scale(1.1);
 }
 
 header .col img {
