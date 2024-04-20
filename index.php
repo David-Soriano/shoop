@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
     <link rel="stylesheet" href="CSS/styleIndex.css">
-
+    <link rel="shortcut icon" href="IMG/Logo-oscuro.png" type="image/x-icon">
     <title>Tienda G.I.L</title>
 </head>
 
@@ -21,8 +21,8 @@
     <ul class="men-hrz">
         <?php echo insertMenu(2, "index.php?pg=1002", "#", "index.php?pg=1004", "index.php?pg=1005", "index.php?pg=10015", "views/vwLogin.php");?>
     </ul>
-
-    <section id="bx-section">
+    </nav>
+    <main id="bx-section">
         <?php
         $pg = isset($_GET["pg"]) ? $_GET["pg"] : NULL;
 
@@ -63,7 +63,7 @@
             require_once("views/vwsoport.php");
         }
         ?>
-    </section>
+    </main>
 
     <?php require_once("views/vwFooter.php"); ?>
 

@@ -33,7 +33,7 @@
                                 </form>
                                 <p class="mb-0 mt-4 text-center"><a href="vwLogin.php?aw=01" class="link">Olvido su
                                         contraseña?</a></p>
-                                <a href="../index.php"><img id="logo" src="../IMG/Logo-oscuro.png" alt="Logo GIL"></a>
+                                
                             </div>
                         </div>
                     </div>

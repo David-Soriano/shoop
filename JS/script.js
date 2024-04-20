@@ -37,6 +37,7 @@ function verificarLogin() {
     })
 }
 
+
 window.addEventListener('load', verificarLogin)
 window.addEventListener('load', ocultarBx)
 window.addEventListener('load', ()=>{

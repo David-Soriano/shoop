@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
     <link rel="stylesheet" href="CSS/styleIndex.css">
+    <link rel="shortcut icon" href="IMG/Logo-oscuro.png" type="image/x-icon">
     <title>Tienda G.I.L</title>
 </head>
 

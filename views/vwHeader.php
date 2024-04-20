@@ -1,5 +1,5 @@
-<header class="d-flex">
-        <a href="index.php"><img src="IMG/Logo-oscuro.png" alt=""></a>
+<header class="d-flex header">
+        <a href="index.php"><img src="IMG/LogoAnimado.gif" alt=""></a>
         <div class="cont">
             <input type="search" name="" id="" placeholder="Buscar">
             <div class="btns">
