@@ -21,24 +21,7 @@ function insertText(text, id) {
     document.getElementById(id).innerHTML = text;
 }
 
-function verificarLogin() {
-    let user = "grupoGIL";
-    let pass = "sena";
-    let inpUser = document.getElementById('inp-user');
-    let inpPass = document.getElementById('inp-pass');
-    document.getElementById('btn-ingresar').addEventListener('click', () => {
-        if (inpUser.value == user && inpPass.value == pass) {
-            alert("Bienvenido")
-            window.location = "../home.php"
-        } else {
-            alert("Usuario o contraseña incorrectas")
-            
-        }
-    })
-}
 
-
-window.addEventListener('load', verificarLogin)
 window.addEventListener('load', ocultarBx)
 window.addEventListener('load', ()=>{
     document.getElementById('btn-subreen').addEventListener('click', () =>{
