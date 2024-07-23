@@ -34,6 +34,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
         $rut = getRut($pg);
         var_dump($rut);
         var_dump($pg);
+        var_dump($dtMenu);
         
         if($rut) include $rut[0]['rutpag'];
         // if (!in_array($pg, $excluirVistas)) {
