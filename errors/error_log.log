@@ -34,3 +34,5 @@ Stack trace:
 [22-Jul-2024 17:16:18 Europe/Berlin] PHP Warning:  Undefined variable $pg in C:\xampp\htdocs\SHOOP\views\vwMenu2.php on line 1
 [23-Jul-2024 03:21:22 Europe/Berlin] PHP Warning:  Undefined variable $pg in C:\xampp\htdocs\SHOOP\views\vwMenu2.php on line 1
 [23-Jul-2024 04:15:25 Europe/Berlin] PHP Warning:  Undefined variable $pg in C:\xampp\htdocs\SHOOP\views\vwMenu2.php on line 1
+[23-Jul-2024 14:48:51 Europe/Berlin] PHP Warning:  Undefined variable $pg in C:\xampp\htdocs\SHOOP\views\vwMenu2.php on line 1
+[23-Jul-2024 14:59:14 Europe/Berlin] PHP Warning:  Undefined variable $pg in C:\xampp\htdocs\SHOOP\views\vwMenu2.php on line 1

@@ -81,11 +81,9 @@ class Mpag
     {
         $res = NULL;
         if ($isLoged) {
-            $sql = "SELECT * FROM menu
-                        WHERE estmen = 1 OR estmen IS NULL";
+            $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen FROM menu WHERE estmen = 1 OR estmen IS NULL;";
         } else {
-            $sql = "SELECT * FROM menu
-                        WHERE estmen = 0 OR estmen IS NULL";
+            $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen FROM menu WHERE estmen = 0 OR estmen IS NULL";
         }
         $modelo = new Conexion();
         $conexion = $modelo->getConexion();
@@ -94,7 +92,6 @@ class Mpag
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
-
     //metodos adicionales para las operaciones de la clase
     function savePag()
     {

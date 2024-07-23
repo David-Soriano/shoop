@@ -1,5 +1,5 @@
 <?php 
-ini_set("display_errors", 0);
+ini_set("display_errors", 1);
 ini_set("log_errors", 1);
 ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
 ?>
@@ -26,15 +26,13 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
     ?>
     <nav class="nav-men">
     <ul class="men-hrz">
-        <?php echo insertMenu(2, "index.php?pg=1002", "#", "index.php?pg=1004", "index.php?pg=1005", "index.php?pg=10015", "views/vwLogin.php");?>
+        <?php include "views/vwMenu.php";
+        //echo insertMenu(2, "index.php?pg=1002", "#", "index.php?pg=1004", "index.php?pg=1005", "index.php?pg=10015", "views/vwLogin.php");?>
     </ul>
     </nav>
     <main id="bx-section">
         <?php
         $rut = getRut($pg);
-        var_dump($rut);
-        var_dump($pg);
-        var_dump($dtMenu);
         
         if($rut) include $rut[0]['rutpag'];
         // if (!in_array($pg, $excluirVistas)) {

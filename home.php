@@ -1,3 +1,4 @@
+<?php include "model/logout.php";?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -22,9 +23,10 @@
     </ul>
 </nav>
     <section id="bx-section">
-        <?php
+        <?php include "model/conexion.php";
+        include("controller/cpag.php");
         $pg = isset($_GET["pg"]) ? $_GET["pg"] : NULL;
-
+        
         if (!in_array($pg, $excluirVistas)) {
             require_once ("views/vwSlider.php");
             insertText("Productos hechos para ti");
