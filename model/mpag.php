@@ -6,6 +6,12 @@ class Mpag
     private $rutpag;
     private $mospag;
     private $icopag;
+    //Menú
+    private $idsbm;
+    private $nombre;
+    private $url;
+    private $url2;
+    private $idmen;
     public function getIdpag()
     {
         return $this->idpag;
@@ -25,6 +31,21 @@ class Mpag
     public function getIcopag()
     {
         return $this->icopag;
+    }
+    public function getIdsbm(){
+        return $this->idsbm;
+    }
+    public function getNombre(){
+        return $this->nombre;
+    }
+    public function getUrl(){
+        return $this->url;
+    }
+    public function getUrl2(){
+        return $this->url2;
+    }
+    public function getIdmen(){
+        return $this->idmen;
     }
     public function setIdpag($idpag)
     {
@@ -46,6 +67,21 @@ class Mpag
     {
         $this->icopag = $icopag;
     }
+    public function setIdsbm($idsbm){
+        $this->idsbm = $idsbm;
+    }
+    public function setNombre($nombre){
+        $this->nombre = $nombre;
+    }
+    public function setUrl($url){
+        $this->url = $url;
+    }
+    public function setUrl2($url2){
+        $this->url2 = $url2;
+    }
+    public function setIdmen($idmen){
+        $this->idmen = $idmen;
+    }
     function getAll()
     {
         $res = NULL;
@@ -58,6 +94,7 @@ class Mpag
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
+            echo "Error. Intentalo mas tarde";
         }
         return $res;
     }
@@ -74,22 +111,46 @@ class Mpag
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
+            echo "Error. Intentalo mas tarde";
         }
         return $res;
     }
     function getMenu($isLoged)
     {
         $res = NULL;
-        if ($isLoged) {
-            $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen FROM menu WHERE estmen = 1 OR estmen IS NULL;";
-        } else {
-            $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen FROM menu WHERE estmen = 0 OR estmen IS NULL";
+        try{
+            if ($isLoged) {
+                $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen FROM menu WHERE estmen = 1 OR estmen IS NULL;";
+            } else {
+                $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen FROM menu WHERE estmen = 0 OR estmen IS NULL";
+            }
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
+            echo "Error. Intentalo mas tarde";
         }
-        $modelo = new Conexion();
-        $conexion = $modelo->getConexion();
-        $result = $conexion->prepare($sql);
-        $result->execute();
-        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    function getSubMen()
+    {
+        $res = NULL;
+        $sql = "SELECT s.idsbm, s.nombre, s.url, s.url2, s.idmen FROM submenu AS s INNER JOIN menu AS m ON s.idmen = m.idmen WHERE s.idmen = 3;";
+        try{
+            $modelo = new Conexion();
+            $conexion = $modelo ->getConexion();
+            $result = $conexion->prepare($sql);
+            $idmen = $this->getIdmen();
+            $result->bindParam(':idmen', $idmen, PDO::PARAM_INT);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            error_log($e->getMessage(), 3, "C:/xampp\htdocs/SHOOP/errors/error_log.log");
+            echo "Error. Intentalo mas tarde";
+        }
         return $res;
     }
     //metodos adicionales para las operaciones de la clase
