@@ -32,19 +32,24 @@ class Mpag
     {
         return $this->icopag;
     }
-    public function getIdsbm(){
+    public function getIdsbm()
+    {
         return $this->idsbm;
     }
-    public function getNombre(){
+    public function getNombre()
+    {
         return $this->nombre;
     }
-    public function getUrl(){
+    public function getUrl()
+    {
         return $this->url;
     }
-    public function getUrl2(){
+    public function getUrl2()
+    {
         return $this->url2;
     }
-    public function getIdmen(){
+    public function getIdmen()
+    {
         return $this->idmen;
     }
     public function setIdpag($idpag)
@@ -67,19 +72,24 @@ class Mpag
     {
         $this->icopag = $icopag;
     }
-    public function setIdsbm($idsbm){
+    public function setIdsbm($idsbm)
+    {
         $this->idsbm = $idsbm;
     }
-    public function setNombre($nombre){
+    public function setNombre($nombre)
+    {
         $this->nombre = $nombre;
     }
-    public function setUrl($url){
+    public function setUrl($url)
+    {
         $this->url = $url;
     }
-    public function setUrl2($url2){
+    public function setUrl2($url2)
+    {
         $this->url2 = $url2;
     }
-    public function setIdmen($idmen){
+    public function setIdmen($idmen)
+    {
         $this->idmen = $idmen;
     }
     function getAll()
@@ -118,41 +128,56 @@ class Mpag
     function getMenu($isLoged)
     {
         $res = NULL;
-        try{
-            if ($isLoged) {
-                $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen FROM menu WHERE estmen = 1 OR estmen IS NULL;";
-            } else {
-                $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen FROM menu WHERE estmen = 0 OR estmen IS NULL";
-            }
+        try {
+           
+            $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen 
+                    FROM menu 
+                    WHERE estmen = :status OR estmen IS NULL;";
+
+            $status = $isLoged ? 1 : 0;
+
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
             $result = $conexion->prepare($sql);
+            $result->bindParam(':status', $status, PDO::PARAM_INT);
             $result->execute();
-            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+            $menuItems = $result->fetchAll(PDO::FETCH_ASSOC);
+
+            // Obtener submenús para cada ítem del menú principal
+            foreach ($menuItems as &$menuItem) {
+                $menuItem['submenus'] = $this->getSubMen($menuItem['idmen']);
+            }
+
+            $res = $menuItems;
         } catch (PDOException $e) {
-            error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
             echo "Error. Intentalo mas tarde";
         }
         return $res;
     }
-    function getSubMen()
+
+
+    function getSubMen($idmen)
     {
         $res = NULL;
-        $sql = "SELECT s.idsbm, s.nombre, s.url, s.url2, s.idmen FROM submenu AS s INNER JOIN menu AS m ON s.idmen = m.idmen WHERE s.idmen = 3;";
-        try{
+        $sql = "SELECT s.idsbm, s.nombre, s.url, s.url2, s.idmen 
+                FROM submenu AS s 
+                INNER JOIN menu AS m ON s.idmen = m.idmen 
+                WHERE s.idmen = :idmen;";
+        try {
             $modelo = new Conexion();
-            $conexion = $modelo ->getConexion();
+            $conexion = $modelo->getConexion();
             $result = $conexion->prepare($sql);
-            $idmen = $this->getIdmen();
             $result->bindParam(':idmen', $idmen, PDO::PARAM_INT);
             $result->execute();
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
-        } catch(PDOException $e) {
-            error_log($e->getMessage(), 3, "C:/xampp\htdocs/SHOOP/errors/error_log.log");
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, "C:/xampp/htdocs/SHOOP/errors/error_log.log");
             echo "Error. Intentalo mas tarde";
         }
         return $res;
     }
+
     //metodos adicionales para las operaciones de la clase
     function savePag()
     {

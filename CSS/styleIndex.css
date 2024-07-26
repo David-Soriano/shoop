@@ -143,7 +143,7 @@ body::-webkit-scrollbar-track {
     padding: 5%;
 }
 
-.men-vrt a {
+.men-vrt a, .men-hrz a {
     text-decoration: none;
     color: #000;
 }

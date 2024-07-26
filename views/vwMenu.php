@@ -1,15 +1,18 @@
 <nav class="nav-men">
     <ul class="men-hrz">
-        <?php if ($dtMenu) {
-            foreach ($dtMenu as $dt) { ?>
-                <li class="nav-item"><a class="nav-link" href="<?= $dt['url']; ?>"><?= $dt['nombre']; ?></a>
-                    <?php if (!$dt['url']) { ?>
-                        <ul class="men-hrz">
-                            <!-- submenu -->
-                        </ul>
-                    <?php } ?>
-                </li>
-            <?php }
-        } ?>
+        <?php foreach ($dtMenu as $menuItem): ?>
+            <li class="nav-item">
+                <a href="<?= $isLoggedIn ? $menuItem['url'] : $menuItem['url2']; ?>"><?= $menuItem['nombre'] ?></a>
+                <?php if (!empty($menuItem['submenus'])): ?>
+                    <ul class="men-vrt">
+                        <?php foreach ($menuItem['submenus'] as $subMenuItem):?>
+                            <li>
+                                <a href="<?=  $subMenuItem['url2'];?>"><?= $subMenuItem['nombre'] ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
     </ul>
 </nav>
