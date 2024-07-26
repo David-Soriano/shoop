@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../CSS/bootstrap.min.css">
     <link rel="stylesheet" href="../CSS/styleLogin.css">
     <link rel="shortcut icon" href="../IMG/Logo-oscuro.png" type="image/x-icon">
-    <title>LogIn G.I.L</title>
+    <title>LogIn SHOOP</title>
 </head>
 
 <body>
