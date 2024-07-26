@@ -1,1 +1,0 @@
-<li class="nav-item"><a class="nav-link" href="<?php echo $link2?>">Productos</a></li>

@@ -36,13 +36,7 @@
                             d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                     </svg>
                 </a>
-                <div class="bx-prf-opcs" id="bx-opc-prf">
-                    <ul>
-                        <li><a href="views/vwConfig.php">Perfil</a></li>
-                        <li><a href="views/vwLogin.php">Iniciar Sesión</a></li>
-                        <li><a href="views/vwLogin.php" id="btn-logout">Cerrar Sesión</a></li>
-                    </ul>
-                </div>
+                <?php include "views/vwOpcMen.php";?>
             </div>
         </div>
     </header>
