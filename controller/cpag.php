@@ -22,3 +22,4 @@ function getRut($pg)
 $isLoggedIn = isset($_SESSION['idusu']); // Verificar si el usuario ha iniciado sesión
 $dtMenu = $pag->getMenu($isLoggedIn);
 $dtAll = $pag->getAll();
+$dtMenPf = $pag->getMenuPerf($isLoggedIn, 2);
