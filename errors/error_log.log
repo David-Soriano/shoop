@@ -1,0 +1,21 @@
+[22-Oct-2024 22:54:18 Europe/Berlin] PHP Warning:  Undefined array key 14 in C:\xampp\htdocs\SHOOP\index.php on line 35
+[22-Oct-2024 22:54:18 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\SHOOP\index.php on line 35
+[22-Oct-2024 22:54:18 Europe/Berlin] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\SHOOP\index.php:35
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\SHOOP\index.php on line 35
+[22-Oct-2024 22:54:38 Europe/Berlin] PHP Warning:  Undefined array key "rutpag" in C:\xampp\htdocs\SHOOP\index.php on line 35
+[22-Oct-2024 22:54:38 Europe/Berlin] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\SHOOP\index.php:35
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\SHOOP\index.php on line 35
+[22-Oct-2024 22:54:40 Europe/Berlin] PHP Warning:  Undefined array key "rutpag" in C:\xampp\htdocs\SHOOP\index.php on line 35
+[22-Oct-2024 22:54:40 Europe/Berlin] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\SHOOP\index.php:35
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\SHOOP\index.php on line 35
+[22-Oct-2024 23:08:06 Europe/Berlin] PHP Warning:  include(view/vwInitUser.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\SHOOP\index.php on line 35
+[22-Oct-2024 23:08:06 Europe/Berlin] PHP Warning:  include(): Failed opening 'view/vwInitUser.php' for inclusion (include_path='\xampp\php\PEAR') in C:\xampp\htdocs\SHOOP\index.php on line 35
+[22-Oct-2024 23:11:09 Europe/Berlin] PHP Warning:  include(view/vwInitUser.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\SHOOP\index.php on line 35
+[22-Oct-2024 23:11:09 Europe/Berlin] PHP Warning:  include(): Failed opening 'view/vwInitUser.php' for inclusion (include_path='\xampp\php\PEAR') in C:\xampp\htdocs\SHOOP\index.php on line 35
+[23-Oct-2024 17:42:21 Europe/Berlin] PHP Warning:  Undefined variable $rut in C:\xampp\htdocs\SHOOP\home.php on line 33

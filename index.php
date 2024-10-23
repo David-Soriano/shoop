@@ -27,8 +27,10 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
 
     <main id="bx-section">
         <?php
-        $rut = getRut($pg);
-
+        if($pg)
+            $rut = getRut($pg);
+        else
+            $rut = getRut(14);
         if ($rut)
             include $rut[0]['rutpag'];
         ?>

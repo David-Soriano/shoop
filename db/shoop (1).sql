@@ -209,7 +209,7 @@ INSERT INTO pagina (idpag, nompag, rutpag, mospag, icopag) VALUES
 (2, 'Favoritos', 'views/vwFavorito.php', 0, NULL),
 (3, 'Carro de Compras', 'views/vwCarrComp.php', 0, NULL),
 (4, 'LogIn', 'views/vwLogin.php', 0, NULL),
-(5, 'Nosotros', 'views/vwNosotros.php\"', 0, NULL),
+(5, 'Nosotros', 'views/vwNosotros.php\', 0, NULL),
 (6, 'Preguntas Frecuentes', 'views/vwfaq.php', 0, NULL),
 (7, 'Recursos Educativos', 'views/vwRecuredu.php', 0, NULL),
 (8, 'Soporte', 'views/vwsoport.php', 0, NULL),
