@@ -129,10 +129,8 @@ class Mpag
     {
         $res = NULL;
         try {
-           
-            $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen 
-                    FROM menu 
-                    WHERE estmen = :status OR estmen IS NULL;";
+
+            $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen FROM menu WHERE (lugmen IS NULL OR lugmen = 3) AND (estmen = :status OR estmen IS NULL);";
 
             $status = $isLoged ? 1 : 0;
 
@@ -155,7 +153,28 @@ class Mpag
         }
         return $res;
     }
+    function getMenuPerf($isLoged, $lugar)
+    {
+        $res = NULL;
+        $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen
+                    FROM menu 
+                    WHERE estmen = :status AND lugmen = :lugmen;";
+        try {
+            $status = $isLoged ? 1 : 0;
 
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(':status', $status, PDO::PARAM_INT);
+            $result->bindParam(':lugmen', $lugar);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error. Intentalo mas tarde";
+        }
+        return $res;
+    }
 
     function getSubMen($idmen)
     {

@@ -16,10 +16,11 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
 </head>
 
 <body>
-    <?php require_once ("views/vwHeader.php");
+    <?php 
     include ("controller/funciones.php");
     include "model/conexion.php";
     include ("controller/cpag.php");
+    require_once ("views/vwHeader.php");
     $pg = isset($_REQUEST["pg"]) ? $_REQUEST["pg"] : NULL;
     
     include "views/vwMenu.php"; ?>
@@ -32,6 +33,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
             $rut = getRut(14);
         if ($rut)
             include $rut[0]['rutpag'];
+        else include "views/vwTienda.php";
         ?>
     </main>
     <?php require_once ("views/vwFooter.php"); ?>

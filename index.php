@@ -17,10 +17,10 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
 </head>
 
 <body>
-    <?php require_once ("views/vwHeader.php");
-    include "model/conexion.php";
-    include ("controller/funciones.php");
-    include ("controller/cpag.php");
+    <?php include "model/conexion.php";
+    include("controller/funciones.php");
+    include("controller/cpag.php");
+    require_once("views/vwHeader.php");
     $pg = isset($_REQUEST["pg"]) ? $_REQUEST["pg"] : NULL;
 
     include "views/vwMenu.php"; ?>
@@ -36,7 +36,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
         ?>
     </main>
 
-    <?php require_once ("views/vwFooter.php"); ?>
+    <?php require_once("views/vwFooter.php"); ?>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="JS/bootstrap.min.js"></script>
