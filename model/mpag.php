@@ -126,39 +126,45 @@ class Mpag
         return $res;
     }
     function getMenu($isLoged)
-    {
-        $res = NULL;
-        try {
+{
+    $res = NULL;
+    try {
+        $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen 
+                FROM menu 
+                WHERE lugmen = 0 AND (estmen = :status OR estmen IS NULL);";
 
-            $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen FROM menu WHERE (lugmen IS NULL OR lugmen = 3) AND (estmen = :status OR estmen IS NULL);";
+        $status = $isLoged ? 1 : 0;
 
-            $status = $isLoged ? 1 : 0;
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(':status', $status, PDO::PARAM_INT);
+        $result->execute();
+        $menuItems = $result->fetchAll(PDO::FETCH_ASSOC);
 
-            $modelo = new Conexion();
-            $conexion = $modelo->getConexion();
-            $result = $conexion->prepare($sql);
-            $result->bindParam(':status', $status, PDO::PARAM_INT);
-            $result->execute();
-            $menuItems = $result->fetchAll(PDO::FETCH_ASSOC);
-
-            // Obtener submenús para cada ítem del menú principal
-            foreach ($menuItems as &$menuItem) {
-                $menuItem['submenus'] = $this->getSubMen($menuItem['idmen']);
+        // Obtener submenús para cada ítem del menú principal
+        foreach ($menuItems as $key => $menuItem) {
+            if ($menuItem['submen'] != 0) {
+                $menuItems[$key]['submenus'] = $this->getSubMen($menuItem['idmen']);
+            } else {
+                $menuItems[$key]['submenus'] = []; // No tiene submenús
             }
-
-            $res = $menuItems;
-        } catch (PDOException $e) {
-            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            echo "Error. Intentalo mas tarde";
         }
-        return $res;
+
+        $res = $menuItems;
+    } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        echo "Error en getMenu. Intentalo más tarde";
     }
-    function getMenuPerf($isLoged, $lugar)
+    return $res;
+}
+
+    function getMenuPerf($isLoged)
     {
         $res = NULL;
         $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen
                     FROM menu 
-                    WHERE estmen = :status AND lugmen = :lugmen;";
+                    WHERE estmen = :status AND lugmen = :status ORDER BY ordmen;";
         try {
             $status = $isLoged ? 1 : 0;
 
@@ -166,12 +172,11 @@ class Mpag
             $conexion = $modelo->getConexion();
             $result = $conexion->prepare($sql);
             $result->bindParam(':status', $status, PDO::PARAM_INT);
-            $result->bindParam(':lugmen', $lugar);
             $result->execute();
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            echo "Error. Intentalo mas tarde";
+            echo "Error en MenuPerf. Intentalo mas tarde";
         }
         return $res;
     }
