@@ -149,7 +149,7 @@ class Musu{
     function saveUsu()
     {
         $res = NULL;
-        $sql = "INSERT INTO usuario(idusu, nomusu, apeusu, docusu, emausu, celusu, genusu, dirrecusu, tipdoc, idval, idubi, feccreate, fecupdate, fotpef, idpef, pasusu) VALUES (:idusu, :nomusu, :apeusu, :docusu, :emausu, :celusu, :genusu, :dirrecusu, :tipdoc, :idval, :idubi, :feccreate, :fecupdate, :fotpef, :idpef, :pasusu)";
+        $sql = "INSERT INTO usuario(idusu, nomusu, apeusu, tipdoc, docusu, emausu, celusu, genusu, dirrecusu, idval, idubi, feccreate, fecupdate, fotpef, idpef, pasusu) VALUES (:idusu, :nomusu, :apeusu, :docusu, :emausu, :celusu, :genusu, :dirrecusu, :tipdoc, :idval, :idubi, :feccreate, :fecupdate, :fotpef, :idpef, :pasusu)";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -181,7 +181,7 @@ class Musu{
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
-            echo "Error. Intentalo mas tarde";
+            echo "Error al registrar. Intentalo mas tarde";
         }
         return $res;
     }
