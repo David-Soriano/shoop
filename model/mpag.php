@@ -12,6 +12,7 @@ class Mpag
     private $url;
     private $url2;
     private $idmen;
+    private $lugmen;
     public function getIdpag()
     {
         return $this->idpag;
@@ -52,6 +53,9 @@ class Mpag
     {
         return $this->idmen;
     }
+    public function getLugmen(){
+        return $this->lugmen;
+    }
     public function setIdpag($idpag)
     {
         $this->idpag = $idpag;
@@ -91,6 +95,9 @@ class Mpag
     public function setIdmen($idmen)
     {
         $this->idmen = $idmen;
+    }
+    public function setLugmen($lugmen){
+        $this->lugmen = $lugmen;
     }
     function getAll()
     {
@@ -201,7 +208,25 @@ class Mpag
         }
         return $res;
     }
+    function getMenHeader($lugmen){
+        $res = NULL;
+        $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen, icomen
+                FROM menu 
+                WHERE lugmen = :lugmen;";
+        try {
 
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(':lugmen', $lugmen);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error en Menu Headre. Intentalo mas tarde";
+        }
+        return $res;
+    }
     //metodos adicionales para las operaciones de la clase
     function savePag()
     {

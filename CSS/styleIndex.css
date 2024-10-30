@@ -106,12 +106,12 @@ body::-webkit-scrollbar-track {
     background: #cd1717;
 }
 
-.icons svg {
+.icons a {
     cursor: pointer;
     transition: all 400ms;
 }
 
-.icons svg:hover {
+.icons a:hover {
     transform: scale(1.2);
 }
 
@@ -764,6 +764,7 @@ div .bx-btns-comp div {
     align-items: center;
     flex-direction: column;
     margin: 4% 0;
+    min-height: 63vh;
 }
 
 .bx-cabecera {

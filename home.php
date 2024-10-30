@@ -12,6 +12,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
     <link rel="stylesheet" href="CSS/styleIndex.css">
     <link rel="shortcut icon" href="IMG/Logo-oscuro.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>SHOOP S.A</title>
 </head>
 

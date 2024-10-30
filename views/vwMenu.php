@@ -8,7 +8,7 @@
                     <ul class="men-vrt">
                         <?php foreach ($menuItem['submenus'] as $subMenuItem): ?>
                             <li>
-                                <a href="<?= $isLoggedIn ? $subMenuItem['url2'] : $subMenuItem['url']; ?>"><?= $subMenuItem['nombre'] ?></a>
+                                <a href="<?=$isLoggedIn ? $subMenuItem['url2'] : $subMenuItem['url']; ?>"><?= $subMenuItem['nombre'] ?></a>
                             </li>
                         <?php endforeach; ?>
                     </ul>
