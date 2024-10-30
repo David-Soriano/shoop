@@ -1,5 +1,6 @@
-<?php 
-class Musu{
+<?php
+class Musu
+{
     private $idusu;
     private $nomusu;
     private $apeusu;
@@ -16,100 +17,132 @@ class Musu{
     private $fotpef;
     private $idpef;
     private $pasusu;
-    function getIdusu(){
+    function getIdusu()
+    {
         return $this->idusu;
     }
-    function getNomusu(){
+    function getNomusu()
+    {
         return $this->nomusu;
     }
-    function getApeusu(){
+    function getApeusu()
+    {
         return $this->apeusu;
     }
-    function getDocusu(){
+    function getDocusu()
+    {
         return $this->docusu;
     }
-    function getEmausu(){
+    function getEmausu()
+    {
         return $this->emausu;
     }
-    function getCelusu(){
+    function getCelusu()
+    {
         return $this->celusu;
     }
-    function getGenusu(){
+    function getGenusu()
+    {
         return $this->genusu;
     }
-    function getDirrecusu(){
+    function getDirrecusu()
+    {
         return $this->dirrecusu;
     }
-    function getTipdoc(){
+    function getTipdoc()
+    {
         return $this->tipdoc;
     }
-    function getIdval(){
+    function getIdval()
+    {
         return $this->idval;
     }
-    function getIdubi(){
+    function getIdubi()
+    {
         return $this->idubi;
     }
-    function getFeccreate(){
+    function getFeccreate()
+    {
         return $this->feccreate;
     }
-    function getFecupdate(){
+    function getFecupdate()
+    {
         return $this->fecupdate;
     }
-    function getFotpef(){
+    function getFotpef()
+    {
         return $this->fotpef;
     }
-    function getIdpef(){
+    function getIdpef()
+    {
         return $this->idpef;
     }
-    function getPasusu(){
+    function getPasusu()
+    {
         return $this->pasusu;
     }
-    function setIdusu($idusu){
+    function setIdusu($idusu)
+    {
         $this->idusu = $idusu;
     }
-    function setNomusu($nomusu){
+    function setNomusu($nomusu)
+    {
         $this->nomusu = $nomusu;
     }
-    function setApeusu($apeusu){
+    function setApeusu($apeusu)
+    {
         $this->apeusu = $apeusu;
     }
-    function setDocusu($docusu){
+    function setDocusu($docusu)
+    {
         $this->docusu = $docusu;
     }
-    function setEmausu($emausu){
+    function setEmausu($emausu)
+    {
         $this->emausu = $emausu;
     }
-    function setCelusu($celusu){
+    function setCelusu($celusu)
+    {
         $this->celusu = $celusu;
     }
-    function setGenusu($genusu){
+    function setGenusu($genusu)
+    {
         $this->genusu = $genusu;
     }
-    function setDirrecusu($dirrecusu){
+    function setDirrecusu($dirrecusu)
+    {
         $this->dirrecusu = $dirrecusu;
     }
-    function setTipdoc($tipdoc){
+    function setTipdoc($tipdoc)
+    {
         $this->tipdoc = $tipdoc;
     }
-    function setIdval($idval){
+    function setIdval($idval)
+    {
         $this->idval = $idval;
     }
-    function setIdubi($idubi){
+    function setIdubi($idubi)
+    {
         $this->idubi = $idubi;
     }
-    function setFeccreate($feccreate){
+    function setFeccreate($feccreate)
+    {
         $this->feccreate = $feccreate;
     }
-    function setFecupdate($fecupdate){
+    function setFecupdate($fecupdate)
+    {
         $this->fecupdate = $fecupdate;
     }
-    function setFotpef($fotpef){
+    function setFotpef($fotpef)
+    {
         $this->fotpef = $fotpef;
     }
-    function setIdpef($idpef){
+    function setIdpef($idpef)
+    {
         $this->idpef = $idpef;
     }
-    function setPasusu($pasusu){
+    function setPasusu($pasusu)
+    {
         $this->pasusu = $pasusu;
     }
     function getAll()
@@ -149,40 +182,54 @@ class Musu{
     function saveUsu()
     {
         $res = NULL;
-        $sql = "INSERT INTO usuario(idusu, nomusu, apeusu, tipdoc, docusu, emausu, celusu, genusu, dirrecusu, idval, idubi, feccreate, fecupdate, fotpef, idpef, pasusu) VALUES (:idusu, :nomusu, :apeusu, :docusu, :emausu, :celusu, :genusu, :dirrecusu, :tipdoc, :idval, :idubi, :feccreate, :fecupdate, :fotpef, :idpef, :pasusu)";
+        $sql = "INSERT INTO usuario(nomusu, apeusu, tipdoc, docusu, emausu, celusu, genusu, idpef, pasusu) 
+            VALUES (:nomusu, :apeusu, :tipdoc, :docusu, :emausu, :celusu, :genusu, :idpef, :pasusu)";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
             $result = $conexion->prepare($sql);
+
             $nomusu = $this->getNomusu();
             $apeusu = $this->getApeusu();
+            $tipdoc = $this->getTipdoc();
             $docusu = $this->getDocusu();
             $emausu = $this->getEmausu();
             $celusu = $this->getCelusu();
             $genusu = $this->getGenusu();
-            $dirrecusu = $this->getDirrecusu();
-            $tipdoc = $this->getTipdoc();
-            $fotpef = $this->getFotpef();
             $idpef = $this->getIdpef();
             $pasusu = $this->getPasusu();
-            $result->bindParam(':idusu', $idusu, PDO::PARAM_INT);
+
             $result->bindParam(':nomusu', $nomusu, PDO::PARAM_STR);
             $result->bindParam(':apeusu', $apeusu, PDO::PARAM_STR);
+            $result->bindParam(':tipdoc', $tipdoc, PDO::PARAM_STR);
             $result->bindParam(':docusu', $docusu, PDO::PARAM_STR);
             $result->bindParam(':emausu', $emausu, PDO::PARAM_STR);
             $result->bindParam(':celusu', $celusu, PDO::PARAM_STR);
             $result->bindParam(':genusu', $genusu, PDO::PARAM_STR);
-            $result->bindParam(':dirrecusu', $dirrecusu, PDO::PARAM_STR);
-            $result->bindParam(':tipdoc', $tipdoc, PDO::PARAM_STR);
-            $result->bindParam(':fotpef', $fotpef, PDO::PARAM_STR);
             $result->bindParam(':idpef', $idpef, PDO::PARAM_INT);
             $result->bindParam(':pasusu', $pasusu, PDO::PARAM_STR);
+
             $result->execute();
-            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+            $res = $result->rowCount(); // Cambiado a rowCount() para ver si se insertaron filas
         } catch (PDOException $e) {
-            error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
-            echo "Error al registrar. Intentalo mas tarde";
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al registrar. Inténtalo más tarde";
         }
         return $res;
+    }
+
+    function verificarCorreo($emausu)
+    {
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+
+        // Consulta para verificar si el correo ya existe
+        $sql = "SELECT COUNT(*) FROM usuario WHERE emausu = :emausu";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindParam(':emausu', $emausu);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+
+        return $count > 0; // Retorna true si el correo ya existe
     }
 }

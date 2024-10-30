@@ -43,15 +43,17 @@ window.addEventListener("load", function () {
         alert("Producto Agregado");
     });
 });
-window.addEventListener('load', function () {
-    document.getElementById('btn-registrar').addEventListener('click', () => {
-        alert("Registrado con éxito");
-    });
-});
+// window.addEventListener('load', function () {
+//     document.getElementById('btn-registrar').addEventListener('click', () => {
+//         alert("Registrado con éxito");
+//     });
+// });
 
 window.addEventListener('load', function () {
     new DataTable('#tpro');
 });
+
+// Asegúrate de que esto se ejecute cuando el DOM esté completamente cargado
 
 
 

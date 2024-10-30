@@ -49,6 +49,9 @@ h6 span{
 .container{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
 }
 
 .container .bx-rec-con{

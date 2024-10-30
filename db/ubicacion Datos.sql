@@ -1,4 +1,4 @@
-INSERT INTO ubicacion (idubi, departamento, ciudad) VALUES
+INSERT INTO ubicacion (idubi, nomubi, depenubi) VALUES
 (5, 'ANTIOQUIA', 0),
 (8, 'ATLANTICO', 0),
 (11, 'BOGOTÁ D.C.', 0),

@@ -209,8 +209,8 @@ img {
     width: 12%;
     position: absolute;
     z-index: 10;
-    top: 11.3%;
-    right: 0%;
+    top: 6%;
+    right: -4%;
     background: white;
     border-radius: 12px;
     transition: all 1s;
