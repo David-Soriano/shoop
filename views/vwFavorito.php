@@ -2,7 +2,7 @@
     <div class="row bx-prp-carr-comp">
         <div class="col bx-items-carr-comp">
             <div class="col-6">
-                <h4>Aquí veras tus favoritos</h4>
+                <?php echo $isLoggedIn ? "<h4>Aquí veras tus favoritos</h4>" : "<h4>Inicia sesión para guardar tus favoritos</h4>"?>
                 <p>Encuentra productos y coleccionalos</p>
             </div>
             <div class="col-4">

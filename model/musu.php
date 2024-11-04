@@ -210,7 +210,7 @@ class Musu
             $result->bindParam(':pasusu', $pasusu, PDO::PARAM_STR);
 
             $result->execute();
-            $res = $result->rowCount(); // Cambiado a rowCount() para ver si se insertaron filas
+            // $res = $result->rowCount(); // Cambiado a rowCount() para ver si se insertaron filas
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
             echo "Error al registrar. Inténtalo más tarde";

@@ -196,6 +196,9 @@ img {
     color: #000;
 }
 
+.ico-items a i, #btnPrf{
+    font-size: 25px;
+}
 .inf-perfil {
     display: flex;
     flex-direction: column;
@@ -579,7 +582,7 @@ div .bx-btns-comp div {
     padding: 1%;
     background: #e3e3e357;
     text-align: center;
-    min-height: 80vh;
+    min-height: 50vh;
 }
 
 .bx-items-carr-comp img {
@@ -596,9 +599,13 @@ div .bx-btns-comp div {
     padding: 1%;
     border-radius: 5px;
     background: #f51f1fd6;
-    color: #FFF;
     font-size: 12px;
     transition: all 400ms;
+}
+
+.bx-items-carr-comp button a {
+    color: #FFF;
+    text-decoration: none;
 }
 
 .bx-items-carr-comp button:hover {
