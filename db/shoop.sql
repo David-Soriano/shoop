@@ -193,11 +193,18 @@ CREATE TABLE `favoritos` (
 
 CREATE TABLE `imagen` (
   `idimag` int(10) NOT NULL,
-  `imgpro` varchar(20) DEFAULT NULL,
-  `nomimg` varchar(20) DEFAULT NULL,
+  `imgpro` varchar(100) DEFAULT NULL,
+  `nomimg` varchar(50) DEFAULT NULL,
   `tipimg` varchar(20) DEFAULT NULL,
   `idpro` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `imagen`
+--
+
+INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`) VALUES
+(1, 'proinf/camiseta.png', 'Camiseta de algodón', 'png', 3);
 
 -- --------------------------------------------------------
 
@@ -398,6 +405,13 @@ CREATE TABLE `producto` (
   `pordescu` float DEFAULT 0,
   `idval` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `imgpro`, `provpro`, `prousu`, `idcat`, `feccreat`, `fecupdate`, `enofer`, `precofer`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`) VALUES
+(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Camiseta de algodón ', 'imagenes/camiseta.jp', 0, 'admin', NULL, '2024-11-04 15:14:03', '2024-11-04 15:14:03', 0, 20000, '2024-11-05 05:00:00', '2024-11-20 05:00:00', 'activo', 15, NULL);
 
 -- --------------------------------------------------------
 
@@ -1997,7 +2011,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2039,7 +2053,7 @@ ALTER TABLE `pqr`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`

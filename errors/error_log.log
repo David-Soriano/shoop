@@ -19,3 +19,96 @@ SQLSTATE[42S22]: Column not found: 1054 Unknown column 'lugmen' in 'field list'S
 [02-Nov-2024 02:55:59 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
 [04-Nov-2024 14:59:29 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
 [04-Nov-2024 15:09:36 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
+[04-Nov-2024 16:23:08 Europe/Berlin] PHP Warning:  Undefined variable $productos in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:23:08 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:23:58 Europe/Berlin] PHP Warning:  Undefined variable $productos in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:23:58 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:27:02 Europe/Berlin] PHP Warning:  Undefined variable $productos in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:27:02 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:27:31 Europe/Berlin] PHP Fatal error:  Cannot declare class Producto, because the name is already in use in C:\xampp\htdocs\SHOOP\model\producto.php on line 2
+[04-Nov-2024 16:28:05 Europe/Berlin] PHP Warning:  include(vwTienda.php.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\SHOOP\controller\cpro.php on line 29
+[04-Nov-2024 16:28:05 Europe/Berlin] PHP Warning:  include(): Failed opening 'vwTienda.php.php' for inclusion (include_path='\xampp\php\PEAR') in C:\xampp\htdocs\SHOOP\controller\cpro.php on line 29
+[04-Nov-2024 16:28:05 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:28:56 Europe/Berlin] PHP Warning:  include(views/vwTienda.php.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\SHOOP\controller\cpro.php on line 29
+[04-Nov-2024 16:28:56 Europe/Berlin] PHP Warning:  include(): Failed opening 'views/vwTienda.php.php' for inclusion (include_path='\xampp\php\PEAR') in C:\xampp\htdocs\SHOOP\controller\cpro.php on line 29
+[04-Nov-2024 16:28:56 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:39:18 Europe/Berlin] PHP Warning:  Undefined variable $productos in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:39:18 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:43:59 Europe/Berlin] PHP Warning:  include(../views/vwTienda.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\SHOOP\controller\cpro.php on line 45
+[04-Nov-2024 16:43:59 Europe/Berlin] PHP Warning:  include(): Failed opening '../views/vwTienda.php' for inclusion (include_path='\xampp\php\PEAR') in C:\xampp\htdocs\SHOOP\controller\cpro.php on line 45
+[04-Nov-2024 16:43:59 Europe/Berlin] PHP Warning:  Undefined variable $productos in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:43:59 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:45:15 Europe/Berlin] PHP Warning:  Undefined variable $isLoggedIn in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 67
+[04-Nov-2024 16:45:15 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:67
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\controller\cpro.php(45): include()
+#1 C:\xampp\htdocs\SHOOP\controller\cpro.php(36): render('views/vwTienda', Array)
+#2 C:\xampp\htdocs\SHOOP\controller\cpro.php(5): mostrarProductos()
+#3 C:\xampp\htdocs\SHOOP\home.php(24): include('C:\\xampp\\htdocs...')
+#4 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 67
+[04-Nov-2024 16:46:30 Europe/Berlin] PHP Warning:  Undefined variable $productos in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:46:30 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:47:11 Europe/Berlin] PHP Warning:  Undefined variable $productos in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:47:11 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 66
+[04-Nov-2024 16:47:51 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:67
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\home.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 67
+[04-Nov-2024 16:49:43 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:67
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\home.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 67
+[04-Nov-2024 16:50:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:58
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\home.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 58
+[04-Nov-2024 16:50:57 Europe/Berlin] PHP Warning:  Undefined variable $prductos in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 57
+[04-Nov-2024 16:50:57 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:59
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\home.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 59
+[04-Nov-2024 16:51:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:59
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\home.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 59
+[04-Nov-2024 16:53:11 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:59
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\home.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 59
+[04-Nov-2024 16:53:42 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:68
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\home.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 68
+[04-Nov-2024 16:54:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\home.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[04-Nov-2024 16:58:33 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
+[04-Nov-2024 16:58:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\home.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[04-Nov-2024 17:03:42 Europe/Berlin] PHP Warning:  include(vwTienda.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\SHOOP\controller\cpro.php on line 46
+[04-Nov-2024 17:03:42 Europe/Berlin] PHP Warning:  include(): Failed opening 'vwTienda.php' for inclusion (include_path='\xampp\php\PEAR') in C:\xampp\htdocs\SHOOP\controller\cpro.php on line 46
+[04-Nov-2024 17:03:42 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\home.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[04-Nov-2024 17:04:00 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\controller\cpro.php(46): include()
+#1 C:\xampp\htdocs\SHOOP\controller\cpro.php(43): render('views/vwTienda', Array)
+#2 C:\xampp\htdocs\SHOOP\home.php(24): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
