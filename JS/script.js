@@ -8,10 +8,10 @@ function ocultarBx() {
     let bandera = false;
     btnPrf.addEventListener('click', () => {
         if (bandera === false) {
-            document.getElementById('bx-opc-prf').style.height = 'auto';
+            document.getElementById('bx-opc-prf').style.display = 'block';
             bandera = true;
         } else {
-            document.getElementById('bx-opc-prf').style.height = '0';
+            document.getElementById('bx-opc-prf').style.display = 'none';
             bandera = false;
         }
     })

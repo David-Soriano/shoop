@@ -17,3 +17,5 @@ SQLSTATE[42S22]: Column not found: 1054 Unknown column 'lugmen' in 'field list'S
 [02-Nov-2024 02:55:35 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
 [02-Nov-2024 02:55:49 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
 [02-Nov-2024 02:55:59 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
+[04-Nov-2024 14:59:29 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
+[04-Nov-2024 15:09:36 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
