@@ -149,11 +149,15 @@
 
                     <div class="col img-artc">
                         <img src="<?php echo $producto['imgpro']; ?>"
-                            alt="<?php echo htmlspecialchars($producto['nompro']); ?>">
+                            alt="<?php echo htmlspecialchars($producto['nompro']); ?>" title="<?php echo htmlspecialchars($producto['nompro']); ?>">
                     </div>
                     <div class="col inf-artc">
                         <h6><?php echo htmlspecialchars($producto['nompro']); ?></h6>
-                        <p>$<?php echo number_format($producto['precio'], 0, ',', '.'); ?></p>
+                        <p id="val-sindes">$<del><?php echo number_format($producto['valorunitario'], 0, ',', '.'); ?></del></p>
+                        <div class="inf-tot-prc">
+                            <p id="prc-fin">$<?php echo number_format($producto['precio'], 0, ',', '.'); ?></p>
+                            <p id="inf-val-des"><?php echo $producto['pordescu']; ?>%</p>
+                        </div>
                     </div>
                 </a>
             <?php endforeach; ?>
