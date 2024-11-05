@@ -1,7 +1,82 @@
 <?php
 class Mpro
 {
-        public function obtenerProductos()
+    public $idpro;
+    public $nompro;
+    public $precio;
+    public $descripcion;
+    public $estado;
+    public $imgpro;
+    
+    // Getters
+    public function getIdpro()
+    {
+        return $this->idpro;
+    }
+
+    public function getNompro()
+    {
+        return $this->nompro;
+    }
+
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    public function getImgpro()
+    {
+        return $this->imgpro;
+    }
+
+    // Setters
+    public function setIdpro($idpro)
+    {
+        $this->idpro = $idpro;
+    }
+
+    public function setNompro($nompro)
+    {
+        $this->nompro = $nompro;
+    }
+
+    public function setPrecio($precio)
+    {
+        if ($precio < 0) {
+            throw new Exception("El precio no puede ser negativo.");
+        }
+        $this->precio = $precio;
+    }
+
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    }
+
+    public function setEstado($estado)
+    {
+        $estadosValidos = ['activo', 'inactivo'];
+        if (!in_array($estado, $estadosValidos)) {
+            throw new Exception("Estado no válido.");
+        }
+        $this->estado = $estado;
+    }
+
+    public function setImgpro($imgpro)
+    {
+        $this->imgpro = $imgpro;
+    }
+        public function getAll()
     {
         $res = "";
         $sql = "SELECT p.idpro, p.nompro, p.precio, p.descripcion, p.estado, i.imgpro 

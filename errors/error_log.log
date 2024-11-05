@@ -112,3 +112,59 @@ Stack trace:
 #2 C:\xampp\htdocs\SHOOP\home.php(24): include('C:\\xampp\\htdocs...')
 #3 {main}
   thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[05-Nov-2024 14:17:07 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\controller\cpro.php(46): include()
+#1 C:\xampp\htdocs\SHOOP\controller\cpro.php(43): render('views/vwTienda', Array)
+#2 C:\xampp\htdocs\SHOOP\index.php(24): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[05-Nov-2024 14:18:34 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\controller\cpro.php(46): include()
+#1 C:\xampp\htdocs\SHOOP\controller\cpro.php(43): render('views/vwTienda', Array)
+#2 C:\xampp\htdocs\SHOOP\index.php(24): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[05-Nov-2024 14:18:35 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\controller\cpro.php(46): include()
+#1 C:\xampp\htdocs\SHOOP\controller\cpro.php(43): render('views/vwTienda', Array)
+#2 C:\xampp\htdocs\SHOOP\index.php(24): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[05-Nov-2024 14:18:38 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\controller\cpro.php(46): include()
+#1 C:\xampp\htdocs\SHOOP\controller\cpro.php(43): render('views/vwTienda', Array)
+#2 C:\xampp\htdocs\SHOOP\index.php(24): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[05-Nov-2024 14:18:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\controller\cpro.php(46): include()
+#1 C:\xampp\htdocs\SHOOP\controller\cpro.php(43): render('views/vwTienda', Array)
+#2 C:\xampp\htdocs\SHOOP\index.php(24): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[05-Nov-2024 14:18:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\controller\cpro.php(46): include()
+#1 C:\xampp\htdocs\SHOOP\controller\cpro.php(43): render('views/vwTienda', Array)
+#2 C:\xampp\htdocs\SHOOP\index.php(24): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[05-Nov-2024 14:18:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\controller\cpro.php(46): include()
+#1 C:\xampp\htdocs\SHOOP\controller\cpro.php(43): render('views/vwTienda', Array)
+#2 C:\xampp\htdocs\SHOOP\index.php(24): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[05-Nov-2024 14:22:07 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
+[05-Nov-2024 14:22:14 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type Producto as array in C:\xampp\htdocs\SHOOP\views\vwTienda.php:147
+Stack trace:
+#0 C:\xampp\htdocs\SHOOP\index.php(37): include()
+#1 {main}
+  thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
+[05-Nov-2024 16:29:42 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66

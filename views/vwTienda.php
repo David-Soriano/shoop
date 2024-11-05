@@ -53,7 +53,7 @@
 <div class="row bx-artc-prc">
     <section class="col-sm-10 col">
         <div class="row d-flex gap-5 justify-content-center">
-            <a href="<?php echo $isLoggedIn ? "home.php?pg=001" : "index.php?pg=001"; ?>"
+            <!-- <a href="<?php echo $isLoggedIn ? "home.php?pg=001" : "index.php?pg=001"; ?>"
                 class="col-lg-2 col-md-3 col-sm-5 col-4 bx-item">
                 <div class="col img-artc">
                     <img src="IMG/Articulo 1.png" alt="">
@@ -141,14 +141,14 @@
                     <h6>Nombre</h6>
                     <p>$000.0</p>
                 </div>
-            </a>
+            </a> -->
             <?php
             foreach ($productos as $producto): ?>
                 <a href="<?php echo $isLoggedIn ? "home.php?pg=001&id=" . $producto['idpro'] : "index.php?pg=001&id=" . $producto['idpro']; ?>"
                     class="col-lg-2 col-md-3 col-sm-5 col-4 bx-item">
 
                     <div class="col img-artc">
-                        <img src="<?php echo 'proinf/' . $producto['imgpro']; ?>"
+                        <img src="<?php echo $producto['imgpro']; ?>"
                             alt="<?php echo htmlspecialchars($producto['nompro']); ?>">
                     </div>
                     <div class="col inf-artc">
