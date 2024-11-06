@@ -2243,12 +2243,6 @@ ALTER TABLE `pqr`
   ADD CONSTRAINT `pqr_ibfk_2` FOREIGN KEY (`idusu`) REFERENCES `usuario` (`idusu`);
 
 --
--- Filtros para la tabla `producto`
---
-ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idcat`) REFERENCES `categoria` (`idcat`);
-
---
 -- Filtros para la tabla `prodxprov`
 --
 ALTER TABLE `prodxprov`

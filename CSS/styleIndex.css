@@ -395,7 +395,7 @@ footer {
 }
 
 .aside div div {
-    height: 50vh;
+    height: 8vh;
 }
 
 .bx-fot-art {
@@ -416,6 +416,7 @@ footer {
 .bx-mr-prd {
     min-height: 43vh;
     max-height: 43vh;
+    gap: 5%;
 }
 
 .bx-mr-prd div {
@@ -524,7 +525,7 @@ h4 {
 
 .bx-car-items,
 .bx-des-prd {
-    width: 80%;
+    width: 100%;
 }
 
 .bx-des-prd div {
@@ -971,8 +972,26 @@ form button {
 .contact-form {
     grid-area: contact-form;
 }
-
-@media screen and (max-width: 550px) {
+.bx-min-fot{
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+}
+.bx-mobile{
+    display: none;
+}
+.bx-md-compu{
+    display: none;
+}
+/* @media screen and (max-width: 780px){
+    .bx-md-compu{
+        display: flex;
+    }
+    .bx-compu{
+        display: none;
+    }
+} */
+@media screen and (max-width: 580px) {
     .bx-cont-inf{
         flex-direction: column;
         align-items: center;
@@ -983,5 +1002,49 @@ form button {
         display: flex;
         align-items: center;
         min-height: 40vh;
+    }
+    .bx-fot-art{
+        display: flex;
+        flex-direction: column;
+    }
+    .bx-min-fot{
+        display: none;
+    }
+    .bx-compu{
+        display: none;
+    }
+    .bx-mobile{
+        display: flex;
+        min-height: auto;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .bx-mobile .bx-car-prd{
+        height: auto;
+    }
+    .bx-mobile .row{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .bx-btns-comp{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .bx-btns-comp button{
+        width: 100%;
+    }
+    .bx-mr-prd div{
+        height: 30vh;
+        width: 135px;
+    }
+    .bx-mr-car-prd .bx-car-items{
+        display: flex;
+        flex-direction: column;
+    }
+    .bx-txt-prd{
+        min-height: 43vh;
     }
 }
