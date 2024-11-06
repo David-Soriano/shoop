@@ -168,3 +168,19 @@ Stack trace:
 #1 {main}
   thrown in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 147
 [05-Nov-2024 16:29:42 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66
+[06-Nov-2024 03:03:16 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 158
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Warning:  Undefined variable $producto in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 145
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 145
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Warning:  Undefined variable $producto in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 145
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 145
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 161
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 161
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 161
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 161
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 161
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 161
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 161
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 161
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 161
+[06-Nov-2024 03:07:29 Europe/Berlin] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in C:\xampp\htdocs\SHOOP\views\vwTienda.php on line 161
+[06-Nov-2024 03:20:18 Europe/Berlin] PHP Warning:  Undefined variable $url2 in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 66

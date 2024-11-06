@@ -76,10 +76,25 @@ class Mpro
     {
         $this->imgpro = $imgpro;
     }
+    public function getOnePrd(){
+        $res = "";
+        $sql = "SELECT idpro, nompro, precio, cantidad, tipro, valorunitario, descripcion, imgpro, provpro, prousu, feccreat, fecupdate, enofer, fechiniofer, fechfinofer, estado, pordescu, idval FROM producto WHERE idpro = 3;
+";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
+            echo "Error al obtener productos. Intentalo mas tarde";
+        }
+    }
     public function getInfPar()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.precio, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro,p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' GROUP BY p.idpro;
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro,p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' GROUP BY p.idpro;
 ";
         try {
             $modelo = new Conexion();

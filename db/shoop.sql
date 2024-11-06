@@ -411,7 +411,7 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `imgpro`, `provpro`, `prousu`, `idcat`, `feccreat`, `fecupdate`, `enofer`, `precofer`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`) VALUES
-(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Camiseta de algodón ', 'imagenes/camiseta.jp', 0, 'admin', NULL, '2024-11-04 15:14:03', '2024-11-04 15:14:03', 0, 20000, '2024-11-05 05:00:00', '2024-11-20 05:00:00', 'activo', 15, NULL);
+(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Camiseta de algodón ', 'proinf/camiseta.jp', 0, 'admin', NULL, '2024-11-04 15:14:03', '2024-11-04 15:14:03', 0, 20000, '2024-11-05 05:00:00', '2024-11-20 05:00:00', 'activo', 15, NULL);
 
 -- --------------------------------------------------------
 
