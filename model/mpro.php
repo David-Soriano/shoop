@@ -76,20 +76,23 @@ class Mpro
     {
         $this->imgpro = $imgpro;
     }
-    public function getOnePrd(){
+    public function getOnePrd()
+    {
         $res = "";
-        $sql = "SELECT idpro, nompro, precio, cantidad, tipro, valorunitario, descripcion, imgpro, provpro, prousu, feccreat, fecupdate, enofer, fechiniofer, fechfinofer, estado, pordescu, idval FROM producto WHERE idpro = 3;
-";
+        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.pordescu, p.productvend, img.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo FROM producto AS p LEFT JOIN imagen AS img ON p.idpro = img.idpro WHERE p.idpro = :idpro;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
             $result = $conexion->prepare($sql);
+            $idpro = $this->getIdpro();
+            $result->bindParam(':idpro',$idpro);
             $result->execute();
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
-            echo "Error al obtener productos. Intentalo mas tarde";
+            echo "Error al obtener detalle del producto. Intentalo mas tarde";
         }
+        return $res;
     }
     public function getInfPar()
     {
@@ -105,6 +108,24 @@ class Mpro
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
             echo "Error al obtener productos. Intentalo mas tarde";
+        }
+        return $res;
+    }
+    public function getCarPrd()
+    {
+        $res = "";
+        $sql = "SELECT idcar, idpro, descripcion FROM caracteristicas WHERE idpro = :idpro;";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $idpro = $this->getIdpro();
+            $result->bindParam(':idpro',$idpro);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
+            echo "Error al obtener detalle del producto. Intentalo mas tarde";
         }
         return $res;
     }
