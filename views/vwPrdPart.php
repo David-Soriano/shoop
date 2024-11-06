@@ -61,7 +61,7 @@
                             <?php } ?>
                         </h4>
                         <p><span>Envío Gratis</span></p>
-                        <section>
+                        <section class="bx-carprd">
                             <p>
                                 Características principales:
                             </p>
@@ -87,7 +87,7 @@
                 <p>Cantidad: <span>1</span></p>
                 <button id="btn-buy"><a href="<?php echo $isLoggedIn ? "home.php?pg=9" : "views/vwLogin.php"; ?>">Lo
                         quiero </a></button>
-                <button id="btn-add-carr">Añadir al carrito</button>
+                <button id="btn-add-carr" title="Añadir al carrito"><i class="bi bi-cart2"></i></button>
                 <div class="col">
                     <h6>Información de la Tienda</h6>
                     <div class="col">
@@ -127,7 +127,7 @@
                 <p>Cantidad: <span>1</span></p>
                 <button id="btn-buy"><a href="<?php echo $isLoggedIn ? "home.php?pg=9" : "views/vwLogin.php"; ?>">Lo
                         quiero </a></button>
-                <button id="btn-add-carr">Añadir al carrito</button>
+                <button id="btn-add-carr" title="Añadir al carrito"><i class="bi bi-cart2"></i></button>
                 <div class="col">
                     <h6>Información de la Tienda</h6>
                     <div class="col">

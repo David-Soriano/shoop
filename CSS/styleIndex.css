@@ -410,7 +410,7 @@ footer {
 }
 
 .bx-art-pr img {
-    width: 60%;
+    width: 70%;
 }
 
 .bx-mr-prd {
@@ -983,15 +983,32 @@ form button {
 .bx-md-compu{
     display: none;
 }
-/* @media screen and (max-width: 780px){
-    .bx-md-compu{
-        display: flex;
+.bx-min-fot.min-img{
+    height: 80vh;
+}
+@media screen and (max-width: 1300px){
+    .bx-art-pr img{
+        width: 100%;
     }
-    .bx-compu{
-        display: none;
+    .bx-min-fot.min-img{
+        width: 8vh;
     }
-} */
-@media screen and (max-width: 580px) {
+}
+@media screen and (max-width:1000px) {
+    .bx-txt-prd h3, h4{
+        font-size: 16px;
+    }
+    .bx-car-prd del{
+        font-size: 13px;
+    }
+    .bx-car-prd li{
+        font-size: 12px;
+    }
+    #btn-buy{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 670px) {
     .bx-cont-inf{
         flex-direction: column;
         align-items: center;
@@ -1046,5 +1063,15 @@ form button {
     }
     .bx-txt-prd{
         min-height: 43vh;
+    }
+    #btn-buy{
+        font-size: 16px;
+    }
+    .icons
+    .ico-items{
+        margin-right: 106%;
+    }
+    .ico-items a i{
+        font-size: 20px;
     }
 }
