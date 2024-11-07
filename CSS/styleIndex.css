@@ -1022,6 +1022,21 @@ form button {
 .image-zoom-container.zoom #mainImage:hover {
     cursor: zoom-out;
 }
+#search-results{
+    position: absolute;
+    top: 8%;
+    left: 42%;
+    width: 20%;
+}
+#search-results .product{
+    max-height: 6vh;
+}
+#search-results .product h3{
+    font-size: 14px;
+}
+#search-results .product p{
+    font-size: 10px;
+}
 @media screen and (max-width: 1600px) {
     .inf-perfil div{
         width: 12%;

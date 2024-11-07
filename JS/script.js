@@ -78,6 +78,37 @@ function toggleContainerClass() {
 // Llamamos a la función para asegurarnos de que se aplique cuando se carga la página
 toggleContainerClass();
 
+// Seleccionamos los botones de navegación y el contenedor
+const btnLeft = document.getElementById("btn-left");
+const btnRight = document.getElementById("btn-right");
+const section = document.getElementById("product-section");
+
+// Función para mover los productos a la izquierda
+btnLeft.addEventListener("click", function() {
+    section.scrollLeft -= 200; // Mueve 200px hacia la izquierda
+});
+
+// Función para mover los productos a la derecha
+btnRight.addEventListener("click", function() {
+    section.scrollLeft += 200; // Mueve 200px hacia la derecha
+});
+
+document.getElementById('search-input').addEventListener('input', function() {
+    var query = this.value; // Obtener el valor del campo de búsqueda
+
+    // Verificar que el valor sea lo suficientemente largo para realizar la búsqueda
+    if (query.length > 2) {
+        fetch('controller/buscar.php?query=' + encodeURIComponent(query)) // Enviar solicitud GET a buscar.php
+            .then(response => response.text()) // Procesar la respuesta como texto
+            .then(data => {
+                document.getElementById('search-results').innerHTML = data; // Mostrar los resultados
+            })
+            .catch(error => console.error('Error al buscar:', error)); // Manejar posibles errores
+    } else {
+        document.getElementById('search-results').innerHTML = ''; // Limpiar los resultados si no hay texto o si es muy corto
+    }
+});
+
 function insertText(text, id) {
     document.getElementById(id).innerHTML = text;
 }

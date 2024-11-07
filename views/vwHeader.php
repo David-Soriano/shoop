@@ -1,7 +1,10 @@
 <header class="d-flex header">
     <a href="<?= $isLoggedIn ? "home.php" : "index.php"; ?>"><img src="IMG/LogoAnimado.gif" alt=""></a>
     <div class="cont">
-        <input type="search" name="" id="" placeholder="Buscar">
+        <!-- Formulario para la búsqueda -->
+        <input type="search" name="query" id="search-input" placeholder="Buscar productos" required>
+
+        <!-- Botón de búsqueda (Opcional, ya que el script funcionará solo con el input) -->
         <div class="btns">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search"
                 viewBox="0 0 16 16">
@@ -10,9 +13,13 @@
             </svg>
         </div>
     </div>
+
+    <!-- Contenedor donde se mostrarán los resultados de la búsqueda -->
+    <div id="search-results"></div>
+
     <div class="icons col-2">
         <div class="col-4 ico-items">
-            <?php foreach ($dtMenHead as $dmh):?>
+            <?php foreach ($dtMenHead as $dmh): ?>
                 <a href="<?= $isLoggedIn ? $dmh['url2'] : $dmh['url']; ?>" title="<?= $dmh['nombre']; ?>">
                     <i class="<?= $dmh['icomen']; ?>"></i>
                 </a>
