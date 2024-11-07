@@ -1028,7 +1028,7 @@ form button {
     top: 8%;
     left: 39%;
     width: 20%;
-    background: #dfdfdf;
+    background: transparent;
     border-radius: 5px;
     padding: 4px;
     justify-content: center;
@@ -1193,5 +1193,8 @@ form button {
     width: 21%;
     top: 6%;
     right: 0%;
+    }
+    .item-car{
+        width: 100%;
     }
 }
