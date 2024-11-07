@@ -8,3 +8,4 @@ $mpro->setIdpro($idpro);
 $productos = $mpro->getInfPar();
 $dtInfPrd = $mpro->getOnePrd();
 $dtCarprd = $mpro->getCarPrd();
+$dtImgpro = $mpro->getImagesByProduct();

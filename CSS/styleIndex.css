@@ -409,7 +409,7 @@ footer {
 .bx-art-pr {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .bx-art-pr img {
@@ -1005,6 +1005,25 @@ form button {
 #cantidad:focus-visible{
     outline: none;
 }
+.image-zoom-container {
+    position: relative;
+    overflow: hidden;
+}
+
+#mainImage {
+    width: 100%; /* Ajusta el tamaño inicial */
+    transition: transform 0.3s ease; /* Suaviza el efecto al entrar y salir */
+}
+
+.image-zoom-container.zoom #mainImage {
+    transform: scale(2); /* Factor de zoom, ajusta según desees */
+    cursor: zoom-in;
+}
+
+.image-zoom-container.zoom #mainImage:hover {
+    cursor: zoom-out;
+}
+
 @media screen and (max-width: 1300px){
     .bx-art-pr img{
         width: 100%;

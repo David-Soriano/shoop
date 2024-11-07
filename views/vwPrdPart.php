@@ -3,20 +3,19 @@
         <div class="row bx-fot-art">
             <div class="col-2">
                 <div class="row bx-min-fot min-img">
-                    <div class="col">
-                        <img src="IMG/Articulo 5.webp" alt="">
-                    </div>
-                    <div class="col">
-                        <img src="IMG/min-art5.webp" alt="">
-                    </div>
-                    <div class="col">
-                        <img src="IMG/min1-art5.webp" alt="">
-                    </div>
-                    <div class="col">
-                        <img src="IMG/min2-art5.webp" alt="">
-                    </div>
+                    <?php if (!empty($dtImgpro)) {
+                        foreach ($dtImgpro as $dtImg => $img) { ?>
+                            <div class="col" onmouseover="changeMainImage('<?= $img['imgpro'] ?>')">
+                                <img class="thumbnail" src="<?= $img['imgpro'] ?>" alt="Imagen del producto <?= $dtImg + 1 ?>">
+                            </div>
+                        <?php }
+                    } else { ?>
+                        <p>No hay imágenes disponibles para este producto.</p>
+                    <?php } ?>
                 </div>
+
             </div>
+
             <aside class="aside col-6 bx-mobile">
                 <div class="row">
                     <?php if (isset($dtInfPrd)) {
@@ -32,8 +31,8 @@
             </aside>
             <?php if (isset($dtInfPrd)) {
                 foreach ($dtInfPrd as $dtinf) { ?>
-                    <div class="col-10 bx-art-pr">
-                        <img src="<?= $dtinf['imgpro'] ?>" alt="<?= $dtinf['nompro'] ?>">
+                    <div class="col-10 bx-art-pr image-zoom-container">
+                        <img id="mainImage" src="<?= $dtinf['imgpro'] ?>" alt="<?= $dtinf['nompro'] ?>">
                     </div>
                 <?php }
             } ?>
@@ -66,7 +65,7 @@
                                 Características principales:
                             </p>
                             <?php
-                            
+
                             if (!empty($dtCarprd)) {
                                 $contador = 0; // Inicializar un contador
                                 foreach ($dtCarprd as $dtcar) {

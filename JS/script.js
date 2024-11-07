@@ -26,6 +26,36 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+function changeMainImage(src) {
+    // Obtener el elemento de la imagen principal
+    const mainImage = document.getElementById("mainImage");
+    // Cambiar la `src` de la imagen principal a la `src` recibida
+    mainImage.src = src;
+}
+
+const mainImageContainer = document.querySelector('.image-zoom-container');
+const mainImage = document.getElementById("mainImage");
+
+mainImageContainer.addEventListener('mousemove', (event) => {
+    const rect = mainImageContainer.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // Calcula el movimiento de la imagen
+    const xPercent = (x / rect.width) * 100;
+    const yPercent = (y / rect.height) * 100;
+
+    mainImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+});
+
+mainImageContainer.addEventListener('mouseenter', () => {
+    mainImageContainer.classList.add('zoom');
+});
+
+mainImageContainer.addEventListener('mouseleave', () => {
+    mainImageContainer.classList.remove('zoom');
+    mainImage.style.transformOrigin = 'center center'; // Reinicia la posición de zoom
+});
 
 function insertText(text, id) {
     document.getElementById(id).innerHTML = text;
