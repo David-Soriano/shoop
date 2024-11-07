@@ -1023,19 +1023,49 @@ form button {
     cursor: zoom-out;
 }
 #search-results{
+    display: flex;
     position: absolute;
     top: 8%;
-    left: 42%;
+    left: 39%;
     width: 20%;
+    background: #dfdfdf;
+    border-radius: 5px;
+    padding: 4px;
+    justify-content: center;
 }
 #search-results .product{
-    max-height: 6vh;
+    max-height: 10vh;
+    width: 28vh;
+    background: white;
+    border-radius: 5px;
+    outline: 1px solid #9b9b9b;
+    padding: 2px;
 }
 #search-results .product h3{
     font-size: 14px;
+    text-align: center;
 }
 #search-results .product p{
-    font-size: 10px;
+    font-size: 14px;
+    margin: 0;
+}
+.bx-sh-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bx-sh-img img{
+    width: 75%;
+}
+.product del, .product del, .product span{
+    font-size: 11px;
+}
+.product span{
+    color: #ea4949;
+}
+#res-nf{
+    text-align: center;
+    font-size: 12px;
 }
 @media screen and (max-width: 1600px) {
     .inf-perfil div{
