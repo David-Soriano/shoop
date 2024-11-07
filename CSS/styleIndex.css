@@ -227,8 +227,8 @@ img {
     width: 12%;
     position: absolute;
     z-index: 10;
-    top: 7%;
-    right: -4%;
+    top: 6%;
+    right: -3.5%;
     background: white;
     border-radius: 12px;
     transition: all 1s;
@@ -339,7 +339,6 @@ footer {
 
 .section,
 .aside {
-    min-height: 60vh;
     border-radius: 10px;
     overflow: auto;
 }
@@ -987,7 +986,7 @@ form button {
     display: none;
 }
 .bx-min-fot.min-img{
-    height: 80vh;
+    height: 40vh;
 }
 .section{
     min-height: 27vh;
@@ -1011,7 +1010,7 @@ form button {
 }
 
 #mainImage {
-    width: 100%; /* Ajusta el tamaño inicial */
+    width: 60%; /* Ajusta el tamaño inicial */
     transition: transform 0.3s ease; /* Suaviza el efecto al entrar y salir */
 }
 
@@ -1023,7 +1022,13 @@ form button {
 .image-zoom-container.zoom #mainImage:hover {
     cursor: zoom-out;
 }
-
+@media screen and (max-width: 1600px) {
+    .inf-perfil div{
+        width: 12%;
+        top: 6%;
+        right: -2.5%;
+        }
+}
 @media screen and (max-width: 1300px){
     .bx-art-pr img{
         width: 100%;
@@ -1033,6 +1038,10 @@ form button {
     }
 }
 @media screen and (max-width:1000px) {
+    .bx-opc-det-prd{
+        display: flex;
+        flex-direction: column;
+    }
     .bx-txt-prd h3, h4{
         font-size: 16px;
     }
@@ -1059,11 +1068,26 @@ form button {
         height: 0;
     }
     .bx-min-fot.min-img{
-        height: 60vh;
+        height: 40vh;
     }
     .aside div div {
         height: 4vh;
+        width: 100%;
     }
+    .bx-carprd{
+        display: none;
+    }
+    .bx-btns-comp{
+        margin-top: 20%;
+    }
+    #mainImage{
+        width: 100%;
+    }
+    .inf-perfil div{
+        width: 16%;
+        top: 6%;
+        right: 2%;
+        }
 }
 @media screen and (max-width: 670px) {
     .bx-cont-inf{
@@ -1116,5 +1140,13 @@ form button {
     }
     header img {
         width: 25%;
+    }
+    .bx-btns-comp{
+        margin-top: 0;
+    }
+    .inf-perfil div{
+    width: 21%;
+    top: 6%;
+    right: 0%;
     }
 }

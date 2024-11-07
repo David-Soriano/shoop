@@ -56,6 +56,27 @@ mainImageContainer.addEventListener('mouseleave', () => {
     mainImageContainer.classList.remove('zoom');
     mainImage.style.transformOrigin = 'center center'; // Reinicia la posición de zoom
 });
+//Responsive
+window.addEventListener('resize', toggleContainerClass);
+
+function toggleContainerClass() {
+    const container = document.querySelector('.container, .container-fluid');  // Aseguramos que seleccionamos la clase correcta
+    
+    if (window.innerWidth <= 1300) {
+        if (!container.classList.contains('container-fluid')) {
+            container.classList.add('container-fluid');
+            container.classList.remove('container');
+        }
+    } else {
+        if (!container.classList.contains('container')) {
+            container.classList.add('container');
+            container.classList.remove('container-fluid');
+        }
+    }
+}
+
+// Llamamos a la función para asegurarnos de que se aplique cuando se carga la página
+toggleContainerClass();
 
 function insertText(text, id) {
     document.getElementById(id).innerHTML = text;

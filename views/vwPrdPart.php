@@ -39,7 +39,7 @@
         </div>
     </section>
     <aside class="aside col-6 bx-txt-prd bx-compu">
-        <div class="row">
+        <div class="row bx-opc-det-prd">
             <?php if (isset($dtInfPrd)) {
                 foreach ($dtInfPrd as $dtinf) { ?>
                     <div class="col-7 bx-car-prd">
