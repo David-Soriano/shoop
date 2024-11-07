@@ -208,8 +208,11 @@ img {
     color: #000;
 }
 
-.ico-items a i, #btnPrf{
-    font-size: 25px;
+.ico-items a i{
+    font-size: 20px;
+}
+#btnPrf{
+    font-size: 24px;
 }
 .inf-perfil {
     display: flex;
@@ -322,7 +325,7 @@ footer {
 
 @media screen and (max-width: 900px) {
     header img {
-        width: 17%;
+        width: 20%;
     }
 }
 
@@ -386,7 +389,7 @@ footer {
 }
 
 .min-img div {
-    height: 40vh;
+    max-height: 16vh;
     border: 1px solid;
     border-radius: 5px;
     cursor: pointer;
@@ -986,12 +989,28 @@ form button {
 .bx-min-fot.min-img{
     height: 80vh;
 }
+.section{
+    min-height: 27vh;
+}
+.bx-mr-prd div{
+    height: 22vh;
+    width: 180px;
+}
+#cantidad{
+    width: 45px;
+    border: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+#cantidad:focus-visible{
+    outline: none;
+}
 @media screen and (max-width: 1300px){
     .bx-art-pr img{
         width: 100%;
     }
     .bx-min-fot.min-img{
-        width: 8vh;
+        width: 6vh;
     }
 }
 @media screen and (max-width:1000px) {
@@ -1007,18 +1026,31 @@ form button {
     #btn-buy{
         font-size: 12px;
     }
+    .icons{
+        margin-right: 14%;
+    }
+    .icons
+    .ico-items{
+        margin-right: 82%;
+    }
+    .ico-items a i{
+        font-size: 20px;
+    }
+    .min-img div{
+        height: 0;
+    }
+    .bx-min-fot.min-img{
+        height: 60vh;
+    }
+    .aside div div {
+        height: 4vh;
+    }
 }
 @media screen and (max-width: 670px) {
     .bx-cont-inf{
         flex-direction: column;
         align-items: center;
         width: 100%;
-    }
-    .section{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        min-height: 40vh;
     }
     .bx-fot-art{
         display: flex;
@@ -1053,10 +1085,6 @@ form button {
     .bx-btns-comp button{
         width: 100%;
     }
-    .bx-mr-prd div{
-        height: 30vh;
-        width: 135px;
-    }
     .bx-mr-car-prd .bx-car-items{
         display: flex;
         flex-direction: column;
@@ -1067,11 +1095,7 @@ form button {
     #btn-buy{
         font-size: 16px;
     }
-    .icons
-    .ico-items{
-        margin-right: 106%;
-    }
-    .ico-items a i{
-        font-size: 20px;
+    header img {
+        width: 25%;
     }
 }

@@ -79,7 +79,7 @@ class Mpro
     public function getOnePrd()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.pordescu, p.productvend, img.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo FROM producto AS p LEFT JOIN imagen AS img ON p.idpro = img.idpro WHERE p.idpro = :idpro;";
+        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.pordescu, p.productvend, p.cantidad, img.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo, prov.nomprov, prov.dirrecprov, prov.url, prov.estado, prov.desprv FROM producto AS p LEFT JOIN imagen AS img ON p.idpro = img.idpro LEFT JOIN prodxprov AS pp ON p.idpro = pp.idpro LEFT JOIN proveedor AS prov ON pp.idprov = prov.idprov WHERE p.idpro = :idpro;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -129,4 +129,23 @@ class Mpro
         }
         return $res;
     }
+    public function getImagesByProduct()
+{
+    $res = "";
+    $sql = "SELECT imgpro, nomimg FROM imagen WHERE idpro = :idpro ORDER BY ordimg;";
+    try {
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $result = $conexion->prepare($sql);
+        $idpro = $this->getIdpro();
+        $result->bindParam(':idpro', $idpro);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        echo "Error al obtener las imágenes del producto. Intentalo más tarde.";
+    }
+    return $res;
+}
+
 }

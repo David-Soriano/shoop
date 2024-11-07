@@ -16,6 +16,16 @@ function ocultarBx() {
         }
     })
 }
+document.addEventListener("DOMContentLoaded", function() {
+    const cantidadInput = document.getElementById("cantidad");
+    const maxCantidad = parseInt(cantidadInput.getAttribute("data-max"), 10);
+
+    cantidadInput.addEventListener("input", function() {
+        if (parseInt(cantidadInput.value, 10) > maxCantidad) {
+            cantidadInput.value = maxCantidad; // Restringe al valor máximo si se excede
+        }
+    });
+});
 
 function insertText(text, id) {
     document.getElementById(id).innerHTML = text;
