@@ -804,7 +804,7 @@ div .bx-btns-comp div {
 .contact-us {
     position: relative;
     width: 250px;
-    background: #000000;
+    background: #ea4949;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -829,7 +829,7 @@ div .bx-btns-comp div {
     right: -100px;
     height: 270px;
     width: 400px;
-    background: #535151;
+    background: #f3acac;
     transform: rotate(-25deg);
 }
 
@@ -936,7 +936,7 @@ form button {
     border: 0;
     border-radius: 20px;
     bottom: -20px;
-    background: #0f3b49;
+    background: #ea4949;
     color: white;
     font-size: 1.1rem;
     font-weight: 300;
@@ -1032,6 +1032,11 @@ form button {
     border-radius: 5px;
     padding: 4px;
     justify-content: center;
+    z-index: 20;
+}
+#search-results a{
+    text-decoration: none;
+    color: #000;
 }
 #search-results .product{
     max-height: 10vh;

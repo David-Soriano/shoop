@@ -10,7 +10,6 @@
                 <input class="inp-link" id="btn-envcod" type="submit" value="Enviar">
             </form>
             <a href="vwLogin.php"><input type="button" value="Volver" class="inp-link" id="btn-vol1"></a>
-            <img id="logo" src="../IMG/Logo-oscuro.png" alt="Logo GIL">
         </div>
     </div>
 </div>

@@ -24,7 +24,7 @@
         </div>
         <div class="bx-cabecera">
             <h1>
-                G.I.L Soporte y comunicación.
+                SHOOP Soporte y comunicación.
             </h1>
         </div>
         <div class="address">
@@ -42,7 +42,7 @@
         <div class="email">
             <i class="fas fa-envelope"></i>
             <h3>
-                G.I.LS.A@gmail.com
+                toshoop2024@gmail.com
             </h3>
         </div>
         <div class="contact-form">
