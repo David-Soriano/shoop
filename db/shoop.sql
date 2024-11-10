@@ -2,6 +2,12 @@ DROP DATABASE IF EXISTS shoop;
 CREATE DATABASE shoop;
 USE shoop;
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Base de datos: `shoop`
 --
@@ -212,24 +218,26 @@ CREATE TABLE `imagen` (
   `imgpro` varchar(100) DEFAULT NULL,
   `nomimg` varchar(50) DEFAULT NULL,
   `tipimg` varchar(20) DEFAULT NULL,
-  `idpro` int(5) DEFAULT NULL
+  `idpro` int(5) DEFAULT NULL,
+  `ordimg` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `imagen`
 --
 
-INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`) VALUES
-(1, 'proinf/camiseta.png', 'Camiseta de algodón', 'png', 3),
-(11, 'proinf/jeans.png', 'Pantalón vaquero', 'png', 4),
-(12, 'proinf/zapatos.png', 'Zapatos deportivos', 'png', 5),
-(13, 'proinf/bolso.png', 'Bolso de cuero', 'png', 6),
-(14, 'proinf/reloj.png', 'Reloj digital', 'png', 7),
-(15, 'proinf/gorra.png', 'Gorra de béisbol', 'png', 8),
-(16, 'proinf/sudadera.png', 'Sudadera con capucha', 'png', 9),
-(17, 'proinf/bufanda.png', 'Bufanda de lana', 'png', 10),
-(18, 'proinf/cartera.png', 'Cartera pequeña', 'png', 11),
-(19, 'proinf/sombrero.png', 'Sombrero de paja', 'png', 12);
+INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`) VALUES
+(1, 'proinf/camiseta.png', 'Camiseta de algodón', 'png', 3, 1),
+(11, 'proinf/jeans.png', 'Pantalón vaquero', 'png', 4, 1),
+(12, 'proinf/zapatos.png', 'Zapatos deportivos', 'png', 5, 1),
+(13, 'proinf/bolso.png', 'Bolso de cuero', 'png', 6, 1),
+(14, 'proinf/reloj.png', 'Reloj digital', 'png', 7, 1),
+(15, 'proinf/gorra.png', 'Gorra de béisbol', 'png', 8, 1),
+(16, 'proinf/sudadera.png', 'Sudadera con capucha', 'png', 9, 1),
+(17, 'proinf/bufanda.png', 'Bufanda de lana', 'png', 10, 1),
+(18, 'proinf/cartera.png', 'Cartera pequeña', 'png', 11, 1),
+(19, 'proinf/sombrero.png', 'Sombrero de paja', 'png', 12, 1),
+(21, 'proinf/camiseta-min.png', 'Camiseta Colombia', 'png', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -415,7 +423,7 @@ CREATE TABLE `producto` (
   `cantidad` int(10) DEFAULT NULL,
   `tipro` varchar(20) DEFAULT NULL,
   `valorunitario` float DEFAULT NULL,
-  `descripcion` varchar(20) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
   `imgpro` varchar(20) DEFAULT NULL,
   `provpro` int(5) DEFAULT NULL,
   `prousu` varchar(255) DEFAULT NULL,
@@ -437,8 +445,8 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `imgpro`, `provpro`, `prousu`, `idcat`, `feccreat`, `fecupdate`, `enofer`, `precofer`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`) VALUES
-(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Camiseta de algodón ', 'imagenes/camiseta.jp', 0, 'admin', NULL, '2024-11-04 15:14:03', '2024-11-06 14:24:55', 0, 20000, '2024-11-05 05:00:00', '2024-11-20 05:00:00', 'activo', 15, NULL, 0),
-(4, 'Pantalón vaquero', 60000, 50, 'Ropa', 50000, 'Pantalón vaquero clá', 'imagenes/jeans.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:24:58', 0, 45000, '2024-11-01 05:00:00', '2024-11-10 05:00:00', 'activo', NULL, NULL, 0),
+(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Disfruta de la comodidad de nuestra camisa de algodón 100%. Ideal para cualquier ocasión, brinda suavidad y frescura todo el día. Recomendaciones: Lavar con colores similares y a máquina en ciclo suave. Cuimedia.', 'imagenes/camiseta.jp', 0, 'admin', NULL, '2024-11-04 15:14:03', '2024-11-07 02:23:37', 0, 20000, '2024-11-05 05:00:00', '2024-11-20 05:00:00', 'activo', 15, NULL, 0),
+(4, 'Pantalón vaquero', 60000, 50, 'Ropa', 50000, NULL, 'imagenes/jeans.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-07 02:42:19', 0, 45000, '2024-11-01 05:00:00', '2024-11-10 05:00:00', 'activo', NULL, NULL, 0),
 (5, 'Zapatos deportivos', 90000, 80, 'Calzado', 85000, 'Zapatos deportivos c', 'imagenes/zapatos.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:05', 0, 80000, '2024-11-10 05:00:00', '2024-11-30 05:00:00', 'activo', 5, NULL, 0),
 (6, 'Bolso de cuero', 120000, 30, 'Accesorios', 110000, 'Bolso de cuero genui', 'imagenes/bolso.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:03', 0, 100000, '2024-11-15 05:00:00', '2024-12-01 05:00:00', 'activo', 12, NULL, 0),
 (7, 'Reloj digital', 50000, 60, 'Accesorios', 45000, 'Reloj digital resist', 'imagenes/reloj.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:00', 0, 40000, '2024-11-05 05:00:00', '2024-11-25 05:00:00', 'activo', 20, NULL, 0),
@@ -482,19 +490,20 @@ CREATE TABLE `proveedor` (
   `estado` varchar(20) DEFAULT NULL,
   `nit` varchar(20) DEFAULT NULL,
   `idubi` int(5) DEFAULT NULL,
-  `idusu` int(5) DEFAULT NULL
+  `idusu` int(5) DEFAULT NULL,
+  `desprv` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `proveedor`
 --
 
-INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `url`, `estado`, `nit`, `idubi`, `idusu`) VALUES
-(1, 'Tienda A', 'Calle 123 #45-67', 'http://www.tiendaA.c', 'activo', '900123456', 5, 1),
-(2, 'Tienda B', 'Carrera 5 #10-20', 'http://www.tiendaB.c', 'activo', '900789012', 8, 13),
-(3, 'Tienda C', 'Avenida 9 #8-15', 'http://www.tiendaC.c', 'inactivo', '900345678', 11, 14),
-(4, 'Tienda D', 'Transversal 25 #50-6', 'http://www.tiendaD.c', 'activo', '900456789', 15, 15),
-(5, 'Tienda E', 'Diagonal 45 #67-89', 'http://www.tiendaE.c', 'activo', '900567890', 17, 12);
+INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `url`, `estado`, `nit`, `idubi`, `idusu`, `desprv`) VALUES
+(1, 'Tienda A', 'Calle 123 #45-67', 'http://www.tiendaA.c', 'activo', '900123456', 5, 1, NULL),
+(2, 'Tienda B', 'Carrera 5 #10-20', 'http://www.tiendaB.c', 'activo', '900789012', 8, 13, 'Tienda de ropa y textiles'),
+(3, 'Tienda C', 'Avenida 9 #8-15', 'http://www.tiendaC.c', 'inactivo', '900345678', 11, 14, NULL),
+(4, 'Tienda D', 'Transversal 25 #50-6', 'http://www.tiendaD.c', 'activo', '900456789', 15, 15, NULL),
+(5, 'Tienda E', 'Diagonal 45 #67-89', 'http://www.tiendaE.c', 'activo', '900567890', 17, 12, NULL);
 
 -- --------------------------------------------------------
 
@@ -2059,7 +2068,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
