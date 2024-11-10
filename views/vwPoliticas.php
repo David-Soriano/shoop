@@ -20,5 +20,5 @@
     <p>Nos reservamos el derecho de modificar estas políticas en cualquier momento. Se recomienda revisar periódicamente esta página para estar al tanto de los cambios.</p>
     
     <h2>Contacto</h2>
-    <p>Si tiene alguna pregunta sobre nuestras políticas, puede contactarnos <a href="Gilhepl@gmail.com">aquí</a>.</p>
+    <p>Si tiene alguna pregunta sobre nuestras políticas, puede contactarnos <a href="toshoop2024@gmail.com">aquí</a>.</p>
   </div>

@@ -1039,7 +1039,7 @@ form button {
     color: #000;
 }
 #search-results .product{
-    max-height: 10vh;
+    max-height: 11vh;
     width: 28vh;
     background: white;
     border-radius: 5px;
@@ -1071,6 +1071,9 @@ form button {
 #res-nf{
     text-align: center;
     font-size: 12px;
+}
+.cont input:not(:placeholder-shown) {
+    width: 350px !important;
 }
 @media screen and (max-width: 1600px) {
     .inf-perfil div{

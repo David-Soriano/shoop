@@ -8,3 +8,5 @@ SQLSTATE[42S22]: Column not found: 1054 Unknown column 'img.orimg' in 'field lis
 [07-Nov-2024 04:31:58 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, string given in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 29
 [07-Nov-2024 04:31:58 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, string given in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 40
 [07-Nov-2024 04:31:58 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, string given in C:\xampp\htdocs\SHOOP\views\vwPrdPart.php on line 112
+[10-Nov-2024 17:41:23 Europe/Berlin] PHP Warning:  include(views/vwPoliticas.pph): Failed to open stream: No such file or directory in C:\xampp\htdocs\shoop\index.php on line 37
+[10-Nov-2024 17:41:23 Europe/Berlin] PHP Warning:  include(): Failed opening 'views/vwPoliticas.pph' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\shoop\index.php on line 37

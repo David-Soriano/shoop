@@ -54,6 +54,14 @@ function setupZoom() {
     }
 }
 
+// ======= Funciones relacionadas con cambio de imagenes =======
+function changeMainImage(src) {
+    // Obtener el elemento de la imagen principal
+    const mainImage = document.getElementById("mainImage");
+    // Cambiar la src de la imagen principal a la src recibida
+    mainImage.src = src;
+}
+
 // ======= Funciones relacionadas con botones =======
 function setupButtons() {
     const btnLogout = document.getElementById('btn-logout');
@@ -172,6 +180,19 @@ function setupLeerCorreo(id1, id2, id3) {
     }
 }
 
+function setupInputSearch() {
+    // Detecta si el input tiene contenido
+    const input = document.getElementById('search-input');
+
+    input.addEventListener('input', function () {
+        if (input.value.length > 0) {
+            input.classList.add('has-content');  // Añadir clase cuando hay contenido
+        } else {
+            input.classList.remove('has-content');  // Eliminar clase si está vacío
+        }
+    });
+
+}
 // ======= Cargar todas las configuraciones al inicio =======
 window.addEventListener('load', () => {
     setupSearch();
@@ -182,4 +203,5 @@ window.addEventListener('load', () => {
     setupMaxQuantity();
     setupBoxToggle();
     setupDataTable();
+    setupInputSearch();
 });

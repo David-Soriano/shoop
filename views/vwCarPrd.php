@@ -1,5 +1,5 @@
 <div class="row bx-mr-car-prd">
-    <h5>Y las Características...</h5>
+    <h5>Cracterísticas del producto</h5>
     <div class="row bx-car-items">
         <?php if (!empty($dtCarprd)) { ?>
             <?php 

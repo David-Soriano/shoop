@@ -101,7 +101,7 @@
                             </div>
                             <p><?= $dtinf['desprv']; ?></p>
                             <div>
-                                <p>Consulta nuestros <a href="">Terminos y Condiciones</a></p>
+                                <p>Consulta nuestros <a href="<?php echo $isLoggedIn ? "home.php?pg=17" : "index.php?pg=17"; ?>">Terminos y Condiciones</a></p>
                             </div>
                         </div>
                     </div>

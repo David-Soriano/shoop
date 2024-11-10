@@ -1,5 +1,6 @@
 <?php
 include dirname(__DIR__) . "/model/conexion.php";
+session_start();
 $isLoggedIn = isset($_SESSION['idusu']); 
 if (isset($_GET['query'])) {
     $searchQuery = htmlspecialchars($_GET['query']); // Obtener el término de búsqueda
