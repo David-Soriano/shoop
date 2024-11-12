@@ -1,55 +1,35 @@
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-            aria-label="Slide 4"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
-            aria-label="Slide 5"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5"
-            aria-label="Slide 6"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6"
-            aria-label="Slide 7"></button>
+        <?php
+        $i = 0;
+        foreach($dtSliders as $dtsl) {
+            $activeClass = $i === 0 ? 'active' : '';
+            echo "<button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='$i' class='$activeClass' aria-current='true' aria-label='Slide ".($i+1)."'></button>";
+            $i++;
+        }
+        ?>
     </div>
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="IMG/publicidad1.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="IMG/publicidad2.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="IMG/publicidad3.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="IMG/publicidad4.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="IMG/publicidad5.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="IMG/publicidad6.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="IMG/publicidad7.jpg" class="d-block w-100" alt="...">
-        </div>
+        <?php
+        $i = 0;
+        foreach($dtSliders as $dtsl) {
+            $activeClass = $i === 0 ? 'active' : '';
+            echo "<div class='carousel-item $activeClass'>";
+            echo "<img src='" . $dtsl['imgpro'] . "' class='d-block w-100' alt='...'>";
+            echo "</div>";
+            $i++;
+        }
+        ?>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
 <div class="row bx-artc-prc">
     <section class="col-sm-10 col">
         <div class="row d-flex gap-5 justify-content-center">
