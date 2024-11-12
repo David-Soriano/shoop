@@ -10,3 +10,6 @@ $dtInfPrd = $mpro->getOnePrd();
 $dtCarprd = $mpro->getCarPrd();
 $dtImgpro = $mpro->getImagesByProduct($idpro);
 $dtSliders = $mpro->getImagesByProduct(NULL,1);
+
+$productosOfertas = $mpro->getInfOfertas();
+$productosMasVendidos = $mpro->getInfMasVendidos();
