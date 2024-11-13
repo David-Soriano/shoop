@@ -3,13 +3,13 @@
     <div class="row bx-art-sg">
         <button class="btn-direct" id="btn-left"><i class="bi bi-chevron-compact-left"></i></button>
         <section class="section col d-flex align-items-center bx-mr-prd" id="product-section">
-            <div class="col-2 "></div>
-            <div class="col-2 "></div>
-            <div class="col-2 "></div>
-            <div class="col-2 "></div>
-            <div class="col-2 "></div>
-            <div class="col-2 "></div>
-            <div class="col-2 "></div>
+            <a class="col-2 "></a>
+            <a class="col-2 "></a>
+            <a class="col-2 "></a>
+            <a class="col-2 "></a>
+            <a class="col-2 "></a>
+            <a class="col-2 "></a>
+            <a class="col-2 "></a>
         </section>
         <button class="btn-direct" id="btn-right"><i class="bi bi-chevron-compact-right"></i></button>
     </div>

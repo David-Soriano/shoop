@@ -22,3 +22,7 @@ Stack trace:
 #0 C:\xampp\htdocs\shoop\index.php(37): include()
 #1 {main}
   thrown in C:\xampp\htdocs\shoop\views\vwTienda.php on line 16
+[13-Nov-2024 03:07:13 Europe/Berlin] PHP Warning:  Undefined variable $productosRecientes in C:\xampp\htdocs\shoop\views\vwTienda.php on line 134
+[13-Nov-2024 03:07:13 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\shoop\views\vwTienda.php on line 134
+[13-Nov-2024 03:10:20 Europe/Berlin] PHP Warning:  Undefined variable $productosRecientes in C:\xampp\htdocs\shoop\views\vwTienda.php on line 163
+[13-Nov-2024 03:10:20 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\shoop\views\vwTienda.php on line 163

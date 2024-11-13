@@ -284,7 +284,7 @@ img {
     height: 35%;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    clip-path: polygon(0% 0%, 86% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 0%, 95% 0%, 100% 100%, 0% 100%);
     color: #000;
 }
 
@@ -416,12 +416,10 @@ footer {
 }
 
 .bx-mr-prd {
-    min-height: 43vh;
-    max-height: 43vh;
     gap: 5%;
 }
 
-.bx-mr-prd div {
+.bx-mr-prd a {
     height: 35vh;
 }
 
@@ -466,13 +464,13 @@ h4 {
     scroll-snap-type: x mandatory;
 }
 
-.bx-mr-prd div {
+.bx-mr-prd a {
     border: 1px solid #00000075;
     border-radius: 5px;
     scroll-snap-align: start;
 }
 
-.bx-mr-prd div:hover {
+.bx-mr-prd a:hover {
     transform: scale(1.05);
     border: 1px solid #000000e1;
     -webkit-box-shadow: 0px 9px 21px -12px rgba(0, 0, 0, 0.75);
@@ -991,7 +989,8 @@ form button {
 .section{
     min-height: 27vh;
 }
-.bx-mr-prd div{
+.bx-mr-prd a{
+    margin-top: 4%;
     height: 22vh;
     width: 180px;
 }

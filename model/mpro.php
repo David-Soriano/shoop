@@ -206,6 +206,34 @@ class Mpro
 
         return $res;
     }
+    //Productos vistos recientemente
+    public function getProVistos()
+{
+    $res = [];
+    
+    // Verificar si la cookie de productos vistos existe y contiene productos
+    if (isset($_COOKIE['provis']) && !empty($_COOKIE['provis'])) {
+        // Obtener los IDs de productos vistos desde la cookie
+        $idsProductos = $_COOKIE['provis'];
+
+        // Consulta SQL para obtener los detalles de los productos
+        $sql = "SELECT p.idpro, p.nompro, p.valorunitario, p.pordescu, i.imgpro,
+       p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE ordimg = (SELECT MIN(ordimg) FROM imagen WHERE idpro = imagen.idpro)) AS i ON p.idpro = i.idpro WHERE p.idpro IN ($idsProductos) AND p.estado = 'activo' ORDER BY FIELD(p.idpro, $idsProductos);"; // Mantener el orden de los productos
+
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al obtener productos recientemente vistos. Intentalo más tarde";
+        }
+    }
+    
+    return $res;
+}
 
     public function getCarPrd()
     {
