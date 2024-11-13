@@ -169,7 +169,7 @@ class Mpag
     function getMenuPerf($isLoged)
     {
         $res = NULL;
-        $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen
+        $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen, isUser
                     FROM menu 
                     WHERE estmen = :status AND lugmen = :status ORDER BY ordmen;";
         try {
