@@ -166,6 +166,13 @@ CREATE TABLE `detalle_pedido` (
   `precio` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detalle_pedido`
+--
+
+INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`) VALUES
+(1, 1, 7, 5, 30000.00);
+
 -- --------------------------------------------------------
 
 --
@@ -191,9 +198,15 @@ CREATE TABLE `devolucionreembolso` (
 
 CREATE TABLE `dominio` (
   `iddom` int(5) NOT NULL,
-  `nomdom` varchar(20) DEFAULT NULL,
-  `idval` int(5) DEFAULT NULL
+  `nomdom` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `dominio`
+--
+
+INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
+(1, 'Categorías');
 
 -- --------------------------------------------------------
 
@@ -219,25 +232,29 @@ CREATE TABLE `imagen` (
   `nomimg` varchar(50) DEFAULT NULL,
   `tipimg` varchar(20) DEFAULT NULL,
   `idpro` int(5) DEFAULT NULL,
-  `ordimg` int(1) DEFAULT NULL
+  `ordimg` int(1) DEFAULT NULL,
+  `lugimg` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `imagen`
 --
 
-INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`) VALUES
-(1, 'proinf/camiseta.png', 'Camiseta de algodón', 'png', 3, 1),
-(11, 'proinf/jeans.png', 'Pantalón vaquero', 'png', 4, 1),
-(12, 'proinf/zapatos.png', 'Zapatos deportivos', 'png', 5, 1),
-(13, 'proinf/bolso.png', 'Bolso de cuero', 'png', 6, 1),
-(14, 'proinf/reloj.png', 'Reloj digital', 'png', 7, 1),
-(15, 'proinf/gorra.png', 'Gorra de béisbol', 'png', 8, 1),
-(16, 'proinf/sudadera.png', 'Sudadera con capucha', 'png', 9, 1),
-(17, 'proinf/bufanda.png', 'Bufanda de lana', 'png', 10, 1),
-(18, 'proinf/cartera.png', 'Cartera pequeña', 'png', 11, 1),
-(19, 'proinf/sombrero.png', 'Sombrero de paja', 'png', 12, 1),
-(21, 'proinf/camiseta-min.png', 'Camiseta Colombia', 'png', 3, 2);
+INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`, `lugimg`) VALUES
+(1, 'proinf/camiseta.png', 'Camiseta de algodón', 'png', 3, 1, NULL),
+(11, 'proinf/jeans.png', 'Pantalón vaquero', 'png', 4, 1, NULL),
+(12, 'proinf/zapatos.png', 'Zapatos deportivos', 'png', 5, 1, NULL),
+(13, 'proinf/bolso.png', 'Bolso de cuero', 'png', 6, 1, NULL),
+(14, 'proinf/reloj.png', 'Reloj digital', 'png', 7, 1, NULL),
+(15, 'proinf/gorra.png', 'Gorra de béisbol', 'png', 8, 1, NULL),
+(16, 'proinf/sudadera.png', 'Sudadera con capucha', 'png', 9, 1, NULL),
+(17, 'proinf/bufanda.png', 'Bufanda de lana', 'png', 10, 1, NULL),
+(18, 'proinf/cartera.png', 'Cartera pequeña', 'png', 11, 1, NULL),
+(19, 'proinf/sombrero.png', 'Sombrero de paja', 'png', 12, 1, NULL),
+(21, 'proinf/camiseta-min.png', 'Camiseta Colombia', 'png', 3, 2, NULL),
+(22, 'IMG/publicidad4.jpg', 'Sport', 'jpg', NULL, 1, 1),
+(23, 'IMG/publicidad7.jpg', 'Mac Mini', 'jpg', NULL, 3, 1),
+(24, 'IMG/publicidad3.jpg', 'Yu Na', 'jpg', NULL, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -254,27 +271,28 @@ CREATE TABLE `menu` (
   `url2` varchar(255) DEFAULT NULL,
   `submen` tinyint(1) DEFAULT 0,
   `lugmen` int(1) DEFAULT NULL,
-  `icomen` varchar(50) DEFAULT NULL
+  `icomen` varchar(50) DEFAULT NULL,
+  `isUser` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `menu`
 --
 
-INSERT INTO `menu` (`idmen`, `nombre`, `url`, `ordmen`, `estmen`, `url2`, `submen`, `lugmen`, `icomen`) VALUES
-(1, 'Categorías', NULL, 1, NULL, NULL, 1, 0, NULL),
-(2, 'Nosotros', 'index.php?pg=5', 2, NULL, 'home.php?pg=5', 0, 0, NULL),
-(3, 'Ayuda/PQR', 'index.php?pg=8', 3, NULL, 'home.php?pg=8', 1, 0, NULL),
-(4, 'Iniciar Sesión', 'views/vwLogin.php', 4, 0, 'views/vwLogin.php', 0, 0, NULL),
-(5, 'Productos', '#', 5, 1, NULL, 0, 0, NULL),
-(6, 'Vender', NULL, 6, 1, 'views/vwpanpro.php', 0, 0, NULL),
-(7, 'Cerrar Sesión', 'views/vwExit.php', 10, 1, NULL, 0, 1, NULL),
-(8, 'Perfil', 'home.php?pg=15', 7, 1, NULL, 0, 1, NULL),
-(9, 'Tus Pedidos', NULL, 8, 1, NULL, 0, 1, NULL),
-(10, 'Tus Compras', 'home.php?pg=16', 9, 1, NULL, 0, 1, NULL),
-(11, 'Favoritos', 'index.php?pg=002', 11, NULL, 'home.php?pg=002', 0, 2, 'bi bi-heart'),
-(12, 'Carro Compras', 'index.php?pg=003', 12, NULL, 'home.php?pg=003', 0, 2, 'bi bi-basket3'),
-(13, 'Icono User', NULL, 0, NULL, NULL, 0, 3, 'bi bi-person-circle');
+INSERT INTO `menu` (`idmen`, `nombre`, `url`, `ordmen`, `estmen`, `url2`, `submen`, `lugmen`, `icomen`, `isUser`) VALUES
+(1, 'Categorías', NULL, 1, NULL, NULL, 1, 0, NULL, NULL),
+(2, 'Nosotros', 'index.php?pg=5', 2, NULL, 'home.php?pg=5', 0, 0, NULL, NULL),
+(3, 'Ayuda/PQR', 'index.php?pg=8', 3, NULL, 'home.php?pg=8', 1, 0, NULL, NULL),
+(4, 'Iniciar Sesión', 'views/vwLogin.php', 4, 0, 'views/vwLogin.php', 0, 0, NULL, NULL),
+(5, 'Productos', '#', 5, 1, NULL, 0, 0, NULL, NULL),
+(6, 'Vender', NULL, 6, 1, 'views/vwpanpro.php', 0, 0, NULL, NULL),
+(7, 'Cerrar Sesión', 'views/vwExit.php', 10, 1, NULL, 0, 1, NULL, NULL),
+(8, 'Perfil', 'home.php?pg=15', 7, 1, NULL, 0, 1, NULL, NULL),
+(9, 'Tus Pedidos', 'home.php?pg=17', 8, 1, NULL, 0, 1, NULL, 1),
+(10, 'Tus Compras', 'home.php?pg=16', 9, 1, NULL, 0, 1, NULL, 1),
+(11, 'Favoritos', 'index.php?pg=002', 11, NULL, 'home.php?pg=002', 0, 2, 'bi bi-heart', NULL),
+(12, 'Carro Compras', 'index.php?pg=003', 12, NULL, 'home.php?pg=003', 0, 2, 'bi bi-basket3', NULL),
+(13, 'Icono User', NULL, 0, NULL, NULL, 0, 3, 'bi bi-person-circle', NULL);
 
 -- --------------------------------------------------------
 
@@ -311,7 +329,8 @@ INSERT INTO `pagina` (`idpag`, `nompag`, `rutpag`, `mospag`, `icopag`, `lugpag`)
 (13, 'Tienda', 'views/vwTienda.php', 0, NULL, NULL),
 (14, 'Bienvenida', 'views/vwTienda.php', 0, NULL, NULL),
 (15, 'Perfil', 'views/vwPerfil.php', 0, 'bi bi-person-circle', 1),
-(16, 'Tus Compras', 'views/vwTuscompras.php', 0, NULL, NULL);
+(16, 'Tus Compras', 'views/vwTuscompras.php', 0, NULL, NULL),
+(17, 'Tus Pedidos', 'views/vwTusPedidos.php', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -374,6 +393,13 @@ CREATE TABLE `pedido` (
   `estped` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`idped`, `idusu`, `total`, `fecha`, `estped`) VALUES
+(1, 1, 30000.00, '2024-11-13 01:36:56', 'Enviado');
+
 -- --------------------------------------------------------
 
 --
@@ -424,7 +450,6 @@ CREATE TABLE `producto` (
   `tipro` varchar(20) DEFAULT NULL,
   `valorunitario` float DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
-  `imgpro` varchar(20) DEFAULT NULL,
   `provpro` int(5) DEFAULT NULL,
   `prousu` varchar(255) DEFAULT NULL,
   `idcat` bigint(11) DEFAULT NULL,
@@ -437,24 +462,25 @@ CREATE TABLE `producto` (
   `estado` enum('activo','descontinuado','pendiente') DEFAULT 'activo',
   `pordescu` float DEFAULT 0,
   `idval` int(5) DEFAULT NULL,
-  `productvend` int(10) DEFAULT 0
+  `productvend` int(10) DEFAULT 0,
+  `temporada` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `imgpro`, `provpro`, `prousu`, `idcat`, `feccreat`, `fecupdate`, `enofer`, `precofer`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`) VALUES
-(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Disfruta de la comodidad de nuestra camisa de algodón 100%. Ideal para cualquier ocasión, brinda suavidad y frescura todo el día. Recomendaciones: Lavar con colores similares y a máquina en ciclo suave. Cuimedia.', 'imagenes/camiseta.jp', 0, 'admin', NULL, '2024-11-04 15:14:03', '2024-11-07 02:23:37', 0, 20000, '2024-11-05 05:00:00', '2024-11-20 05:00:00', 'activo', 15, NULL, 0),
-(4, 'Pantalón vaquero', 60000, 50, 'Ropa', 50000, NULL, 'imagenes/jeans.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-07 02:42:19', 0, 45000, '2024-11-01 05:00:00', '2024-11-10 05:00:00', 'activo', NULL, NULL, 0),
-(5, 'Zapatos deportivos', 90000, 80, 'Calzado', 85000, 'Zapatos deportivos c', 'imagenes/zapatos.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:05', 0, 80000, '2024-11-10 05:00:00', '2024-11-30 05:00:00', 'activo', 5, NULL, 0),
-(6, 'Bolso de cuero', 120000, 30, 'Accesorios', 110000, 'Bolso de cuero genui', 'imagenes/bolso.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:03', 0, 100000, '2024-11-15 05:00:00', '2024-12-01 05:00:00', 'activo', 12, NULL, 0),
-(7, 'Reloj digital', 50000, 60, 'Accesorios', 45000, 'Reloj digital resist', 'imagenes/reloj.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:00', 0, 40000, '2024-11-05 05:00:00', '2024-11-25 05:00:00', 'activo', 20, NULL, 0),
-(8, 'Gorra de béisbol', 15000, 120, 'Accesorios', 12000, 'Gorra de béisbol aju', 'imagenes/gorra.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:09', 0, 11000, '2024-11-02 05:00:00', '2024-11-18 05:00:00', 'activo', 10, NULL, 0),
-(9, 'Sudadera con capucha', 45000, 70, 'Ropa', 42000, 'Sudadera con capucha', 'imagenes/sudadera.jp', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:12', 0, 40000, '2024-11-12 05:00:00', '2024-11-28 05:00:00', 'activo', 8, NULL, 0),
-(10, 'Bufanda de lana', 30000, 100, 'Accesorios', 25000, 'Bufanda de lana para', 'imagenes/bufanda.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:16', 0, 24000, '2024-11-01 05:00:00', '2024-11-15 05:00:00', 'activo', 20, NULL, 0),
-(11, 'Cartera pequeña', 20000, 90, 'Accesorios', 18000, 'Cartera de mano pequ', 'imagenes/cartera.jpg', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:20', 0, 17000, '2024-11-04 05:00:00', '2024-11-18 05:00:00', 'activo', 15, NULL, 0),
-(12, 'Sombrero de paja', 22000, 60, 'Accesorios', 20000, 'Sombrero de paja ide', 'imagenes/sombrero.jp', 0, 'admin', NULL, '2024-11-06 01:14:25', '2024-11-06 14:25:23', 0, 19000, '2024-11-10 05:00:00', '2024-11-24 05:00:00', 'activo', 12, NULL, 0);
+INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `provpro`, `prousu`, `idcat`, `feccreat`, `fecupdate`, `enofer`, `precofer`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`, `temporada`) VALUES
+(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Disfruta de la comodidad de nuestra camisa de algodón 100%. Ideal para cualquier ocasión, brinda suavidad y frescura todo el día. Recomendaciones: Lavar con colores similares y a máquina en ciclo suave. Cuimedia.', 0, 'admin', NULL, '2024-11-05 06:14:03', '2024-11-13 00:51:00', 0, 20000, '2024-11-05 20:00:00', '2024-11-20 20:00:00', 'activo', 15, 1, 0, NULL),
+(4, 'Pantalón vaquero', 60000, 50, 'Ropa', 50000, NULL, 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 00:58:01', 0, 45000, '2024-11-01 20:00:00', '2024-11-10 20:00:00', 'activo', NULL, 1, 0, NULL),
+(5, 'Zapatos deportivos', 90000, 80, 'Calzado', 85000, 'Zapatos deportivos c', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 00:58:45', 0, 80000, '2024-11-10 20:00:00', '2024-11-30 20:00:00', 'activo', 5, 1, 0, NULL),
+(6, 'Bolso de cuero', 120000, 30, 'Accesorios', 110000, 'Bolso de cuero genui', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 00:58:55', 0, 100000, '2024-11-15 20:00:00', '2024-12-01 20:00:00', 'activo', 12, 3, 0, NULL),
+(7, 'Reloj digital', 50000, 60, 'Accesorios', 45000, 'Reloj digital resist', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 00:59:04', 0, 40000, '2024-11-05 20:00:00', '2024-11-25 20:00:00', 'activo', 20, 2, 0, NULL),
+(8, 'Gorra de béisbol', 15000, 120, 'Accesorios', 12000, 'Gorra de béisbol aju', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 00:59:33', 0, 11000, '2024-11-02 20:00:00', '2024-11-18 20:00:00', 'activo', 10, 3, 0, NULL),
+(9, 'Sudadera con capucha', 45000, 70, 'Ropa', 42000, 'Sudadera con capucha', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 01:38:38', 0, 40000, '2024-11-12 20:00:00', '2024-11-28 20:00:00', 'activo', 8, 1, 0, NULL),
+(10, 'Bufanda de lana', 30000, 100, 'Accesorios', 25000, 'Bufanda de lana para', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 01:38:56', 0, 24000, '2024-11-01 20:00:00', '2024-11-15 20:00:00', 'activo', 20, 3, 0, NULL),
+(11, 'Cartera pequeña', 20000, 90, 'Accesorios', 18000, 'Cartera de mano pequ', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 01:39:15', 0, 17000, '2024-11-04 20:00:00', '2024-11-18 20:00:00', 'activo', 15, 3, 0, NULL),
+(12, 'Sombrero de paja', 22000, 60, 'Accesorios', 20000, 'Sombrero de paja ide', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 01:39:33', 0, 19000, '2024-11-10 20:00:00', '2024-11-24 20:00:00', 'activo', 12, 3, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -1750,16 +1776,16 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusu`, `nomusu`, `apeusu`, `docusu`, `emausu`, `celusu`, `genusu`, `dirrecusu`, `tipdoc`, `idval`, `idubi`, `feccreate`, `fecupdate`, `fotpef`, `idpef`, `pasusu`) VALUES
-(1, 'David', 'Soriano', 123213, 'davidscicua314@gmail.com', '3186274255', 'Masculino', 'Chia', 'CC', NULL, NULL, '2024-07-23 00:57:00', '2024-07-23 01:08:34', NULL, 1, '$2y$10$x.YxpWCplR/9QvsxVAJDsu4ba.U/TOTy6N7ootwlW7b8r27GyRqnW'),
-(7, 'Diego', 'Sarmiento', 80546098, 'correo@gmail.com', '3186274255', 'M', NULL, NULL, NULL, NULL, '2024-10-31 00:40:34', '2024-10-31 00:40:34', NULL, 1, '456'),
-(8, 'Juan', 'Soriano', 80546098, 'correo@gmail.com', '3186274255', 'M', NULL, NULL, NULL, NULL, '2024-10-31 00:40:50', '2024-10-31 00:40:50', NULL, 1, '456'),
-(9, 'Juan', 'Soriano', 80546098, 'correo@gmail.com', '3186274255', 'M', NULL, 'CC', NULL, NULL, '2024-10-31 00:46:21', '2024-10-31 00:46:21', NULL, 1, '456'),
-(10, 'Angela', 'Soriano', 12345, 'correo@gmail.com', '3186274255', 'F', NULL, 'CC', NULL, NULL, '2024-10-31 00:47:03', '2024-10-31 00:47:03', NULL, 1, '789'),
-(11, 'Angela', 'Soriano', 12345, 'correo@gmail.com', '3186274255', 'F', NULL, 'CC', NULL, NULL, '2024-10-31 00:47:39', '2024-10-31 00:47:39', NULL, 1, '789'),
-(12, 'Angela', 'Soriano', 12345, 'correo@gmail.com', '3186274255', 'F', NULL, 'CC', NULL, NULL, '2024-10-31 00:50:25', '2024-10-31 00:50:25', NULL, 1, '789'),
-(13, 'Omar', 'Soriano', 745253, 'correo@gmail.com', '3186274255', 'M', NULL, 'RC', NULL, NULL, '2024-10-31 00:51:05', '2024-10-31 00:51:05', NULL, 1, '544'),
-(14, 'Miguel', 'Gomez', 714546354, 'correo@gmail.com', '7845234', 'M', NULL, 'CC', NULL, NULL, '2024-10-31 00:55:38', '2024-10-31 00:55:38', NULL, 1, '$2y$10$Kl0GUisqCIIGIqimBmSirOCV9v8TXaHepxitwao2.PW0L1YjFS/2y'),
-(15, 'Laura', 'Bello', 10468975, 'laura@gmail.com', '3186274255', 'F', NULL, 'TI', NULL, NULL, '2024-10-31 00:59:03', '2024-10-31 00:59:47', NULL, 1, '$2y$10$F.3MJK1bLXoT6aSlVs8IpO549M10DZ56pQIt5jbzDW.u.5TZNfRda');
+(1, 'David', 'Soriano', 123213, 'davidscicua314@gmail.com', '3186274255', 'Masculino', 'Chia', 'CC', NULL, NULL, '2024-07-23 15:57:00', '2024-07-23 16:08:34', NULL, 1, '$2y$10$x.YxpWCplR/9QvsxVAJDsu4ba.U/TOTy6N7ootwlW7b8r27GyRqnW'),
+(7, 'Diego', 'Sarmiento', 80546098, 'correo@gmail.com', '3186274255', 'M', NULL, NULL, NULL, NULL, '2024-10-31 15:40:34', '2024-10-31 15:40:34', NULL, 1, '456'),
+(8, 'Juan', 'Soriano', 80546098, 'correo@gmail.com', '3186274255', 'M', NULL, NULL, NULL, NULL, '2024-10-31 15:40:50', '2024-10-31 15:40:50', NULL, 1, '456'),
+(9, 'Juan', 'Soriano', 80546098, 'correo@gmail.com', '3186274255', 'M', NULL, 'CC', NULL, NULL, '2024-10-31 15:46:21', '2024-10-31 15:46:21', NULL, 1, '456'),
+(10, 'Angela', 'Soriano', 12345, 'correo@gmail.com', '3186274255', 'F', NULL, 'CC', NULL, NULL, '2024-10-31 15:47:03', '2024-10-31 15:47:03', NULL, 1, '789'),
+(11, 'Angela', 'Soriano', 12345, 'correo@gmail.com', '3186274255', 'F', NULL, 'CC', NULL, NULL, '2024-10-31 15:47:39', '2024-10-31 15:47:39', NULL, 1, '789'),
+(12, 'Angela', 'Soriano', 12345, 'correo@gmail.com', '3186274255', 'F', NULL, 'CC', NULL, NULL, '2024-10-31 15:50:25', '2024-10-31 15:50:25', NULL, 1, '789'),
+(13, 'Omar', 'Soriano', 745253, 'correo@gmail.com', '3186274255', 'M', NULL, 'RC', NULL, NULL, '2024-10-31 15:51:05', '2024-10-31 15:51:05', NULL, 1, '544'),
+(14, 'Miguel', 'Gomez', 714546354, 'correo@gmail.com', '7845234', 'M', NULL, 'CC', NULL, NULL, '2024-10-31 15:55:38', '2024-10-31 15:55:38', NULL, 1, '$2y$10$Kl0GUisqCIIGIqimBmSirOCV9v8TXaHepxitwao2.PW0L1YjFS/2y'),
+(15, 'Laura', 'Bello', 10468975, 'laura@gmail.com', '3186274255', 'F', NULL, 'TI', NULL, NULL, '2024-10-31 15:59:03', '2024-10-31 15:59:47', NULL, 1, '$2y$10$F.3MJK1bLXoT6aSlVs8IpO549M10DZ56pQIt5jbzDW.u.5TZNfRda');
 
 -- --------------------------------------------------------
 
@@ -1770,11 +1796,19 @@ INSERT INTO `usuario` (`idusu`, `nomusu`, `apeusu`, `docusu`, `emausu`, `celusu`
 CREATE TABLE `valor` (
   `idval` int(5) NOT NULL,
   `nomval` varchar(255) DEFAULT NULL,
-  `parval` varchar(255) DEFAULT NULL,
   `act` tinyint(1) DEFAULT NULL,
   `idusu` int(5) DEFAULT NULL,
   `iddom` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `valor`
+--
+
+INSERT INTO `valor` (`idval`, `nomval`, `act`, `idusu`, `iddom`) VALUES
+(1, 'Moda', NULL, NULL, 1),
+(2, 'Tecnología', NULL, NULL, 1),
+(3, 'Accesorios', NULL, NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -1866,8 +1900,7 @@ ALTER TABLE `devolucionreembolso`
 -- Indices de la tabla `dominio`
 --
 ALTER TABLE `dominio`
-  ADD PRIMARY KEY (`iddom`),
-  ADD KEY `idval` (`idval`);
+  ADD PRIMARY KEY (`iddom`);
 
 --
 -- Indices de la tabla `favoritos`
@@ -1934,7 +1967,8 @@ ALTER TABLE `pqr`
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD PRIMARY KEY (`idpro`);
+  ADD PRIMARY KEY (`idpro`),
+  ADD KEY `fk_producto_valor` (`idval`);
 
 --
 -- Indices de la tabla `prodxprov`
@@ -1986,7 +2020,7 @@ ALTER TABLE `usuario`
 ALTER TABLE `valor`
   ADD PRIMARY KEY (`idval`),
   ADD KEY `idusu` (`idusu`),
-  ADD KEY `idval` (`idval`);
+  ADD KEY `fk_valor_dominio` (`iddom`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -2044,7 +2078,7 @@ ALTER TABLE `detallefavoritos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `devolucionreembolso`
@@ -2056,7 +2090,7 @@ ALTER TABLE `devolucionreembolso`
 -- AUTO_INCREMENT de la tabla `dominio`
 --
 ALTER TABLE `dominio`
-  MODIFY `iddom` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `iddom` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `favoritos`
@@ -2068,7 +2102,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2080,7 +2114,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
@@ -2092,7 +2126,7 @@ ALTER TABLE `pago`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
@@ -2146,7 +2180,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `valor`
 --
 ALTER TABLE `valor`
-  MODIFY `idval` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `idval` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -2208,12 +2242,6 @@ ALTER TABLE `devolucionreembolso`
   ADD CONSTRAINT `devolucionreembolso_ibfk_2` FOREIGN KEY (`idpro`) REFERENCES `producto` (`idpro`);
 
 --
--- Filtros para la tabla `dominio`
---
-ALTER TABLE `dominio`
-  ADD CONSTRAINT `dominio_ibfk_1` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);
-
---
 -- Filtros para la tabla `favoritos`
 --
 ALTER TABLE `favoritos`
@@ -2250,6 +2278,12 @@ ALTER TABLE `pedido`
 ALTER TABLE `pqr`
   ADD CONSTRAINT `pqr_ibfk_1` FOREIGN KEY (`idprov`) REFERENCES `proveedor` (`idprov`),
   ADD CONSTRAINT `pqr_ibfk_2` FOREIGN KEY (`idusu`) REFERENCES `usuario` (`idusu`);
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `fk_producto_valor` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`);
 
 --
 -- Filtros para la tabla `prodxprov`
@@ -2289,6 +2323,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `valor`
 --
 ALTER TABLE `valor`
+  ADD CONSTRAINT `fk_valor_dominio` FOREIGN KEY (`iddom`) REFERENCES `dominio` (`iddom`),
   ADD CONSTRAINT `valor_ibfk_1` FOREIGN KEY (`idusu`) REFERENCES `usuario` (`idusu`);
 COMMIT;
 
