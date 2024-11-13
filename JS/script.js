@@ -123,12 +123,14 @@ function setupProductNavigation() {
     const section = document.getElementById("product-section");
 
     if (btnLeft && btnRight && section) {
+        section.scrollLeft = 0; // Inicia desde el primer elemento
+
         btnLeft.addEventListener("click", function () {
-            section.scrollLeft -= 200; // Mueve 200px hacia la izquierda
+            section.scrollLeft -= section.clientWidth / 2; // Desplaza a la izquierda
         });
 
         btnRight.addEventListener("click", function () {
-            section.scrollLeft += 200; // Mueve 200px hacia la derecha
+            section.scrollLeft += section.clientWidth / 2; // Desplaza a la derecha
         });
     }
 }

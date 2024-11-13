@@ -153,12 +153,11 @@ body::-webkit-scrollbar-track {
 }
 
 .bx-item {
-    height: 30vh;
     width: 298px;
     outline: 1px solid #0000000f;
-    border-radius: 5px;
     cursor: pointer;
     padding: 0;
+    background: #FFF;
 }
 
 .bx-item p,
@@ -168,6 +167,8 @@ img {
 
 .bx-item {
     text-decoration: none;
+    flex-shrink: 0;
+    scroll-snap-align: start;
 }
 
 .bx-item:hover img {
@@ -190,7 +191,7 @@ img {
     font-size: 12px;
 }
 .row section .row {
-    padding: 2% 5% 5%;
+    padding: 1%;
 }
 
 .icons {
@@ -264,6 +265,7 @@ img {
 
 .bx-artc-prc {
     justify-content: center;
+    width: 75%;
 }
 
 .img-artc {
@@ -415,20 +417,6 @@ footer {
     width: 70%;
 }
 
-.bx-mr-prd {
-    gap: 5%;
-}
-
-.bx-mr-prd a {
-    height: 35vh;
-}
-
-.bx-art-sg {
-    width: 90%;
-    display: flex;
-    align-items: center;
-}
-
 .min-img div img {
     width: -webkit-fill-available;
 }
@@ -459,31 +447,22 @@ h4 {
     font-size: 16px;
 }
 
-.bx-mr-prd {
-    overflow: hidden;
-    scroll-snap-type: x mandatory;
+/* Para Chrome, Safari y Edge */
+.bx-mr-prd::-webkit-scrollbar {
+    display: none;
 }
 
 .bx-mr-prd a {
-    border: 1px solid #00000075;
     border-radius: 5px;
     scroll-snap-align: start;
+    transition: 400ms;
 }
 
 .bx-mr-prd a:hover {
-    transform: scale(1.05);
-    border: 1px solid #000000e1;
+    transform: scale(1.01);
     -webkit-box-shadow: 0px 9px 21px -12px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 9px 21px -12px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 9px 21px -12px rgba(0, 0, 0, 0.75);
-}
-
-.btn-direct {
-    width: 4vw;
-    height: 6vh;
-    border-radius: 50%;
-    border: none;
-    background: #FFF;
 }
 
 .btn-direct:hover {
@@ -784,7 +763,7 @@ div .bx-btns-comp div {
     align-items: center;
     flex-direction: column;
     margin: 1% 0;
-    min-height: 63vh;
+    background: #ebebeb;
 }
 
 .bx-cabecera {
@@ -989,11 +968,6 @@ form button {
 .section{
     min-height: 27vh;
 }
-.bx-mr-prd a{
-    margin-top: 4%;
-    height: 22vh;
-    width: 180px;
-}
 #cantidad{
     width: 45px;
     border: none;
@@ -1074,6 +1048,119 @@ form button {
 .cont input:not(:placeholder-shown) {
     width: 350px !important;
 }
+.bx-apart {
+    background: #fffbfb;
+    padding: 4%;
+    border-radius: 8px;
+    margin: 4% 0;
+    margin-left: auto;  /* Centra el contenedor */
+    margin-right: auto; /* Centra el contenedor */
+}
+
+.bx-art-sg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+.bx-mr-prd {
+    width: 100%; /* Ocupa el ancho completo del contenedor */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    display: flex;
+    gap: 20px; /* Ajusta el espacio entre los productos si es necesario */
+    box-sizing: border-box;
+    padding-left: 0;
+}
+
+.bx-mr-prd a {
+    scroll-snap-align: center;
+    box-sizing: border-box;
+}
+
+
+.bx-item {
+    flex-shrink: 0;
+    width: 180px;
+    height: 22vh;
+    margin: 2% 0;
+    transition: transform 0.4s ease;
+}
+
+.bx-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.bx-item .inf-artc {
+    padding: 5px;
+}
+
+.bx-item h6 {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.inf-tot-prc p {
+    font-size: 1.1rem;
+}
+
+.btn-direct {
+    width: 4vw;
+    height: 6vh;
+    border-radius: 50%;
+    border: none;
+    background: #FFF;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+#btn-left {
+    left: -50px;
+}
+
+#btn-right {
+    right: -50px;
+}
+.bx-apart.bx-apart_views{
+    width: 50%;
+    overflow: hidden;
+}
+.bx-tsec{
+    gap: 2%;
+}
+.bx-tsec .bx-apart{
+    margin: 0;
+}
+.bx-inituser{
+    background: #fffbfb;
+    margin: 10px 0;
+    border-radius: 5px;
+    padding: 1%;
+}
+.bx-art-sg section{
+    width: 100vw;
+}
+.bx-anres{
+    background: url(../IMG/MorePrd.jpg);
+    background-size: cover;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    padding: 5%;
+    border-radius: 8px;
+}
+.bx-anres h2, .bx-anres h6{
+    color: #fdfdfd;
+}
+    
 @media screen and (max-width: 1600px) {
     .inf-perfil div{
         width: 12%;

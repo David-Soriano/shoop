@@ -122,7 +122,7 @@ class Mpro
             LEFT JOIN imagen AS i ON p.idpro = i.idpro 
             WHERE p.estado = 'activo' AND p.pordescu > 0
             GROUP BY p.idpro
-            LIMIT 5"; // Limitar el número de productos
+            LIMIT 4"; // Limitar el número de productos
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -146,7 +146,7 @@ class Mpro
             WHERE p.estado = 'activo' 
             GROUP BY p.idpro
             ORDER BY p.productvend DESC
-            LIMIT 5";
+            LIMIT 4";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
