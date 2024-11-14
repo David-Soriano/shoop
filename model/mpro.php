@@ -76,6 +76,7 @@ class Mpro
     {
         $this->imgpro = $imgpro;
     }
+    //Traer un producto en especifico
     public function getOnePrd()
     {
         $res = "";
@@ -94,7 +95,7 @@ class Mpro
         }
         return $res;
     }
-
+    //Traer todos los productos a la pagina inicial
     public function getInfPar()
     {
         $res = "";
@@ -112,7 +113,7 @@ class Mpro
         }
         return $res;
     }
-    //Productos en oferta
+    //Productos en oferta limitado
     public function getInfOfertas()
     {
         $res = "";
@@ -123,6 +124,28 @@ class Mpro
             WHERE p.estado = 'activo' AND p.pordescu > 0
             GROUP BY p.idpro
             LIMIT 4"; // Limitar el número de productos
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al obtener productos en oferta. Intentalo más tarde";
+        }
+        return $res;
+    }
+    //TODOS Productos en oferta ordenados
+    public function getInfOfertasAll()
+    {
+        $res = "";
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro, 
+            p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento 
+            FROM producto AS p 
+            LEFT JOIN imagen AS i ON p.idpro = i.idpro 
+            WHERE p.estado = 'activo' AND p.pordescu > 0
+            GROUP BY p.idpro ORDER BY p.fechiniofer DESC";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -147,6 +170,28 @@ class Mpro
             GROUP BY p.idpro
             ORDER BY p.productvend DESC
             LIMIT 4";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al obtener productos más vendidos. Intentalo más tarde";
+        }
+        return $res;
+    }
+    public function getInfMasVendidosAll()
+    {
+        $res = "";
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro, 
+            p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento 
+            FROM producto AS p 
+            LEFT JOIN imagen AS i ON p.idpro = i.idpro 
+            WHERE p.estado = 'activo' 
+            GROUP BY p.idpro
+            ORDER BY p.productvend DESC";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -208,18 +253,36 @@ class Mpro
     }
     //Productos vistos recientemente
     public function getProVistos()
-{
-    $res = [];
-    
-    // Verificar si la cookie de productos vistos existe y contiene productos
-    if (isset($_COOKIE['provis']) && !empty($_COOKIE['provis'])) {
-        // Obtener los IDs de productos vistos desde la cookie
-        $idsProductos = $_COOKIE['provis'];
+    {
+        $res = [];
 
-        // Consulta SQL para obtener los detalles de los productos
-        $sql = "SELECT p.idpro, p.nompro, p.valorunitario, p.pordescu, i.imgpro,
+        // Verificar si la cookie de productos vistos existe y contiene productos
+        if (isset($_COOKIE['provis']) && !empty($_COOKIE['provis'])) {
+            // Obtener los IDs de productos vistos desde la cookie
+            $idsProductos = $_COOKIE['provis'];
+
+            // Consulta SQL para obtener los detalles de los productos
+            $sql = "SELECT p.idpro, p.nompro, p.valorunitario, p.pordescu, i.imgpro,
        p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE ordimg = (SELECT MIN(ordimg) FROM imagen WHERE idpro = imagen.idpro)) AS i ON p.idpro = i.idpro WHERE p.idpro IN ($idsProductos) AND p.estado = 'activo' ORDER BY FIELD(p.idpro, $idsProductos);"; // Mantener el orden de los productos
 
+            try {
+                $modelo = new Conexion();
+                $conexion = $modelo->getConexion();
+                $result = $conexion->prepare($sql);
+                $result->execute();
+                $res = $result->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+                echo "Error al obtener productos recientemente vistos. Intentalo más tarde";
+            }
+        }
+
+        return $res;
+    }
+    public function getProductosNuevos()
+    {
+        $res = "";
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, p.feccreat, i.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen ORDER BY ordimg ASC) AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' AND DATEDIFF(NOW(), p.feccreat) <= 20 GROUP BY p.idpro ORDER BY p.feccreat DESC;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -228,13 +291,11 @@ class Mpro
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            echo "Error al obtener productos recientemente vistos. Intentalo más tarde";
+            echo "Error al obtener productos nuevos. Intentalo más tarde";
         }
+        return $res;
     }
-    
-    return $res;
-}
-
+    //Traer características de un producto
     public function getCarPrd()
     {
         $res = "";

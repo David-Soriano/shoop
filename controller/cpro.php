@@ -13,7 +13,9 @@ $dtSliders = $mpro->getImagesByProduct(NULL, 1);
 
 $productosOfertas = $mpro->getInfOfertas();
 $productosMasVendidos = $mpro->getInfMasVendidos();
-
+$productosNuevos = $mpro->getProductosNuevos();
+$AllProductOferta = $mpro->getInfOfertasAll();
+$AllProductVend = $mpro->getInfMasVendidosAll();
 // Verificar si la cookie 'provis' está definida y, si no, inicializarla como un array vacío
 $proVistos = isset($_COOKIE['provis']) ? explode(',', $_COOKIE['provis']) : [];
 

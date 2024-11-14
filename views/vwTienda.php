@@ -85,7 +85,7 @@
                 </section>
             <?php } ?>
             <section class="col">
-                <a href="" class="bx-anres">
+                <a href="<?php echo $isLoggedIn ? "home.php?pg=18" : "index.php?pg=18"?>" class="bx-anres">
                 <h2>Añadidos Recientemente</h2>
                 <h6>Descubre lo nuevo</h6>
                 </a>
@@ -129,7 +129,7 @@
                         </div>
                     </a>
                 <?php endforeach; ?>
-                <a href="home.php?pg=ofertas" class="ver-mas">Ver más</a>
+                <a href="<?php echo $isLoggedIn ? "home.php?pg=19" : "index.php?pg=19"?>" class="ver-mas">Ver más</a>
             </div>
         </section>
 
@@ -179,7 +179,7 @@
                         </div>
                     </a>
                 <?php endforeach; ?>
-                <a href="home.php?pg=mas-vendido" class="ver-mas">Ver más</a>
+                <a href="<?php echo $isLoggedIn ? "home.php?pg=20" : "index.php?pg=20"?>" class="ver-mas">Ver más</a>
             </div>
         </section>
     </section>

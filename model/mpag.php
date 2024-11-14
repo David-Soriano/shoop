@@ -99,6 +99,7 @@ class Mpag
     public function setLugmen($lugmen){
         $this->lugmen = $lugmen;
     }
+    //Traer todas las paginas de la base de datos
     function getAll()
     {
         $res = NULL;
@@ -115,6 +116,7 @@ class Mpag
         }
         return $res;
     }
+    //Traer una pagina en especifico de la base de datos
     function getOne($idpag)
     {
         $res = NULL;
@@ -132,6 +134,7 @@ class Mpag
         }
         return $res;
     }
+    //Traer el menu de la barra de navegacion
     function getMenu($isLoged)
 {
     $res = NULL;
@@ -165,7 +168,7 @@ class Mpag
     }
     return $res;
 }
-
+    //Traer el menu de las opciones del perfil de usuario
     function getMenuPerf($isLoged)
     {
         $res = NULL;
@@ -187,7 +190,7 @@ class Mpag
         }
         return $res;
     }
-
+    //Traer submenús 
     function getSubMen($idmen)
     {
         $res = NULL;
@@ -223,7 +226,7 @@ class Mpag
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            echo "Error en Menu Headre. Intentalo mas tarde";
+            echo "Error en Menu Header. Intentalo mas tarde";
         }
         return $res;
     }

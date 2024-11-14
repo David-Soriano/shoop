@@ -762,8 +762,9 @@ div .bx-btns-comp div {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 1% 0;
+    margin: 1% 0 0;
     background: #ebebeb;
+    min-height: 100%;
 }
 
 .bx-cabecera {
@@ -1160,7 +1161,12 @@ form button {
 .bx-anres h2, .bx-anres h6{
     color: #fdfdfd;
 }
-    
+.tit-new{
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 @media screen and (max-width: 1600px) {
     .inf-perfil div{
         width: 12%;
