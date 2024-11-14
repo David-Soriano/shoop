@@ -1,34 +1,48 @@
-    <h1 class="txtven">
-        <div class="es1"><i class="fa-solid fa-truck-field"></i></div>
-        Mis productos de venta
-    </h1>
-    <i class="fa-solid fa-circle-plus fa-2x btnadd" id="btnadd"></i>
+    <h4 class="txtven">
+        Sube productos y empieza a facturar
+    </h4>
     <div id="formven">
         <form name="frm1" action="#" method="POST">
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label>Producto</label>
-                    <input type="text" class="form-control form-control" required>
+                <div class="col">
+                    <input type="text" placeholder="Nombre del artículo" required>
                 </div>
-                <div class="form-group col-md-8">
-                    <label>Descripción</label>
-                    <textarea class="form-control form-control"></textarea>
+                <div class="col">
+                    <textarea name="" id="" placeholder="Añade una descripción" required></textarea>
                 </div>
-                <div class="form-group col-md-4">
-                    <label>Existencias</label>
-                    <input type="number" class="form-control form-control" required>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="number" placeholder="Cantidad disponible" required>
                 </div>
-                <div class="form-group col-md-4">
-                    <label>Precio</label>
-                    <input type="number" class="form-control form-control" required>
+                <div class="col">
+                    <select name="" id="" required>
+                        <option value="0">Categoría</option>
+                    </select>
                 </div>
-                <div class="mb-3">
-                    <label for="formFileMultiple" class="form-label">Sube las imagenes del producto</label>
-                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="number" placeholder="Precio del producto" required>
                 </div>
-                <div class="form-group col-md-4">
-                    <br>
-                    <input type="button" class="btn btn-primary" id="venpro" value="Enviar">
+                <div class="col">
+                    <input type="number" placeholder="Valor Unitario" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>¿Algún descuento en especial?</h6>
+                </div>
+                <div class="col">
+                    <input type="number" placeholder="Valor">
+                </div>
+            </div>
+            <div class="row bx-subm">
+                <div class="col">
+                    <input type="submit" value="Cargar">
+                </div>
+                <div class="col">
+                    <p>¿Tienes muchos artículos para subir? Ingresa <a href="#">Aquí</a></p>
                 </div>
             </div>
         </form>

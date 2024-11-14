@@ -12,63 +12,62 @@
 
 <body>
   <header>
-    <div class="row">
-      <div class="col" id="bx-icons">
-      <a href="../home.php"><i class="bi bi-box-arrow-left" title="Volver"></i></a>
-        <img src="../IMG/Logo-oscuro.png" alt="">
-      </div>
-      <div class="col">
-        <h2>Panel de control</h2>
-      </div>
+    <a href="#"><img src="../IMG/LogoAnimado.gif" alt=""></a>
+    <div>
+      <h2>Panel de Control</h2>
+    </div>
+    <div>
+      <i class="bi bi-person-circle"></i>
     </div>
   </header>
-  <div class="container-fluid">
-    <div class="row bx-prc">
-      <div class="bx-slider col-2">
-        <h5>Ordenes</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link text-black" href="vwpanpro.php?vw=003">Listado de Pedidos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-black" href="vwpanpro.php?vw=004">Detalle de Pedidos</a>
-          </li>
-        </ul>
-        <h5>Inventario</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link text-black" href="vwpanpro.php?vw=001">Lista de Inventarios</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-black" href="vwpanpro.php?vw=002">Añadir Nuevos Articulos</a>
-          </li>
-        </ul>
-      </div>
-      <div class="bx-apartados col-9">
-        <?php
-        $vw = isset($_GET["vw"]) ? $_GET["vw"] : NULL;
-        $excluirVistas = array("001", "002", "003", "004");
-        if (!in_array($vw, $excluirVistas)) {
-          include ("vwDefPan.php");
-        }
-        ?>
+  <main>
+    <div class="container-fluid">
+      <div class="row bx-prc">
+        <div class="bx-slider col-2">
+          <h5>Ordenes</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-black" href="vwpanpro.php?vw=003">Listado de Pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-black" href="vwpanpro.php?vw=004">Detalle de Pedidos</a>
+            </li>
+          </ul>
+          <h5>Inventario</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-black" href="vwpanpro.php?vw=001">Almacén</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-black" href="vwpanpro.php?vw=002">Añadir Nuevos Articulos</a>
+            </li>
+          </ul>
+        </div>
+        <div class="bx-apartados col-9">
+          <?php
+          $vw = isset($_GET["vw"]) ? $_GET["vw"] : NULL;
+          $excluirVistas = array("001", "002", "003", "004");
+          if (!in_array($vw, $excluirVistas)) {
+            include("vwDefPan.php");
+          }
+          ?>
 
-        <?php
-        if ($vw == "001") {
-          require_once ("../views/vwTable.php");
-        } else if ($vw == "002") {
-          require_once ("../views/vwven.php");
-        } else if ($vw == "003") {
-          require_once ("../views/vwListPed.php");
-        } else if ($vw == "004") {
-          require_once ("../views/vwDetPed.php");
-        }
-        ?>
+          <?php
+          if ($vw == "001") {
+            require_once("../views/vwTable.php");
+          } else if ($vw == "002") {
+            require_once("../views/vwven.php");
+          } else if ($vw == "003") {
+            require_once("../views/vwListPed.php");
+          } else if ($vw == "004") {
+            require_once("../views/vwDetPed.php");
+          }
+          ?>
+        </div>
       </div>
     </div>
-  </div>
-
-  <?php include("vwFooter.php")?>
+  </main>
+  <?php include("vwFooter.php") ?>
 
   <!-- Bootstrap scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

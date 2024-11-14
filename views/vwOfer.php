@@ -31,6 +31,7 @@
                                         <?php
                                         // Verificar si el valor con descuento es válido y mayor que 0
                                         $valorConDescuento = $producto['valor_con_descuento'] > 0 ? $producto['valor_con_descuento'] : $producto['valorunitario'];
+                                        
                                         echo "$" . number_format($valorConDescuento, 0, ',', '.');
                                         ?>
                                     </p>
