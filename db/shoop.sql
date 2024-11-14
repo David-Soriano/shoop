@@ -330,7 +330,11 @@ INSERT INTO `pagina` (`idpag`, `nompag`, `rutpag`, `mospag`, `icopag`, `lugpag`)
 (14, 'Bienvenida', 'views/vwTienda.php', 0, NULL, NULL),
 (15, 'Perfil', 'views/vwPerfil.php', 0, 'bi bi-person-circle', 1),
 (16, 'Tus Compras', 'views/vwTuscompras.php', 0, NULL, NULL),
-(17, 'Tus Pedidos', 'views/vwTusPedidos.php', NULL, NULL, NULL);
+(17, 'Tus Pedidos', 'views/vwTusPedidos.php', NULL, NULL, NULL),
+(18, 'Productos Añadidos', 'views/vwPrdAnd.php', 0, NULL, NULL),
+(19, 'Ofertas', 'views/vwOfer.php', NULL, NULL, NULL),
+(20, 'Más vendido', 'views/vwMVen.php', NULL, NULL, NULL),
+(21, 'Categorías', 'views/vwCatego.php', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -377,7 +381,11 @@ INSERT INTO `pagxperfil` (`idpag`, `idpef`) VALUES
 (12, 1),
 (2, 1),
 (14, 2),
-(14, 1);
+(14, 1),
+(18, 1),
+(19, 1),
+(20, 1),
+(21, 1);
 
 -- --------------------------------------------------------
 
@@ -452,11 +460,8 @@ CREATE TABLE `producto` (
   `descripcion` varchar(255) DEFAULT NULL,
   `provpro` int(5) DEFAULT NULL,
   `prousu` varchar(255) DEFAULT NULL,
-  `idcat` bigint(11) DEFAULT NULL,
   `feccreat` timestamp NOT NULL DEFAULT current_timestamp(),
   `fecupdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `enofer` tinyint(1) DEFAULT 0,
-  `precofer` float DEFAULT NULL,
   `fechiniofer` timestamp NULL DEFAULT NULL,
   `fechfinofer` timestamp NULL DEFAULT NULL,
   `estado` enum('activo','descontinuado','pendiente') DEFAULT 'activo',
@@ -470,17 +475,17 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `provpro`, `prousu`, `idcat`, `feccreat`, `fecupdate`, `enofer`, `precofer`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`, `temporada`) VALUES
-(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Disfruta de la comodidad de nuestra camisa de algodón 100%. Ideal para cualquier ocasión, brinda suavidad y frescura todo el día. Recomendaciones: Lavar con colores similares y a máquina en ciclo suave. Cuimedia.', 0, 'admin', NULL, '2024-11-05 06:14:03', '2024-11-13 00:51:00', 0, 20000, '2024-11-05 20:00:00', '2024-11-20 20:00:00', 'activo', 15, 1, 0, NULL),
-(4, 'Pantalón vaquero', 60000, 50, 'Ropa', 50000, NULL, 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 00:58:01', 0, 45000, '2024-11-01 20:00:00', '2024-11-10 20:00:00', 'activo', NULL, 1, 0, NULL),
-(5, 'Zapatos deportivos', 90000, 80, 'Calzado', 85000, 'Zapatos deportivos c', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 00:58:45', 0, 80000, '2024-11-10 20:00:00', '2024-11-30 20:00:00', 'activo', 5, 1, 0, NULL),
-(6, 'Bolso de cuero', 120000, 30, 'Accesorios', 110000, 'Bolso de cuero genui', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 00:58:55', 0, 100000, '2024-11-15 20:00:00', '2024-12-01 20:00:00', 'activo', 12, 3, 0, NULL),
-(7, 'Reloj digital', 50000, 60, 'Accesorios', 45000, 'Reloj digital resist', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 00:59:04', 0, 40000, '2024-11-05 20:00:00', '2024-11-25 20:00:00', 'activo', 20, 2, 0, NULL),
-(8, 'Gorra de béisbol', 15000, 120, 'Accesorios', 12000, 'Gorra de béisbol aju', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 00:59:33', 0, 11000, '2024-11-02 20:00:00', '2024-11-18 20:00:00', 'activo', 10, 3, 0, NULL),
-(9, 'Sudadera con capucha', 45000, 70, 'Ropa', 42000, 'Sudadera con capucha', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 01:38:38', 0, 40000, '2024-11-12 20:00:00', '2024-11-28 20:00:00', 'activo', 8, 1, 0, NULL),
-(10, 'Bufanda de lana', 30000, 100, 'Accesorios', 25000, 'Bufanda de lana para', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 01:38:56', 0, 24000, '2024-11-01 20:00:00', '2024-11-15 20:00:00', 'activo', 20, 3, 0, NULL),
-(11, 'Cartera pequeña', 20000, 90, 'Accesorios', 18000, 'Cartera de mano pequ', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 01:39:15', 0, 17000, '2024-11-04 20:00:00', '2024-11-18 20:00:00', 'activo', 15, 3, 0, NULL),
-(12, 'Sombrero de paja', 22000, 60, 'Accesorios', 20000, 'Sombrero de paja ide', 0, 'admin', NULL, '2024-11-06 16:14:25', '2024-11-13 01:39:33', 0, 19000, '2024-11-10 20:00:00', '2024-11-24 20:00:00', 'activo', 12, 3, 0, NULL);
+INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `provpro`, `prousu`, `feccreat`, `fecupdate`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`, `temporada`) VALUES
+(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Disfruta de la comodidad de nuestra camisa de algodón 100%. Ideal para cualquier ocasión, brinda suavidad y frescura todo el día. Recomendaciones: Lavar con colores similares y a máquina en ciclo suave. Cuimedia.', 0, 'admin', '2024-11-05 06:14:03', '2024-11-13 00:51:00', '2024-11-05 20:00:00', '2024-11-20 20:00:00', 'activo', 15, 1, 0, NULL),
+(4, 'Pantalón vaquero', 60000, 50, 'Ropa', 50000, NULL, 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 00:58:01', '2024-11-01 20:00:00', '2024-11-10 20:00:00', 'activo', NULL, 1, 0, NULL),
+(5, 'Zapatos deportivos', 90000, 80, 'Calzado', 85000, 'Zapatos deportivos c', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 00:58:45', '2024-11-10 20:00:00', '2024-11-30 20:00:00', 'activo', 5, 1, 0, NULL),
+(6, 'Bolso de cuero', 120000, 30, 'Accesorios', 110000, 'Bolso de cuero genui', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 00:58:55', '2024-11-15 20:00:00', '2024-12-01 20:00:00', 'activo', 12, 3, 0, NULL),
+(7, 'Reloj digital', 50000, 60, 'Accesorios', 45000, 'Reloj digital resist', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 00:59:04', '2024-11-05 20:00:00', '2024-11-25 20:00:00', 'activo', 20, 2, 0, NULL),
+(8, 'Gorra de béisbol', 15000, 120, 'Accesorios', 12000, 'Gorra de béisbol aju', 0, 'admin', '2024-11-06 16:14:25', '2024-11-14 02:26:07', '2024-11-02 20:00:00', '2024-11-18 20:00:00', 'activo', 10, 3, 20, NULL),
+(9, 'Sudadera con capucha', 45000, 70, 'Ropa', 42000, 'Sudadera con capucha', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 01:38:38', '2024-11-12 20:00:00', '2024-11-28 20:00:00', 'activo', 8, 1, 0, NULL),
+(10, 'Bufanda de lana', 30000, 100, 'Accesorios', 25000, 'Bufanda de lana para', 0, 'admin', '2024-11-06 16:14:25', '2024-11-14 02:24:13', '2024-11-01 20:00:00', '2024-11-15 20:00:00', 'activo', 20, 3, 10, NULL),
+(11, 'Cartera pequeña', 20000, 90, 'Accesorios', 18000, 'Cartera de mano pequ', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 01:39:15', '2024-11-04 20:00:00', '2024-11-18 20:00:00', 'activo', 15, 3, 0, NULL),
+(12, 'Sombrero de paja', 22000, 60, 'Accesorios', 20000, 'Sombrero de paja ide', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 01:39:33', '2024-11-10 20:00:00', '2024-11-24 20:00:00', 'activo', 12, 3, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -568,7 +573,9 @@ INSERT INTO `submenu` (`idsbm`, `nombre`, `url`, `url2`, `idmen`) VALUES
 (1, 'Preguntas Frecuentes', 'index.php?pg=6', 'home.php?pg=6', 3),
 (2, 'Recursos Educativos', 'index.php?pg=7', 'home.php?pg=7', 3),
 (3, 'Soporte', 'index.php?pg=8', 'home.php?pg=8', 3),
-(4, 'Moda', NULL, NULL, 1);
+(4, 'Moda', 'index.php?pg=21&cg=Moda', 'home.php?pg=21&cg=Moda', 1),
+(5, 'Tecnología', 'index.php?pg=21&cg=Tecnología', 'home.php?pg=21&cg=Tecnología', 1),
+(6, 'Accesorios', 'index.php?pg=21&cg=Accesorios', 'home.php?pg=21&cg=Accesorios', 1);
 
 -- --------------------------------------------------------
 
@@ -2114,7 +2121,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
@@ -2162,7 +2169,7 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT de la tabla `submenu`
 --
 ALTER TABLE `submenu`
-  MODIFY `idsbm` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idsbm` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `ubicacion`

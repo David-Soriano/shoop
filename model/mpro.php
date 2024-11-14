@@ -295,6 +295,26 @@ class Mpro
         }
         return $res;
     }
+    //Productos por categoría
+    public function getCatego($categoria)
+    {
+        $res = "";
+        $sql = "SELECT p.idpro, p.nompro, p.precio, p.cantidad, p.tipro, p.valorunitario, p.feccreat, p.estado, p.pordescu, p.idval, v.nomval AS categoria, i.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto p JOIN valor v ON p.idval = v.idval JOIN dominio d ON v.iddom = d.iddom LEFT JOIN (SELECT idpro, imgpro FROM imagen ORDER BY ordimg ASC) AS i ON p.idpro = i.idpro WHERE d.nomdom = 'Categorías' AND v.nomval = :categoria GROUP BY p.idpro";
+
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(':categoria', $categoria, PDO::PARAM_STR);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al obtener productos por categoría. Inténtalo más tarde.";
+        }
+        return $res;
+    }
+
     //Traer características de un producto
     public function getCarPrd()
     {
