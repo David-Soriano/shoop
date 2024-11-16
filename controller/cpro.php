@@ -5,6 +5,7 @@ $mpro = new Mpro();
 $idpro = isset($_REQUEST['idpro']) ? $_REQUEST['idpro'] : NULL;
 $cg = isset($_REQUEST['cg']) ? $_REQUEST['cg'] : NULL;
 
+
 $mpro->setIdpro($idpro);
 $productos = $mpro->getInfPar();
 $dtInfPrd = $mpro->getOnePrd();
@@ -21,7 +22,6 @@ $productCatego = $mpro->getCatego($cg);
 
 // Verificar si la cookie 'provis' está definida y, si no, inicializarla como un array vacío
 $proVistos = isset($_COOKIE['provis']) ? explode(',', $_COOKIE['provis']) : [];
-
 // Añadir el producto actual a la lista si no está ya en ella
 if ($idpro && !in_array($idpro, $proVistos)) {
     $proVistos[] = $idpro;

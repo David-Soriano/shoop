@@ -11,6 +11,8 @@
 </head>
 
 <body>
+  <?php
+    include("../controller/cpancon.php");?>
   <header>
     <a href="#"><img src="../IMG/LogoAnimado.gif" alt=""></a>
     <div>

@@ -1,48 +1,36 @@
 <?php
 class Mpro
 {
-    public $idpro;
-    public $nompro;
-    public $precio;
-    public $descripcion;
-    public $estado;
-    public $imgpro;
+    private $idpro;
+    private $nompro;
+    private $descripcion;
+    private $cantidad;
+    private $idval;
+    private $valorunitario;
+    private $pordescu;
+    private $precio;
+    private $estado;
+    private $imgpro;
+    private $nomimg;
+    private $tipimg;
+    private $ordimg;
 
     // Getters
+    // Getters y Setters para idpro
     public function getIdpro()
     {
         return $this->idpro;
     }
 
-    public function getNompro()
-    {
-        return $this->nompro;
-    }
-
-    public function getPrecio()
-    {
-        return $this->precio;
-    }
-
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    public function getEstado()
-    {
-        return $this->estado;
-    }
-
-    public function getImgpro()
-    {
-        return $this->imgpro;
-    }
-
-    // Setters
     public function setIdpro($idpro)
     {
         $this->idpro = $idpro;
+    }
+
+    // Getters y Setters para nompro
+    public function getNompro()
+    {
+        return $this->nompro;
     }
 
     public function setNompro($nompro)
@@ -50,12 +38,10 @@ class Mpro
         $this->nompro = $nompro;
     }
 
-    public function setPrecio($precio)
+    // Getters y Setters para descripcion
+    public function getDescripcion()
     {
-        if ($precio < 0) {
-            throw new Exception("El precio no puede ser negativo.");
-        }
-        $this->precio = $precio;
+        return $this->descripcion;
     }
 
     public function setDescripcion($descripcion)
@@ -63,18 +49,114 @@ class Mpro
         $this->descripcion = $descripcion;
     }
 
+    // Getters y Setters para cantidad
+    public function getCantidad()
+    {
+        return $this->cantidad;
+    }
+
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
+    }
+
+    // Getters y Setters para idval
+    public function getIdval()
+    {
+        return $this->idval;
+    }
+
+    public function setIdval($idval)
+    {
+        $this->idval = $idval;
+    }
+
+    // Getters y Setters para valorunitario
+    public function getValorunitario()
+    {
+        return $this->valorunitario;
+    }
+
+    public function setValorunitario($valorunitario)
+    {
+        $this->valorunitario = $valorunitario;
+    }
+
+    // Getters y Setters para pordescu
+    public function getPordescu()
+    {
+        return $this->pordescu;
+    }
+
+    public function setPordescu($pordescu)
+    {
+        $this->pordescu = $pordescu;
+    }
+
+    // Getters y Setters para precio
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+
+    public function setPrecio($precio)
+    {
+        $this->precio = $precio;
+    }
+
+    // Getters y Setters para estado
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
     public function setEstado($estado)
     {
-        $estadosValidos = ['activo', 'inactivo'];
-        if (!in_array($estado, $estadosValidos)) {
-            throw new Exception("Estado no válido.");
-        }
         $this->estado = $estado;
+    }
+
+    // Getters y Setters para imgpro
+    public function getImgpro()
+    {
+        return $this->imgpro;
     }
 
     public function setImgpro($imgpro)
     {
         $this->imgpro = $imgpro;
+    }
+
+    // Getters y Setters para nomimg
+    public function getNomimg()
+    {
+        return $this->nomimg;
+    }
+
+    public function setNomimg($nomimg)
+    {
+        $this->nomimg = $nomimg;
+    }
+
+    // Getters y Setters para tipimg
+    public function getTipimg()
+    {
+        return $this->tipimg;
+    }
+
+    public function setTipimg($tipimg)
+    {
+        $this->tipimg = $tipimg;
+    }
+
+    // Getters y Setters para ordimg
+    public function getOrdimg()
+    {
+        return $this->ordimg;
+    }
+
+    public function setOrdimg($ordimg)
+    {
+        $this->ordimg = $ordimg;
     }
     //Traer un producto en especifico
     public function getOnePrd()
@@ -356,6 +438,73 @@ class Mpro
         return $res;
     }
 
+    public function saveProductoConImagenes($imagenes)
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $conexion->beginTransaction();
 
+            // Inserta el producto
+            $idProducto = $this->insertProducto($conexion);
 
+            // Inserta las imágenes asociadas al producto
+            if ($idProducto) {
+                $this->insertImagenes($conexion, $idProducto, $imagenes);
+            }
+
+            $conexion->commit();
+            return $idProducto; // Retorna el ID del producto insertado
+        } catch (PDOException $e) {
+            $conexion->rollBack();
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al registrar producto e imágenes. Inténtalo más tarde.";
+            return null;
+        }
+    }
+    private function insertProducto($conexion)
+    {
+        $sql = "INSERT INTO producto(nompro, descripcion, cantidad, idval, valorunitario, precio, pordescu) 
+                VALUES (:nompro, :descripcion, :cantidad, :idval, :valorunitario, :precio, :pordescu)";
+        $stmt = $conexion->prepare($sql);
+
+        $params = [
+            ':nompro' => $this->getNompro(),
+            ':descripcion' => $this->getDescripcion(),
+            ':cantidad' => $this->getCantidad(),
+            ':idval' => $this->getIdval(),
+            ':valorunitario' => $this->getValorunitario(),
+            ':pordescu' => $this->getPordescu(),
+            ':precio' => $this->getPrecio(),
+        ];
+
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+        }
+
+        $stmt->execute();
+        return $conexion->lastInsertId(); // Retorna el ID del producto recién insertado
+    }
+    private function insertImagenes($conexion, $idProducto, $imagenes)
+    {
+        $sql = "INSERT INTO imagen(imgpro, nomimg, tipimg, idpro, ordimg) 
+                VALUES (:imgpro, :nomimg, :tipimg, :idpro, :ordimg)";
+        $stmt = $conexion->prepare($sql);
+
+        foreach ($imagenes as $index => $imagen) {
+            $params = [
+                ':imgpro' => $imagen['imgpro'],
+                ':nomimg' => $imagen['nomimg'],
+                ':tipimg' => $imagen['tipimg'],
+                ':idpro' => $idProducto,
+                ':ordimg' => isset($imagen['principal']) && $imagen['principal'] ? 1 : $index+1
+            ];
+
+            foreach ($params as $key => $value) {
+                $stmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+            }
+
+            $stmt->execute();
+        }
+    }
 }

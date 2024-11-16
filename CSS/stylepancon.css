@@ -10,23 +10,27 @@ body {
     background: #d0d0d069;
 }
 
-header{
+header {
     display: flex;
     height: 7vh;
     background: #FFF;
     align-items: center;
     justify-content: space-around;
 }
-header a{
+
+header a {
     width: 10%;
 }
-header img{
+
+header img {
     width: 72%;
 }
-main{
+
+main {
     background: #ebebeb;
     min-height: 100%;
 }
+
 .container-fluid {
     padding: 2% 0;
 }
@@ -57,25 +61,26 @@ main{
     box-shadow: 2px -2px 38px -14px rgba(0, 0, 0, 0.75); */
 }
 
-.bx-init{
+.bx-init {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.bx-init img{
+.bx-init img {
     width: 100%;
     margin: 10% 0;
 }
 
-#bx-init_p-1{
+#bx-init_p-1 {
     text-align: center;
 }
 
-#bx-init_p-2{
+#bx-init_p-2 {
     font-weight: bold;
 }
+
 table .td-config {
     text-align: center;
 }
@@ -86,32 +91,62 @@ table .td-options {
     align-items: center;
     justify-content: center;
 }
-#formven input, #formven textarea, #formven select{
+
+#formven input,
+#formven textarea,
+#formven select {
     border: none;
     background: #e9e9e9;
     padding: 3%;
     border-radius: 7px;
     resize: none;
 }
-#formven input, #formven textarea, #formven select:focus{
+
+#formven input,
+#formven textarea,
+#formven select:focus {
     outline: none;
 }
-#formven .row{
+
+#formven .row {
     margin: 3% 0;
 }
-.bx-subm .col{
+
+.bx-subm .col {
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
-#formven .bx-subm .col input{
+
+#formven .bx-subm .col input {
     background: #ff5151;
     color: #FFF;
 }
-.bx-subm .col p{
+
+#formven .row .col i {
+    font-size: 11px;
+}
+.bx-subprd{
+    width: 100%;
+}
+.bx-subprd h5{
+    text-align: center;
+}
+.bx-subprd_valor .col{
+    display: flex;
+    flex-direction: column;
+}
+.marco{
+    outline: 1px solid gray;
+    border-radius: 5px;
+    padding: 2%;
+}
+
+.bx-subm .col p {
     margin: 0;
     font-size: 12px;
 }
+
 footer {
     display: flex;
     flex-direction: column;
