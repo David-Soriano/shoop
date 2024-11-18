@@ -19,7 +19,7 @@
                 </div>
                 <div class="col">
                     <select name="idval" required>
-                        <option value="#">Categoría</option>
+                        <option value="">Categoría</option>
                         <?php if (!empty($dtCatego)) {
                             foreach ($dtCatego as $dtcat) { ?>
                                 <option value="<?= $dtcat['idval'] ?>"><?= $dtcat['categoria'] ?></option>
@@ -45,7 +45,16 @@
                     <h6>¿Algún descuento en especial?</h6>
                 </div>
                 <div class="col">
-                    <input type="number" id="pordescu" name="pordescu" placeholder="Valor">
+                    <input type="number" id="pordescu" name="pordescu" placeholder="Valor. Ej: 5%">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <Label>Características del producto</Label>
+                    <i class="bi bi-question-circle-fill" title="Cantidad de característica a registrar"></i>
+                    <input type="number" name="" id="cantcr" placeholder="Cantidad" oninput="cantCr()">
+                </div>
+                <div class="col" id="descar">
                 </div>
             </div>
             <div class="row">
@@ -59,7 +68,7 @@
                 <!-- Aquí se mostrarán las imágenes con su orden -->
             </div>
             <div class="row bx-subm">
-                <input type="hidden" name="idusu" value="<?=$_SESSION['idusu']?>">
+                <input type="hidden" name="idusu" value="<?= $_SESSION['idusu'] ?>">
                 <div class="col">
                     <input type="submit" value="Cargar">
                 </div>

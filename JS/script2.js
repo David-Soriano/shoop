@@ -28,17 +28,24 @@ function calcularPrecio() {
     `;
     document.getElementById('detalle').innerHTML = desglose;
 }
-
+let selectedFiles = [];
 function actualizarOrden() {
     const input = document.getElementById('imgpro');
     const ordenContenedor = document.getElementById('orden-imagenes');
+    const files = input.files;
 
-    // Limpiar contenido previo antes de agregar las nuevas imágenes
+    // Añadir las nuevas imágenes seleccionadas al array
+    for (let i = 0; i < files.length; i++) {
+        if (!selectedFiles.includes(files[i])) {
+            selectedFiles.push(files[i]);  // Añadir archivo al array si no está ya
+        }
+    }
+
+    // Limpiar el contenedor antes de agregar las nuevas imágenes
     ordenContenedor.innerHTML = "";
 
-    const archivos = input.files; // Acceder directamente a los archivos seleccionados
-    for (let index = 0; index < archivos.length; index++) {
-        const archivo = archivos[index];
+    // Mostrar todas las imágenes en selectedFiles (nuevas y antiguas)
+    selectedFiles.forEach((archivo, index) => {
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -51,11 +58,31 @@ function actualizarOrden() {
                     <input type="radio" name="imagenPrincipal" value="${index}" ${index === 0 ? "checked" : ""}>
                     Principal
                 </label>
+                <button type="button" onclick="eliminarImagen(${index})" class="btn-del"><i class="bi bi-x-circle-fill"></i></button>
             `;
             ordenContenedor.appendChild(imgDiv);
         };
+
         reader.readAsDataURL(archivo);
+    });
+}
+function eliminarImagen(index) {
+    // Eliminar la imagen del array
+    selectedFiles.splice(index, 1);
+
+    // Limpiar el input file
+    const input = document.getElementById('imgpro');
+    input.value = '';  // Vaciar el campo input de tipo file
+
+    // Reasignar los archivos restantes al input
+    for (let i = 0; i < selectedFiles.length; i++) {
+        let dataTransfer = new DataTransfer();
+        dataTransfer.items.add(selectedFiles[i]); // Agregar el archivo al DataTransfer
+        input.files = dataTransfer.files; // Asignar el nuevo array de archivos
     }
+
+    // Volver a actualizar la vista
+    actualizarOrden();
 }
 function nextStep(step) {
     // Ocultar todos los pasos
@@ -64,6 +91,15 @@ function nextStep(step) {
     }
     // Mostrar el paso actual
     document.getElementById('step' + step).style.display = 'block';
+}
+function cantCr() {
+    let cant = document.getElementById('cantcr').value; // Cantidad de inputs a generar
+    let bx = document.getElementById('descar');        // Contenedor para los inputs
+    bx.innerHTML = ""; // Limpiar el contenido antes de agregar los nuevos inputs
+
+    for (let i = 0; i < cant; i++) {
+        bx.innerHTML += `<input type="text" name="descripcioncr[]" id="" placeholder="Característica ${i + 1}"><br>`;
+    }
 }
 
 window.addEventListener('load', () => {

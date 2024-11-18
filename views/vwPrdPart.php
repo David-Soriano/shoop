@@ -73,7 +73,7 @@
                                         break; // Detener el bucle después de 5 elementos
                                     ?>
                                     <ul>
-                                        <li><?= $dtcar['descripcion'] ?></li>
+                                        <li><?= $dtcar['descripcioncr'] ?></li>
                                     </ul>
                                     <?php
                                     $contador++; // Incrementar el contador

@@ -147,6 +147,17 @@ table .td-options {
     font-size: 12px;
 }
 
+#descar input{
+    margin: 1% 0;
+}
+.btn-del{
+    background: none;
+    border: none;
+}
+#formven #orden-imagenes .btn-del i{
+    font-size: 16px;
+    color: palevioletred;
+}
 footer {
     display: flex;
     flex-direction: column;

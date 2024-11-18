@@ -58,18 +58,19 @@ class Mpancon
                 imagecopyresampled($imagenRedimensionada, $imagenOriginal, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $anchoOriginal, $altoOriginal);
 
                 // Generar el nombre final y guardar la imagen
-                $rutaFinal = $ruta . '/' . $nombreBase . '_' . $prefijo . '.' . $ext;
+                $rutaFinal = 'proinf/' . $nombreBase . '_' . $prefijo . '.' . $ext; // Guardar solo la parte relativa
+
                 switch ($ext) {
                     case 'jpg':
                     case 'jpeg':
-                        imagejpeg($imagenRedimensionada, $rutaFinal, $calidad);
+                        imagejpeg($imagenRedimensionada, $ruta . '/' . $nombreBase . '_' . $prefijo . '.' . $ext, $calidad);
                         break;
                     case 'png':
                         $compresionPng = (int) ((100 - $calidad) / 10); // 0 (mejor calidad) a 9 (máxima compresión)
-                        imagepng($imagenRedimensionada, $rutaFinal, $compresionPng);
+                        imagepng($imagenRedimensionada, $ruta . '/' . $nombreBase . '_' . $prefijo . '.' . $ext, $compresionPng);
                         break;
                     case 'webp':
-                        imagewebp($imagenRedimensionada, $rutaFinal, $calidad);  // Guardar como WebP
+                        imagewebp($imagenRedimensionada, $ruta . '/' . $nombreBase . '_' . $prefijo . '.' . $ext, $calidad);  // Guardar como WebP
                         break;
                 }
 
@@ -82,6 +83,7 @@ class Mpancon
         }
         return $rutaFinal;
     }
+
 
 
 }

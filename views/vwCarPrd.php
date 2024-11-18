@@ -5,12 +5,12 @@
             <?php 
             $hasFeatures = false; // Inicializamos una variable para comprobar si hay alguna característica válida
             foreach ($dtCarprd as $dtcar) { 
-                if (!empty($dtcar['descripcion'])) {
+                if (!empty($dtcar['descripcioncr'])) {
                     $hasFeatures = true; // Indicamos que se encontró al menos una característica
                     ?>
                     <div class="item-car col-4">
                         <i class="bi bi-patch-check"></i>
-                        <p><?= $dtcar['descripcion']; ?></p>
+                        <p><?= $dtcar['descripcioncr']; ?></p>
                     </div>
                 <?php } 
             }

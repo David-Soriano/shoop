@@ -1,1 +1,1 @@
-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '0' for key 'PRIMARY'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`shoop`.`producto`, CONSTRAINT `fk_producto_valor` FOREIGN KEY (`idval`) REFERENCES `valor` (`idval`))
+

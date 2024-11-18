@@ -19,9 +19,11 @@ $valorunitario = isset($_POST['valorunitario']) ? $_POST['valorunitario'] : NULL
 $precio = isset($_POST['precio']) ? $_POST['precio'] : NULL;
 $pordescu = isset($_POST['pordescu']) ? $_POST['pordescu'] : NULL;
 $imgpro = isset($_FILES['imgpro']) ? $_FILES['imgpro'] : NULL;
-
-
 $dtCatego = $control->getCategorías();
+
+if (isset($_POST['descripcioncr']) && is_array($_POST['descripcioncr'])) {
+    $caracteristicas = $_POST['descripcioncr'];
+}
 
 $res = "";
 // Proveedor
@@ -32,7 +34,6 @@ if ($idusu) {
         header("Location: ../views/vwRegPrv.php");
         exit(); // Detener ejecución adicional
     } else {
-        echo "sigue";
         require_once '../model/mpro.php';
 
         //Guardar Producto
@@ -46,10 +47,9 @@ if ($idusu) {
         $pro->setValorunitario($valorunitario);
         $pro->setPordescu($pordescu);
         $pro->setPrecio($precio);
-        echo "sigue";
+        
         if (!empty($_FILES['imgpro']['name'][0])) {
-            echo "sigue";
-            $ruta = 'proinf';
+            $ruta = '../proinf';
             $imagenesGuardadas = []; // Almacenar datos para insertarlos luego
             foreach ($_FILES['imgpro']['name'] as $key => $nombreOriginal) {
                 $archivo = [
@@ -83,12 +83,12 @@ if ($idusu) {
             // Insertar las imágenes en la base de datos
             if (!empty($imagenesGuardadas)) {
                 try {
-                    $res = $pro->saveProductoConImagenes($imagenesGuardadas);
+                    $res = $pro->saveProductoConImagenes($imagenesGuardadas, $caracteristicas);
 
-                    if ($res){
+                    if ($res) {
                         echo "Todas las imágenes se han guardado correctamente.<br>";
                         header("location:../views/vwpanpro.php");
-                    }else
+                    } else
                         echo "Error al guardar las imágenes en la base de datos.<br>";
                 } catch (PDOException $e) {
                     error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');

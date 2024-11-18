@@ -15,6 +15,9 @@ class Mpro
     private $tipimg;
     private $ordimg;
 
+    //Características
+    private $descripcionCr;
+
     // Getters
     // Getters y Setters para idpro
     public function getIdpro()
@@ -153,10 +156,15 @@ class Mpro
     {
         return $this->ordimg;
     }
-
+    public function getDescripcionCr(){
+        return $this->descripcionCr;
+    }
     public function setOrdimg($ordimg)
     {
         $this->ordimg = $ordimg;
+    }
+    public function setDescripcionCr($descripcionCr){
+        $this->descripcionCr = $descripcionCr;
     }
     //Traer un producto en especifico
     public function getOnePrd()
@@ -345,7 +353,7 @@ class Mpro
 
             // Consulta SQL para obtener los detalles de los productos
             $sql = "SELECT p.idpro, p.nompro, p.valorunitario, p.pordescu, i.imgpro,
-       p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE ordimg = (SELECT MIN(ordimg) FROM imagen WHERE idpro = imagen.idpro)) AS i ON p.idpro = i.idpro WHERE p.idpro IN ($idsProductos) AND p.estado = 'activo' ORDER BY FIELD(p.idpro, $idsProductos);"; // Mantener el orden de los productos
+       p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE ordimg = (SELECT MIN(ordimg) FROM imagen WHERE idpro = imagen.idpro)) AS i ON p.idpro = i.idpro WHERE p.idpro IN ($idsProductos) AND p.estado = 'activo' ORDER BY FIELD(p.idpro, $idsProductos) DESC;"; // Mantener el orden de los productos
 
             try {
                 $modelo = new Conexion();
@@ -401,7 +409,7 @@ class Mpro
     public function getCarPrd()
     {
         $res = "";
-        $sql = "SELECT idcar, idpro, descripcion FROM caracteristicas WHERE idpro = :idpro;";
+        $sql = "SELECT idcar, idpro, descripcioncr FROM caracteristicas WHERE idpro = :idpro;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -412,7 +420,7 @@ class Mpro
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
-            echo "Error al obtener detalle del producto. Intentalo mas tarde";
+            echo "Error al obtener características del producto. Intentalo mas tarde";
         }
         return $res;
     }
@@ -438,7 +446,7 @@ class Mpro
         return $res;
     }
 
-    public function saveProductoConImagenes($imagenes)
+    public function saveProductoConImagenes($imagenes, $caracteristicas)
     {
         try {
             $modelo = new Conexion();
@@ -451,6 +459,7 @@ class Mpro
             // Inserta las imágenes asociadas al producto
             if ($idProducto) {
                 $this->insertImagenes($conexion, $idProducto, $imagenes);
+                $this->saveCaracterísticas($conexion, $idProducto, $caracteristicas); //
             }
 
             $conexion->commit();
@@ -504,6 +513,19 @@ class Mpro
                 $stmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
             }
 
+            $stmt->execute();
+        }
+    }
+    function saveCaracterísticas($conexion, $idpro, $caracteristicas){
+        foreach ($caracteristicas as $descripcion) {
+            // Asegúrate de limpiar los datos antes de usarlos (prevención de inyección SQL)
+            $descripcionLimpia = htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8');
+    
+            // Aquí puedes insertar cada característica en la base de datos
+            $sql = "INSERT INTO caracteristicas (descripcioncr, idpro) VALUES (:descripcioncr, :idpro)";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindParam(':descripcioncr', $descripcionLimpia);
+            $stmt->bindParam(':idpro', $idpro); // Asegúrate de que $idProducto esté definido
             $stmt->execute();
         }
     }
