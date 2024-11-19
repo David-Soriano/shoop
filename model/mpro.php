@@ -14,7 +14,8 @@ class Mpro
     private $nomimg;
     private $tipimg;
     private $ordimg;
-
+    private $fechfinofer;
+    private $fechiniofer;
     //Características
     private $descripcionCr;
 
@@ -165,6 +166,18 @@ class Mpro
     }
     public function setDescripcionCr($descripcionCr){
         $this->descripcionCr = $descripcionCr;
+    }
+    public function getFechiniofer(){
+        return $this->fechiniofer;
+    }
+    public function setFechiniofer($fechiniofer){
+        $this->fechiniofer = $fechiniofer;
+    }
+    public function getFechfinofer(){
+        return $this->fechfinofer;
+    }
+    public function setFechfinofer($fechfinofer){
+        $this->fechfinofer = $fechfinofer;
     }
     //Traer un producto en especifico
     public function getOnePrd()
@@ -473,8 +486,8 @@ class Mpro
     }
     private function insertProducto($conexion)
     {
-        $sql = "INSERT INTO producto(nompro, descripcion, cantidad, idval, valorunitario, precio, pordescu) 
-                VALUES (:nompro, :descripcion, :cantidad, :idval, :valorunitario, :precio, :pordescu)";
+        $sql = "INSERT INTO producto(nompro, descripcion, cantidad, idval, valorunitario, fechiniofer, fechfinofer, precio, pordescu) 
+                VALUES (:nompro, :descripcion, :cantidad, :idval, :valorunitario, :fechiniofer, :fechfinofer, :precio, :pordescu)";
         $stmt = $conexion->prepare($sql);
 
         $params = [
@@ -483,10 +496,11 @@ class Mpro
             ':cantidad' => $this->getCantidad(),
             ':idval' => $this->getIdval(),
             ':valorunitario' => $this->getValorunitario(),
+            ':fechiniofer' => $this->getFechiniofer(),
+            ':fechfinofer'=> $this->getFechfinofer(),
             ':pordescu' => $this->getPordescu(),
             ':precio' => $this->getPrecio(),
         ];
-
         foreach ($params as $key => $value) {
             $stmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
         }

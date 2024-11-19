@@ -101,6 +101,51 @@ function cantCr() {
         bx.innerHTML += `<input type="text" name="descripcioncr[]" id="" placeholder="Característica ${i + 1}"><br>`;
     }
 }
+// Función principal
+function mostrarFechaFin() {
+    const descuento = document.getElementById('pordescu').value;
+    const fechaOferta = document.getElementById('fechaOferta');
+    const fechaInicio = document.getElementById('fechaInicio');
+    const fechaFin = document.getElementById('fechaFin');
+
+    if (descuento > 0) {
+        fechaOferta.style.display = "block";
+
+        // Obtener la fecha actual desde la API y configurar los valores
+        obtenerFechaActual((fechaActual) => {
+            fechaInicio.value = fechaActual; // Establecer la fecha actual en fechaInicio
+            fechaFin.min = fechaActual; // Configurar la fecha mínima permitida en fechaFin
+            fechaFin.value = fechaActual;
+        });
+    } else {
+        fechaOferta.style.display = "none";
+        fechaInicio.value = ""; // Limpiar la fecha de inicio si no hay descuento
+        fechaFin.value = ""; // Limpiar el campo de fecha fin
+    }
+}
+
+// Función para obtener la fecha desde Time Zone DB
+async function obtenerFechaActual(callback) {
+    const apiKey = '554XT8S07RF7';
+    const timezone = 'America/Bogota';
+    const response = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=zone&zone=${timezone}`);
+    const data = await response.json();
+
+    if (data && data.formatted) {
+        const fechaActual = ajustarZonaHoraria(data.formatted);
+        callback(fechaActual);
+    } else {
+        console.error('Error al obtener la fecha actual de la API');
+    }
+}
+
+// Ajustar la fecha a la zona horaria local y retornar en formato YYYY-MM-DD
+function ajustarZonaHoraria(fechaISO) {
+    const fecha = new Date(fechaISO);
+    const offsetMilisegundos = fecha.getTimezoneOffset() * 60 * 1000; // Compensar la diferencia horaria
+    const fechaLocal = new Date(fecha.getTime() - offsetMilisegundos);
+    return fechaLocal.toISOString().split('T')[0]; // Retornar en formato YYYY-MM-DD
+}
 
 window.addEventListener('load', () => {
     document.getElementById('valorunitario').addEventListener('input', calcularPrecio);

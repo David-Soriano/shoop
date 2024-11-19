@@ -19,8 +19,11 @@ $valorunitario = isset($_POST['valorunitario']) ? $_POST['valorunitario'] : NULL
 $precio = isset($_POST['precio']) ? $_POST['precio'] : NULL;
 $pordescu = isset($_POST['pordescu']) ? $_POST['pordescu'] : NULL;
 $imgpro = isset($_FILES['imgpro']) ? $_FILES['imgpro'] : NULL;
-$dtCatego = $control->getCategorías();
+$fechiniofer = isset($_POST['fechiniofer']) ? $_POST['fechiniofer'] : NULL;
+$fechfinofer = isset($_POST['fechfinofer']) ? $_POST['fechfinofer'] : NULL;
 
+$dtCatego = $control->getCategorías();
+$caracteristicas = [];
 if (isset($_POST['descripcioncr']) && is_array($_POST['descripcioncr'])) {
     $caracteristicas = $_POST['descripcioncr'];
 }
@@ -47,7 +50,8 @@ if ($idusu) {
         $pro->setValorunitario($valorunitario);
         $pro->setPordescu($pordescu);
         $pro->setPrecio($precio);
-        
+        $pro->setFechiniofer($fechiniofer);
+        $pro->setFechfinofer($fechfinofer);
         if (!empty($_FILES['imgpro']['name'][0])) {
             $ruta = '../proinf';
             $imagenesGuardadas = []; // Almacenar datos para insertarlos luego
@@ -86,8 +90,7 @@ if ($idusu) {
                     $res = $pro->saveProductoConImagenes($imagenesGuardadas, $caracteristicas);
 
                     if ($res) {
-                        echo "Todas las imágenes se han guardado correctamente.<br>";
-                        header("location:../views/vwpanpro.php");
+                        header("location:../views/vwpanpro.php?vw=001");
                     } else
                         echo "Error al guardar las imágenes en la base de datos.<br>";
                 } catch (PDOException $e) {

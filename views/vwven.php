@@ -45,9 +45,17 @@
                     <h6>¿Algún descuento en especial?</h6>
                 </div>
                 <div class="col">
-                    <input type="number" id="pordescu" name="pordescu" placeholder="Valor. Ej: 5%">
+                    <input type="number" id="pordescu" name="pordescu" placeholder="Valor. Ej: 5%"
+                        oninput="mostrarFechaFin()">
                 </div>
             </div>
+            <div class="row" id="fechaOferta" style="display: none;">
+                <div class="col">
+                    <label for="fechaFin">Fecha fin de la oferta:</label>
+                    <input type="date" id="fechaFin" name="fechfinofer">
+                </div>
+            </div>
+            <input type="hidden" id="fechaInicio" name="fechiniofer" value="">
             <div class="row">
                 <div class="col">
                     <Label>Características del producto</Label>
