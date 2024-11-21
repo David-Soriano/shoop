@@ -83,7 +83,25 @@ class Mpancon
         }
         return $rutaFinal;
     }
-
-
+    function getIdPrv($idusu){
+        $sql = "SELECT idprov FROM proveedor WHERE idusu = :idusu";
+        try{
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->bindValue(':idusu', $idusu);
+            $result->execute();
+            if( $result->rowCount() > 0){
+                $row = $result->fetch(PDO::FETCH_ASSOC);
+                $idprov = $row['idprov'];
+                
+                // Guardar el idprov en la sesión
+                $_SESSION['idprov'] = $idprov;
+            }
+        } catch(PDOException $e){
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al mostrar productos registrados. Inténtalo más tarde.";
+        }
+    }
 
 }

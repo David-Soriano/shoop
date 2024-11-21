@@ -3,10 +3,11 @@ session_start();
 include "../model/conexion.php";
 include "../model/mpancon.php";
 include "../model/mprov.php";
+include "../model/mpro.php";
 
 $control = new Mpancon();
 $prov = new Mprov();
-
+$mpro = new Mpro();
 $idusus = isset($_SESSION['idusu']) ? $_SESSION['idusu'] : null;
 $idProveedor = $prov->existeProveedor($idusus);
 
@@ -22,7 +23,32 @@ $imgpro = isset($_FILES['imgpro']) ? $_FILES['imgpro'] : NULL;
 $fechiniofer = isset($_POST['fechiniofer']) ? $_POST['fechiniofer'] : NULL;
 $fechfinofer = isset($_POST['fechfinofer']) ? $_POST['fechfinofer'] : NULL;
 
+
+// Paginación de tablas
+$resultsPerPage = 10;
+$currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$offset = ($currentPage - 1) * $resultsPerPage;
+
 $dtCatego = $control->getCategorías();
+$control->getIdPrv($idusus);
+
+// Obtener el total de productos del proveedor
+$totalResults = $mpro->getCantPrd($_SESSION['idprov']);
+
+// Calcular el número total de páginas
+$totalPages = ceil($totalResults / $resultsPerPage);
+
+// Consulta para obtener productos según la búsqueda
+$dtAllPrd = $mpro->getAllPrd($_SESSION['idprov'], $resultsPerPage, $offset);
+
+// Calcular los límites para "Mostrando X-Y de Z resultados"
+$start = $offset + 1;
+$end = min($offset + $resultsPerPage, $totalResults);
+
+// Generar el mensaje dinámico
+$recordsMessage = "Mostrando: <b>{$start}-{$end}</b> de <b>{$totalResults}</b> resultados";
+
+
 $caracteristicas = [];
 if (isset($_POST['descripcioncr']) && is_array($_POST['descripcioncr'])) {
     $caracteristicas = $_POST['descripcioncr'];

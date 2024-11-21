@@ -1,178 +1,165 @@
-<table id="tpro" class="table table-striped">
-    <thead>
-        <tr>
-            <th>Producto</th>
-            <th>Descripción</th>
-            <th>Existencias</th>
-            <th>Precio</th>
-            <th>Visitas</th>
-            <td class="td-config">Configuración</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Silla</td>
-            <td>Comoda silla</td>
-            <td>95</td>
-            <td>$320,800</td>
-            <td>61</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Mesa</td>
-            <td>Mesa negra</td>
-            <td>102</td>
-            <td>$170,750</td>
-            <td>63</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Audifonos</td>
-            <td>Audifonos inalámpricos</td>
-            <td>110</td>
-            <td>$86,000</td>
-            <td>66</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Disco Duro Ssd</td>
-            <td>1TB de espacio</td>
-            <td>95</td>
-            <td>$433,060</td>
-            <td>22</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Hoodie</td>
-            <td>Hoodie de AC</td>
-            <td>102</td>
-            <td>$162,700</td>
-            <td>33</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Colchon</td>
-            <td>Colchon de espuma rosada</td>
-            <td>80</td>
-            <td>$372,000</td>
-            <td>61</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Mouse pad</td>
-            <td>Mouse pad de Sub-zero</td>
-            <td>110</td>
-            <td>$137,500</td>
-            <td>59</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Tenis</td>
-            <td>Tenis Adidas</td>
-            <td>102</td>
-            <td>$327,900</td>
-            <td>55</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Maquina de coser</td>
-            <td>Portatil</td>
-            <td>110</td>
-            <td>$205,500</td>
-            <td>39</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Trapero</td>
-            <td>Con exprimidor</td>
-            <td>95</td>
-            <td>$103,600</td>
-            <td>23</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Proteina</td>
-            <td>SMART</td>
-            <td>92</td>
-            <td>$90,560</td>
-            <td>30</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Caja juego de copas</td>
-            <td>52 piezas</td>
-            <td>95</td>
-            <td>$342,000</td>
-            <td>22</td>
-            <td class="td-options "
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Targeta grafica</td>
-            <td>AMD Rx 580</td>
-            <td>110</td>
-            <td>$470,600</td>
-            <td>36</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>Targeta grafica</td>
-            <td>Gigabyte Gtx 1650</td>
-            <td>92</td>
-            <td>$780.750</td>
-            <td>43</td>
-            <td class="td-options ">
-                <a href="#" id="btntrash"><i class="bi bi-trash3"></i></a>
-                <a href="vwActArt.php" id="btnedit"><i class="bi bi-pencil"></i></a>
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <th>Producto</th>
-            <th>Descripción</th>
-            <th>Existencias</th>
-            <th>Precio</th>
-            <th>Visitas</th>
-            <th class="td-config">Configuración</th>
-        </tr>
-    </tfoot>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 card-margin">
+            <div class="card search-form">
+                <div class="card-body p-0">
+                    <form id="search-form">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row no-gutters">
+                                    <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+                                        <input type="text" placeholder="Buscar..." class="form-control" id="search"
+                                            name="search" oninput="actualizarTabla()">
+                                    </div>
+                                    <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+                                        <div class="btn btn-base">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-search">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-margin">
+                <div class="card-body">
+                    <div class="row search-body">
+                        <div class="col-lg-12">
+                            <div class="search-result">
+                                <div class="result-header">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="records"><?php echo $recordsMessage; ?></div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="result-actions">
+                                                <div class="result-sorting">
+                                                    <span>Ordenar Por:</span>
+                                                    <select class="form-control border-0" id="exampleOption">
+                                                        <option value="1">Fecha</option>
+                                                        <option value="2">Nombre (A-Z)</option>
+                                                        <option value="3">Nombre (Z-A)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="result-body">
+                                    <div class="table-responsive">
+                                        <table class="table widget-26" id="productTable">
+                                            <tbody>
+                                                <?php
+                                                if (isset($dtAllPrd) && count($dtAllPrd) > 0) {
+                                                    foreach ($dtAllPrd as $dtp) { ?>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="widget-26-job-starred">
+                                                                    <input class="product-checkbox" type="checkbox" name="" id=""
+                                                                        value="<?= $dtp['idpro'] ?>">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="widget-26-job-emp-img">
+                                                                    <img src="../<?= $dtp['imgpro']; ?>"
+                                                                        alt="<?= $dtp['nomimg']; ?>">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="widget-26-job-title">
+                                                                    <a href="#"><?= $dtp['nompro']; ?></a>
+                                                                    <p class="m-0"><a href="#"
+                                                                            class="employer-name"><?= $dtp['nomval']; ?></a>
+                                                                        <span
+                                                                            class="text-muted time"><?= $dtp['productvend']; ?>
+                                                                            vendidos</span>
+                                                                    </p>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="widget-26-job-info">
+                                                                    <p class="type m-0">Stock</p>
+                                                                    <p class="text-muted m-0"><span
+                                                                            class="location"><?= $dtp['cantidad']; ?></span></p>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="widget-26-job-salary">
+                                                                    <p class="type m-0">Precio</p>
+                                                                    <?php echo "$" . number_format($dtp['precio'], 0, ',', '.') ?>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <?php if ($dtp['pordescu'] > 0) { ?>
+                                                                    <div
+                                                                        class="widget-26-job-category indicator-wrap bg-soft-success">
+                                                                        <i class="indicator bg-success"></i>
+                                                                        <span>En oferta</span>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php }
+                                                } else { ?>
+                                                    <tr>
+                                                        <td colspan="6">No se encontraron productos.</td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                        <div class="table-options-bar mt-3 d-flex justify-content-end">
+                                            <button class=" me-2" id="editButton" title="Editar" disabled><i class="bi bi-pen-fill"></i></button>
+                                            <button class="" id="deleteButton" title="Eliminar" disabled><i class="bi bi-trash-fill"></i>
+                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="d-flex justify-content-center">
+                        <ul class="pagination pagination-base pagination-boxed pagination-square mb-0">
+                            <!-- Botón "Anterior" -->
+                            <li class="page-item <?= ($currentPage <= 1) ? 'disabled' : '' ?>">
+                                <a class="page-link no-border" href="?page=<?= $currentPage - 1 ?>"
+                                    aria-label="Anterior">
+                                    <span aria-hidden="true">«</span>
+                                    <span class="sr-only">Anterior</span>
+                                </a>
+                            </li>
+
+                            <!-- Enlaces de páginas -->
+                            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                <li class="page-item <?= ($currentPage === $i) ? 'active' : '' ?>">
+                                    <a class="page-link no-border" href="?page=<?= $i ?>"><?= $i ?></a>
+                                </li>
+                            <?php endfor; ?>
+
+                            <!-- Botón "Siguiente" -->
+                            <li class="page-item <?= ($currentPage >= $totalPages) ? 'disabled' : '' ?>">
+                                <a class="page-link no-border" href="?page=<?= $currentPage + 1 ?>"
+                                    aria-label="Siguiente">
+                                    <span aria-hidden="true">»</span>
+                                    <span class="sr-only">Siguiente</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

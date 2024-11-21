@@ -18,6 +18,8 @@ class Mpro
     private $fechiniofer;
     //Características
     private $descripcionCr;
+    //Proveedor
+    private $idprov;
 
     // Getters
     // Getters y Setters para idpro
@@ -157,27 +159,41 @@ class Mpro
     {
         return $this->ordimg;
     }
-    public function getDescripcionCr(){
+    public function getDescripcionCr()
+    {
         return $this->descripcionCr;
     }
     public function setOrdimg($ordimg)
     {
         $this->ordimg = $ordimg;
     }
-    public function setDescripcionCr($descripcionCr){
+    public function setDescripcionCr($descripcionCr)
+    {
         $this->descripcionCr = $descripcionCr;
     }
-    public function getFechiniofer(){
+    public function getFechiniofer()
+    {
         return $this->fechiniofer;
     }
-    public function setFechiniofer($fechiniofer){
+    public function setFechiniofer($fechiniofer)
+    {
         $this->fechiniofer = $fechiniofer;
     }
-    public function getFechfinofer(){
+    public function getFechfinofer()
+    {
         return $this->fechfinofer;
     }
-    public function setFechfinofer($fechfinofer){
+    public function setFechfinofer($fechfinofer)
+    {
         $this->fechfinofer = $fechfinofer;
+    }
+    public function getIdprov()
+    {
+        return $this->idprov;
+    }
+    public function setIdprov($idprov)
+    {
+        $this->idprov = $idprov;
     }
     //Traer un producto en especifico
     public function getOnePrd()
@@ -497,7 +513,7 @@ class Mpro
             ':idval' => $this->getIdval(),
             ':valorunitario' => $this->getValorunitario(),
             ':fechiniofer' => $this->getFechiniofer(),
-            ':fechfinofer'=> $this->getFechfinofer(),
+            ':fechfinofer' => $this->getFechfinofer(),
             ':pordescu' => $this->getPordescu(),
             ':precio' => $this->getPrecio(),
         ];
@@ -520,7 +536,7 @@ class Mpro
                 ':nomimg' => $imagen['nomimg'],
                 ':tipimg' => $imagen['tipimg'],
                 ':idpro' => $idProducto,
-                ':ordimg' => isset($imagen['principal']) && $imagen['principal'] ? 1 : $index+1
+                ':ordimg' => isset($imagen['principal']) && $imagen['principal'] ? 1 : $index + 1
             ];
 
             foreach ($params as $key => $value) {
@@ -530,11 +546,12 @@ class Mpro
             $stmt->execute();
         }
     }
-    function saveCaracterísticas($conexion, $idpro, $caracteristicas){
+    function saveCaracterísticas($conexion, $idpro, $caracteristicas)
+    {
         foreach ($caracteristicas as $descripcion) {
             // Asegúrate de limpiar los datos antes de usarlos (prevención de inyección SQL)
             $descripcionLimpia = htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8');
-    
+
             // Aquí puedes insertar cada característica en la base de datos
             $sql = "INSERT INTO caracteristicas (descripcioncr, idpro) VALUES (:descripcioncr, :idpro)";
             $stmt = $conexion->prepare($sql);
@@ -543,4 +560,61 @@ class Mpro
             $stmt->execute();
         }
     }
+    function getAllPrd($idprov, $limit, $offset)
+    {
+        $res = "";
+        // Si no hay búsqueda, la consulta no tiene filtro por nombre del producto
+        $sql = "SELECT p.idpro, p.nompro, p.precio, p.cantidad, 
+                        p.feccreat, p.fecupdate, p.fechfinofer, 
+                        p.pordescu, v.idval, v.nomval, p.productvend, 
+                        pr.idprov, i.imgpro, i.nomimg 
+                FROM producto p 
+                JOIN prodxprov pxp ON p.idpro = pxp.idpro
+                JOIN proveedor pr ON pxp.idprov = pr.idprov
+                JOIN valor v ON p.idval = v.idval
+                LEFT JOIN imagen i ON p.idpro = i.idpro AND i.ordimg = (
+                    SELECT MIN(ordimg) FROM imagen WHERE imagen.idpro = p.idpro
+                )
+                WHERE pr.idprov = :idprov
+                ORDER BY p.feccreat DESC
+                LIMIT $limit OFFSET $offset";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->bindValue(':idprov', $idprov, PDO::PARAM_INT);
+
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al mostrar productos registrados. Inténtalo más tarde.";
+        }
+        return $res;
+    }
+
+    function getCantPrd($idprov)
+    {
+        $total = 0; // Inicializar la variable en caso de error
+        $sql = "SELECT COUNT(*) AS total FROM producto p 
+                   JOIN prodxprov pxp ON p.idpro = pxp.idpro
+                   JOIN proveedor pr ON pxp.idprov = pr.idprov
+                   WHERE pr.idprov = :idprov";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->bindValue(':idprov', $idprov);
+            $result->execute();
+            $res = $result->fetch(PDO::FETCH_ASSOC); // Usar fetch para un único resultado
+            if ($res) {
+                $total = $res['total']; // Acceder directamente al valor
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al mostrar productos registrados. Inténtalo más tarde.";
+        }
+        return $total; // Retorna el total correctamente
+    }
+
 }

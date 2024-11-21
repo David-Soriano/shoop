@@ -147,7 +147,138 @@ function ajustarZonaHoraria(fechaISO) {
     return fechaLocal.toISOString().split('T')[0]; // Retornar en formato YYYY-MM-DD
 }
 
+function actualizarTabla() {
+    let searchTerm = $('#search').val();  // Obtener el valor del campo de búsqueda
+
+    console.log("Buscando:", searchTerm);  // Verifica el valor de búsqueda
+
+    // Realizar la solicitud AJAX
+    $.ajax({
+        url: '../controller/buscTable.php',  // Ruta correcta del archivo PHP que procesa la búsqueda
+        method: 'GET',
+        data: {
+            search: searchTerm,
+            vw: '002'  // Agregar el parámetro vw=002
+        },
+        success: function (response) {
+            console.log(response);  // Verifica la respuesta del servidor
+            $('#productTable tbody').html(response);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error en la solicitud AJAX: ", error);
+        }
+    });
+}
+
+function buttonsTable() {
+    const checkboxes = document.querySelectorAll('.product-checkbox');
+    const editButton = document.getElementById('editButton');
+    const deleteButton = document.getElementById('deleteButton');
+    // Verificar cambios en los checkboxes
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            // Habilitar los botones si hay al menos un checkbox seleccionado
+            const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+            editButton.disabled = !anyChecked;
+            deleteButton.disabled = !anyChecked;
+        });
+    });
+
+    // Acción al hacer clic en "Editar seleccionados"
+    editButton.addEventListener('click', () => {
+        const selectedIds = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (selectedIds.length === 0) {
+            alert("Selecciona al menos un producto para editar.");
+            return;
+        }
+
+        // Por simplicidad, consideramos que solo puedes editar un producto a la vez
+        if (selectedIds.length > 1) {
+            alert("Por favor, selecciona solo un producto para editar.");
+            return;
+        }
+
+        const productId = selectedIds[0];
+
+        // Simulación de obtener datos del producto
+        // Esto debería ser una solicitud AJAX para obtener los datos del producto desde el servidor
+        const productData = {
+            nompro: "Producto de Ejemplo",
+            precio: 1200,
+            cantidad: 10,
+            fechfinofer: "2024-12-31",
+            pordescu: 5,
+            nomval: "Tecnología",
+            imgpro: "https://via.placeholder.com/150"
+        };
+
+        // Crear modal dinámicamente
+        const modalHTML = ``;
+
+        // Insertar el modal en el cuerpo del documento
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        // Mostrar el modal
+        document.getElementById('popup').style.display = 'flex';
+    });
+
+    function closeModal() {
+        const popup = document.getElementById('popup');
+        if (popup) popup.remove();
+    }
+
+    function saveProductData() {
+        // Aquí puedes procesar y enviar los datos del formulario al backend
+        const formData = {
+            nompro: document.getElementById('nompro').value,
+            precio: document.getElementById('precio').value,
+            cantidad: document.getElementById('cantidad').value,
+            fechfinofer: document.getElementById('fechfinofer').value,
+            pordescu: document.getElementById('pordescu').value,
+            nomval: document.getElementById('nomval').value,
+        };
+
+        console.log("Datos del formulario guardados:", formData);
+
+        // Simulación de guardar los datos (debería enviarse al backend)
+        closeModal();
+        alert("Producto guardado exitosamente.");
+    }
+
+
+    // Acción al hacer clic en "Eliminar seleccionados"
+    deleteButton.addEventListener('click', () => {
+        const selectedIds = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (confirm(`¿Estás seguro de que deseas eliminar los productos seleccionados?`)) {
+            // Enviar solicitud AJAX para eliminar los productos
+            fetch('../controller/cpancon.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'delete', ids: selectedIds })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Productos eliminados exitosamente');
+                        location.reload(); // Recargar la página
+                    } else {
+                        alert('Error al eliminar los productos');
+                    }
+                });
+        }
+    });
+}
+document.addEventListener('DOMContentLoaded', function () {
+    buttonsTable();
+});
 window.addEventListener('load', () => {
     document.getElementById('valorunitario').addEventListener('input', calcularPrecio);
     document.getElementById('pordescu').addEventListener('input', calcularPrecio);
 });
+
