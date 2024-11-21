@@ -597,9 +597,9 @@ class Mpro
     {
         $total = 0; // Inicializar la variable en caso de error
         $sql = "SELECT COUNT(*) AS total FROM producto p 
-                   JOIN prodxprov pxp ON p.idpro = pxp.idpro
-                   JOIN proveedor pr ON pxp.idprov = pr.idprov
-                   WHERE pr.idprov = :idprov";
+                JOIN prodxprov pxp ON p.idpro = pxp.idpro
+                JOIN proveedor pr ON pxp.idprov = pr.idprov
+                WHERE pr.idprov = :idprov";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -616,5 +616,168 @@ class Mpro
         }
         return $total; // Retorna el total correctamente
     }
+    function updateallPrd($imagenes, $caracteristicas, $idpro)
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $conexion->beginTransaction(); // Inicia la transacción
 
+            // Actualiza el producto
+            $productoActualizado = $this->updateProducto($idpro, $conexion);
+
+            if ($productoActualizado) {
+                // Actualiza las imágenes y características asociadas
+                $this->updateImagen($conexion, $idpro, $imagenes);
+                $this->updateCaracteristicas($conexion, $idpro, $caracteristicas);
+            }
+
+            $conexion->commit(); // Confirma la transacción si todo sale bien
+            return $idpro; // Retorna el ID del producto actualizado
+        } catch (PDOException $e) {
+            $conexion->rollBack(); // Reversa los cambios en caso de error
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al actualizar el producto. Inténtalo más tarde.";
+            return null;
+        }
+    }
+
+    function updateProducto($idpro, $conexion)
+    {
+        $sql = "UPDATE producto 
+            SET nompro = :nompro, descripcion = :descripcion, cantidad = :cantidad, idval = :idval,
+                valorunitario = :valorunitario, fechfinofer = :fechfinofer, precio = :precio, pordescu = :pordescu
+            WHERE idpro = :idpro";
+        try {
+            $result = $conexion->prepare($sql);
+            $result->bindParam(':nompro', $this->getNompro());
+            $result->bindParam(':descripcion', $this->getDescripcion());
+            $result->bindParam(':cantidad', $this->getCantidad());
+            $result->bindParam(':idval', $this->getIdval());
+            $result->bindParam(':valorunitario', $this->getValorunitario());
+            $result->bindParam(':fechfinofer', $this->getFechfinofer());
+            $result->bindParam(':precio', $this->getPrecio());
+            $result->bindParam(':pordescu', $this->getPordescu());
+            $result->bindValue(':idpro', $idpro);
+            $result->execute();
+            return $result->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            throw $e;
+        }
+    }
+
+    function updateImagen($conexion, $idpro, $imagenes)
+    {
+        $sql = "UPDATE imagen 
+            SET imgpro = :imgpro, nomimg = :nomimg, tipimg = :tipimg, ordimg = :ordimg
+            WHERE idpro = :idpro AND ordimg = :ordimg";
+        try {
+            $result = $conexion->prepare($sql);
+            foreach ($imagenes as $index => $imagen) {
+                $result->bindValue(':idpro', $idpro);
+                $result->bindValue(':imgpro', $imagen['imgpro']);
+                $result->bindValue(':nomimg', $imagen['nomimg']);
+                $result->bindValue(':tipimg', $imagen['tipimg']);
+                $result->bindValue(':ordimg', $index + 1); // Orden de la imagen
+                $result->execute();
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            throw $e;
+        }
+    }
+
+    function updateCaracteristicas($conexion, $idpro, $caracteristicas)
+    {
+        $sql = "UPDATE caracteristica 
+            SET descripcioncr = :descripcion cr
+            WHERE idpro = :idpro";
+        try {
+            $result = $conexion->prepare($sql);
+            foreach ($caracteristicas as $descripcion) {
+                $result->bindValue(':idpro', $idpro);
+                $result->bindValue(':descripcioncr', htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8'));
+                $result->execute();
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            throw $e;
+        }
+    }
+
+    function getProductoById($idpro)
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+
+            $sql = "SELECT 
+                    p.idpro, p.nompro, p.descripcion, p.cantidad, p.idval, 
+                    p.valorunitario, p.fechfinofer, p.precio, p.pordescu,
+                    i.idimag, i.imgpro, i.nomimg, i.tipimg, i.ordimg,
+                    c.idcar, c.descripcioncr AS descripcion_caracteristica
+                FROM producto p
+                LEFT JOIN imagen i ON p.idpro = i.idpro
+                LEFT JOIN caracteristica c ON p.idpro = c.idpro
+                WHERE p.idpro = :idpro";
+
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindValue(':idpro', $idpro, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Obtiene todos los resultados
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($resultados)) {
+                throw new Exception("No se encontró el producto con el ID proporcionado.");
+            }
+
+            // Organiza los datos en un formato estructurado
+            $producto = [
+                'idpro' => $resultados[0]['idpro'],
+                'nompro' => $resultados[0]['nompro'],
+                'descripcion' => $resultados[0]['descripcion'],
+                'cantidad' => $resultados[0]['cantidad'],
+                'idval' => $resultados[0]['idval'],
+                'valorunitario' => $resultados[0]['valorunitario'],
+                'fechfinofer' => $resultados[0]['fechfinofer'],
+                'precio' => $resultados[0]['precio'],
+                'pordescu' => $resultados[0]['pordescu'],
+                'imagenes' => [],
+                'caracteristicas' => []
+            ];
+
+            foreach ($resultados as $fila) {
+                // Agregar imágenes si existen
+                if ($fila['idimag']) {
+                    $producto['imagenes'][] = [
+                        'idimag' => $fila['idimag'],
+                        'imgpro' => $fila['imgpro'],
+                        'nomimg' => $fila['nomimg'],
+                        'tipimg' => $fila['tipimg'],
+                        'ordimg' => $fila['ordimg']
+                    ];
+                }
+
+                // Agregar características si existen
+                if ($fila['idcar']) {
+                    $producto['caracteristicas'][] = [
+                        'idcar' => $fila['idcar'],
+                        'descripcioncr' => $fila['descripcioncr']
+                    ];
+                }
+            }
+
+            return $producto;
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al obtener los datos del producto. Inténtalo más tarde.";
+            return null;
+        } catch (Exception $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo $e->getMessage();
+            return null;
+        }
+    }
 }

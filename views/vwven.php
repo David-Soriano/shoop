@@ -77,6 +77,7 @@
             </div>
             <div class="row bx-subm">
                 <input type="hidden" name="idusu" value="<?= $_SESSION['idusu'] ?>">
+                <input type="hidden" name="ope" value="save">
                 <div class="col">
                     <input type="submit" value="Cargar">
                 </div>

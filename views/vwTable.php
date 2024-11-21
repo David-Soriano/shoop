@@ -119,7 +119,7 @@
                                             </tbody>
                                         </table>
                                         <div class="table-options-bar mt-3 d-flex justify-content-end">
-                                            <button class=" me-2" id="editButton" title="Editar" disabled><i class="bi bi-pen-fill"></i></button>
+                                            <button type="button" class="btn me-2" id="editButton" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled><i class="bi bi-pen-fill"></i></button>
                                             <button class="" id="deleteButton" title="Eliminar" disabled><i class="bi bi-trash-fill"></i>
                                                 </button>
                                         </div>
@@ -163,3 +163,25 @@
     </div>
 </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col">
+                <input type="hidden" name="ope" value="edit">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <input class="btn" type="submit" value="Actualizar">
+      </div>
+    </div>
+  </div>
+</div>

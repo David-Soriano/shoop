@@ -23,6 +23,7 @@ $imgpro = isset($_FILES['imgpro']) ? $_FILES['imgpro'] : NULL;
 $fechiniofer = isset($_POST['fechiniofer']) ? $_POST['fechiniofer'] : NULL;
 $fechfinofer = isset($_POST['fechfinofer']) ? $_POST['fechfinofer'] : NULL;
 
+$ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
 // Paginación de tablas
 $resultsPerPage = 10;
@@ -113,7 +114,26 @@ if ($idusu) {
             // Insertar las imágenes en la base de datos
             if (!empty($imagenesGuardadas)) {
                 try {
-                    $res = $pro->saveProductoConImagenes($imagenesGuardadas, $caracteristicas);
+                    if ($ope == 'save') {
+                        $res = $pro->saveProductoConImagenes($imagenesGuardadas, $caracteristicas);
+                    } elseif ($ope == 'edit') {
+                        $res = $pro->updateallPrd($imagenesGuardadas, $caracteristicas, $idusus);
+                    }
+
+                    if (isset($_GET['idpro'])) {
+                        $idpro = intval($_GET['idpro']);
+                        $producto = $pro->getProductoById($idpro);
+
+                        if ($producto) {
+                            header('Content-Type: application/json');
+                            echo json_encode($producto);
+                        } else {
+                            echo json_encode(null);
+                        }
+                    } else {
+                        http_response_code(400); // Bad Request
+                        echo json_encode(['error' => 'ID del producto no proporcionado.']);
+                    }
 
                     if ($res) {
                         header("location:../views/vwpanpro.php?vw=001");

@@ -171,83 +171,44 @@ function actualizarTabla() {
 }
 
 function buttonsTable() {
-    const checkboxes = document.querySelectorAll('.product-checkbox');
     const editButton = document.getElementById('editButton');
-    const deleteButton = document.getElementById('deleteButton');
-    // Verificar cambios en los checkboxes
+    const checkboxes = document.querySelectorAll('.product-checkbox');
+    let selectedId = null;
+
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', () => {
-            // Habilitar los botones si hay al menos un checkbox seleccionado
-            const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
-            editButton.disabled = !anyChecked;
-            deleteButton.disabled = !anyChecked;
+            selectedId = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.getAttribute('data-id'))[0] || null;
+
+            editButton.disabled = !selectedId;
         });
     });
 
-    // Acción al hacer clic en "Editar seleccionados"
     editButton.addEventListener('click', () => {
-        const selectedIds = Array.from(checkboxes)
-            .filter(cb => cb.checked)
-            .map(cb => cb.value);
-
-        if (selectedIds.length === 0) {
-            alert("Selecciona al menos un producto para editar.");
-            return;
+        if (selectedId) {
+            fetchProductData(selectedId);
         }
-
-        // Por simplicidad, consideramos que solo puedes editar un producto a la vez
-        if (selectedIds.length > 1) {
-            alert("Por favor, selecciona solo un producto para editar.");
-            return;
-        }
-
-        const productId = selectedIds[0];
-
-        // Simulación de obtener datos del producto
-        // Esto debería ser una solicitud AJAX para obtener los datos del producto desde el servidor
-        const productData = {
-            nompro: "Producto de Ejemplo",
-            precio: 1200,
-            cantidad: 10,
-            fechfinofer: "2024-12-31",
-            pordescu: 5,
-            nomval: "Tecnología",
-            imgpro: "https://via.placeholder.com/150"
-        };
-
-        // Crear modal dinámicamente
-        const modalHTML = ``;
-
-        // Insertar el modal en el cuerpo del documento
-        document.body.insertAdjacentHTML('beforeend', modalHTML);
-
-        // Mostrar el modal
-        document.getElementById('popup').style.display = 'flex';
     });
 
-    function closeModal() {
-        const popup = document.getElementById('popup');
-        if (popup) popup.remove();
+    function fetchProductData(idpro) {
+        fetch(`cpancon.php?idpro=${idpro}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    populateModal(data);
+                } else {
+                    alert("Error: No se pudieron obtener los datos del producto.");
+                }
+            })
+            .catch(error => console.error("Error en la solicitud:", error));
     }
-
-    function saveProductData() {
-        // Aquí puedes procesar y enviar los datos del formulario al backend
-        const formData = {
-            nompro: document.getElementById('nompro').value,
-            precio: document.getElementById('precio').value,
-            cantidad: document.getElementById('cantidad').value,
-            fechfinofer: document.getElementById('fechfinofer').value,
-            pordescu: document.getElementById('pordescu').value,
-            nomval: document.getElementById('nomval').value,
-        };
-
-        console.log("Datos del formulario guardados:", formData);
-
-        // Simulación de guardar los datos (debería enviarse al backend)
-        closeModal();
-        alert("Producto guardado exitosamente.");
+    function populateModal(product) {
+        document.querySelector('input[name="ope"]').value = 'edit';
+        // Rellena otros campos del formulario según sea necesario
+        document.querySelector('#exampleModal .modal-title').textContent = product.nompro || "Producto sin nombre";
+        // Puedes agregar más campos según lo que tenga `product`
     }
-
 
     // Acción al hacer clic en "Eliminar seleccionados"
     deleteButton.addEventListener('click', () => {
