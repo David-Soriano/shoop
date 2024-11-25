@@ -3,6 +3,7 @@ CREATE DATABASE shoop;
 USE shoop;
 
 
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -53,7 +54,27 @@ INSERT INTO `caracteristicas` (`idcar`, `idpro`, `descripcioncr`) VALUES
 (7, 3, 'Tejido suave y cómodo'),
 (8, 3, 'Lavable a máquina'),
 (9, 3, 'Ideal para climas cálidos'),
-(10, 3, 'Ajuste regular');
+(10, 3, 'Ajuste regular'),
+(28, 51, 'Color: Morado'),
+(29, 51, 'Color: Morado'),
+(30, 52, 'Color: Morado'),
+(31, 52, 'fghj'),
+(32, 53, 'Color: Morado'),
+(33, 53, '5g'),
+(34, 54, 'Es inalámbrico.'),
+(35, 54, 'Orientación de la mano: diestro.'),
+(36, 54, 'Tipo de alimentación inalámbrica: pilas.'),
+(37, 54, 'Posee rueda de desplazamiento.'),
+(38, 54, 'Con luces para mejorar la experiencia de uso.'),
+(39, 54, 'Cuenta con interruptor de ahorro de energía.'),
+(40, 54, 'Con sensor óptico.'),
+(41, 54, 'Resolución de 12000dpi.'),
+(42, 54, 'Alcance máximo 3 m'),
+(43, 54, 'Interfaces USB'),
+(44, 54, 'Velocidad máxima 400 ips'),
+(45, 54, 'Sistemas operativos compatibles Windows 7, macOS 10.13, Chrome OS'),
+(46, 55, 'Color: Negro'),
+(47, 55, 'Lavable');
 
 -- --------------------------------------------------------
 
@@ -240,7 +261,21 @@ INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`,
 (21, 'proinf/camiseta-min.png', 'Camiseta Colombia', 'png', 3, 2, NULL),
 (22, 'IMG/publicidad4.jpg', 'Sport', 'jpg', NULL, 1, 1),
 (23, 'IMG/publicidad7.jpg', 'Mac Mini', 'jpg', NULL, 3, 1),
-(24, 'IMG/publicidad3.jpg', 'Yu Na', 'jpg', NULL, 2, 1);
+(24, 'IMG/publicidad3.jpg', 'Yu Na', 'jpg', NULL, 2, 1),
+(63, 'proinf/imagen_673c0300a59f3.png', 'El de todos los tiktok pero borroso XD', 'image/png', 49, 1, NULL),
+(64, 'proinf/imagen_673c03e95821b.jpg', 'UNAS CASAS PERRONAS', 'image/jpeg', 50, 1, NULL),
+(65, 'proinf/imagen_673c067805e6b.jpg', 'low-poly-planet-wallpaper-for-2560x1440-62-608', 'image/jpeg', 51, 1, NULL),
+(66, 'proinf/imagen_673c0b5e51acb.jpg', 'HOJAS CLASICAS', 'image/jpeg', 52, 1, NULL),
+(67, 'proinf/imagen_673e7b96f102b.webp', 's21', 'image/webp', 53, 1, NULL),
+(68, 'proinf/imagen_6740e300de441.webp', 'D_NQ_NP_771901-MLU73201258235_122023-O', 'image/webp', 54, 1, NULL),
+(69, 'proinf/imagen_6740e300e73b1.webp', 'D_NQ_NP_815730-MLA54004278336_022023-O', 'image/webp', 54, 2, NULL),
+(70, 'proinf/imagen_6740e300eb507.webp', 'D_NQ_NP_614478-MLA54004321268_022023-O', 'image/webp', 54, 3, NULL),
+(71, 'proinf/imagen_6740e300f25bf.webp', 'D_NQ_NP_750649-MLA44091562174_112020-O (1)', 'image/webp', 54, 4, NULL),
+(72, 'proinf/imagen_6740e301032bb.webp', 'D_NQ_NP_750649-MLA44091562174_112020-O', 'image/webp', 54, 5, NULL),
+(73, 'proinf/imagen_6740e30108258.webp', 'D_NQ_NP_645511-MLU72537278708_112023-O', 'image/webp', 54, 6, NULL),
+(74, 'proinf/imagen_6740e3010c263.webp', 'D_NQ_NP_914397-MLA79220668262_092024-O', 'image/webp', 54, 7, NULL),
+(75, 'proinf/imagen_6740e4baa52f2.jpeg', 'CM1201-BLACK', 'image/jpeg', 55, 1, NULL),
+(130, 'proinf/imagen_67448b4cd17c2.jpg', 'masculino-camisas-polo-camisa-polo-tradicional--p-', 'image/jpeg', 56, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -443,9 +478,7 @@ CREATE TABLE `producto` (
   `cantidad` int(10) DEFAULT NULL,
   `tipro` varchar(20) DEFAULT NULL,
   `valorunitario` float DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
-  `provpro` int(5) DEFAULT NULL,
-  `prousu` varchar(255) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL,
   `feccreat` timestamp NOT NULL DEFAULT current_timestamp(),
   `fecupdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `fechiniofer` timestamp NULL DEFAULT NULL,
@@ -461,17 +494,25 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `provpro`, `prousu`, `feccreat`, `fecupdate`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`, `temporada`) VALUES
-(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Disfruta de la comodidad de nuestra camisa de algodón 100%. Ideal para cualquier ocasión, brinda suavidad y frescura todo el día. Recomendaciones: Lavar con colores similares y a máquina en ciclo suave. Cuimedia.', 0, 'admin', '2024-11-05 06:14:03', '2024-11-13 00:51:00', '2024-11-05 20:00:00', '2024-11-20 20:00:00', 'activo', 15, 1, 0, NULL),
-(4, 'Pantalón vaquero', 60000, 50, 'Ropa', 50000, NULL, 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 00:58:01', '2024-11-01 20:00:00', '2024-11-10 20:00:00', 'activo', NULL, 1, 0, NULL),
-(5, 'Zapatos deportivos', 90000, 80, 'Calzado', 85000, 'Zapatos deportivos c', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 00:58:45', '2024-11-10 20:00:00', '2024-11-30 20:00:00', 'activo', 5, 1, 0, NULL),
-(6, 'Bolso de cuero', 120000, 30, 'Accesorios', 110000, 'Bolso de cuero genui', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 00:58:55', '2024-11-15 20:00:00', '2024-12-01 20:00:00', 'activo', 12, 3, 0, NULL),
-(7, 'Reloj digital', 50000, 60, 'Accesorios', 45000, 'Reloj digital resist', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 00:59:04', '2024-11-05 20:00:00', '2024-11-25 20:00:00', 'activo', 20, 2, 0, NULL),
-(8, 'Gorra de béisbol', 15000, 120, 'Accesorios', 12000, 'Gorra de béisbol aju', 0, 'admin', '2024-11-06 16:14:25', '2024-11-14 02:26:07', '2024-11-02 20:00:00', '2024-11-18 20:00:00', 'activo', 10, 3, 20, NULL),
-(9, 'Sudadera con capucha', 45000, 70, 'Ropa', 42000, 'Sudadera con capucha', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 01:38:38', '2024-11-12 20:00:00', '2024-11-28 20:00:00', 'activo', 8, 1, 0, NULL),
-(10, 'Bufanda de lana', 30000, 100, 'Accesorios', 25000, 'Bufanda de lana para', 0, 'admin', '2024-11-06 16:14:25', '2024-11-14 02:24:13', '2024-11-01 20:00:00', '2024-11-15 20:00:00', 'activo', 20, 3, 10, NULL),
-(11, 'Cartera pequeña', 20000, 90, 'Accesorios', 18000, 'Cartera de mano pequ', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 01:39:15', '2024-11-04 20:00:00', '2024-11-18 20:00:00', 'activo', 15, 3, 0, NULL),
-(12, 'Sombrero de paja', 22000, 60, 'Accesorios', 20000, 'Sombrero de paja ide', 0, 'admin', '2024-11-06 16:14:25', '2024-11-13 01:39:33', '2024-11-10 20:00:00', '2024-11-24 20:00:00', 'activo', 12, 3, 0, NULL);
+INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `feccreat`, `fecupdate`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`, `temporada`) VALUES
+(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Disfruta de la comodidad de nuestra camisa de algodón 100%. Ideal para cualquier ocasión, brinda suavidad y frescura todo el día. Recomendaciones: Lavar con colores similares y a máquina en ciclo suave. Cuimedia.', '2024-11-05 06:14:03', '2024-11-13 00:51:00', '2024-11-05 20:00:00', '2024-11-20 20:00:00', 'activo', 15, 1, 0, NULL),
+(4, 'Pantalón vaquero', 60000, 50, 'Ropa', 50000, NULL, '2024-11-06 16:14:25', '2024-11-13 00:58:01', '2024-11-01 20:00:00', '2024-11-10 20:00:00', 'activo', NULL, 1, 0, NULL),
+(5, 'Zapatos deportivos', 90000, 80, 'Calzado', 85000, 'Zapatos deportivos c', '2024-11-06 16:14:25', '2024-11-13 00:58:45', '2024-11-10 20:00:00', '2024-11-30 20:00:00', 'activo', 5, 1, 0, NULL),
+(6, 'Bolso de cuero', 120000, 30, 'Accesorios', 110000, 'Bolso de cuero genui', '2024-11-06 16:14:25', '2024-11-13 00:58:55', '2024-11-15 20:00:00', '2024-12-01 20:00:00', 'activo', 12, 3, 0, NULL),
+(7, 'Reloj digital', 50000, 60, 'Accesorios', 45000, 'Reloj digital resist', '2024-11-06 16:14:25', '2024-11-13 00:59:04', '2024-11-05 20:00:00', '2024-11-25 20:00:00', 'activo', 20, 2, 0, NULL),
+(8, 'Gorra de béisbol', 15000, 120, 'Accesorios', 12000, 'Gorra de béisbol aju', '2024-11-06 16:14:25', '2024-11-14 02:26:07', '2024-11-02 20:00:00', '2024-11-18 20:00:00', 'activo', 10, 3, 20, NULL),
+(9, 'Sudadera con capucha', 45000, 70, 'Ropa', 42000, 'Sudadera con capucha', '2024-11-06 16:14:25', '2024-11-13 01:38:38', '2024-11-12 20:00:00', '2024-11-28 20:00:00', 'activo', 8, 1, 0, NULL),
+(10, 'Bufanda de lana', 30000, 100, 'Accesorios', 25000, 'Bufanda de lana para', '2024-11-06 16:14:25', '2024-11-14 02:24:13', '2024-11-01 20:00:00', '2024-11-15 20:00:00', 'activo', 20, 3, 10, NULL),
+(11, 'Cartera pequeña', 20000, 90, 'Accesorios', 18000, 'Cartera de mano pequ', '2024-11-06 16:14:25', '2024-11-13 01:39:15', '2024-11-04 20:00:00', '2024-11-18 20:00:00', 'activo', 15, 3, 0, NULL),
+(12, 'Sombrero de paja', 22000, 60, 'Accesorios', 20000, 'Sombrero de paja ide', '2024-11-06 16:14:25', '2024-11-13 01:39:33', '2024-11-10 20:00:00', '2024-11-24 20:00:00', 'activo', 12, 3, 0, NULL),
+(49, 'Fondos perzonalizado', 1210, 7, NULL, 1000, 'Fondos', '2024-11-19 03:16:17', '2024-11-22 23:25:09', NULL, '0000-00-00 00:00:00', 'activo', 5, 2, 0, NULL),
+(50, 'Fondos perzonalizado', 1210, 7, NULL, 1000, 'Mas fondos', '2024-11-19 03:20:10', '2024-11-19 03:20:10', NULL, NULL, 'activo', 5, 2, 0, NULL),
+(51, 'Fondos perzonalizado', 1210, 7, NULL, 1000, 'kjhgfd', '2024-11-19 03:31:04', '2024-11-20 02:41:28', '2024-11-18 05:00:00', '2024-11-18 05:00:00', 'activo', NULL, 2, 0, NULL),
+(52, 'Fondos perzonalizado', 1210, 7, NULL, 1000, 'eryvbn n', '2024-11-19 03:51:59', '2024-11-19 03:51:59', '2024-11-18 05:00:00', '2024-12-18 05:00:00', 'activo', 5, 2, 0, NULL),
+(53, 'Samsung S21+ FE 2024', 1920000, 9, NULL, 2000000, 'Teléfono móvil', '2024-11-21 00:15:19', '2024-11-22 23:26:17', NULL, '2024-11-30 05:00:00', 'activo', 30, 2, 0, NULL),
+(54, 'Logitech G305, Mouse', 166261, 20, NULL, 156850, 'LOGITECH G305 MOUSE GAMER INALÁMBRICO LIGHTSPEED / 12000DPI\n\n• TECNOLOGÍA INALÁMBRICA LIGHTSPEED PARA TODOS. TECNOLOGÍA INALÁMBRICA LIGHTSPEED DE PRÓXIMA GENERACIÓN LISTA PARA TODOS LOS JUGADORES\nG305 es un ratón inalámbrico para gaming LIGHTSPEED dise', '2024-11-22 20:01:05', '2024-11-22 20:35:38', '2024-11-22 05:00:00', '2024-11-22 05:00:00', 'activo', 20, 2, 0, NULL),
+(55, 'Cafetera Black Deer', 183000, 7, NULL, 150000, 'Maquina para hacer café', '2024-11-22 20:08:26', '2024-11-23 00:08:27', '2024-11-26 05:00:00', '2024-11-30 05:00:00', 'activo', 4, 1, 0, NULL),
+(56, 'Camisa Polo + Cafete', 24800, 2, NULL, 20000, 'Camisa polo blanca y de regalo una cafetera', '2024-11-23 01:50:12', '2024-11-23 16:12:44', '0000-00-00 00:00:00', '2024-11-27 05:00:00', 'activo', 2, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -484,6 +525,20 @@ CREATE TABLE `prodxprov` (
   `idprov` int(5) DEFAULT NULL,
   `idprodprv` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `prodxprov`
+--
+
+INSERT INTO `prodxprov` (`idpro`, `idprov`, `idprodprv`) VALUES
+(49, 38, 15),
+(50, 38, 16),
+(51, 38, 17),
+(52, 38, 18),
+(53, 38, 19),
+(54, 38, 20),
+(55, 38, 21),
+(56, 38, 22);
 
 -- --------------------------------------------------------
 
@@ -2044,7 +2099,7 @@ ALTER TABLE `valor`
 -- AUTO_INCREMENT de la tabla `caracteristicas`
 --
 ALTER TABLE `caracteristicas`
-  MODIFY `idcar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `idcar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `carrito`
@@ -2110,7 +2165,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2152,13 +2207,13 @@ ALTER TABLE `pqr`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT de la tabla `prodxprov`
 --
 ALTER TABLE `prodxprov`
-  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
