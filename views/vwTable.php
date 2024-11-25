@@ -66,8 +66,8 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="widget-26-job-starred">
-                                                                    <input class="product-checkbox" type="checkbox" name="" id=""
-                                                                        value="<?= $dtp['idpro'] ?>">
+                                                                    <input class="product-checkbox" type="checkbox" name=""
+                                                                        id="" value="<?= $dtp['idpro'] ?>">
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -119,9 +119,11 @@
                                             </tbody>
                                         </table>
                                         <div class="table-options-bar mt-3 d-flex justify-content-end">
-                                            <button type="button" class="btn me-2" id="editButton" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled><i class="bi bi-pen-fill"></i></button>
-                                            <button class="" id="deleteButton" title="Eliminar" disabled><i class="bi bi-trash-fill"></i>
-                                                </button>
+                                            <button type="button" class="btn me-2" id="editButton" title="Editar"><i
+                                                    class="bi bi-pen-fill"></i></button>
+                                            <button class="" id="deleteButton" title="Eliminar"><i
+                                                    class="bi bi-trash-fill"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -164,24 +166,108 @@
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="row">
-            <div class="col">
-                <input type="hidden" name="ope" value="edit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Sin artículo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <input class="btn" type="submit" value="Actualizar">
-      </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data" method="POST" id="formUpdatePrd" action="../controller/cpancon.php">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" name="nompro" placeholder="Nombre del artículo" required>
+                        </div>
+                        <div class="col">
+                            <textarea name="descripcion" placeholder="Añade una descripción" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="number" name="cantidad" placeholder="Cantidad disponible" required>
+                        </div>
+                        <div class="col">
+                            <select name="idval" required>
+                                <option value="">Categoría</option>
+                                <?php if (!empty($dtCatego)) {
+                                    foreach ($dtCatego as $dtcat) { ?>
+                                        <option value="<?= $dtcat['idval'] ?>"><?= $dtcat['categoria'] ?></option>
+                                    <?php }
+                                } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row bx-subprd_valor">
+                        <div class="col">
+                            <i class="bi bi-question-circle-fill"
+                                title="Valor unitario: Es el precio por unidad antes de aplicar descuentos o recargos."></i>
+                            <input type="number" id="valorunitario" name="valorunitario" placeholder="Valor Unitario"
+                                required>
+                        </div>
+                        <div class="col">
+                            <i class="bi bi-question-circle-fill"
+                                title="Precio: Es el costo final que paga el cliente, incluyendo descuentos o recargos."></i>
+                            <input type="number" id="precio" name="precio" placeholder="Precio del producto" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h6>¿Algún descuento en especial?</h6>
+                        </div>
+                        <div class="col">
+                            <input type="number" id="pordescu" name="pordescu" oninput="mostrarFechaFin()"
+                                placeholder="Valor. Ej: 5%">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="fechaInicio">Fecha de inicio de la oferta:</label>
+                            <input type="date" id="fechaInicio" name="fechiniofer">
+                        </div>
+                    </div>
+                    <div class="row" id="fechaOferta">
+                        <div class="col">
+                            <label for="fechaFin">Fecha fin de la oferta:</label>
+                            <input type="date" id="fechaFin" name="fechfinofer">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <Label>Características del producto</Label>
+                            <i class="bi bi-question-circle-fill" title="Cantidad de característica a registrar"></i>
+                            <input type="number" name="" id="cantcr" placeholder="Cantidad" oninput="cantCr()">
+                        </div>
+                        <div class="col" id="descar">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="imgpro">Selecciona imágenes:</label>
+                            <input type="file" name="imgpro[]" id="imgpro" multiple accept=".jpg, .jpeg, .png, .webp"
+                                onchange="actualizarOrden()">
+                        </div>
+                    </div>
+                    <div class="row" id="orden-imagenes">
+                        <!-- Aquí se mostrarán las imágenes con su orden -->
+                    </div>
+                    <div class="row" id="image_exist">
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="hidden" name="idpro">
+                            <input type="hidden" name="ope" value="edit">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn" type="submit" onclick="actualizarOrdenImagenes()" value="Actualizar">
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col" id="detalle"></div>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 </div>

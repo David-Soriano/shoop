@@ -66,24 +66,56 @@ function actualizarOrden() {
         reader.readAsDataURL(archivo);
     });
 }
-function eliminarImagen(index) {
-    // Eliminar la imagen del array
-    selectedFiles.splice(index, 1);
+function eliminarImagen(index, existente = false) {
+    if (existente) {
+        // Contenedor de imágenes existentes
+        const imageExistContainer = document.getElementById('image_exist');
+        const imgDivs = imageExistContainer.querySelectorAll('.imagen-preview'); // Obtener imágenes existentes
 
-    // Limpiar el input file
-    const input = document.getElementById('imgpro');
-    input.value = '';  // Vaciar el campo input de tipo file
+        // Verificar si el índice es válido
+        if (!imgDivs[index]) {
+            console.error("No se encontró la imagen existente correspondiente en el DOM.");
+            return;
+        }
 
-    // Reasignar los archivos restantes al input
-    for (let i = 0; i < selectedFiles.length; i++) {
-        let dataTransfer = new DataTransfer();
-        dataTransfer.items.add(selectedFiles[i]); // Agregar el archivo al DataTransfer
-        input.files = dataTransfer.files; // Asignar el nuevo array de archivos
+        // Eliminar el input oculto correspondiente
+        const hiddenInputs = document.querySelectorAll('input[name="imagenesExistentes[]"]');
+        if (hiddenInputs[index]) {
+            hiddenInputs[index].remove(); // Elimina el input oculto si existe
+        }
+
+        // Eliminar el contenedor visual de la imagen
+        imgDivs[index].remove();
+    } else {
+        // Contenedor de imágenes nuevas
+        const imageNewContainer = document.getElementById('orden-imagenes');
+        const imgDivs = imageNewContainer.querySelectorAll('.imagen-preview'); // Obtener imágenes nuevas
+
+        // Verificar si el índice es válido
+        if (!imgDivs[index]) {
+            console.error("No se encontró la imagen nueva correspondiente en el DOM.");
+            return;
+        }
+
+        // Eliminar la imagen nueva del array
+        selectedFiles.splice(index, 1);
+
+        // Actualizar el input file
+        const input = document.getElementById('imgpro');
+        const dataTransfer = new DataTransfer();
+        selectedFiles.forEach(file => dataTransfer.items.add(file)); // Agregar las imágenes restantes
+        input.files = dataTransfer.files; // Actualizar el input file
+
+        // Eliminar el contenedor visual de la imagen
+        imgDivs[index].remove();
     }
 
-    // Volver a actualizar la vista
+    // Actualizar la vista del orden
     actualizarOrden();
 }
+
+
+
 function nextStep(step) {
     // Ocultar todos los pasos
     for (let i = 1; i <= 4; i++) {
@@ -171,72 +203,221 @@ function actualizarTabla() {
 }
 
 function buttonsTable() {
-    const editButton = document.getElementById('editButton');
-    const checkboxes = document.querySelectorAll('.product-checkbox');
-    let selectedId = null;
-
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            selectedId = Array.from(checkboxes)
-                .filter(cb => cb.checked)
-                .map(cb => cb.getAttribute('data-id'))[0] || null;
-
-            editButton.disabled = !selectedId;
-        });
-    });
-
-    editButton.addEventListener('click', () => {
-        if (selectedId) {
-            fetchProductData(selectedId);
+    document.getElementById('editButton').addEventListener('click', function () {
+        const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
+        console.log("IDs seleccionados:", selectedIds); // Verifica los IDs seleccionados
+        if (selectedIds.length > 0) {
+            const idProParam = selectedIds.join(',');  // Convierte los IDs a una cadena separada por comas
+            console.log("Parámetro idpro:", idProParam); // Verifica el valor de idpro
+            fetchProductData(idProParam); // Pasa la cadena como parámetro
+            const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
+            modalElement.show();
+        } else {
+            alert("Selecciona al menos un producto para editar.");
         }
     });
 
-    function fetchProductData(idpro) {
-        fetch(`cpancon.php?idpro=${idpro}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data) {
-                    populateModal(data);
-                } else {
-                    alert("Error: No se pudieron obtener los datos del producto.");
-                }
-            })
-            .catch(error => console.error("Error en la solicitud:", error));
+}
+
+// Función que obtiene los IDs de los productos seleccionados
+function getSelectedProductIds() {
+    const selectedCheckboxes = document.querySelectorAll('.product-checkbox:checked');
+    const ids = [];
+    selectedCheckboxes.forEach(checkbox => {
+        console.log("Checkbox seleccionado:", checkbox.value); // Verifica los valores de los checkboxes seleccionados
+        ids.push(checkbox.value);
+    });
+    return ids;
+}
+
+// Función que maneja la solicitud de datos del producto
+function fetchProductData(idpro) {
+    console.log("Enviando solicitud a:", `../controller/edit.php?idpro=${idpro}`);
+    fetch(`../controller/edit.php?idpro=${idpro}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la respuesta: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            populateModal(data);
+        })
+        .catch(error => {
+            console.error('Hubo un problema con la solicitud:', error);
+        });
+}
+
+// Función que llena el modal con los datos obtenidos
+function populateModal(data) {
+    if (data && Array.isArray(data) && data.length > 0) {
+        const product = data[0]; // Tomar el primer producto
+
+        // Llenar los campos del formulario con los datos
+        document.getElementById('exampleModalLabel').innerHTML = product.nompro;
+        document.querySelector('[name="nompro"]').value = product.nompro;
+        document.querySelector('[name="descripcion"]').value = product.descripcion;
+        document.querySelector('[name="cantidad"]').value = product.cantidad;
+        document.querySelector('[name="idval"]').value = product.idval;
+        document.querySelector('[name="valorunitario"]').value = product.valorunitario;
+        document.querySelector('[name="precio"]').value = product.precio;
+        document.querySelector('[name="pordescu"]').value = product.pordescu;
+        document.querySelector('[name="idpro"]').value = product.idpro;
+
+        // Formato para la fecha
+        document.querySelector('[name="fechfinofer"]').value = product.fechfinofer.slice(0, 10);
+        document.querySelector('[name="fechiniofer"]').value = product.fechiniofer.slice(0, 10);
+
+        // Llenar las características
+        const caracteristicasContainer = document.getElementById('descar');
+        caracteristicasContainer.innerHTML = ''; // Limpiar el contenedor
+        product.caracteristicas.forEach((caracteristica, index) => {
+            const caracteristicaDiv = document.createElement('div');
+            caracteristicaDiv.classList.add('row');
+            caracteristicaDiv.innerHTML = `
+                <div class="col">
+                    <input type="text" name="caracteristica_${index}" value="${caracteristica.descripcioncr}" placeholder="Característica ${index + 1}">
+                </div>
+            `;
+            caracteristicasContainer.appendChild(caracteristicaDiv);
+        });
+
+        // Llenar las imágenes
+        const imageExistContainer = document.getElementById('image_exist');
+        imageExistContainer.innerHTML = ""; // Limpiar cualquier contenido previo
+        product.imagenes.forEach((imagen, index) => {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'imagenesExistentes[]';
+            hiddenInput.value = imagen.imgpro;
+            imageExistContainer.appendChild(hiddenInput);
+
+            const imgDiv = document.createElement('div');
+            imgDiv.classList.add('col', 'imagen-preview');
+            imgDiv.setAttribute('data-index', index);
+            imgDiv.innerHTML = `
+                <img src="../${imagen.imgpro}" alt="Imagen ${index + 1}" class="img-thumbnail" style="max-width: 100px; margin: 5px;">
+                <label>
+                    <input type="radio" name="imagenPrincipal" value="${index}" ${index === 0 ? 'checked' : ''} data-imgpro="${imagen.imgpro}" onclick="actualizarOrdenImagenes()">
+                    Principal
+                </label>
+                <button type="button" onclick="eliminarImagen(${index}, true)" class="btn-del">
+                    <i class="bi bi-x-circle-fill"></i>
+                </button>
+            `;
+            imageExistContainer.appendChild(imgDiv);
+        });
+        actualizarOrdenImagenes();
+        // Mostrar el modal
+        const modalElement = document.getElementById('exampleModal');
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+
+        // Configurar limpieza al cerrar el modal
+        modalElement.addEventListener('hidden.bs.modal', limpiarModal);
+    } else {
+        console.error('No se encontraron datos para el producto.');
+        alert('No se encontraron datos para el producto. Verifica el ID.');
     }
-    function populateModal(product) {
-        document.querySelector('input[name="ope"]').value = 'edit';
-        // Rellena otros campos del formulario según sea necesario
-        document.querySelector('#exampleModal .modal-title').textContent = product.nompro || "Producto sin nombre";
-        // Puedes agregar más campos según lo que tenga `product`
+}
+// Esta función se ejecuta cada vez que se marca un radio button
+function actualizarOrdenImagenes() {
+    const imagenesPrincipales = document.querySelectorAll('input[name="imagenPrincipal"]'); // Radios de imágenes principales
+    const formulario = document.getElementById('formUpdatePrd'); // Asegúrate de que este ID sea correcto
+
+    if (!formulario) {
+        console.error("El formulario con ID 'formUpdatePrd' no se encuentra en el DOM.");
+        return;
     }
 
-    // Acción al hacer clic en "Eliminar seleccionados"
-    deleteButton.addEventListener('click', () => {
-        const selectedIds = Array.from(checkboxes)
-            .filter(cb => cb.checked)
-            .map(cb => cb.value);
+    // Eliminar inputs ocultos existentes para evitar duplicados
+    const camposOrdenImagenes = formulario.querySelectorAll('input[name="ordenImagenes[]"]');
+    camposOrdenImagenes.forEach(campo => campo.remove());
 
-        if (confirm(`¿Estás seguro de que deseas eliminar los productos seleccionados?`)) {
-            // Enviar solicitud AJAX para eliminar los productos
-            fetch('../controller/cpancon.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: 'delete', ids: selectedIds })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Productos eliminados exitosamente');
-                        location.reload(); // Recargar la página
-                    } else {
-                        alert('Error al eliminar los productos');
-                    }
-                });
+    // Crear nuevo orden de imágenes
+    const ordenImagenes = [];
+    imagenesPrincipales.forEach((radio, index) => {
+        // Verifica si el radio tiene el atributo `data-imgpro`
+        const imgpro = radio.dataset.imgpro || "";
+        if (!imgpro) {
+            console.warn(`El radio en la posición ${index} no tiene un atributo 'data-imgpro'.`);
+            return;
+        }
+
+        // Determinar el orden
+        const imagen = {
+            imgpro, // Ruta de la imagen
+            ordimg: radio.checked ? 1 : index + 2 // 1 si es principal, orden secuencial para las demás
+        };
+        ordenImagenes.push(imagen);
+
+        // Crear input oculto para enviar al servidor
+        const inputHidden = document.createElement('input');
+        inputHidden.type = 'hidden';
+        inputHidden.name = 'ordenImagenes[]'; // Nombre del campo enviado
+        inputHidden.value = JSON.stringify(imagen); // Convertir a JSON
+        formulario.appendChild(inputHidden);
+    });
+
+    console.log("Orden de imágenes actualizado y agregado al formulario:", ordenImagenes);
+}
+
+function obtenerImagenesExistentes() {
+    // Selecciona todos los inputs con name="imagenesExistentes[]"
+    const inputsExistentes = document.querySelectorAll('input[name="imagenesExistentes[]"]');
+    // Extrae los valores de los inputs
+    const valores = Array.from(inputsExistentes).map(input => input.value);
+
+    return valores; // Devuelve un array con los valores
+}
+
+function limpiarModal() {
+    // Limpiar campos del formulario
+    document.getElementById('exampleModalLabel').innerHTML = 'Sin Artículo';
+    document.querySelector('[name="nompro"]').value = '';
+    document.querySelector('[name="descripcion"]').value = '';
+    document.querySelector('[name="cantidad"]').value = '';
+    document.querySelector('[name="idval"]').value = '';
+    document.querySelector('[name="valorunitario"]').value = '';
+    document.querySelector('[name="precio"]').value = '';
+    document.querySelector('[name="pordescu"]').value = '';
+    document.querySelector('[name="fechfinofer"]').value = '';
+    document.querySelector('[name="idpro"]').value = '';
+
+    // Limpiar contenedores dinámicos
+    document.getElementById('descar').innerHTML = '';
+    document.getElementById('orden-imagenes').innerHTML = '';
+
+    console.log('Modal y variables limpias.');
+}
+
+
+function cerrarModal() {
+    // Obtener el modal y el backdrop
+    const modalElement = document.getElementById('exampleModal');
+    const modal = new bootstrap.Modal(modalElement);
+
+    // Evento del botón de cierre
+    const closeButton = document.querySelector('.btn-close');
+
+    closeButton.addEventListener('click', function () {
+        modal.hide();  // Cierra el modal
+    });
+
+    // Asegurarte de que el backdrop se elimine cuando el modal se cierra
+    $(modalElement).on('hidden.bs.modal', function () {
+        // Este código se ejecuta después de que el modal se cierra
+        document.body.classList.remove('modal-open');  // Asegúrate de que el fondo no se quede visible
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+            backdrop.remove();  // Elimina el backdrop manualmente
         }
     });
 }
+
 document.addEventListener('DOMContentLoaded', function () {
     buttonsTable();
+    cerrarModal();
 });
 window.addEventListener('load', () => {
     document.getElementById('valorunitario').addEventListener('input', calcularPrecio);

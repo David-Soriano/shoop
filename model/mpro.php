@@ -401,7 +401,7 @@ class Mpro
     public function getProductosNuevos()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, p.feccreat, i.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen ORDER BY ordimg ASC) AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' AND DATEDIFF(NOW(), p.feccreat) <= 20 GROUP BY p.idpro ORDER BY p.feccreat DESC;";
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, p.feccreat, i.imgpro, i.ordimg, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo FROM producto AS p LEFT JOIN ( SELECT idpro, imgpro, ordimg FROM imagen WHERE ordimg = 1) AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' AND DATEDIFF(NOW(), p.feccreat) <= 20 ORDER BY p.feccreat DESC;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -616,95 +616,126 @@ class Mpro
         }
         return $total; // Retorna el total correctamente
     }
-    function updateallPrd($imagenes, $caracteristicas, $idpro)
+    public function updateProducto()
     {
+        $sql = "UPDATE producto SET 
+                    nompro = :nompro, 
+                    descripcion = :descripcion, 
+                    cantidad = :cantidad, 
+                    idval = :idval, 
+                    valorunitario = :valorunitario, 
+                    pordescu = :pordescu, 
+                    precio = :precio, 
+                    fechiniofer = :fechiniofer, 
+                    fechfinofer = :fechfinofer
+                WHERE idpro = :idpro";
+
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
-            $conexion->beginTransaction(); // Inicia la transacción
+            $stmt = $conexion->prepare($sql);
 
-            // Actualiza el producto
-            $productoActualizado = $this->updateProducto($idpro, $conexion);
+            $nompro = $this->getNompro();
+            $descripcion = $this->getDescripcion();
+            $cantidad = $this->getCantidad();
+            $idval = $this->getIdval();
+            $valorunitario = $this->getValorunitario();
+            $pordescu = $this->getPordescu();
+            $precio = $this->getPrecio();
+            $fechiniofer = $this->getFechiniofer();
+            $fechfinofer = $this->getFechfinofer();
+            $idpro = $this->getIdpro();
 
-            if ($productoActualizado) {
-                // Actualiza las imágenes y características asociadas
-                $this->updateImagen($conexion, $idpro, $imagenes);
-                $this->updateCaracteristicas($conexion, $idpro, $caracteristicas);
-            }
+            $stmt->bindParam(':nompro', $nompro);
+            $stmt->bindParam(':descripcion', $descripcion);
+            $stmt->bindParam(':cantidad', $cantidad);
+            $stmt->bindParam(':idval', $idval);
+            $stmt->bindParam(':valorunitario', $valorunitario);
+            $stmt->bindParam(':pordescu', $pordescu);
+            $stmt->bindParam(':precio', $precio);
+            $stmt->bindParam(':fechiniofer', $fechiniofer);
+            $stmt->bindParam(':fechfinofer', $fechfinofer);
+            $stmt->bindParam(':idpro', $idpro);
 
-            $conexion->commit(); // Confirma la transacción si todo sale bien
-            return $idpro; // Retorna el ID del producto actualizado
+            return $stmt->execute();
         } catch (PDOException $e) {
-            $conexion->rollBack(); // Reversa los cambios en caso de error
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            echo "Error al actualizar el producto. Inténtalo más tarde.";
-            return null;
+            return false;
         }
     }
 
-    function updateProducto($idpro, $conexion)
-    {
-        $sql = "UPDATE producto 
-            SET nompro = :nompro, descripcion = :descripcion, cantidad = :cantidad, idval = :idval,
-                valorunitario = :valorunitario, fechfinofer = :fechfinofer, precio = :precio, pordescu = :pordescu
-            WHERE idpro = :idpro";
-        try {
-            $result = $conexion->prepare($sql);
-            $result->bindParam(':nompro', $this->getNompro());
-            $result->bindParam(':descripcion', $this->getDescripcion());
-            $result->bindParam(':cantidad', $this->getCantidad());
-            $result->bindParam(':idval', $this->getIdval());
-            $result->bindParam(':valorunitario', $this->getValorunitario());
-            $result->bindParam(':fechfinofer', $this->getFechfinofer());
-            $result->bindParam(':precio', $this->getPrecio());
-            $result->bindParam(':pordescu', $this->getPordescu());
-            $result->bindValue(':idpro', $idpro);
-            $result->execute();
-            return $result->rowCount() > 0;
-        } catch (PDOException $e) {
-            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            throw $e;
-        }
-    }
 
-    function updateImagen($conexion, $idpro, $imagenes)
+    public function updateImagenesProducto($imagenes)
     {
-        $sql = "UPDATE imagen 
-            SET imgpro = :imgpro, nomimg = :nomimg, tipimg = :tipimg, ordimg = :ordimg
-            WHERE idpro = :idpro AND ordimg = :ordimg";
+        $sqlDelete = "DELETE FROM imagen WHERE idpro = :idpro";
+        $sqlInsert = "INSERT INTO imagen (imgpro, nomimg, tipimg, ordimg, idpro) 
+                      VALUES (:imgpro, :nomimg, :tipimg, :ordimg, :idpro)";
         try {
-            $result = $conexion->prepare($sql);
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+
+            // Eliminar imágenes antiguas
+            $stmt = $conexion->prepare($sqlDelete);
+            $idpro = $this->getIdpro();
+            $stmt->bindParam(':idpro', $idpro);
+            $stmt->execute();
+
+            // Insertar nuevas imágenes
+            $stmtInsert = $conexion->prepare($sqlInsert);
+            $idpro = $this->getIdpro();
             foreach ($imagenes as $index => $imagen) {
-                $result->bindValue(':idpro', $idpro);
-                $result->bindValue(':imgpro', $imagen['imgpro']);
-                $result->bindValue(':nomimg', $imagen['nomimg']);
-                $result->bindValue(':tipimg', $imagen['tipimg']);
-                $result->bindValue(':ordimg', $index + 1); // Orden de la imagen
-                $result->execute();
+                $params = [
+                    ':imgpro' => $imagen['imgpro'],
+                    ':nomimg' => $imagen['nomimg'],
+                    ':tipimg' => $imagen['tipimg'],
+                    ':idpro' => $idpro,
+                    ':ordimg' => $imagen['ordimg']
+                ];
+                var_dump("Params: ",$params);
+                foreach ($params as $key => $value) {
+                    $stmtInsert->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+                }
+    
+                $stmtInsert->execute();
             }
+            return true;
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            throw $e;
+            return false;
         }
     }
 
-    function updateCaracteristicas($conexion, $idpro, $caracteristicas)
+
+    public function updateCaracteristicas($caracteristicas, $idpro)
     {
-        $sql = "UPDATE caracteristica 
-            SET descripcioncr = :descripcion cr
-            WHERE idpro = :idpro";
+        $sqlDelete = "DELETE FROM caracteristicas WHERE idusu = :idusu";
+        $sqlInsert = "INSERT INTO caracteristicas (descripcioncr, idpro) 
+                      VALUES (:descripcioncr, :idpro)";
+
         try {
-            $result = $conexion->prepare($sql);
-            foreach ($caracteristicas as $descripcion) {
-                $result->bindValue(':idpro', $idpro);
-                $result->bindValue(':descripcioncr', htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8'));
-                $result->execute();
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+
+            // Eliminar características antiguas
+            $stmt = $conexion->prepare($sqlDelete);
+            $stmt->bindParam(':idpro', $idpro);
+            $stmt->execute();
+
+            // Insertar nuevas características
+            $stmtInsert = $conexion->prepare($sqlInsert);
+            foreach ($caracteristicas as $carac) {
+                $stmtInsert->bindParam(':descripcioncr', $carac);
+                $stmtInsert->bindParam(':idpro', $idpro);
+                $stmtInsert->execute();
             }
+
+            return true;
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            throw $e;
+            return false;
         }
     }
+
 
     function getProductoById($idpro)
     {
@@ -713,27 +744,56 @@ class Mpro
             $conexion = $modelo->getConexion();
 
             $sql = "SELECT 
-                    p.idpro, p.nompro, p.descripcion, p.cantidad, p.idval, 
-                    p.valorunitario, p.fechfinofer, p.precio, p.pordescu,
-                    i.idimag, i.imgpro, i.nomimg, i.tipimg, i.ordimg,
-                    c.idcar, c.descripcioncr AS descripcion_caracteristica
-                FROM producto p
-                LEFT JOIN imagen i ON p.idpro = i.idpro
-                LEFT JOIN caracteristica c ON p.idpro = c.idpro
-                WHERE p.idpro = :idpro";
+            p.idpro, 
+            p.nompro, 
+            p.descripcion, 
+            p.cantidad, 
+            p.idval, 
+            p.valorunitario,
+            p.fechiniofer,
+            p.fechfinofer, 
+            p.precio, 
+            p.pordescu, 
+            COALESCE(
+                GROUP_CONCAT(
+                    DISTINCT CONCAT(
+                        '{\"idimag\":', i.idimag, 
+                        ', \"imgpro\":\"', i.imgpro, 
+                        '\", \"nomimg\":\"', i.nomimg, 
+                        '\", \"tipimg\":\"', i.tipimg, 
+                        '\", \"ordimg\":', i.ordimg, '}'
+                    ) SEPARATOR ','), 
+                '') AS imagenes, 
+            COALESCE(
+                GROUP_CONCAT(
+                    CONCAT(
+                        '{\"idcar\":', c.idcar, 
+                        ', \"descripcioncr\":\"', c.descripcioncr, '\"}'
+                    ) SEPARATOR ','), 
+                '') AS caracteristicas
+        FROM 
+            producto p
+        LEFT JOIN 
+            imagen i ON p.idpro = i.idpro
+        LEFT JOIN 
+            caracteristicas c ON p.idpro = c.idpro
+        WHERE 
+            p.idpro = :idpro
+        GROUP BY 
+            p.idpro";
 
             $stmt = $conexion->prepare($sql);
             $stmt->bindValue(':idpro', $idpro, PDO::PARAM_INT);
             $stmt->execute();
 
-            // Obtiene todos los resultados
-            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            if (empty($resultados)) {
+            // Depurar el contenido de $stmt
+            if ($stmt->rowCount() === 0) {
                 throw new Exception("No se encontró el producto con el ID proporcionado.");
             }
 
-            // Organiza los datos en un formato estructurado
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Continúa el procesamiento...
             $producto = [
                 'idpro' => $resultados[0]['idpro'],
                 'nompro' => $resultados[0]['nompro'],
@@ -741,31 +801,22 @@ class Mpro
                 'cantidad' => $resultados[0]['cantidad'],
                 'idval' => $resultados[0]['idval'],
                 'valorunitario' => $resultados[0]['valorunitario'],
+                'fechiniofer' => $resultados[0]['fechiniofer'],
                 'fechfinofer' => $resultados[0]['fechfinofer'],
                 'precio' => $resultados[0]['precio'],
                 'pordescu' => $resultados[0]['pordescu'],
-                'imagenes' => [],
-                'caracteristicas' => []
+                'imagenes' => [], // Inicializa como un arreglo vacío
+                'caracteristicas' => [] // Inicializa como un arreglo vacío
             ];
 
+            // Recorre los resultados
             foreach ($resultados as $fila) {
-                // Agregar imágenes si existen
-                if ($fila['idimag']) {
-                    $producto['imagenes'][] = [
-                        'idimag' => $fila['idimag'],
-                        'imgpro' => $fila['imgpro'],
-                        'nomimg' => $fila['nomimg'],
-                        'tipimg' => $fila['tipimg'],
-                        'ordimg' => $fila['ordimg']
-                    ];
+                if ($fila['imagenes']) { // Verifica si existen imágenes
+                    $producto['imagenes'] = json_decode('[' . $fila['imagenes'] . ']', true); // Convierte el JSON a un array
                 }
 
-                // Agregar características si existen
-                if ($fila['idcar']) {
-                    $producto['caracteristicas'][] = [
-                        'idcar' => $fila['idcar'],
-                        'descripcioncr' => $fila['descripcioncr']
-                    ];
+                if ($fila['caracteristicas']) { // Verifica si existen características
+                    $producto['caracteristicas'] = json_decode('[' . $fila['caracteristicas'] . ']', true); // Convierte el JSON a un array
                 }
             }
 
@@ -780,4 +831,6 @@ class Mpro
             return null;
         }
     }
+
+
 }

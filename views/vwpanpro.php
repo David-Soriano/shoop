@@ -1,3 +1,4 @@
+<?php include "../model/logoutprv.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +15,7 @@
   <?php
     include("../controller/cpancon.php");?>
   <header>
-    <a href="#"><img src="../IMG/LogoAnimado.gif" alt=""></a>
+    <a href="../home.php"><img src="../IMG/LogoAnimado.gif" alt=""></a>
     <div>
       <h2>Panel de Control</h2>
     </div>
