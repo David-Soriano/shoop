@@ -5,7 +5,7 @@
     <div class="col" id="formven">
         <h5>Completa el formulario</h5>
         <form class="marco" name="frm1" action="../controller/cpancon.php" method="POST" enctype="multipart/form-data">
-            <div class="row">
+            <div class="row bx-inp-inf">
                 <div class="col">
                     <input type="text" name="nompro" placeholder="Nombre del artículo" required>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="col" id="descar">
                 </div>
             </div>
-            <div class="row">
+            <div class="row bx-reg-file">
                 <div class="col">
                     <label for="imgpro">Selecciona imágenes:</label>
                     <input type="file" name="imgpro[]" id="imgpro" multiple accept=".jpg, .jpeg, .png, .webp"

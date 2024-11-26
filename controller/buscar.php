@@ -1,12 +1,28 @@
 <?php
 include dirname(__DIR__) . "/model/conexion.php";
 session_start();
-$isLoggedIn = isset($_SESSION['idusu']); 
+$isLoggedIn = isset($_SESSION['idusu']);
 if (isset($_GET['query'])) {
     $searchQuery = htmlspecialchars($_GET['query']); // Obtener el término de búsqueda
 
     // Preparar la consulta SQL para buscar en nombre o descripción de los productos
-    $sql = "SELECT p.idpro,p.nompro,p.valorunitario,p.pordescu,(p.valorunitario - (p.valorunitario * (p.pordescu / 100))) AS valor_con_descuento, i.imgpro FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.nompro LIKE :query OR p.descripcion LIKE :query ORDER BY i.ordimg ASC LIMIT 1;";
+    $sql = "SELECT 
+    p.idpro,
+    p.nompro,
+    p.valorunitario,
+    p.pordescu,
+    (p.valorunitario - (p.valorunitario * (p.pordescu / 100))) AS valor_con_descuento,
+    i.imgpro
+FROM 
+    producto AS p
+LEFT JOIN 
+    imagen AS i ON p.idpro = i.idpro
+WHERE 
+    p.estado = 'activo' 
+    AND (p.nompro LIKE :query OR p.descripcion LIKE :query)
+ORDER BY 
+    i.ordimg ASC 
+LIMIT 1;";
 
     try {
         $model = new Conexion();

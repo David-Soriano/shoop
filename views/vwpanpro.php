@@ -1,4 +1,7 @@
-<?php include "../model/logoutprv.php"; ?>
+<?php include "../model/logoutprv.php";
+ini_set("display_errors", 0);
+ini_set("log_errors", 1);
+ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,6 +46,15 @@
             </li>
             <li class="nav-item">
               <a class="nav-link text-black" href="vwpanpro.php?vw=002">Añadir Nuevos Articulos</a>
+            </li>
+          </ul>
+          <h5>PQRs</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-black" href="">Recibidas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-black" href="">Realizar PQR</a>
             </li>
           </ul>
         </div>

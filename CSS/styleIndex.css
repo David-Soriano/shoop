@@ -1033,6 +1033,7 @@ form button {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 6vh;
 }
 .bx-sh-img img{
     width: 75%;
@@ -1046,6 +1047,7 @@ form button {
 #res-nf{
     text-align: center;
     font-size: 12px;
+    background: #FFF;
 }
 .cont input:not(:placeholder-shown) {
     width: 350px !important;
@@ -1312,7 +1314,7 @@ form button {
 }
 
 .product img {
-    width: 100%;
+    width: 70%;
     object-fit: cover;
 }
 

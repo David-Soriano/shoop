@@ -22,7 +22,7 @@ function busqueda($idprov, $busqueda, $limit, $offset)
                 LEFT JOIN imagen i ON p.idpro = i.idpro AND i.ordimg = (
                     SELECT MIN(ordimg) FROM imagen WHERE imagen.idpro = p.idpro
                 )
-                WHERE pr.idprov = :idprov AND (p.nompro LIKE :searchTerm OR i.nomimg LIKE :searchTerm OR p.precio LIKE :searchTerm)
+                WHERE pr.idprov = :idprov AND (p.nompro LIKE :searchTerm OR i.nomimg LIKE :searchTerm OR p.precio LIKE :searchTerm) AND p.estado = 'activo'
                 ORDER BY p.feccreat DESC LIMIT $limit OFFSET $offset";
     } else{
         $sql = "SELECT p.idpro, p.nompro, p.precio, p.cantidad, 
@@ -36,7 +36,7 @@ function busqueda($idprov, $busqueda, $limit, $offset)
                 LEFT JOIN imagen i ON p.idpro = i.idpro AND i.ordimg = (
                     SELECT MIN(ordimg) FROM imagen WHERE imagen.idpro = p.idpro
                 )
-                WHERE pr.idprov = :idprov
+                WHERE pr.idprov = :idprov AND p.estado = 'activo'
                 ORDER BY p.feccreat DESC LIMIT $limit OFFSET $offset";
     }
     try {

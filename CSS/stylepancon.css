@@ -477,3 +477,10 @@ footer {
 #deleteButton{
     color: rgb(243, 76, 76);
 }
+
+.bx-inp-inf .col{
+    margin: 2% 0;
+}
+.bx-reg-file input, #pordescu{
+    width: inherit;
+}

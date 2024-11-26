@@ -182,8 +182,6 @@ function ajustarZonaHoraria(fechaISO) {
 function actualizarTabla() {
     let searchTerm = $('#search').val();  // Obtener el valor del campo de búsqueda
 
-    console.log("Buscando:", searchTerm);  // Verifica el valor de búsqueda
-
     // Realizar la solicitud AJAX
     $.ajax({
         url: '../controller/buscTable.php',  // Ruta correcta del archivo PHP que procesa la búsqueda
@@ -193,7 +191,6 @@ function actualizarTabla() {
             vw: '002'  // Agregar el parámetro vw=002
         },
         success: function (response) {
-            console.log(response);  // Verifica la respuesta del servidor
             $('#productTable tbody').html(response);
         },
         error: function (xhr, status, error) {
@@ -215,57 +212,51 @@ function buttonsTable() {
         }
     });
     document.getElementById('deleteButton').addEventListener('click', function () {
-        // Obtener el ID del producto seleccionado
-        const checkboxes = document.querySelectorAll('.product-checkbox:checked');
-        if (checkboxes.length === 0) {
-            alert('Por favor selecciona al menos un producto para eliminar.');
-            return;
-        }
-    
-        const productId = parseInt(checkboxes[0].value, 10); // Solo usar el primero seleccionado para probar
-        console.log("ID del producto seleccionado:", productId);
-        // Confirmar la acción
-        if (!confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-            return;
-        }
-    
-        // Enviar petición AJAX
-        fetch('../controller/edit.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ idpro: productId }), // Enviar idpro como número o cadena
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+        const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
+        if (selectedIds.length > 0) {
+            if (confirm('¿Estás seguro de que deseas eliminar los productos seleccionados?')) {
+                const idProParam = selectedIds.join(','); // Convertir los IDs en una cadena separada por comas
+                deleteProductData(idProParam); // Llamar a la función de eliminación
             }
-            return response.json();
+        } else {
+            alert("Selecciona al menos un producto para eliminar.");
+        }
+    });
+}
+function deleteProductData(idpro) {
+    fetch(`../controller/edit.php`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ idpro }), // Enviar como JSON
+    })
+        .then(async response => {
+            const rawText = await response.text();
+            if (!response.ok) {
+                throw new Error('Error en la respuesta: ' + response.status);
+            }
+            return rawText ? JSON.parse(rawText) : {};
         })
         .then(data => {
             if (data.success) {
-                alert('Producto eliminado con éxito.');
-                checkboxes[0].closest('tr').remove();
+                alert('Productos eliminados con éxito.');
+                location.reload();
             } else {
-                alert('Hubo un error al intentar eliminar el producto: ' + data.error);
+                alert('No se pudieron eliminar los productos: ' + data.error);
             }
         })
         .catch(error => {
-            console.error('Error:', error.message);
-            alert('Ocurrió un error en la solicitud.');
+            console.error('Hubo un problema con la solicitud:', error);
         });
-    });
-    
-    
 }
+
 
 // Función que obtiene los IDs de los productos seleccionados
 function getSelectedProductIds() {
     const selectedCheckboxes = document.querySelectorAll('.product-checkbox:checked');
     const ids = [];
     selectedCheckboxes.forEach(checkbox => {
-        console.log("Checkbox seleccionado:", checkbox.value); // Verifica los valores de los checkboxes seleccionados
         ids.push(checkbox.value);
     });
     return ids;
@@ -398,8 +389,6 @@ function actualizarOrdenImagenes() {
         inputHidden.value = JSON.stringify(imagen); // Convertir a JSON
         formulario.appendChild(inputHidden);
     });
-
-    console.log("Orden de imágenes actualizado y agregado al formulario:", ordenImagenes);
 }
 
 function obtenerImagenesExistentes() {
@@ -427,8 +416,6 @@ function limpiarModal() {
     // Limpiar contenedores dinámicos
     document.getElementById('descar').innerHTML = '';
     document.getElementById('orden-imagenes').innerHTML = '';
-
-    console.log('Modal y variables limpias.');
 }
 
 

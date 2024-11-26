@@ -199,7 +199,7 @@ class Mpro
     public function getOnePrd()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.pordescu, p.productvend, p.cantidad, img.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo, prov.nomprov, prov.dirrecprov, prov.url, prov.estado, prov.desprv FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE idpro = :idpro ORDER BY ordimg ASC LIMIT 1) AS img ON p.idpro = img.idpro LEFT JOIN prodxprov AS pp ON p.idpro = pp.idpro LEFT JOIN proveedor AS prov ON pp.idprov = prov.idprov WHERE p.idpro = :idpro;";
+        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.pordescu, p.productvend, p.cantidad, img.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo, prov.nomprov, prov.dirrecprov, prov.url, prov.estado, prov.desprv FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE idpro = :idpro ORDER BY ordimg ASC LIMIT 1) AS img ON p.idpro = img.idpro LEFT JOIN prodxprov AS pp ON p.idpro = pp.idpro LEFT JOIN proveedor AS prov ON pp.idprov = prov.idprov WHERE p.idpro = :idpro AND p.estado = 'activo';";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -418,7 +418,7 @@ class Mpro
     public function getCatego($categoria)
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.precio, p.cantidad, p.tipro, p.valorunitario, p.feccreat, p.estado, p.pordescu, p.idval, v.nomval AS categoria, i.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto p JOIN valor v ON p.idval = v.idval JOIN dominio d ON v.iddom = d.iddom LEFT JOIN (SELECT idpro, imgpro FROM imagen ORDER BY ordimg ASC) AS i ON p.idpro = i.idpro WHERE d.nomdom = 'Categorías' AND v.nomval = :categoria GROUP BY p.idpro";
+        $sql = "SELECT p.idpro, p.nompro, p.precio, p.cantidad, p.tipro, p.valorunitario, p.feccreat, p.estado, p.pordescu, p.idval, v.nomval AS categoria, i.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto p JOIN valor v ON p.idval = v.idval JOIN dominio d ON v.iddom = d.iddom LEFT JOIN (SELECT idpro, imgpro FROM imagen ORDER BY ordimg ASC) AS i ON p.idpro = i.idpro WHERE d.nomdom = 'Categorías' AND v.nomval = :categoria AND p.estado = 'activo' GROUP BY p.idpro";
 
         try {
             $modelo = new Conexion();
@@ -575,7 +575,7 @@ class Mpro
                 LEFT JOIN imagen i ON p.idpro = i.idpro AND i.ordimg = (
                     SELECT MIN(ordimg) FROM imagen WHERE imagen.idpro = p.idpro
                 )
-                WHERE pr.idprov = :idprov
+                WHERE pr.idprov = :idprov AND p.estado = 'activo'
                 ORDER BY p.feccreat DESC
                 LIMIT $limit OFFSET $offset";
         try {
@@ -599,7 +599,7 @@ class Mpro
         $sql = "SELECT COUNT(*) AS total FROM producto p 
                 JOIN prodxprov pxp ON p.idpro = pxp.idpro
                 JOIN proveedor pr ON pxp.idprov = pr.idprov
-                WHERE pr.idprov = :idprov";
+                WHERE pr.idprov = :idprov AND p.estado = 'activo'";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -778,7 +778,7 @@ class Mpro
         LEFT JOIN 
             caracteristicas c ON p.idpro = c.idpro
         WHERE 
-            p.idpro = :idpro
+            p.idpro = :idpro AND p.estado = 'activo'
         GROUP BY 
             p.idpro";
 
@@ -831,7 +831,7 @@ class Mpro
             return null;
         }
     }
-    function deleteProducto()
+    public function deleteProducto()
     {
         $sql = "UPDATE producto SET estado = 'inactivo' WHERE idpro = :idpro";
 
@@ -840,31 +840,15 @@ class Mpro
             $conexion = $modelo->getConexion();
             $stmt = $conexion->prepare($sql);
 
-            // Obtenemos el id del producto
             $idpro = $this->getIdpro();
-            $idpro = $this->getIdpro();
-            if (!$idpro) {
-                error_log("ID inválido recibido en deleteProducto.", 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-                echo json_encode(['success' => false, 'error' => 'ID del producto inválido.']);
-                return;
-            }
-            // Vinculamos el parámetro
             $stmt->bindParam(':idpro', $idpro, PDO::PARAM_INT);
 
-            // Ejecutamos la consulta
-            $success = $stmt->execute();
-
-            // Verificamos si se afectaron filas
-            if ($success && $stmt->rowCount() > 0) {
-                echo json_encode(['success' => true, 'message' => 'Producto eliminado exitosamente.']);
-            } else {
-                echo json_encode(['success' => false, 'error' => 'No se encontró el producto o ya está inactivo.']);
-            }
+            return $stmt->execute() && $stmt->rowCount() > 0;
         } catch (PDOException $e) {
-            // Log de errores
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            echo json_encode(['success' => false, 'error' => 'Ocurrió un error interno.']);
+            return false;
         }
     }
+
 
 }

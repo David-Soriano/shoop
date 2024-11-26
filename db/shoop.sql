@@ -45,20 +45,6 @@ CREATE TABLE `caracteristicas` (
 --
 
 INSERT INTO `caracteristicas` (`idcar`, `idpro`, `descripcioncr`) VALUES
-(1, 3, 'Composición: 100% algodón'),
-(2, 3, 'Color: Blanco'),
-(3, 3, 'Tamaño: M'),
-(4, 3, 'Tipo de cuello: Redondo'),
-(5, 3, 'Manga corta'),
-(6, 3, 'Estilo: Casual'),
-(7, 3, 'Tejido suave y cómodo'),
-(8, 3, 'Lavable a máquina'),
-(9, 3, 'Ideal para climas cálidos'),
-(10, 3, 'Ajuste regular'),
-(28, 51, 'Color: Morado'),
-(29, 51, 'Color: Morado'),
-(30, 52, 'Color: Morado'),
-(31, 52, 'fghj'),
 (32, 53, 'Color: Morado'),
 (33, 53, '5g'),
 (34, 54, 'Es inalámbrico.'),
@@ -173,13 +159,6 @@ CREATE TABLE `detalle_pedido` (
   `precio` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `detalle_pedido`
---
-
-INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`) VALUES
-(1, 1, 7, 5, 30000.00);
-
 -- --------------------------------------------------------
 
 --
@@ -248,34 +227,19 @@ CREATE TABLE `imagen` (
 --
 
 INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`, `lugimg`) VALUES
-(1, 'proinf/camiseta.png', 'Camiseta de algodón', 'png', 3, 1, NULL),
-(11, 'proinf/jeans.png', 'Pantalón vaquero', 'png', 4, 1, NULL),
-(12, 'proinf/zapatos.png', 'Zapatos deportivos', 'png', 5, 1, NULL),
-(13, 'proinf/bolso.png', 'Bolso de cuero', 'png', 6, 1, NULL),
-(14, 'proinf/reloj.png', 'Reloj digital', 'png', 7, 1, NULL),
-(15, 'proinf/gorra.png', 'Gorra de béisbol', 'png', 8, 1, NULL),
-(16, 'proinf/sudadera.png', 'Sudadera con capucha', 'png', 9, 1, NULL),
-(17, 'proinf/bufanda.png', 'Bufanda de lana', 'png', 10, 1, NULL),
-(18, 'proinf/cartera.png', 'Cartera pequeña', 'png', 11, 1, NULL),
-(19, 'proinf/sombrero.png', 'Sombrero de paja', 'png', 12, 1, NULL),
-(21, 'proinf/camiseta-min.png', 'Camiseta Colombia', 'png', 3, 2, NULL),
 (22, 'IMG/publicidad4.jpg', 'Sport', 'jpg', NULL, 1, 1),
 (23, 'IMG/publicidad7.jpg', 'Mac Mini', 'jpg', NULL, 3, 1),
 (24, 'IMG/publicidad3.jpg', 'Yu Na', 'jpg', NULL, 2, 1),
-(63, 'proinf/imagen_673c0300a59f3.png', 'El de todos los tiktok pero borroso XD', 'image/png', 49, 1, NULL),
-(64, 'proinf/imagen_673c03e95821b.jpg', 'UNAS CASAS PERRONAS', 'image/jpeg', 50, 1, NULL),
-(65, 'proinf/imagen_673c067805e6b.jpg', 'low-poly-planet-wallpaper-for-2560x1440-62-608', 'image/jpeg', 51, 1, NULL),
-(66, 'proinf/imagen_673c0b5e51acb.jpg', 'HOJAS CLASICAS', 'image/jpeg', 52, 1, NULL),
 (67, 'proinf/imagen_673e7b96f102b.webp', 's21', 'image/webp', 53, 1, NULL),
-(68, 'proinf/imagen_6740e300de441.webp', 'D_NQ_NP_771901-MLU73201258235_122023-O', 'image/webp', 54, 1, NULL),
-(69, 'proinf/imagen_6740e300e73b1.webp', 'D_NQ_NP_815730-MLA54004278336_022023-O', 'image/webp', 54, 2, NULL),
-(70, 'proinf/imagen_6740e300eb507.webp', 'D_NQ_NP_614478-MLA54004321268_022023-O', 'image/webp', 54, 3, NULL),
-(71, 'proinf/imagen_6740e300f25bf.webp', 'D_NQ_NP_750649-MLA44091562174_112020-O (1)', 'image/webp', 54, 4, NULL),
-(72, 'proinf/imagen_6740e301032bb.webp', 'D_NQ_NP_750649-MLA44091562174_112020-O', 'image/webp', 54, 5, NULL),
-(73, 'proinf/imagen_6740e30108258.webp', 'D_NQ_NP_645511-MLU72537278708_112023-O', 'image/webp', 54, 6, NULL),
-(74, 'proinf/imagen_6740e3010c263.webp', 'D_NQ_NP_914397-MLA79220668262_092024-O', 'image/webp', 54, 7, NULL),
 (75, 'proinf/imagen_6740e4baa52f2.jpeg', 'CM1201-BLACK', 'image/jpeg', 55, 1, NULL),
-(130, 'proinf/imagen_67448b4cd17c2.jpg', 'masculino-camisas-polo-camisa-polo-tradicional--p-', 'image/jpeg', 56, 1, NULL);
+(131, 'proinf/imagen_67448b4cd17c2.jpg', 'imagen_67448b4cd17c2', 'image/jpeg', 56, 1, NULL),
+(139, 'proinf/imagen_6740e300de441.webp', 'imagen_6740e300de441', 'image/jpeg', 54, 1, NULL),
+(140, 'proinf/imagen_6740e300e73b1.webp', 'imagen_6740e300e73b1', 'image/jpeg', 54, 3, NULL),
+(141, 'proinf/imagen_6740e300eb507.webp', 'imagen_6740e300eb507', 'image/jpeg', 54, 4, NULL),
+(142, 'proinf/imagen_6740e300f25bf.webp', 'imagen_6740e300f25bf', 'image/jpeg', 54, 5, NULL),
+(143, 'proinf/imagen_6740e301032bb.webp', 'imagen_6740e301032bb', 'image/jpeg', 54, 6, NULL),
+(144, 'proinf/imagen_6740e30108258.webp', 'imagen_6740e30108258', 'image/jpeg', 54, 7, NULL),
+(145, 'proinf/imagen_6740e3010c263.webp', 'imagen_6740e3010c263', 'image/jpeg', 54, 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -422,13 +386,6 @@ CREATE TABLE `pedido` (
   `estped` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `pedido`
---
-
-INSERT INTO `pedido` (`idped`, `idusu`, `total`, `fecha`, `estped`) VALUES
-(1, 1, 30000.00, '2024-11-13 01:36:56', 'Enviado');
-
 -- --------------------------------------------------------
 
 --
@@ -483,7 +440,7 @@ CREATE TABLE `producto` (
   `fecupdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `fechiniofer` timestamp NULL DEFAULT NULL,
   `fechfinofer` timestamp NULL DEFAULT NULL,
-  `estado` enum('activo','descontinuado','pendiente') DEFAULT 'activo',
+  `estado` enum('activo','inactivo','pendiente') DEFAULT 'activo',
   `pordescu` float DEFAULT 0,
   `idval` int(5) DEFAULT NULL,
   `productvend` int(10) DEFAULT 0,
@@ -495,24 +452,10 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `feccreat`, `fecupdate`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`, `temporada`) VALUES
-(3, 'Camiseta de algodón', 25000, 100, 'Ropa', 20000, 'Disfruta de la comodidad de nuestra camisa de algodón 100%. Ideal para cualquier ocasión, brinda suavidad y frescura todo el día. Recomendaciones: Lavar con colores similares y a máquina en ciclo suave. Cuimedia.', '2024-11-05 06:14:03', '2024-11-13 00:51:00', '2024-11-05 20:00:00', '2024-11-20 20:00:00', 'activo', 15, 1, 0, NULL),
-(4, 'Pantalón vaquero', 60000, 50, 'Ropa', 50000, NULL, '2024-11-06 16:14:25', '2024-11-13 00:58:01', '2024-11-01 20:00:00', '2024-11-10 20:00:00', 'activo', NULL, 1, 0, NULL),
-(5, 'Zapatos deportivos', 90000, 80, 'Calzado', 85000, 'Zapatos deportivos c', '2024-11-06 16:14:25', '2024-11-13 00:58:45', '2024-11-10 20:00:00', '2024-11-30 20:00:00', 'activo', 5, 1, 0, NULL),
-(6, 'Bolso de cuero', 120000, 30, 'Accesorios', 110000, 'Bolso de cuero genui', '2024-11-06 16:14:25', '2024-11-13 00:58:55', '2024-11-15 20:00:00', '2024-12-01 20:00:00', 'activo', 12, 3, 0, NULL),
-(7, 'Reloj digital', 50000, 60, 'Accesorios', 45000, 'Reloj digital resist', '2024-11-06 16:14:25', '2024-11-13 00:59:04', '2024-11-05 20:00:00', '2024-11-25 20:00:00', 'activo', 20, 2, 0, NULL),
-(8, 'Gorra de béisbol', 15000, 120, 'Accesorios', 12000, 'Gorra de béisbol aju', '2024-11-06 16:14:25', '2024-11-14 02:26:07', '2024-11-02 20:00:00', '2024-11-18 20:00:00', 'activo', 10, 3, 20, NULL),
-(9, 'Sudadera con capucha', 45000, 70, 'Ropa', 42000, 'Sudadera con capucha', '2024-11-06 16:14:25', '2024-11-13 01:38:38', '2024-11-12 20:00:00', '2024-11-28 20:00:00', 'activo', 8, 1, 0, NULL),
-(10, 'Bufanda de lana', 30000, 100, 'Accesorios', 25000, 'Bufanda de lana para', '2024-11-06 16:14:25', '2024-11-14 02:24:13', '2024-11-01 20:00:00', '2024-11-15 20:00:00', 'activo', 20, 3, 10, NULL),
-(11, 'Cartera pequeña', 20000, 90, 'Accesorios', 18000, 'Cartera de mano pequ', '2024-11-06 16:14:25', '2024-11-13 01:39:15', '2024-11-04 20:00:00', '2024-11-18 20:00:00', 'activo', 15, 3, 0, NULL),
-(12, 'Sombrero de paja', 22000, 60, 'Accesorios', 20000, 'Sombrero de paja ide', '2024-11-06 16:14:25', '2024-11-13 01:39:33', '2024-11-10 20:00:00', '2024-11-24 20:00:00', 'activo', 12, 3, 0, NULL),
-(49, 'Fondos perzonalizado', 1210, 7, NULL, 1000, 'Fondos', '2024-11-19 03:16:17', '2024-11-22 23:25:09', NULL, '0000-00-00 00:00:00', 'activo', 5, 2, 0, NULL),
-(50, 'Fondos perzonalizado', 1210, 7, NULL, 1000, 'Mas fondos', '2024-11-19 03:20:10', '2024-11-19 03:20:10', NULL, NULL, 'activo', 5, 2, 0, NULL),
-(51, 'Fondos perzonalizado', 1210, 7, NULL, 1000, 'kjhgfd', '2024-11-19 03:31:04', '2024-11-20 02:41:28', '2024-11-18 05:00:00', '2024-11-18 05:00:00', 'activo', NULL, 2, 0, NULL),
-(52, 'Fondos perzonalizado', 1210, 7, NULL, 1000, 'eryvbn n', '2024-11-19 03:51:59', '2024-11-19 03:51:59', '2024-11-18 05:00:00', '2024-12-18 05:00:00', 'activo', 5, 2, 0, NULL),
 (53, 'Samsung S21+ FE 2024', 1920000, 9, NULL, 2000000, 'Teléfono móvil', '2024-11-21 00:15:19', '2024-11-22 23:26:17', NULL, '2024-11-30 05:00:00', 'activo', 30, 2, 0, NULL),
-(54, 'Logitech G305, Mouse', 166261, 20, NULL, 156850, 'LOGITECH G305 MOUSE GAMER INALÁMBRICO LIGHTSPEED / 12000DPI\n\n• TECNOLOGÍA INALÁMBRICA LIGHTSPEED PARA TODOS. TECNOLOGÍA INALÁMBRICA LIGHTSPEED DE PRÓXIMA GENERACIÓN LISTA PARA TODOS LOS JUGADORES\nG305 es un ratón inalámbrico para gaming LIGHTSPEED dise', '2024-11-22 20:01:05', '2024-11-22 20:35:38', '2024-11-22 05:00:00', '2024-11-22 05:00:00', 'activo', 20, 2, 0, NULL),
-(55, 'Cafetera Black Deer', 183000, 7, NULL, 150000, 'Maquina para hacer café', '2024-11-22 20:08:26', '2024-11-23 00:08:27', '2024-11-26 05:00:00', '2024-11-30 05:00:00', 'activo', 4, 1, 0, NULL),
-(56, 'Camisa Polo + Cafete', 24800, 2, NULL, 20000, 'Camisa polo blanca y de regalo una cafetera', '2024-11-23 01:50:12', '2024-11-23 16:12:44', '0000-00-00 00:00:00', '2024-11-27 05:00:00', 'activo', 2, 1, 0, NULL);
+(54, 'Logitech G305, Mouse', 166261, 20, NULL, 156850, 'LOGITECH G305 MOUSE GAMER INALÁMBRICO LIGHTSPEED / 12000DPI\r\n\r\n• TECNOLOGÍA INALÁMBRICA LIGHTSPEED PARA TODOS. TECNOLOGÍA INALÁMBRICA LIGHTSPEED DE PRÓXIMA GENERACIÓN LISTA PARA TODOS LOS JUGADORES\r\nG305 es un ratón inalámbrico para gaming LIGHTSPEED diseñado para un rendimiento excelente con las innovaciones tecnológicas más recientes a un precio accesible.\r\n\r\n• SENSOR HERO. RENDIMIENTO DE 12.000 DPI, EFICIENCIA 10X\r\nEl sensor HERO es el sensor óptico para gaming de Logitech G capaz de un rendimiento increíble y de una eficiencia sin precedentes. Programa dpi de 200 a 12.000 y guarda hasta cinco perfiles en la memoria integrada.\r\n\r\n• MÁS SOBRE EL SENSOR HERO. TECNOLOGÍA INALÁMBRICA LIGHTSPEED SIN CABLES. SIN LÍMITES.\r\nCon LIGHTSPEED, la tecnología inalámbrica es tan rápida como la conexión con cable. La solución integral diseñada meticulosamente da a los jugadores la libertad de la tecnología inalámbrica y el rendimiento de 1 ms necesarios para gaming.\r\n\r\n• MÁS SOBRE LIGHTSPEED. DURACIÓN ULTRALARGA. 250 HORAS, UNA PILA AA\r\nEl sensor HERO y LIGHTSPEED ofrecen una eficiencia extrema para que puedas jugar durante 250 horas con una sola pila AA. Cuenta con un indicador luminoso que te avisa cuando queda un 15% de carga de la pila.\r\n\r\n• UTRALIGERO, 99 GRAMOS DE RÁPIDA LIBERTAD\r\nG305 es muy ligero, apenas pesa 99 gramos. Esto ha sido posible gracias al diseño mecánico ligero y al uso ultraeficiente de la pila.\r\n\r\n• SEIS BOTONES PROGRAMABLES, FLEXIBLE Y SENCILLO\r\nG305 aguanta diez millones de clics en los dos botones principales. Posee además clic con botón central, botón de dpi y dos botones laterales que se pueden programar a tu gusto mediante software.\r\n\r\n• SISTEMA AVANZADO DE TENSIÓN DE BOTONES. RESPUESTA DE CLIC SUPERIOR\r\nEl sistema avanzado de tensión de botones con botones separados aumenta la coherencia de respuesta de los botones izquierdo y derecho del ratón, y requiere menos esfuerzo de clic.\r\n\r\n• JUEGA EN CUALQUIER LUGAR. ALMACENAMIENTO INTEGRADO PARA EL NANO RECEPTOR USB\r\nEl diseño ligero, compacto y duradero, y el almacenamiento integrado para el nano receptor hacen de G305 un gran compañero de viaje.\r\n\r\nREQUISITOS DEL SISTEMA\r\n\r\n• Windows® 7 o posterior\r\n• macOS 10.11 o posterior\r\n• Chrome OS™\r\n• Puerto USB\r\n\r\nCONTENIDO DE LA CAJA\r\n\r\n• Mouse para gaming\r\n• Nano receptor LIGHTSPEED USB\r\n• Alargador de cable para receptor\r\n• Pila AA\r\n• Documentación del usuario\r\n\r\nESPECIFICACIONES TÉCNICAS\r\n\r\n• Seguimiento\r\nSensor: HERO™\r\nResolución: 200 – 12.000 dpi\r\nSin suavizado/aceleración/filtros\r\nAceleración máxima: > 40 G\r\nVelocidad máxima: > 400 ips\r\n\r\n• Respuesta\r\nFormato de datos USB: 16 bits/eje\r\nVelocidad de respuesta USB: 1000 Hz (1 ms)\r\nMicroprocesador: 32 bits ARM\r\n\r\n• Resistencia\r\nBotones (izquierdo/derecho): Diez millones de clics\r\nPies de PTFE: Recorrido de 250 kilómetros\r\n\r\nESPECIFICACIONES FÍSICAS\r\n\r\n• Altura: 116,6 mm\r\n• Anchura: 62,15 mm\r\n• Profundidad: 38,2 mm\r\n• Peso: 99 g', '2024-11-22 20:01:05', '2024-11-26 14:31:55', '2024-11-22 05:00:00', '2024-11-22 05:00:00', 'activo', 20, 2, 0, NULL),
+(55, 'Cafetera Black Deer', 183000, 7, NULL, 150000, 'Maquina para hacer café', '2024-11-22 20:08:26', '2024-11-26 14:07:39', '2024-11-26 05:00:00', '2024-11-30 05:00:00', '', 4, 1, 0, NULL),
+(56, 'Camisa Polo + Cafete', 248000, 2, NULL, 200000, 'Camisa polo blanca y de regalo una cafetera', '2024-11-23 01:50:12', '2024-11-26 04:07:00', '0000-00-00 00:00:00', '2024-11-27 05:00:00', '', 2, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -531,10 +474,6 @@ CREATE TABLE `prodxprov` (
 --
 
 INSERT INTO `prodxprov` (`idpro`, `idprov`, `idprodprv`) VALUES
-(49, 38, 15),
-(50, 38, 16),
-(51, 38, 17),
-(52, 38, 18),
 (53, 38, 19),
 (54, 38, 20),
 (55, 38, 21),
@@ -2165,7 +2104,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`

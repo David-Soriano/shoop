@@ -1,61 +1,69 @@
 <?php
-// Configuración de errores
+
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
-// Inclusión de modelos necesarios
+
 include "../model/conexion.php";
 include "../model/mpro.php";
 
-header('Content-Type: application/json'); // Configurar tipo de respuesta JSON
+header('Content-Type: application/json'); 
 
 $mpro = new Mpro();
 
-// Verificar si la solicitud es GET o POST
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Manejar la solicitud GET
+
     if (isset($_GET['idpro'])) {
-        $idpro = explode(',', $_GET['idpro']); // Convertir los IDs en un array
-        $productos = []; // Array para almacenar los productos
+        $idpro = explode(',', $_GET['idpro']);
+        $productos = [];
 
         foreach ($idpro as $id) {
-            $id = intval($id); // Sanitizar el valor
-            $producto = $mpro->getProductoById($id); // Obtener el producto por ID
+            $id = intval($id); 
+            $producto = $mpro->getProductoById($id);
             if ($producto) {
-                $productos[] = $producto; // Agregar el producto al array
+                $productos[] = $producto;
             }
         }
 
         if (!empty($productos)) {
             echo json_encode($productos, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
         } else {
-            echo json_encode(null); // No se encontraron productos
+            echo json_encode(null);
         }
     } else {
-        http_response_code(400); // Bad Request
+        http_response_code(400);
         echo json_encode(['error' => 'ID del producto no proporcionado.']);
     }
-} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    header('Content-Type: application/json'); 
-    $data = json_decode(file_get_contents('php://input'), true);
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    ob_clean(); 
+    header('Content-Type: application/json');
 
-    // Validar que se reciba un ID válido
-    $idpro = isset($data['idpro']) ? intval($data['idpro']) : null;
-    var_dump($idpro);
-    die();
-    if (!$idpro) {
-        echo json_encode(['success' => false, 'error' => 'ID de producto inválido.']);
+    $data = json_decode(file_get_contents('php://input'), true);
+    $idsPro = isset($data['idpro']) ? explode(',', $data['idpro']) : [];
+    
+    if (empty($idsPro)) {
+        echo json_encode(['success' => false, 'error' => 'ID(s) de producto no proporcionado(s).']);
         exit;
     }
 
-    $mpro->setIdpro($idpro);
+    $resultados = ['success' => true, 'ids_fallidos' => []];
 
-    if ($mpro->deleteProducto()) {
-        echo json_encode(['success' => true, 'message' => 'Producto eliminado exitosamente.']);
-    } else {
-        echo json_encode(['success' => false, 'error' => 'No se pudo eliminar el producto.']);
+    foreach ($idsPro as $idpro) {
+        $mpro->setIdpro(intval($idpro));
+        if (!$mpro->deleteProducto()) {
+            $resultados['success'] = false;
+            $resultados['ids_fallidos'][] = intval($idpro);
+        }
     }
-} else {
-    http_response_code(405); // Método no permitido
-    echo json_encode(['error' => 'Método no permitido.']);
+
+    if (!empty($resultados['ids_fallidos'])) {
+        $resultados['error'] = 'No se pudieron eliminar algunos productos.';
+    }
+
+    echo json_encode($resultados);
+    exit;
 }
+
+
