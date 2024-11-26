@@ -691,11 +691,11 @@ class Mpro
                     ':idpro' => $idpro,
                     ':ordimg' => $imagen['ordimg']
                 ];
-                var_dump("Params: ",$params);
+                var_dump("Params: ", $params);
                 foreach ($params as $key => $value) {
                     $stmtInsert->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
                 }
-    
+
                 $stmtInsert->execute();
             }
             return true;
@@ -831,6 +831,40 @@ class Mpro
             return null;
         }
     }
+    function deleteProducto()
+    {
+        $sql = "UPDATE producto SET estado = 'inactivo' WHERE idpro = :idpro";
 
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $stmt = $conexion->prepare($sql);
+
+            // Obtenemos el id del producto
+            $idpro = $this->getIdpro();
+            $idpro = $this->getIdpro();
+            if (!$idpro) {
+                error_log("ID inválido recibido en deleteProducto.", 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+                echo json_encode(['success' => false, 'error' => 'ID del producto inválido.']);
+                return;
+            }
+            // Vinculamos el parámetro
+            $stmt->bindParam(':idpro', $idpro, PDO::PARAM_INT);
+
+            // Ejecutamos la consulta
+            $success = $stmt->execute();
+
+            // Verificamos si se afectaron filas
+            if ($success && $stmt->rowCount() > 0) {
+                echo json_encode(['success' => true, 'message' => 'Producto eliminado exitosamente.']);
+            } else {
+                echo json_encode(['success' => false, 'error' => 'No se encontró el producto o ya está inactivo.']);
+            }
+        } catch (PDOException $e) {
+            // Log de errores
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo json_encode(['success' => false, 'error' => 'Ocurrió un error interno.']);
+        }
+    }
 
 }

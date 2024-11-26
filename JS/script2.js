@@ -205,10 +205,8 @@ function actualizarTabla() {
 function buttonsTable() {
     document.getElementById('editButton').addEventListener('click', function () {
         const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
-        console.log("IDs seleccionados:", selectedIds); // Verifica los IDs seleccionados
         if (selectedIds.length > 0) {
             const idProParam = selectedIds.join(',');  // Convierte los IDs a una cadena separada por comas
-            console.log("Parámetro idpro:", idProParam); // Verifica el valor de idpro
             fetchProductData(idProParam); // Pasa la cadena como parámetro
             const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
             modalElement.show();
@@ -216,7 +214,50 @@ function buttonsTable() {
             alert("Selecciona al menos un producto para editar.");
         }
     });
-
+    document.getElementById('deleteButton').addEventListener('click', function () {
+        // Obtener el ID del producto seleccionado
+        const checkboxes = document.querySelectorAll('.product-checkbox:checked');
+        if (checkboxes.length === 0) {
+            alert('Por favor selecciona al menos un producto para eliminar.');
+            return;
+        }
+    
+        const productId = parseInt(checkboxes[0].value, 10); // Solo usar el primero seleccionado para probar
+        console.log("ID del producto seleccionado:", productId);
+        // Confirmar la acción
+        if (!confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+            return;
+        }
+    
+        // Enviar petición AJAX
+        fetch('../controller/edit.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ idpro: productId }), // Enviar idpro como número o cadena
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert('Producto eliminado con éxito.');
+                checkboxes[0].closest('tr').remove();
+            } else {
+                alert('Hubo un error al intentar eliminar el producto: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error.message);
+            alert('Ocurrió un error en la solicitud.');
+        });
+    });
+    
+    
 }
 
 // Función que obtiene los IDs de los productos seleccionados
@@ -232,7 +273,6 @@ function getSelectedProductIds() {
 
 // Función que maneja la solicitud de datos del producto
 function fetchProductData(idpro) {
-    console.log("Enviando solicitud a:", `../controller/edit.php?idpro=${idpro}`);
     fetch(`../controller/edit.php?idpro=${idpro}`)
         .then(response => {
             if (!response.ok) {

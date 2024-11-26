@@ -1299,3 +1299,86 @@ form button {
         width: 100%;
     }
 }
+
+/*Dariana*/
+.product {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.product-image{
+    width: 14vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-details {
+    flex: 1;
+    padding: 0 10px;
+}
+.product-details p{
+    margin: 0;
+}
+.product-actions {
+    display: flex;
+    align-items: center;
+}
+
+.product-actions a {
+    margin-left: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.product-actions a:hover {
+    text-decoration: underline;
+}
+
+.product-actions_opt div{
+    display: flex;
+    flex-direction: column;
+}
+
+.product-actions_opt div a:hover:nth-child(1){
+    color: red;
+}
+
+.product-actions_opt div a i{
+    font-size: 24px;
+}
+.quantity {
+    width: 50px;
+    text-align: center;
+}
+
+.total {
+    font-weight: bold;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.continue-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.continue-button:hover {
+    background-color: #0056b3;
+}
