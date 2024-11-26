@@ -23,6 +23,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
     include ("controller/cpag.php");
     include("controller/cpro.php");
     include ("controller/cped.php");
+    include ("controller/ccom.php");
     require_once ("views/vwHeader.php");
     $pg = isset($_REQUEST["pg"]) ? $_REQUEST["pg"] : NULL;
     
