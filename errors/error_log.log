@@ -40,3 +40,5 @@ SQLSTATE[42S22]: Column not found: 1054 Unknown column 'p.estado' in 'where clau
 [26-Nov-2024 16:00:30 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
 [26-Nov-2024 16:01:23 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
 [26-Nov-2024 16:01:59 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[27-Nov-2024 15:33:37 Europe/Berlin] PHP Warning:  include(views/vwPerfil.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\shoop\home.php on line 39
+[27-Nov-2024 15:33:37 Europe/Berlin] PHP Warning:  include(): Failed opening 'views/vwPerfil.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\shoop\home.php on line 39

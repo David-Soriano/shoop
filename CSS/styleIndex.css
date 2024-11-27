@@ -1170,6 +1170,9 @@ form button {
     align-items: center;
     justify-content: center;
 }
+.bx-catg h5, .bx-catg h6{
+    text-align: center;
+}
 @media screen and (max-width: 1600px) {
     .inf-perfil div{
         width: 12%;

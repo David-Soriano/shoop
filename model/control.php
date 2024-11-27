@@ -1,5 +1,5 @@
 <?php
-require_once ("conexion.php");
+require_once("conexion.php");
 
 $usu = isset($_POST['user']) ? $_POST['user'] : NULL;
 $pass = isset($_POST['pass']) ? $_POST['pass'] : NULL;
@@ -27,10 +27,13 @@ function valida($usu, $psw)
         $_SESSION['tipdoc'] = $res[0]['tipdoc'];
         $_SESSION['fotpef'] = $res[0]['fotpef'];
         $_SESSION['nompef'] = $res[0]['nompef'];
+        $_SESSION['idpef'] = $res[0]['idpef'];
         $_SESSION['pagini'] = $res[0]['pagiini'];
         $_SESSION['aut'] = 'Msjh$5%khdfHSÑjsdh:-.';
-        header("Location: ../home.php");
-        exit();
+        if ($_SESSION['idpef'] === 2)
+            header("Location: ../views/admin.php");
+        else header("Location: ../home.php");
+            exit();
     } else {
         red();
     }

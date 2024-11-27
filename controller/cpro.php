@@ -7,6 +7,31 @@ $idpro = isset($_REQUEST['idpro']) ? $_REQUEST['idpro'] : NULL;
 $cg = isset($_REQUEST['cg']) ? $_REQUEST['cg'] : NULL;
 
 
+$frases = [
+    "Moda" => [
+        "inicio" => "Sumergete en la",
+        "final" => "donde cada estilo cuenta tu historia."
+    ],
+    "Accesorios" => [
+        "inicio" => "Encuentra lo mejor en",
+        "final" => "para realzar tu personalidad."
+    ],
+    "Hogar" => [
+        "inicio" => "Transforma los espacios de tu",
+        "final" => "y crea el ambiente que soñaste."
+    ],
+    "Tecnología" => [
+        "inicio" => "Explora el mundo de la",
+        "final" => "impulsando tus ideas hacia el futuro.."
+    ]
+];
+
+$default_inicio = "Explora el mundo de";
+$default_final = "lleno de posibilidades únicas.";
+
+$inicio = isset($frases[$cg]) ? $frases[$cg]['inicio'] : $default_inicio;
+$final = isset($frases[$cg]) ? $frases[$cg]['final'] : $default_final;
+
 $mpro->setIdpro($idpro);
 $productos = $mpro->getInfPar();
 $dtInfPrd = $mpro->getOnePrd();
