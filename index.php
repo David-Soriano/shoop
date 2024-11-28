@@ -35,6 +35,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
             $rut = getRut(14);
         if ($rut)
             include $rut[0]['rutpag'];
+        else echo "404 - Not Found";
         ?>
     </main>
 

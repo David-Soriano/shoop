@@ -16,7 +16,7 @@ $pag->setIdpag($idpag);
 function getRut($pg)
 {
     $pag = new Mpag();
-    return $pag->getOne($pg);
+    return $pag->getOne($pg, 1);
 }
 
 $isLoggedIn = isset($_SESSION['idusu']); // Verificar si el usuario ha iniciado sesión

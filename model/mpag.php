@@ -117,15 +117,16 @@ class Mpag
         return $res;
     }
     //Traer una pagina en especifico de la base de datos
-    function getOne($idpag)
+    function getOne($idpag, $idpef)
     {
         $res = NULL;
-        $sql = "SELECT idpag, nompag, rutpag, mospag, icopag FROM pagina WHERE idpag = :idpag";
+        $sql = "SELECT p.idpef, p.nompef, p.pagini, pxp.idperpf, pg.idpag, pg.nompag, pg.rutpag, pg.mospag, pg.icopag, pg.lugpag FROM pagxperfil AS pxp INNER JOIN perfil AS p ON pxp.idpef = p.idpef INNER JOIN pagina AS pg ON pxp.idpag = pg.idpag WHERE pxp.idpef = :idpef AND pg.idpag = :idpag;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
             $result = $conexion->prepare($sql);
             $result->bindParam(':idpag', $idpag, PDO::PARAM_INT);
+            $result->bindParam(':idpef', $idpef, PDO::PARAM_INT);
             $result->execute();
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

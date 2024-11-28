@@ -14,8 +14,13 @@ function valida($usu, $psw)
 {
     $res = ingr($usu, $psw);
     $res = isset($res) ? $res : NULL;
+
     if ($res) {
+        ini_set('session.cookie_httponly', 1);  // Evita que JavaScript acceda a las cookies
+        ini_set('session.cookie_secure', 1);    // Solo permite el envío de cookies a través de HTTPS
+        ini_set('session.cookie_samesite', 'Strict');
         session_start();
+
         $_SESSION['idusu'] = $res[0]['idusu'];
         $_SESSION['nomusu'] = $res[0]['nomusu'];
         $_SESSION['apeusu'] = $res[0]['apeusu'];
@@ -29,15 +34,21 @@ function valida($usu, $psw)
         $_SESSION['nompef'] = $res[0]['nompef'];
         $_SESSION['idpef'] = $res[0]['idpef'];
         $_SESSION['pagini'] = $res[0]['pagiini'];
-        $_SESSION['aut'] = 'Msjh$5%khdfHSÑjsdh:-.';
-        if ($_SESSION['idpef'] === 2)
+
+        $_SESSION['aut'] = getenv('DB_KEY') ?: 'Msjh$5%khdfHSÑjsdh:-.';
+
+        if ($_SESSION['idpef'] === 2) {
             header("Location: ../views/admin.php");
-        else header("Location: ../home.php");
+            exit;
+        } else {
+            header("Location: ../home.php");
             exit();
+        }
     } else {
         red();
     }
 }
+
 
 function red()
 {
