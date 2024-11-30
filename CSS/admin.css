@@ -1,0 +1,203 @@
+ /* Reset básico */
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: Arial, sans-serif;
+     background-color: #f3f3f3;
+     /* Fondo blanco para todo el cuerpo */
+     color: #333;
+ }
+
+ /* Header */
+ header {
+     text-align: center;
+     padding: 40px 20px;
+     background: rgb(225, 75, 47);
+     background: linear-gradient(112deg, rgba(225, 75, 47, 1) 0%, rgba(233, 105, 74, 1) 23%, rgba(240, 134, 100, 1) 64%, rgba(248, 164, 127, 1) 84%, rgba(255, 255, 255, 1) 100%);
+     color: #fff;
+     height: 30vh;
+ }
+
+ header h1 {
+     font-size: 2.5rem;
+ }
+
+ header p {
+     font-size: 1rem;
+     margin-top: 10px;
+ }
+
+ /* Logo */
+ .logo img {
+     max-width: 150px;
+ }
+
+ /* Navbar */
+ nav {
+     padding: 15px 0;
+     text-align: center;
+     width: fit-content;
+     position: absolute;
+     margin: auto;
+     bottom: 60%;
+     left: 50%;
+     transform: translateX(-50%);
+ }
+
+ nav ul {
+     display: flex;
+     /* Activa Flexbox */
+     flex-direction: row;
+     /* Alinea los elementos en una fila */
+     padding: 0;
+     /* Elimina el relleno predeterminado */
+     margin: 0;
+     /* Elimina el margen predeterminado */
+     list-style: none;
+     box-shadow: 0px 6px 40px -18px rgba(0, 0, 0, 0.58);
+     -webkit-box-shadow: 0px 6px 40px -18px rgba(0, 0, 0, 0.58);
+     -moz-box-shadow: 0px 6px 40px -18px rgba(0, 0, 0, 0.58);
+     border-radius: 10px;
+     background-color: #FFF;
+ }
+
+ nav ul li {
+     margin: 0;
+     padding: 0;
+
+ }
+
+ nav ul li a {
+     text-decoration: none;
+     color: #333;
+     font-weight: bold;
+     padding: 10px;
+     display: flex;
+     transition: background-color 0.3s ease;
+     height: 15vh;
+     align-items: center;
+     transition: 400ms all;
+ }
+
+ nav ul li a div img {
+     width: 50%;
+ }
+
+ nav ul li a:hover {
+    background-color: #FFF;
+    transform: scale(1.1);
+    border-radius: 6px;
+    border-bottom: 6px solid rgba(225, 75, 47, 1);
+    box-shadow: 0px 6px 45px -18px rgba(0, 0, 0, 0.57);
+    -webkit-box-shadow: 0px 6px 45px -18px rgba(0, 0, 0, 0.57);
+    -moz-box-shadow: 0px 6px 45px -18px rgba(0, 0, 0, 0.57);
+ }
+
+ .container{
+    margin-top: 7%;
+ }
+ /* Sección de Tickets */
+ .tickets {
+    margin: 20px 30px;
+ }
+
+ .tickets h2 {
+     font-size: 1.5rem;
+     margin-bottom: 20px;
+ }
+
+ .ticket {
+     background-color: #f9f9f9;
+     padding: 15px;
+     margin-bottom: 15px;
+     border-radius: 5px;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ }
+
+ .ticket h3 {
+     font-size: 1.25rem;
+     display: inline-block;
+ }
+
+ .ticket span {
+     font-size: 1rem;
+     color: #ff2e5b;
+     font-weight: bold;
+     margin-left: 10px;
+ }
+
+ .ticket p {
+     font-size: 0.875rem;
+     color: #777;
+ }
+
+ /* Sección de Centro de Conocimiento */
+ .knowledge {
+     margin: 30px 20px;
+ }
+
+ .knowledge h2 {
+     font-size: 1.5rem;
+     margin-bottom: 20px;
+ }
+
+ .knowledge ul {
+     list-style: none;
+ }
+
+ .knowledge ul li {
+     font-size: 1rem;
+     margin-bottom: 10px;
+ }
+
+ .knowledge ul li a {
+     text-decoration: none;
+     color: #00b1c7;
+     font-weight: bold;
+ }
+
+ .knowledge ul li a:hover {
+     color: #ff2e5b;
+ }
+
+ /* Sección de Contacto */
+ .contact {
+     margin: 30px 20px;
+ }
+
+ .contact h2 {
+     font-size: 1.5rem;
+     margin-bottom: 20px;
+ }
+
+ .contact p {
+     font-size: 1rem;
+     margin-bottom: 10px;
+ }
+
+ .contact button {
+     padding: 10px 20px;
+     background-color: #00b1c7;
+     color: #fff;
+     font-weight: bold;
+     border: none;
+     cursor: pointer;
+     border-radius: 5px;
+     transition: background-color 0.3s;
+ }
+
+ .contact button:hover {
+     background-color: #ff2e5b;
+ }
+
+ /* Footer */
+ footer {
+     text-align: center;
+     padding: 20px;
+     background-color: #fff;
+     color: #333;
+ }
