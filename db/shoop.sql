@@ -319,7 +319,8 @@ INSERT INTO `pagina` (`idpag`, `nompag`, `rutpag`, `mospag`, `icopag`, `lugpag`)
 (18, 'Productos Añadidos', 'views/vwPrdAnd.php', 0, NULL, NULL),
 (19, 'Ofertas', 'views/vwOfer.php', NULL, NULL, NULL),
 (20, 'Más vendido', 'views/vwMVen.php', NULL, NULL, NULL),
-(21, 'Categorías', 'views/vwCatego.php', NULL, NULL, NULL);
+(21, 'Categorías', 'views/vwCatego.php', NULL, NULL, NULL),
+(22, 'Administrador', 'views/admin.php', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -344,33 +345,34 @@ CREATE TABLE `pago` (
 
 CREATE TABLE `pagxperfil` (
   `idpag` int(5) DEFAULT NULL,
-  `idpef` int(5) DEFAULT NULL
+  `idpef` int(5) DEFAULT NULL,
+  `idperpf` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pagxperfil`
 --
 
-INSERT INTO `pagxperfil` (`idpag`, `idpef`) VALUES
-(13, 1),
-(1, 1),
-(3, 1),
-(4, 1),
-(5, 1),
-(6, 1),
-(7, 1),
-(8, 1),
-(9, 1),
-(10, 1),
-(11, 1),
-(12, 1),
-(2, 1),
-(14, 2),
-(14, 1),
-(18, 1),
-(19, 1),
-(20, 1),
-(21, 1);
+INSERT INTO `pagxperfil` (`idpag`, `idpef`, `idperpf`) VALUES
+(13, 1, 1),
+(1, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6),
+(7, 1, 7),
+(8, 1, 8),
+(9, 1, 9),
+(10, 1, 10),
+(11, 1, 11),
+(12, 1, 12),
+(2, 1, 13),
+(14, 1, 15),
+(18, 1, 16),
+(19, 1, 17),
+(20, 1, 18),
+(21, 1, 19),
+(22, 2, 20);
 
 -- --------------------------------------------------------
 
@@ -404,7 +406,7 @@ CREATE TABLE `perfil` (
 
 INSERT INTO `perfil` (`idpef`, `nompef`, `pagini`) VALUES
 (1, 'Cliente', 13),
-(2, 'Invitado', 14);
+(2, 'Administrador', 22);
 
 -- --------------------------------------------------------
 
@@ -1790,7 +1792,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusu`, `nomusu`, `apeusu`, `docusu`, `emausu`, `celusu`, `genusu`, `dirrecusu`, `tipdoc`, `idval`, `idubi`, `feccreate`, `fecupdate`, `fotpef`, `idpef`, `pasusu`) VALUES
-(1, 'David', 'Soriano', 123213, 'davidscicua314@gmail.com', '3186274255', 'Masculino', 'Chia', 'CC', NULL, NULL, '2024-07-23 15:57:00', '2024-07-23 16:08:34', NULL, 1, '$2y$10$x.YxpWCplR/9QvsxVAJDsu4ba.U/TOTy6N7ootwlW7b8r27GyRqnW'),
+(1, 'David', 'Soriano', 123213, 'davidscicua314@gmail.com', '3186274255', 'Masculino', 'Chia', 'CC', NULL, NULL, '2024-07-23 15:57:00', '2024-11-27 21:20:23', NULL, 1, '$2y$10$x.YxpWCplR/9QvsxVAJDsu4ba.U/TOTy6N7ootwlW7b8r27GyRqnW'),
 (7, 'Diego', 'Sarmiento', 80546098, 'correo@gmail.com', '3186274255', 'M', NULL, NULL, NULL, NULL, '2024-10-31 15:40:34', '2024-10-31 15:40:34', NULL, 1, '456'),
 (8, 'Juan', 'Soriano', 80546098, 'correo@gmail.com', '3186274255', 'M', NULL, NULL, NULL, NULL, '2024-10-31 15:40:50', '2024-10-31 15:40:50', NULL, 1, '456'),
 (9, 'Juan', 'Soriano', 80546098, 'correo@gmail.com', '3186274255', 'M', NULL, 'CC', NULL, NULL, '2024-10-31 15:46:21', '2024-10-31 15:46:21', NULL, 1, '456'),
@@ -1799,7 +1801,8 @@ INSERT INTO `usuario` (`idusu`, `nomusu`, `apeusu`, `docusu`, `emausu`, `celusu`
 (12, 'Angela', 'Soriano', 12345, 'correo@gmail.com', '3186274255', 'F', NULL, 'CC', NULL, NULL, '2024-10-31 15:50:25', '2024-10-31 15:50:25', NULL, 1, '789'),
 (13, 'Omar', 'Soriano', 745253, 'correo@gmail.com', '3186274255', 'M', NULL, 'RC', NULL, NULL, '2024-10-31 15:51:05', '2024-10-31 15:51:05', NULL, 1, '544'),
 (14, 'Miguel', 'Gomez', 714546354, 'correo@gmail.com', '7845234', 'M', NULL, 'CC', NULL, NULL, '2024-10-31 15:55:38', '2024-10-31 15:55:38', NULL, 1, '$2y$10$Kl0GUisqCIIGIqimBmSirOCV9v8TXaHepxitwao2.PW0L1YjFS/2y'),
-(15, 'Laura', 'Bello', 10468975, 'laura@gmail.com', '3186274255', 'F', NULL, 'TI', NULL, NULL, '2024-10-31 15:59:03', '2024-10-31 15:59:47', NULL, 1, '$2y$10$F.3MJK1bLXoT6aSlVs8IpO549M10DZ56pQIt5jbzDW.u.5TZNfRda');
+(15, 'Laura', 'Bello', 10468975, 'laura@gmail.com', '3186274255', 'F', NULL, 'TI', NULL, NULL, '2024-10-31 15:59:03', '2024-10-31 15:59:47', NULL, 1, '$2y$10$F.3MJK1bLXoT6aSlVs8IpO549M10DZ56pQIt5jbzDW.u.5TZNfRda'),
+(16, 'admin', 'Soriano', 101564, 'admin@gmail.com', '3186274255', 'M', NULL, 'CC', NULL, NULL, '2024-11-27 21:20:01', '2024-11-27 21:20:19', NULL, 2, '$2y$10$aGcbgN7SK.mxZRsTEfI3jeOcW7sueH9H4d.vRli3ouesWF6NG.SS6');
 
 -- --------------------------------------------------------
 
@@ -1946,6 +1949,7 @@ ALTER TABLE `pago`
 -- Indices de la tabla `pagxperfil`
 --
 ALTER TABLE `pagxperfil`
+  ADD PRIMARY KEY (`idperpf`),
   ADD KEY `idpef` (`idpef`),
   ADD KEY `idpag` (`idpag`);
 
@@ -2116,13 +2120,19 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
 --
 ALTER TABLE `pago`
   MODIFY `idpag` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pagxperfil`
+--
+ALTER TABLE `pagxperfil`
+  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
@@ -2182,7 +2192,7 @@ ALTER TABLE `ubicacion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusu` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idusu` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `valor`
