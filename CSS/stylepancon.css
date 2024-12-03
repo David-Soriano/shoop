@@ -465,22 +465,105 @@ footer {
     align-items: center;
 }
 
-.table-options-bar button{
+.table-options-bar button {
     background: none;
     border: none;
     cursor: pointer;
 }
 
-#editButton{
+#editButton {
     color: #4b4d04;
 }
-#deleteButton{
+
+#deleteButton {
     color: rgb(243, 76, 76);
 }
 
-.bx-inp-inf .col{
+.bx-inp-inf .col {
     margin: 2% 0;
 }
-.bx-reg-file input, #pordescu{
+
+.bx-reg-file input,
+#pordescu {
     width: inherit;
+}
+
+/*PQRs Prv*/
+
+
+.pqr-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 50px;
+}
+
+.section-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.table-container {
+    display: flex;
+    position: relative;
+    width: 70%;
+    justify-content: center;
+}
+
+.pqr-section table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.pqr-section table th,
+td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.pqr-section table th {
+    background-color: #e0e0e0;
+}
+
+.respond-button,
+.new-pqr-button,
+.profile-button,
+.logout-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    /* Efecto suave */
+}
+
+/* Efecto hover */
+.respond-button:hover,
+.new-pqr-button:hover,
+.profile-button:hover,
+.logout-button:hover {
+    background-color: darkred;
+    /* Cambia a un rojo más oscuro */
+    transform: scale(1.05);
+    /* Aumenta ligeramente el tamaño */
+}
+
+/* Botón específico: "Realizar PQR" */
+.new-pqr-button {
+    position: absolute;
+    right: -120px;
+    top: 20px;
+}
+
+.new-pqr-button:hover {
+    background-color: #c40000;
+    /* Cambia a un rojo diferente */
 }

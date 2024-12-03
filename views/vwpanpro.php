@@ -1,7 +1,7 @@
 <?php include "../model/logoutprv.php";
 ini_set("display_errors", 0);
 ini_set("log_errors", 1);
-ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");?>
+ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +16,8 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");?>
 
 <body>
   <?php
-    include("../controller/cpancon.php");?>
+  include("../controller/cpancon.php");
+  include("../controller/cpagprv.php"); ?>
   <header>
     <a href="../home.php"><img src="../IMG/LogoAnimado.gif" alt=""></a>
     <div>
@@ -33,7 +34,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");?>
           <h5>Ordenes</h5>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link text-black" href="vwpanpro.php?vw=003">Listado de Pedidos</a>
+              <a class="nav-link text-black" href="vwpanpro.php?vw=25">Listado de Pedidos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-black" href="vwpanpro.php?vw=004">Detalle de Pedidos</a>
@@ -42,41 +43,46 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");?>
           <h5>Inventario</h5>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link text-black" href="vwpanpro.php?vw=001">Almacén</a>
+              <a class="nav-link text-black" href="vwpanpro.php?vw=23">Almacén</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-black" href="vwpanpro.php?vw=002">Añadir Nuevos Articulos</a>
+              <a class="nav-link text-black" href="vwpanpro.php?vw=24">Añadir Nuevos Articulos</a>
             </li>
           </ul>
           <h5>PQRs</h5>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link text-black" href="">Recibidas</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-black" href="">Realizar PQR</a>
+              <a class="nav-link text-black" href="vwpanpro.php?vw=27">PQRs</a>
             </li>
           </ul>
         </div>
         <div class="bx-apartados col-9">
           <?php
           $vw = isset($_GET["vw"]) ? $_GET["vw"] : NULL;
-          $excluirVistas = array("001", "002", "003", "004");
-          if (!in_array($vw, $excluirVistas)) {
-            include("vwDefPan.php");
-          }
-          ?>
 
-          <?php
-          if ($vw == "001") {
-            require_once("../views/vwTable.php");
-          } else if ($vw == "002") {
-            require_once("../views/vwven.php");
-          } else if ($vw == "003") {
-            require_once("../views/vwListPed.php");
-          } else if ($vw == "004") {
-            require_once("../views/vwDetPed.php");
-          }
+          if ($vw)
+            $rut = getRutPrv($vw);
+          else
+            $rut = getRutPrv(26);
+          if ($rut) {
+            $pg = "../" . $rut[0]['rutpag'];
+            include $pg;
+          } else
+            include("../views/vwDefPan.php");
+          // $excluirVistas = array("001", "002", "003", "004");
+          // if (!in_array($vw, $excluirVistas)) {
+          //   include("vwDefPan.php");
+          // }
+          
+          // if ($vw == "001") {
+          //   require_once("../views/vwTable.php");
+          // } else if ($vw == "002") {
+          //   require_once("../views/vwven.php");
+          // } else if ($vw == "003") {
+          //   require_once("../views/vwListPed.php");
+          // } else if ($vw == "004") {
+          //   require_once("../views/vwDetPed.php");
+          // }
           ?>
         </div>
       </div>

@@ -53,7 +53,8 @@ class Mpag
     {
         return $this->idmen;
     }
-    public function getLugmen(){
+    public function getLugmen()
+    {
         return $this->lugmen;
     }
     public function setIdpag($idpag)
@@ -96,7 +97,8 @@ class Mpag
     {
         $this->idmen = $idmen;
     }
-    public function setLugmen($lugmen){
+    public function setLugmen($lugmen)
+    {
         $this->lugmen = $lugmen;
     }
     //Traer todas las paginas de la base de datos
@@ -117,16 +119,17 @@ class Mpag
         return $res;
     }
     //Traer una pagina en especifico de la base de datos
-    function getOne($idpag, $idpef)
+    function getOne($idpag, $idpef, $lugpag = null)
     {
         $res = NULL;
-        $sql = "SELECT p.idpef, p.nompef, p.pagini, pxp.idperpf, pg.idpag, pg.nompag, pg.rutpag, pg.mospag, pg.icopag, pg.lugpag FROM pagxperfil AS pxp INNER JOIN perfil AS p ON pxp.idpef = p.idpef INNER JOIN pagina AS pg ON pxp.idpag = pg.idpag WHERE pxp.idpef = :idpef AND pg.idpag = :idpag;";
+        $sql = "SELECT p.idpef, p.nompef, p.pagini, pxp.idperpf, pg.idpag, pg.nompag, pg.rutpag, pg.mospag, pg.icopag, pg.lugpag FROM pagxperfil AS pxp INNER JOIN perfil AS p ON pxp.idpef = p.idpef INNER JOIN pagina AS pg ON pxp.idpag = pg.idpag WHERE  pxp.idpef = :idpef AND ( (pg.idpag = :idpag AND pg.lugpag = :lugpag) OR (:lugpag IS NULL AND (pg.lugpag = 1 OR pg.lugpag IS NULL)) );";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
             $result = $conexion->prepare($sql);
             $result->bindParam(':idpag', $idpag, PDO::PARAM_INT);
             $result->bindParam(':idpef', $idpef, PDO::PARAM_INT);
+            $result->bindParam(':lugpag', $lugpag, PDO::PARAM_INT);
             $result->execute();
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -137,38 +140,38 @@ class Mpag
     }
     //Traer el menu de la barra de navegacion
     function getMenu($isLoged)
-{
-    $res = NULL;
-    try {
-        $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen 
+    {
+        $res = NULL;
+        try {
+            $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen 
                 FROM menu 
                 WHERE lugmen = 0 AND (estmen = :status OR estmen IS NULL);";
 
-        $status = $isLoged ? 1 : 0;
+            $status = $isLoged ? 1 : 0;
 
-        $modelo = new Conexion();
-        $conexion = $modelo->getConexion();
-        $result = $conexion->prepare($sql);
-        $result->bindParam(':status', $status, PDO::PARAM_INT);
-        $result->execute();
-        $menuItems = $result->fetchAll(PDO::FETCH_ASSOC);
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(':status', $status, PDO::PARAM_INT);
+            $result->execute();
+            $menuItems = $result->fetchAll(PDO::FETCH_ASSOC);
 
-        // Obtener submenús para cada ítem del menú principal
-        foreach ($menuItems as $key => $menuItem) {
-            if ($menuItem['submen'] != 0) {
-                $menuItems[$key]['submenus'] = $this->getSubMen($menuItem['idmen']);
-            } else {
-                $menuItems[$key]['submenus'] = []; // No tiene submenús
+            // Obtener submenús para cada ítem del menú principal
+            foreach ($menuItems as $key => $menuItem) {
+                if ($menuItem['submen'] != 0) {
+                    $menuItems[$key]['submenus'] = $this->getSubMen($menuItem['idmen']);
+                } else {
+                    $menuItems[$key]['submenus'] = []; // No tiene submenús
+                }
             }
-        }
 
-        $res = $menuItems;
-    } catch (PDOException $e) {
-        error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-        echo "Error en getMenu. Intentalo más tarde";
+            $res = $menuItems;
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error en getMenu. Intentalo más tarde";
+        }
+        return $res;
     }
-    return $res;
-}
     //Traer el menu de las opciones del perfil de usuario
     function getMenuPerf($isLoged)
     {
@@ -212,7 +215,8 @@ class Mpag
         }
         return $res;
     }
-    function getMenHeader($lugmen){
+    function getMenHeader($lugmen)
+    {
         $res = NULL;
         $sql = "SELECT idmen, nombre, url, ordmen, estmen, url2, submen, lugmen, icomen
                 FROM menu 
