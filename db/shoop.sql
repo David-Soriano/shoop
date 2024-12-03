@@ -239,7 +239,11 @@ INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`,
 (142, 'proinf/imagen_6740e300f25bf.webp', 'imagen_6740e300f25bf', 'image/jpeg', 54, 5, NULL),
 (143, 'proinf/imagen_6740e301032bb.webp', 'imagen_6740e301032bb', 'image/jpeg', 54, 6, NULL),
 (144, 'proinf/imagen_6740e30108258.webp', 'imagen_6740e30108258', 'image/jpeg', 54, 7, NULL),
-(145, 'proinf/imagen_6740e3010c263.webp', 'imagen_6740e3010c263', 'image/jpeg', 54, 8, NULL);
+(145, 'proinf/imagen_6740e3010c263.webp', 'imagen_6740e3010c263', 'image/jpeg', 54, 8, NULL),
+(146, 'IMG/Paginas.png', 'Paginas', 'png', NULL, 1, 2),
+(148, 'IMG/Usuarios.png', 'Usuarios', 'png', NULL, 2, 2),
+(149, 'IMG/Balances.png', 'Balances', 'png', NULL, 3, 2),
+(150, 'IMG/Productos.png', 'Productos', 'png', NULL, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -320,7 +324,12 @@ INSERT INTO `pagina` (`idpag`, `nompag`, `rutpag`, `mospag`, `icopag`, `lugpag`)
 (19, 'Ofertas', 'views/vwOfer.php', NULL, NULL, NULL),
 (20, 'Más vendido', 'views/vwMVen.php', NULL, NULL, NULL),
 (21, 'Categorías', 'views/vwCatego.php', NULL, NULL, NULL),
-(22, 'Administrador', 'views/admin.php', NULL, NULL, NULL);
+(22, 'Administrador', 'views/admin.php', NULL, NULL, NULL),
+(23, 'Almacén', 'views/vwTable.php', NULL, NULL, 2),
+(24, 'Subir Productos', 'views/vwven.php', NULL, NULL, 2),
+(25, 'Lista de pedidos', 'views/vwListPed.php', NULL, NULL, 2),
+(26, 'Panel Control WC', 'views/vwDefPan.php', NULL, NULL, 2),
+(27, 'PQR prv', 'views/vista_pqr.php', NULL, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -372,7 +381,12 @@ INSERT INTO `pagxperfil` (`idpag`, `idpef`, `idperpf`) VALUES
 (19, 1, 17),
 (20, 1, 18),
 (21, 1, 19),
-(22, 2, 20);
+(22, 2, 20),
+(23, 1, 21),
+(24, 1, 22),
+(25, 1, 23),
+(26, 1, 24),
+(27, 1, 25);
 
 -- --------------------------------------------------------
 
@@ -2108,7 +2122,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2120,7 +2134,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
@@ -2132,7 +2146,7 @@ ALTER TABLE `pago`
 -- AUTO_INCREMENT de la tabla `pagxperfil`
 --
 ALTER TABLE `pagxperfil`
-  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
