@@ -5,7 +5,7 @@ ini_set('session.cookie_samesite', 'Strict');
 session_start();
 include "../model/conexion.php";
 include "../model/mpancon.php";
-include "../model/mprov.php";
+require_once "../model/mprov.php";
 include "../model/mpro.php";
 
 $control = new Mpancon();

@@ -691,7 +691,6 @@ class Mpro
                     ':idpro' => $idpro,
                     ':ordimg' => $imagen['ordimg']
                 ];
-                var_dump("Params: ", $params);
                 foreach ($params as $key => $value) {
                     $stmtInsert->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
                 }

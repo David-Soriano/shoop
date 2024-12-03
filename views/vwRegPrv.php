@@ -1,5 +1,6 @@
-<?php include("../model/conexion.php");
-include "../model/mprov.php";
+<?php require_once("../model/conexion.php");
+require_once("../model/mprov.php");
+
 include "../controller/cubi.php";
 ini_set('session.cookie_httponly', 1);  // Evita que JavaScript acceda a las cookies
 ini_set('session.cookie_secure', 1);    // Solo permite el envío de cookies a través de HTTPS
@@ -36,7 +37,7 @@ if ($prov->existeProveedor($idusu)) {
             </div>
             <div class="row">
                 <div class="col">
-                    <form id="proveedorForm" method="post" action="../controller/cpancon.php">
+                    <form id="proveedorForm" method="post" action="../controller/cprov.php">
                         <!-- Parte 1: Nombre del proveedor -->
                         <div id="step1">
                             <label for="nomprov">Nombre del Proveedor:</label>
@@ -50,7 +51,7 @@ if ($prov->existeProveedor($idusu)) {
                         <!-- Parte 2: Dirección y URL -->
                         <div id="step2" style="display:none;">
                             <label for="dirrecprov">Dirección del Proveedor:</label>
-                            <input type="text" name="dirrecprov" id="dirrecprov" required>
+                            <input type="text" name="dirrecprov" id="dirrecprov">
 
                             <label for="idubi">Ubicación:</label>
                             <select class="form-select" name="idubi" id="idubi" required>

@@ -61,7 +61,6 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
             $rut = getRutPrv($vw);
           else
             $rut = getRutPrv(26);
-          var_dump($rut);
           if ($rut) {
             $pg = "../" . $rut[0]['rutpag'];
             include $pg;

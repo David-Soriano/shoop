@@ -4,7 +4,7 @@
 
         <div class="card my-3">
             <?php foreach($dtpedido as $dtpd){?>
-            <div class="card-body d-flex justify-content-between align-items-center">
+            <div class="card-body d-flex justify-content-between align-items-center bx_tusped">
                 <div>
                     <h5 class="fw-bold"><?=$dtpd['total']?></h5>
                       
@@ -14,7 +14,7 @@
                     <p></p>
 
                 </div>
-                <a href="#" class="btn btn-outline-danger">Seguir Envío</a>
+                <a href="home.php?pg=28" class="btn btn-outline-danger">Seguir Envío</a>
             </div>
             <?php }?>
         </div>

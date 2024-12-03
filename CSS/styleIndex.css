@@ -1386,3 +1386,7 @@ form button {
 .continue-button:hover {
     background-color: #0056b3;
 }
+
+.bx_tusped img{
+    width: 15%;
+}

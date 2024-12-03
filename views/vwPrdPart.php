@@ -90,7 +90,7 @@
                         <p>Stock disponible: <span><?= $dtinf['cantidad']; ?></span></p>
                         <p>Cantidad: <input type="number" id="cantidad" data-max="<?= $dtinf['cantidad']; ?>" value="1"></p>
 
-                        <button id="btn-buy"><a href="<?php echo $isLoggedIn ? "home.php?pg=9" : "views/vwLogin.php"; ?>">Lo
+                        <button id="btn-buy"><a href="<?php echo $isLoggedIn ? "home.php?pg=29" : "views/vwLogin.php"; ?>">Lo
                                 quiero </a></button>
                         <button id="btn-add-carr" title="Añadir al carrito"><i class="bi bi-cart2"></i></button>
                         <div class="col">

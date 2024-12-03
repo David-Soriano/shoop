@@ -41,7 +41,7 @@
                             <div>
                                 Total: COP <?php echo number_format(array_sum(array_column($productosCarrito, 'subtotal')), 2); ?>
                             </div>
-                            <button class="continue-button">Continuar</button>
+                            <button class="continue-button"><a href="home.php?pg=29">Continuar</a></button>
                         </div>
                     <?php } ?>
                 <?php } else { ?>
