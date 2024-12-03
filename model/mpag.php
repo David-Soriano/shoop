@@ -119,10 +119,11 @@ class Mpag
         return $res;
     }
     //Traer una pagina en especifico de la base de datos
-    function getOne($idpag, $idpef, $lugpag = null)
+    function getOne($idpag, $idpef, $lugpag)
     {
         $res = NULL;
-        $sql = "SELECT p.idpef, p.nompef, p.pagini, pxp.idperpf, pg.idpag, pg.nompag, pg.rutpag, pg.mospag, pg.icopag, pg.lugpag FROM pagxperfil AS pxp INNER JOIN perfil AS p ON pxp.idpef = p.idpef INNER JOIN pagina AS pg ON pxp.idpag = pg.idpag WHERE  pxp.idpef = :idpef AND ( (pg.idpag = :idpag AND pg.lugpag = :lugpag) OR (:lugpag IS NULL AND (pg.lugpag = 1 OR pg.lugpag IS NULL)) );";
+        $lugpag = $lugpag ?: null;
+        $sql = "SELECT p.idpef, p.nompef, p.pagini, pxp.idperpf, pg.idpag, pg.nompag, pg.rutpag, pg.mospag, pg.icopag, pg.lugpag FROM pagxperfil AS pxp INNER JOIN perfil AS p ON pxp.idpef = p.idpef INNER JOIN pagina AS pg ON pxp.idpag = pg.idpag WHERE pxp.idpef = :idpef AND ((pg.idpag = :idpag AND (pg.lugpag = :lugpag OR :lugpag IS NULL))) LIMIT 1;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -130,6 +131,8 @@ class Mpag
             $result->bindParam(':idpag', $idpag, PDO::PARAM_INT);
             $result->bindParam(':idpef', $idpef, PDO::PARAM_INT);
             $result->bindParam(':lugpag', $lugpag, PDO::PARAM_INT);
+
+
             $result->execute();
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

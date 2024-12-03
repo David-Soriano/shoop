@@ -18,29 +18,32 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
 
 <body>
     <?php
-    include ("controller/funciones.php");
+    include("controller/funciones.php");
     include "model/conexion.php";
-    include ("controller/cpag.php");
+    include("controller/cpag.php");
     include("controller/cpro.php");
-    include ("controller/cped.php");
-    include ("controller/ccom.php");
-    require_once ("views/vwHeader.php");
+    include("controller/cped.php");
+    include("controller/ccom.php");
+    include("controller/ccarr.php");
+    require_once("views/vwHeader.php");
     $pg = isset($_REQUEST["pg"]) ? $_REQUEST["pg"] : NULL;
-    
+
     include "views/vwMenu.php"; ?>
 
     <main id="bx-section">
         <?php
-        if($pg)
+        if ($pg)
             $rut = getRut($pg);
         else
             $rut = getRut(14);
-        if ($rut)
+        if (!empty($rut) && isset($rut[0]['rutpag'])) {
             include $rut[0]['rutpag'];
-        else include "views/vwTienda.php";
+        } else {
+            include "views/vwTienda.php";
+        }
         ?>
     </main>
-    <?php require_once ("views/vwFooter.php"); ?>
+    <?php require_once("views/vwFooter.php"); ?>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="JS/bootstrap.min.js"></script>

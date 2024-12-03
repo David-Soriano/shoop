@@ -36,9 +36,6 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
             <li class="nav-item">
               <a class="nav-link text-black" href="vwpanpro.php?vw=25">Listado de Pedidos</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-black" href="vwpanpro.php?vw=004">Detalle de Pedidos</a>
-            </li>
           </ul>
           <h5>Inventario</h5>
           <ul class="nav flex-column">
@@ -64,6 +61,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
             $rut = getRutPrv($vw);
           else
             $rut = getRutPrv(26);
+          var_dump($rut);
           if ($rut) {
             $pg = "../" . $rut[0]['rutpag'];
             include $pg;

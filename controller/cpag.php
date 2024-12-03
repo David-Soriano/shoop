@@ -13,11 +13,12 @@ $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
 $pag->setIdpag($idpag);
 
-function getRut($pg)
-{
+function getRut($pg) {
     $pag = new Mpag();
-    return $pag->getOne($pg, 1);
+    $lugpag = $pg['lugpag'] ?? null; // Maneja el valor de lugpag si está vacío
+    return $pag->getOne($pg, 1, $lugpag);
 }
+
 
 $isLoggedIn = isset($_SESSION['idusu']); // Verificar si el usuario ha iniciado sesión
 $dtMenu = $pag->getMenu($isLoggedIn);

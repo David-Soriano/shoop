@@ -567,3 +567,84 @@ td {
     background-color: #c40000;
     /* Cambia a un rojo diferente */
 }
+
+/*proveedor*/
+.bx-reg-prv {
+    height: 100%;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    justify-content: center;
+}
+
+#proveedorForm label {
+    font-size: 34px;
+}
+
+#proveedorForm input {
+    /* border-radius: 5px; */
+    border: none;
+    width: auto;
+    font-size: 24px;
+    margin-left: 26px;
+    border-bottom: 1px solid;
+    background: transparent;
+    /* height: 40px;*/
+}
+
+#proveedorForm input:focus{
+    outline: none;
+}
+
+#proveedorForm textarea{
+    resize: none;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid;
+    font-size: 24px;
+    margin-left: 26px;
+}
+
+#proveedorForm textarea:focus{
+    outline: none;
+}
+
+.line-1 {
+    border-right: 2px solid rgba(0, 0, 0, 0.75);
+    font-size: 180%;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);
+}
+
+/* Animation */
+.anim-typewriter {
+    animation: typewriter 4s steps(44) 1s 1 normal both,
+        blinkTextCursor 500ms steps(44) infinite normal;
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 13em;
+    }
+}
+
+@keyframes blinkTextCursor {
+    from {
+        border-right-color: rgba(0, 0, 0, 0.75);
+    }
+
+    to {
+        border-right-color: transparent;
+    }
+}
+
+#step2 {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}

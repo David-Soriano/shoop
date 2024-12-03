@@ -31,11 +31,14 @@
      margin-top: 10px;
  }
 
- /* Logo */
- .logo img {
-     max-width: 150px;
+ .bx-opc-in a{
+    text-decoration: none;
+    color: #ffffff;
  }
-
+ 
+.bx-wel{
+    margin-top: 4%;
+}
  /* Navbar */
  nav {
      padding: 15px 0;
@@ -98,6 +101,7 @@
  }
 
  .container{
+    min-height: 40vh;
     margin-top: 7%;
  }
  /* Sección de Tickets */
@@ -196,8 +200,36 @@
 
  /* Footer */
  footer {
-     text-align: center;
-     padding: 20px;
-     background-color: #fff;
-     color: #333;
- }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #454546;
+    color: #cdc1c1;
+    height: 20vh;
+}
+
+.bx-foot-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+}
+
+.bx-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    font-size: 10px;
+}
+
+.bx-social a,
+.bx-social svg {
+    color: gray;
+    transition: all 400ms;
+}
+
+.bx-social svg:hover {
+    transform: scale(1.2);
+}

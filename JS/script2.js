@@ -122,7 +122,7 @@ function nextStep(step) {
         document.getElementById('step' + i).style.display = 'none';
     }
     // Mostrar el paso actual
-    document.getElementById('step' + step).style.display = 'block';
+    document.getElementById('step' + step).style.display = 'flex';
 }
 function cantCr() {
     let cant = document.getElementById('cantcr').value; // Cantidad de inputs a generar

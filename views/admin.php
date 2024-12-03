@@ -17,15 +17,15 @@ if ($_SESSION['idpef'] != 2)
     <?php include "../model/conexion.php";
 include "../controller/cadmin.php"; ?>
     <header>
-        <div class="row">
+        <div class="row bx-opc-in">
             <div class="col">
-                <img src="logo.png" alt="Logo">
+                <a href="">SHOOP S.A</a>
             </div>
             <div class="col">
                 <a href="#"><?= $_SESSION['nomusu'] ?></a>
             </div>
         </div>
-        <div class="row">
+        <div class="row bx-wel">
             <div class="col">
                 <h1>Hola <?= $_SESSION['nomusu'] ?>,</h1>
                 <p>Bienvenid<?php if ($_SESSION['genusu'] == 'M') {
@@ -54,30 +54,36 @@ include "../controller/cadmin.php"; ?>
     </nav>
 
     <div class="container">
+        <?php ?>
         <div class="row">
             <section class="tickets col">
-                <h2>Mis Tickets</h2>
+                <h2>PQRs</h2>
                 <section>
                     <div class="ticket">
-                        <h3>Apple iPad 7” <span>OPEN</span></h3>
-                        <p>Ticket #RE00138305 - 45 mins ago</p>
-                    </div>
-                    <div class="ticket">
-                        <h3>iPhone XR <span>APPROVED</span></h3>
-                        <p>Ticket #RE00138305 - 2 days ago</p>
-                    </div>
-                    <div class="ticket">
-                        <h3>Mi laptop no enciende <span>ON HOLD</span></h3>
-                        <p>Ticket #RE00138305 - 45 mins ago</p>
-                    </div>
-                    <div class="ticket">
-                        <h3>Macbook Pro 15” <span>APPROVED</span></h3>
-                        <p>Ticket #RE00138305 - 45 mins ago</p>
+                        <!-- <h3>Apple iPad 7” <span>OPEN</span></h3> -->
+                        <p>Sin PQRs por ahora</p>
                     </div>
                 </section>
             </section>
-
-            <section class="knowledge col">
+            <section class="tickets col">
+                <h2>Por Definir</h2>
+                <section>
+                    <div class="ticket">
+                        <!-- <h3>Apple iPad 7” <span>OPEN</span></h3> -->
+                        <p>Pronto estaremos con nuevas funciones</p>
+                    </div>
+                </section>
+            </section>
+            <section class="tickets col">
+                <h2>Por Definir</h2>
+                <section>
+                    <div class="ticket">
+                        <!-- <h3>Apple iPad 7” <span>OPEN</span></h3> -->
+                        <p>Pronto estaremos con nuevas funciones</p>
+                    </div>
+                </section>
+            </section>
+            <!-- <section class="knowledge col">
                 <h2>Centro de Conocimiento</h2>
                 <ul>
                     <li><a href="#">¿Dónde solicito la verificación de empleado?</a></li>
@@ -93,13 +99,12 @@ include "../controller/cadmin.php"; ?>
                 <p>Teléfono: 800-444-4444</p>
                 <p>Email: helpdesk@company.com</p>
                 <button>Chat With Us</button>
-            </section>
+            </section> -->
         </div>
+        <?php ?>
 
     </div>
-    <footer>
-        <p>NEWROCKET © 2024</p>
-    </footer>
+    <?php include "vwFooter.php"; ?>
 </body>
 
 </html>
