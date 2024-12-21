@@ -34,7 +34,7 @@ error_log("ID retornado por saveProv: " . $idprov, 3, 'C:/xampp/htdocs/SHOOP/err
 
 if($res){
     $_SESSION['idprov'] = $res;
-     header("Location: cpancon.php");
+     header("Location: ../views/vwpanpro.php");
 } else{
     echo "Error al registrar el proveedor";
 }

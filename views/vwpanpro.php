@@ -16,8 +16,12 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
 
 <body>
   <?php
-  include("../controller/cpancon.php");
-  include("../controller/cpagprv.php"); ?>
+  require_once("../controller/cpancon.php");
+  require_once("../controller/cpagprv.php");
+  if (!$idProveedor) {
+    header("Location:vwRegPrv.php");
+    exit();
+  } ?>
   <header>
     <a href="../home.php"><img src="../IMG/LogoAnimado.gif" alt=""></a>
     <div>

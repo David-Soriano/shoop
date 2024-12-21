@@ -163,4 +163,46 @@ Llamando a saveProv...Datos enviados a la consulta: Array
     [desprv] => jkjkhjk
     [estado] => 
 )
-ID retornado por saveProv: 77
+ID retornado por saveProv: 77Formulario enviado con POST: Array
+(
+    [nomprov] => DavidX
+    [idusu] => 20
+    [dirrecprov] => dfvdz
+    [idubi] => 8
+    [url] => 
+    [nit] => 
+    [desprv] => dsgfd
+)
+Llamando a saveProv...Datos enviados a la consulta: Array
+(
+    [nomprov] => DavidX
+    [idusu] => 20
+    [dirrecprov] => dfvdz
+    [idubi] => 8
+    [url] => 
+    [nit] => 
+    [desprv] => dsgfd
+    [estado] => 
+)
+ID retornado por saveProv: 80Formulario enviado con POST: Array
+(
+    [nomprov] => DavidX
+    [idusu] => 20
+    [dirrecprov] => fhgjkgh
+    [idubi] => 11
+    [url] => 
+    [nit] => 
+    [desprv] => sgz
+)
+Llamando a saveProv...Datos enviados a la consulta: Array
+(
+    [nomprov] => DavidX
+    [idusu] => 20
+    [dirrecprov] => fhgjkgh
+    [idubi] => 11
+    [url] => 
+    [nit] => 
+    [desprv] => sgz
+    [estado] => 
+)
+ID retornado por saveProv: 81
