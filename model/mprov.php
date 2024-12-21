@@ -122,6 +122,17 @@ class Mprov
             $desprv = $this->getDesprv();
             $estado = $this->getEstado();
 
+            error_log("Datos enviados a la consulta: " . print_r([
+                'nomprov' => $nomprov,
+                'idusu' => $idusu,
+                'dirrecprov' => $dirrecprov,
+                'idubi' => $idubi,
+                'url' => $url,
+                'nit' => $nit,
+                'desprv' => $desprv,
+                'estado' => $estado,
+            ], true), 3, 'C:/xampp/htdocs/SHOOP/errors/debug_log.log');
+
             // Vincular los parámetros
             $result->bindParam(':nomprov', $nomprov, PDO::PARAM_STR);
             $result->bindParam(':idusu', $idusu, PDO::PARAM_INT);

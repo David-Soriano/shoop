@@ -82,7 +82,7 @@ if ($prov->existeProveedor($idusu)) {
                         <div id="step4" style="display:none;">
                             <label for="desprv">Descripción del Proveedor:</label>
                             <textarea name="desprv" id="desprv" required></textarea>
-
+                                <input type="hidden" value="activo">
                             <button class="btn" type="submit">Registrar Proveedor</button>
                         </div>
                     </form>

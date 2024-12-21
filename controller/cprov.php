@@ -1,7 +1,9 @@
 <?php
+error_log("Formulario enviado con POST: " . print_r($_POST, true), 3, 'C:/xampp/htdocs/SHOOP/errors/debug_log.log');
+// die("Se recibió el formulario.");
+require_once "../model/conexion.php";
 require_once("../model/mprov.php");
 
-include "../controller/cpancon.php";
 ini_set('session.cookie_httponly', 1);  // Evita que JavaScript acceda a las cookies
 ini_set('session.cookie_secure', 1);    // Solo permite el envío de cookies a través de HTTPS
 ini_set('session.cookie_samesite', 'Strict'); 
@@ -25,12 +27,14 @@ $prov->setUrl($url);               // URL del proveedor
 $prov->setNit($nit);               // NIT del proveedor
 $prov->setDesprv($desprv);
 $prov->setIdusu($idusu);
+error_log("Llamando a saveProv...", 3, 'C:/xampp/htdocs/SHOOP/errors/debug_log.log');
+$res = $idprov = $prov->saveProv();
+error_log("ID retornado por saveProv: " . $idprov, 3, 'C:/xampp/htdocs/SHOOP/errors/debug_log.log');
 
-$res = $prov->saveProv();
 
 if($res){
     $_SESSION['idprov'] = $res;
-    header("Location: cpancon.php");
+     header("Location: cpancon.php");
 } else{
     echo "Error al registrar el proveedor";
 }
