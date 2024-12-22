@@ -101,7 +101,11 @@ if ($idusus) {
             try {
                 $res = $pro->saveProductoConImagenes($imagenesGuardadas, $caracteristicas);
                 if ($res) {
-                    header("Location: ../views/vwpanpro.php?vw=001");
+                    // Inserta productos por proveedor antes de redirigir
+                    if ($idProveedor) {
+                        $prov->insertProdxProv($idProveedor, $res);
+                    }
+                    header("Location: ../views/vwpanpro.php?vw=23");
                     exit();
                 } else {
                     echo "Error al guardar el producto.";
@@ -110,10 +114,6 @@ if ($idusus) {
                 error_log($e->getMessage(), 3, '../errors/error_log.log');
                 echo "Error al guardar el producto en la base de datos.";
             }
-        }
-
-        if ($idProveedor && $res) {
-            $prov->insertProdxProv($idProveedor, $res);
         }
     } elseif ($idpro && $ope === 'edit') {
         try {

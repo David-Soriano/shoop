@@ -240,7 +240,6 @@ function deleteProductData(idpro) {
         })
         .then(data => {
             if (data.success) {
-                alert('Productos eliminados con éxito.');
                 location.reload();
             } else {
                 alert('No se pudieron eliminar los productos: ' + data.error);
