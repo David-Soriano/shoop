@@ -281,14 +281,7 @@ class Mpro
     public function getInfMasVendidos()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro, 
-            p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento 
-            FROM producto AS p 
-            LEFT JOIN imagen AS i ON p.idpro = i.idpro 
-            WHERE p.estado = 'activo' 
-            GROUP BY p.idpro
-            ORDER BY p.productvend DESC
-            LIMIT 4";
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro, CASE WHEN p.pordescu > 0 THEN p.valorunitario - (p.valorunitario * (p.pordescu / 100)) ELSE 0 END AS valor_con_descuento FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' GROUP BY p.idpro ORDER BY p.productvend DESC LIMIT 4;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();

@@ -10,6 +10,7 @@ if ($_SESSION['idpef'] != 2)
         <title>Portal de IT</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link rel="stylesheet" href="../CSS/admin.css">
     </head>
 
@@ -30,18 +31,20 @@ include "../controller/cadmin.php"; ?>
                 <h1>Hola <?= $_SESSION['nomusu'] ?>,</h1>
                 <p>Bienvenid<?php if ($_SESSION['genusu'] == 'M') {
                     echo "o";
+                } else if ($_SESSION['genusu'] == 'M') {
+                    echo "a";
                 } else
-                    echo "a" ?> al Portal de Administración</p>
+                    echo "@" ?> al Portal de Administración</p>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
 
-        <nav>
-            <ul>
+            <nav class="nav">
+                <ul>
             <?php if ($dtImg) {
                     foreach ($dtImg as $dt) { ?>
                     <li>
-                        <a href="#">
+                        <a href="admin.php?pg=<?= $dt['urlimg'] ?>">
                             <div class="col">
                                 <img src="../<?= $dt['imgpro'] ?>" alt="<?= $dt['nomimg'] ?>">
                                 <h6><?= $dt['nomimg'] ?></h6>
@@ -54,36 +57,40 @@ include "../controller/cadmin.php"; ?>
     </nav>
 
     <div class="container">
-        <?php ?>
-        <div class="row">
-            <section class="tickets col">
-                <h2>PQRs</h2>
-                <section>
-                    <div class="ticket">
-                        <!-- <h3>Apple iPad 7” <span>OPEN</span></h3> -->
-                        <p>Sin PQRs por ahora</p>
-                    </div>
+        <?php $pg = isset($_GET['pg']) ? $_GET['pg'] : NULL;
+        if ($pg)
+            $rut = getPagAdm($pg);
+        else {
+            $rut = null; ?>
+            <div class="row">
+                <section class="tickets col">
+                    <h2>PQRs</h2>
+                    <section>
+                        <div class="ticket">
+                            <!-- <h3>Apple iPad 7” <span>OPEN</span></h3> -->
+                            <p>Sin PQRs por ahora</p>
+                        </div>
+                    </section>
                 </section>
-            </section>
-            <section class="tickets col">
-                <h2>Por Definir</h2>
-                <section>
-                    <div class="ticket">
-                        <!-- <h3>Apple iPad 7” <span>OPEN</span></h3> -->
-                        <p>Pronto estaremos con nuevas funciones</p>
-                    </div>
+                <section class="tickets col">
+                    <h2>Por Definir</h2>
+                    <section>
+                        <div class="ticket">
+                            <!-- <h3>Apple iPad 7” <span>OPEN</span></h3> -->
+                            <p>Pronto estaremos con nuevas funciones</p>
+                        </div>
+                    </section>
                 </section>
-            </section>
-            <section class="tickets col">
-                <h2>Por Definir</h2>
-                <section>
-                    <div class="ticket">
-                        <!-- <h3>Apple iPad 7” <span>OPEN</span></h3> -->
-                        <p>Pronto estaremos con nuevas funciones</p>
-                    </div>
+                <section class="tickets col">
+                    <h2>Por Definir</h2>
+                    <section>
+                        <div class="ticket">
+                            <!-- <h3>Apple iPad 7” <span>OPEN</span></h3> -->
+                            <p>Pronto estaremos con nuevas funciones</p>
+                        </div>
+                    </section>
                 </section>
-            </section>
-            <!-- <section class="knowledge col">
+                <!-- <section class="knowledge col">
                 <h2>Centro de Conocimiento</h2>
                 <ul>
                     <li><a href="#">¿Dónde solicito la verificación de empleado?</a></li>
@@ -100,11 +107,19 @@ include "../controller/cadmin.php"; ?>
                 <p>Email: helpdesk@company.com</p>
                 <button>Chat With Us</button>
             </section> -->
-        </div>
-        <?php ?>
+            </div>
+        <?php }
+        if ($rut) {
+            $pg = '../' . $rut[0]['rutpag'];
+            include $pg;
+        } ?>
 
     </div>
     <?php include "vwFooter.php"; ?>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../JS/script2.js"></script>
 </body>
 
 </html>

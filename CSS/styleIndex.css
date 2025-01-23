@@ -51,6 +51,9 @@ body::-webkit-scrollbar-track {
     border-radius: 10px;
 }
 
+p{
+    margin: 0;
+}
 .cont {
     position: absolute;
     left: 48%;
@@ -398,9 +401,9 @@ footer {
     align-items: center;
 }
 
-.aside div div {
+/* .aside div div {
     height: 8vh;
-}
+} */
 
 .bx-fot-art {
     display: flex;
@@ -1087,14 +1090,14 @@ form button {
 
 .bx-item {
     flex-shrink: 0;
-    width: 180px;
-    height: 22vh;
+    width: 140px;
+    height: 30vh;
     margin: 2% 0;
     transition: transform 0.4s ease;
 }
 
 .bx-item img {
-    width: 100%;
+    width: 70%;
     height: auto;
     border-radius: 5px;
 }
@@ -1105,7 +1108,11 @@ form button {
 
 .bx-item h6 {
     font-size: 1rem;
-    margin: 10px 0;
+    margin: 0;
+}
+
+#val-sindes{
+    margin: 0;
 }
 
 .inf-tot-prc p {
@@ -1125,11 +1132,11 @@ form button {
 }
 
 #btn-left {
-    left: -50px;
+    left: -23px;
 }
 
 #btn-right {
-    right: -50px;
+    right: -23px;
 }
 .bx-apart.bx-apart_views{
     width: 50%;
@@ -1168,6 +1175,7 @@ form button {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 3%;
 }
 .bx-catg h5, .bx-catg h6{
     text-align: center;
@@ -1389,4 +1397,11 @@ form button {
 
 .bx_tusped img{
     width: 15%;
+}
+
+@media screen and (min-height:820px) {
+    .bx-item{
+        height: 20vh;
+        margin: 5% 0;
+    }
 }

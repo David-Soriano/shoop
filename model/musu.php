@@ -232,4 +232,25 @@ class Musu
 
         return $count > 0; // Retorna true si el correo ya existe
     }
+    public function getUsers($limit, $offset)
+    {
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $query = 'SELECT u.idusu, u.nomusu, u.apeusu, u.docusu, u.emausu, u.celusu, u.genusu, u.dirrecusu, u.tipdoc, u.idubi, u.idpef, u.estusu, p.nompef FROM usuario AS u INNER JOIN perfil AS p ON p.idpef = u.idpef LIMIT :limit OFFSET :offset;'; // Ajusta según tus columnas
+        $stmt = $conexion->prepare($query);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getTotalUsers()
+    {
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $query = "SELECT COUNT(*) AS total FROM usuario u LEFT JOIN perfil p ON p.idpef = u.idpef"; // Ajusta el nombre de tu tabla
+        $stmt = $conexion->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total'];
+    }
 }

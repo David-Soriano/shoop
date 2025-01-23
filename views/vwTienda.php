@@ -162,7 +162,7 @@
                         </div>
                         <div class="col inf-artc">
                             <h6><?php echo htmlspecialchars($producto['nompro']); ?></h6>
-                            <?php if ($producto['valor_con_descuento'] > 0) { ?>
+                            <?php if ($producto['valor_con_descuento'] != 0) { ?>
                                 <p id="val-sindes">
                                     $<del><?php echo number_format($producto['valorunitario'], 0, ',', '.'); ?></del>
                                 </p>

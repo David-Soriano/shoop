@@ -308,4 +308,26 @@ class Mpag
         }
         return $res;
     }
+    public function getTotalPages()
+    {
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $query = "SELECT COUNT(*) AS total FROM pagina p LEFT JOIN pagxperfil pxp ON p.idpag = pxp.idpag LEFT JOIN perfil pe ON pxp.idpef = pe.idpef"; // Ajusta el nombre de tu tabla
+        $stmt = $conexion->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total'];
+    }
+
+    public function getPages($limit, $offset)
+    {
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $query = 'SELECT p.idpag AS "ID Página", p.nompag AS "Nombre Página", p.rutpag AS "Ruta Página", p.mospag AS "Mostrar Página", p.icopag AS "Ícono", p.lugpag AS "Lugar Página", pe.idpef AS "ID Perfil", pe.nompef AS "Perfil", pe.pagini AS "Página Inicial"  FROM pagina p LEFT JOIN pagxperfil pxp ON p.idpag = pxp.idpag LEFT JOIN perfil pe ON pxp.idpef = pe.idpef LIMIT :limit OFFSET :offset'; // Ajusta según tus columnas
+        $stmt = $conexion->prepare($query);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

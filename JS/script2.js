@@ -179,24 +179,37 @@ function ajustarZonaHoraria(fechaISO) {
     return fechaLocal.toISOString().split('T')[0]; // Retornar en formato YYYY-MM-DD
 }
 
-function actualizarTabla() {
-    let searchTerm = $('#search').val();  // Obtener el valor del campo de búsqueda
+function actualizarTablaGenerica(url) {
+    let searchTerm = $('#search').val(); // Obtener el valor del campo de búsqueda
 
     // Realizar la solicitud AJAX
     $.ajax({
-        url: '../controller/buscTable.php',  // Ruta correcta del archivo PHP que procesa la búsqueda
+        url: url,  // Usar la URL proporcionada como parámetro
         method: 'GET',
         data: {
             search: searchTerm,
             vw: '002'  // Agregar el parámetro vw=002
         },
         success: function (response) {
-            $('#productTable tbody').html(response);
+            $('#productTable tbody').html(response); // Actualizar la tabla con la respuesta
         },
         error: function (xhr, status, error) {
             console.error("Error en la solicitud AJAX: ", error);
         }
     });
+}
+
+// Llamadas específicas
+function actualizarTabla() {
+    actualizarTablaGenerica('../controller/buscTable.php');
+}
+
+function actualizarTabla2() {
+    actualizarTablaGenerica('../controller/buscTb2.php');
+}
+
+function actualizarTabla3() {
+    actualizarTablaGenerica('../controller/buscTb3.php');
 }
 
 function buttonsTable() {
