@@ -73,11 +73,20 @@ function generateSummary(timeframe) {
     const minIndex = sales.indexOf(minSales);
 
     return `
-        <strong>Resumen de Ventas (${timeframe}):</strong><br>
-        - Total de ventas: ${totalSales.toLocaleString()} unidades.<br>
-        - Mayor venta: ${maxSales.toLocaleString()} unidades en el período ${maxIndex + 1}.<br>
-        - Menor venta: ${minSales.toLocaleString()} unidades en el período ${minIndex + 1}.<br>
-        - Crecimiento: ${growth}% desde el inicio hasta el final del período.
+        <h5>Resumen de Ventas (${timeframe}):</h5>
+
+        <div class="bx-des-gf">
+        <ul>
+            <li>Total de ventas: <b>${totalSales.toLocaleString()}</b> unidades</li>
+            <li>Mayor venta: <b>${maxSales.toLocaleString()}</b> unidades en el período ${maxIndex + 1}</li>
+            <li>Menor venta: <b>${minSales.toLocaleString()}</b> unidades en el período ${minIndex + 1}</li>
+        </ul>
+        <div class="bx-crec-tv">
+            <img src="../IMG/grafico-de-linea.png" alt="">
+            <h4>${growth}%</h4>
+            <p>Crecimiento</p>
+            </div>
+        </div>
     `;
 }
 

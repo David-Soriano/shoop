@@ -71,13 +71,6 @@ function setupButtons() {
         });
     }
 
-    const btnAddCarr = document.getElementById('btn-add-carr');
-    if (btnAddCarr) {
-        btnAddCarr.addEventListener('click', () => {
-            alert("Producto Agregado");
-        });
-    }
-
     const btnPagar = document.getElementById('pagar');
     if (btnPagar) {
         btnPagar.addEventListener('click', () => {
@@ -195,6 +188,67 @@ function setupInputSearch() {
     });
 
 }
+
+document.querySelectorAll('.btn-buy').forEach(button => {
+    button.addEventListener('click', function () {
+        const cantidadInput = this.parentElement.querySelector('#cantidad');
+        const cantidad = cantidadInput ? parseInt(cantidadInput.value) : 1;
+
+        const producto = {
+            id: this.getAttribute('data-id'),
+            nombre: this.getAttribute('data-nombre'),
+            precio: this.getAttribute('data-precio'),
+            cantidad: cantidad,
+            imagen: this.getAttribute('data-imagen')
+        };
+        console.log(producto);        // Enviar datos al servidor
+        fetch('controller/resPago.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(producto)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(data.message);
+                } else {
+                    alert('Error al añadir el producto');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+});
+
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', () => {
+        const id = button.dataset.id;
+        const nombre = button.dataset.nombre;
+        const precio = button.dataset.precio;
+        const imagen = button.dataset.imagen;
+        const cantidad = 1; // O puedes permitir al usuario elegir la cantidad
+
+        fetch('controller/carrito.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id,
+                nombre,
+                precio,
+                imagen,
+                cantidad
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message); // Notificar al usuario
+            console.log(data); // Verificar la respuesta
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
+
 // ======= Cargar todas las configuraciones al inicio =======
 window.addEventListener('load', () => {
     setupSearch();

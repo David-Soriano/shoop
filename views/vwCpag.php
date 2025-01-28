@@ -1,4 +1,5 @@
 <div class="row">
+
     <div class="col-lg-12 card-margin">
         <div class="card search-form">
             <div class="card-body p-0">
@@ -54,6 +55,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <nav class="nav-pg">
+                                        <ul>
+                                            <li>Slider</li>
+                                            <li>Nueva Página</li>
+                                        </ul>
+                                    </nav>
+                                </div>
                             </div>
                             <div class="result-body">
                                 <div class="table-responsive">
@@ -104,12 +113,16 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <?php if($dtp['Perfil']){?>
-                                                            <div class="widget-26-job-category indicator-wrap bg-soft-success" style="<?php if($dtp['Perfil'] == 'Administrador') echo "background-color: #ffce4aa6;";?>">
-                                                                <i class="indicator bg-success" style="<?php if($dtp['Perfil'] == 'Administrador') echo "background-color: rgb(165, 128, 0)!important; ";?>"></i>
-                                                                <span><?= $dtp['Perfil']; ?></span>
-                                                            </div>
-                                                            <?php }?>
+                                                            <?php if ($dtp['Perfil']) { ?>
+                                                                <div class="widget-26-job-category indicator-wrap bg-soft-success"
+                                                                    style="<?php if ($dtp['Perfil'] == 'Administrador')
+                                                                        echo "background-color: #ffce4aa6;"; ?>">
+                                                                    <i class="indicator bg-success"
+                                                                        style="<?php if ($dtp['Perfil'] == 'Administrador')
+                                                                            echo "background-color: rgb(165, 128, 0)!important; "; ?>"></i>
+                                                                    <span><?= $dtp['Perfil']; ?></span>
+                                                                </div>
+                                                            <?php } ?>
                                                         </td>
                                                     </tr>
                                                 <?php }

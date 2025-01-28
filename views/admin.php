@@ -20,10 +20,19 @@ include "../controller/cadmin.php"; ?>
     <header>
         <div class="row bx-opc-in">
             <div class="col">
-                <a href="">SHOOP S.A</a>
+                <a href="../views/admin.php">SHOOP S.A</a>
             </div>
             <div class="col">
-                <a href="#"><?= $_SESSION['nomusu'] ?></a>
+                <div class="btn-group btn-pf-adm">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <?= $_SESSION['nomusu'] ?>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="vwExit.php">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="row bx-wel">

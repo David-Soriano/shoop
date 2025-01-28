@@ -90,9 +90,15 @@
                         <p>Stock disponible: <span><?= $dtinf['cantidad']; ?></span></p>
                         <p>Cantidad: <input type="number" id="cantidad" data-max="<?= $dtinf['cantidad']; ?>" value="1"></p>
 
-                        <button id="btn-buy"><a href="<?php echo $isLoggedIn ? "home.php?pg=29" : "views/vwLogin.php"; ?>">Lo
+                        <button id="btn-buy" class="btn-buy" data-id="<?= $dtinf['idpro']; ?>"
+                            data-nombre="<?= $dtinf['nompro']; ?>" data-precio="<?= $valorConDescuento; ?>"
+                            data-imagen="<?= $dtinf['imgpro']; ?>"><a
+                                href="<?php echo $isLoggedIn ? "home.php?pg=9&idpro=" . $dtinf['idpro'] : "views/vwLogin.php"; ?>">Lo
                                 quiero </a></button>
-                        <button id="btn-add-carr" title="Añadir al carrito"><i class="bi bi-cart2"></i></button>
+                        <button id="btn-add-carr" class="add-to-cart" data-id="<?= $dtinf['idpro']; ?>"
+                            data-nombre="<?= $dtinf['nompro']; ?>" data-precio="<?= $valorConDescuento; ?>"
+                            data-imagen="<?= $dtinf['imgpro']; ?>" title="Añadir al carrito"><i
+                                class="bi bi-cart2"></i></button>
                         <div class="col">
                             <h6>Información de la Tienda</h6>
                             <div class="col">
@@ -101,7 +107,9 @@
                             </div>
                             <p><?= $dtinf['desprv']; ?></p>
                             <div>
-                                <p>Consulta nuestros <a href="<?php echo $isLoggedIn ? "home.php?pg=17" : "index.php?pg=17"; ?>">Terminos y Condiciones</a></p>
+                                <p>Consulta nuestros <a
+                                        href="<?php echo $isLoggedIn ? "home.php?pg=17" : "index.php?pg=17"; ?>">Terminos y
+                                        Condiciones</a></p>
                             </div>
                         </div>
                     </div>
@@ -109,7 +117,7 @@
             } ?>
         </div>
     </aside>
-
+    <!-- Mobile -->
     <aside class="aside col-6 bx-txt-prd bx-mobile">
         <div class="row">
             <?php if (isset($dtInfPrd)) {
@@ -129,7 +137,8 @@
                     <div class="col-10 bx-btns-comp">
                         <p>Stock disponible: <span><?= $dtinf['cantidad']; ?></span></p>
                         <p>Cantidad: <span>1</span></p>
-                        <button id="btn-buy"><a href="<?php echo $isLoggedIn ? "home.php?pg=9" : "views/vwLogin.php"; ?>">Lo
+                        <button id="btn-buy"><a
+                                href="<?php echo $isLoggedIn ? "home.php?pg=9&idpro=" . $dtinf['idpro'] : "views/vwLogin.php"; ?>">Lo
                                 quiero </a></button>
                         <button id="btn-add-carr" title="Añadir al carrito"><i class="bi bi-cart2"></i></button>
                         <div class="col">

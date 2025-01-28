@@ -1,24 +1,24 @@
 <div class="wrapper row">
     <div class="counter col_fourth">
-        <i class="bi bi-cart-check-fill"></i>
+        <i class="bi bi-cart-check-fill bi-bal"></i>
         <h2 class="timer count-title count-number" data-to="10425" data-speed="1500"></h2>
         <p class="count-text ">Productos Vendidos</p>
     </div>
 
     <div class="counter col_fourth">
-        <i class="bi bi-currency-dollar"></i>
+        <i class="bi bi-currency-dollar bi-bal"></i>
         <h2 class="timer count-title count-number" data-to="25370000" data-speed="1500"></h2>
         <p class="count-text ">Ingresos Totales</p>
     </div>
 
     <div class="counter col_fourth">
-        <i class="bi bi-person-fill-add"></i>
+        <i class="bi bi-person-fill-add bi-bal"></i>
         <h2 class="timer count-title count-number" data-to="3212" data-speed="1500"></h2>
         <p class="count-text ">Clientes Registrados</p>
     </div>
 
     <div class="counter col_fourth end">
-        <i class="bi bi-rocket-takeoff-fill"></i>
+        <i class="bi bi-rocket-takeoff-fill bi-bal"></i>
         <h2 class="timer count-title count-number" data-to="125" data-speed="1500"></h2>
         <p class="count-text ">Pedidos Enviados</p>
     </div>
@@ -51,8 +51,8 @@
 
         </div>
         <div class="col bx-des-hc">
-            <p class="highcharts-description" id="summary">
-            </p>
+            <div class="highcharts-description" id="summary">
+            </div>
         </div>
     </div>
     <div class="row bx-graf-bl">
