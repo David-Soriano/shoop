@@ -682,6 +682,22 @@ div .bx-btns-comp div {
 
 
 /*----------------------------------------------------------*/
+.container .form-pago {
+    padding: 0px;
+    width: auto;
+    background: transparent;
+    box-shadow: none;
+}
+
+.container .form-pago button {
+    position: relative;
+    left: 0;
+}
+
+.bx-res-tot-pag {
+    display: flex;
+    justify-content: space-evenly;
+}
 
 .container form {
     padding: 20px;
@@ -1490,8 +1506,124 @@ form button {
     background-color: #0056b3;
 }
 
+.bx-tusped-gen {
+    display: flex;
+    justify-content: center;
+}
+
+.bx-tusped-gen-n2 {
+    width: 845px;
+}
+
+.bx_tusped {
+    background: #FFF;
+    padding: 0 2% 11px;
+    border-radius: 9px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .12);
+    margin: 2% 0px;
+}
+
+.bx_tusped-fech {
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #cbc8c8;
+    padding: 1%;
+    margin-bottom: 2%;
+}
+
 .bx_tusped img {
-    width: 15%;
+    width: 90%;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 6px;
+    height: auto;
+}
+
+.bx_tusped-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bx_tusped-dtp {
+    margin-bottom: 1%;
+}
+
+.bx_tusped-est-ped {
+    color: #00a650;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.bx_tusped-ult-acc {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.bx_tusped-inf-nompro {
+    margin: 16px 0 0;
+}
+
+.bx_tusped-nompro {
+    color: rgba(0, 0, 0, .55);
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.bx_tusped-tienda {
+    color: rgba(0, 0, 0, .55);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.bx_tusped-btn-sg-ev {
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    background-color: #e56262;
+    color: #FFF;
+    width: 130px;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px;
+    transition: all 400ms;
+}
+
+.bx_tusped-btn-sg-ev:hover {
+    background-color: #d35454;
+}
+
+.bx_tusped-opcs {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.bx-seg-env {
+    height: 26vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background: #FFF;
+    border-radius: 7px;
+    padding: 2% 4%;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .1);
+}
+
+.dot {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ccc;
+    transition: all 400ms;
+}
+
+.dot:hover {
+    background-color: #ff0000;
+    transform: scale(1.5);
 }
 
 @media screen and (min-height:820px) {
@@ -1508,4 +1640,30 @@ form button {
 .bx-res-carr-comp table tbody tr {
     display: flex;
     justify-content: space-around;
+}
+
+.bx-seg-env-minf {
+    display: flex;
+    gap: 2%;
+}
+
+.bx-seg-env-minf .bx-seg-dt{
+    border-radius: 5px;
+    min-height: 10vh;
+    padding: 2%;
+}
+
+.bx-seg-env-minf .bx-seg-dt h4{
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid #d5d5d5;
+    padding: 1%;
+}
+.bx-seg-env-minf_det-com {
+    background-color: #f5f5f5;
+}
+
+.bx-seg-env-minf_help {
+    background-color: #FFF;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .12);
 }

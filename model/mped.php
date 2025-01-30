@@ -53,7 +53,7 @@ class Pedido {
     function getPedPar()
     {
         $res = NULL;
-        $sql = "SELECT u.idusu, p.idped, p.fecha, p.total, p.estped, dp.iddet, dp.idpro, dp.cantidad, dp.precio AS precio_pedido, pr.nompro, pr.precio AS precio_producto, pr.tipro, pr.valorunitario, pr.descripcion, i.imgpro, i.nomimg FROM usuario u JOIN pedido p ON u.idusu = p.idusu JOIN detalle_pedido dp ON p.idped = dp.idped JOIN producto pr ON dp.idpro = pr.idpro LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro)) i ON pr.idpro = i.idpro WHERE u.idusu = :idusu ORDER BY p.fecha DESC; ";
+        $sql = "SELECT u.idusu, p.idped, p.fecha, p.total, p.estped, dp.iddet, dp.idpro, dp.cantidad, dp.precio AS precio_pedido, pr.nompro, pr.precio AS precio_producto, pr.tipro, pr.valorunitario, pr.descripcion, i.imgpro, i.nomimg, pv.nomprov FROM usuario u JOIN pedido p ON u.idusu = p.idusu JOIN detalle_pedido dp ON p.idped = dp.idped JOIN producto pr ON dp.idpro = pr.idpro LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro)) i ON pr.idpro = i.idpro LEFT JOIN proveedor pv ON pv.idusu = u.idusu WHERE u.idusu = :idusu ORDER BY p.fecha DESC; ";
    
         try {
             $modelo = new Conexion();

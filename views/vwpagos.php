@@ -1,5 +1,5 @@
 <?php
-
+include 'controller/config.php';
 $carrito = $_SESSION['respag'] ?? [];
 ?>
 <div class="container bx-cont-carr-pro">
@@ -11,12 +11,13 @@ $carrito = $_SESSION['respag'] ?? [];
                     <div class="border p-3 mb-4" style="background-color: #f9f9f9; border-radius: 8px;">
                         <h5 class="mb-3"><strong>Dirección De Entrega</strong></h5>
                         <?php if ($_SESSION['dirrecusu']) { ?>
-                            <p class="mb-1"><strong><?=$_SESSION['nomusu']?> <?=$_SESSION['apeusu']?> TEL: <?=$_SESSION['celusu']?></strong></p>
-                            <p class="text-muted"><?=$_SESSION['dirrecusu']?></p>
+                            <p class="mb-1"><strong><?= $_SESSION['nomusu'] ?>     <?= $_SESSION['apeusu'] ?> TEL:
+                                    <?= $_SESSION['celusu'] ?></strong></p>
+                            <p class="text-muted"><?= $_SESSION['dirrecusu'] ?></p>
                             <button>Cambiar</button>
-                        <?php } else{?>
+                        <?php } else { ?>
                             <button class="btn btn-link text-primary" style="font-size: 14px;">Añadir Dirección</button>
-                            <?php }?>
+                        <?php } ?>
 
                     </div>
 
@@ -58,13 +59,19 @@ $carrito = $_SESSION['respag'] ?? [];
                                 diciembre)</p>
                         </div>
                     </div>
-
+                    <?php $total = $item['cantidad'] * $item['precio'];
+                    $descrip = $item['nombre']; ?>
                     <!-- Resumen total -->
-                    <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div class="bx-res-tot-pag">
                         <h4>Total a pagar:
                             <span>$<?= number_format($item['cantidad'] * $item['precio'], 0, ",", "."); ?></span> COP
                         </h4>
-                        <button class="btn btn-success">Realizar Pago</button>
+                        <form method="POST" class="form-pago" action="controller/payment.php">
+                            <input type="hidden" name="amount" value="<?= $total; ?>">
+                            <input type="hidden" name="descripcion" value="Artículo: <?= $descrip ?>">
+                            <input type="hidden" name="product" value="<?= htmlspecialchars(json_encode($carrito, JSON_UNESCAPED_UNICODE), ENT_QUOTES, 'UTF-8'); ?>">
+                            <button type="submit" class="btn btn-success">Realizar Pago</button>
+                        </form>
                     </div>
                 </div>
             </div>

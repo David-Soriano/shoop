@@ -1,0 +1,5 @@
+JSON recibido: 
+JSON recibido: <br />
+<b>Warning</b>:  Array to string conversion in <b>C:\xampp\htdocs\shoop\views\vwpagos.php</b> on line <b>74</b><br />
+Array
+JSON recibido: [{"id":"61","nombre":"Carro","precio":"23","cantidad":1,"imagen":"proinf\/imagen_6766f324cb69f.jpg"}]

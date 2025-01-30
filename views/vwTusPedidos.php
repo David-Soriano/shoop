@@ -1,22 +1,53 @@
-<div class="container my-5">
-    <div class="card p-3">
+<div class="container my-5 bx-tusped-gen">
+    <div class="p-3 bx-tusped-gen-n2">
         <h2 class="text-center fw-bold">Tus Pedidos</h2>
 
-        <div class="card my-3">
-            <?php foreach($dtpedido as $dtpd){?>
-            <div class="card-body d-flex justify-content-between align-items-center bx_tusped">
-                <div>
-                    <h5 class="fw-bold"><?=$dtpd['total']?></h5>
-                      
-                    <p><?=$dtpd['fecha']?></p>
-                    <p><?=$dtpd['estped']?></p>
-                    <img src="<?=$dtpd['imgpro']?>" alt="<?=$dtpd['nompro']?>">
-                    <p></p>
+        <div class="my-3">
+            <?php foreach ($dtpedido as $dtpd) {
+                $fecha = new DateTime($dtpd['fecha']);
+                $meses = [
+                    "January" => "enero",
+                    "February" => "febrero",
+                    "March" => "marzo",
+                    "April" => "abril",
+                    "May" => "mayo",
+                    "June" => "junio",
+                    "July" => "julio",
+                    "August" => "agosto",
+                    "September" => "septiembre",
+                    "October" => "octubre",
+                    "November" => "noviembre",
+                    "December" => "diciembre"
+                ];
+
+                $dia = $fecha->format('j'); // Día sin ceros iniciales
+                $mes = $meses[$fecha->format('F')]; // Nombre del mes en español
+                $año = $fecha->format('Y'); // Año
+                $hora = $fecha->format('H:i:s'); // Hora en formato 24h ?>
+                <div class="card-body bx_tusped">
+                    <div class="row bx_tusped-fech">
+                        <p><?php echo "$dia de $mes de $año, $hora"; ?></p>
+                    </div>
+                    <div class="row bx_tusped-dtp">
+                        <div class="col-2 bx_tusped-img"><img src="<?= $dtpd['imgpro'] ?>" alt="<?= $dtpd['nompro'] ?>">
+                        </div>
+                        <div class="col">
+                            <p class="bx_tusped-est-ped"><?= $dtpd['estped'] ?></p>
+                            <p class="bx_tusped-ult-acc">Ultima Acción</p>
+                            <div class="bx_tusped-inf-nompro">
+                                <p class="bx_tusped-nompro"><?= $dtpd['nompro'] ?></p>
+                                <p class="bx_tusped-nompro"><?= $dtpd['cantidad'] ?> Unidad</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <p class="bx_tusped-tienda"><?= $dtpd['nomprov'] ?></p>
+                        </div>
+                        <div class="col bx_tusped-opcs"><a href="home.php?pg=28" class="bx_tusped-btn-sg-ev">Seguir
+                                Envío</a></div>
+                    </div>
 
                 </div>
-                <a href="home.php?pg=28" class="btn btn-outline-danger">Seguir Envío</a>
-            </div>
-            <?php }?>
+            <?php } ?>
         </div>
 
     </div>
