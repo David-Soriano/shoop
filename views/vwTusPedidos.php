@@ -1,3 +1,5 @@
+<?php
+include_once("controller/cped.php");?>
 <div class="container my-5 bx-tusped-gen">
     <div class="p-3 bx-tusped-gen-n2">
         <h2 class="text-center fw-bold">Tus Pedidos</h2>
@@ -32,7 +34,7 @@
                         <div class="col-2 bx_tusped-img"><img src="<?= $dtpd['imgpro'] ?>" alt="<?= $dtpd['nompro'] ?>">
                         </div>
                         <div class="col">
-                            <p class="bx_tusped-est-ped"><?= $dtpd['estped'] ?></p>
+                            <p class="bx_tusped-est-ped" <?php if($dtpd['estped'] == "Cancelado"){ echo "style='color:red;'";} ?>><?=$dtpd['estped']?></p>
                             <p class="bx_tusped-ult-acc">Ultima Acción</p>
                             <div class="bx_tusped-inf-nompro">
                                 <p class="bx_tusped-nompro"><?= $dtpd['nompro'] ?></p>
@@ -42,12 +44,12 @@
                         <div class="col">
                             <p class="bx_tusped-tienda"><?= $dtpd['nomprov'] ?></p>
                         </div>
-                        <div class="col bx_tusped-opcs"><a href="home.php?pg=28" class="bx_tusped-btn-sg-ev">Seguir
+                        <div class="col bx_tusped-opcs"><a href="home.php?pg=28&idped=<?=$dtpd['idped']?>" class="bx_tusped-btn-sg-ev">Seguir
                                 Envío</a></div>
                     </div>
-
                 </div>
             <?php } ?>
+
         </div>
 
     </div>

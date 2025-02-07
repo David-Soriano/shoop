@@ -8,6 +8,8 @@ body {
 
 body {
     background: #d0d0d069;
+    overflow: auto !important;
+    padding: 0;
 }
 
 header {
@@ -478,7 +480,7 @@ footer {
     color: #4b4d04;
 }
 
-#deleteButton {
+#deleteButton, #deleteButton2 {
     color: rgb(243, 76, 76);
 }
 
@@ -595,11 +597,11 @@ footer {
     /* height: 40px;*/
 }
 
-#proveedorForm input:focus{
+#proveedorForm input:focus {
     outline: none;
 }
 
-#proveedorForm textarea{
+#proveedorForm textarea {
     resize: none;
     background: transparent;
     border: none;
@@ -608,7 +610,7 @@ footer {
     margin-left: 26px;
 }
 
-#proveedorForm textarea:focus{
+#proveedorForm textarea:focus {
     outline: none;
 }
 
@@ -650,4 +652,16 @@ footer {
     display: flex;
     flex-direction: column;
     width: fit-content;
+}
+
+.bx-st-ped .bx-st-ped_st {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.bx-st-ped .bx-st-ped_st div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

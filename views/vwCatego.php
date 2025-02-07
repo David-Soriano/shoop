@@ -21,20 +21,20 @@
                                 </div>
                                 <div class="col inf-artc">
                                     <h6><?php echo htmlspecialchars($producto['nompro']); ?></h6>
-                                    <?php if ($producto['valor_con_descuento'] > 0) { ?>
+                                    <?php if ($producto['pordescu'] > 0) { ?>
                                         <p id="val-sindes">
-                                            $<del><?php echo number_format($producto['valorunitario'], 0, ',', '.'); ?></del>
+                                            $<del><?php echo number_format($producto['precio'], 0, ',', '.'); ?></del>
                                         </p>
                                     <?php } ?>
                                     <div class="inf-tot-prc">
                                         <p id="prc-fin">
                                             <?php
                                             // Verificar si el valor con descuento es válido y mayor que 0
-                                            $valorConDescuento = $producto['valor_con_descuento'] > 0 ? $producto['valor_con_descuento'] : $producto['valorunitario'];
+                                            $valorConDescuento = $producto['valor_con_descuento'] > 0 ? $producto['valor_con_descuento'] : $producto['precio'];
                                             echo "$" . number_format($valorConDescuento, 0, ',', '.');
                                             ?>
                                         </p>
-                                        <?php if ($producto['valor_con_descuento'] > 0) { ?>
+                                        <?php if ($producto['pordescu'] > 0) { ?>
                                             <p id="inf-val-des"><?php echo $producto['pordescu']; ?>%</p>
                                         <?php } ?>
 

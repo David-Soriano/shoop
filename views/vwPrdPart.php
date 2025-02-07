@@ -45,15 +45,18 @@
                     <div class="col-7 bx-car-prd">
                         <div class="bx-compu">
                             <section>
+                                <div class="bx-ico-favo">
+                                    <i class="bi bi-heart" id="heart-icon" data-idusu="<?=$_SESSION['idusu']?>" data-idpro="<?=$dtinf['idpro']?>"></i>
+                                </div>
                                 <p><?php if ($dtinf['es_nuevo']) { ?>Nuevo | <?php }
                                 echo $dtinf['productvend']; ?> vendidos</p>
                                 <h3><?= $dtinf['nompro']; ?></h3>
                             </section>
                         </div>
-                        <?php if ($dtinf['valor_con_descuento'] > 0) { ?>
-                            <del>$<?php echo number_format($dtinf['valorunitario'], 0, ",", "."); ?></del>
+                        <?php if ($dtinf['pordescu'] > 0) { ?>
+                            <del>$<?php echo number_format($dtinf['precio'], 0, ",", "."); ?></del>
                         <?php } ?>
-                        <h4><?php $valorConDescuento = $dtinf['valor_con_descuento'] > 0 ? $dtinf['valor_con_descuento'] : $dtinf['valorunitario'];
+                        <h4><?php $valorConDescuento = $dtinf['valor_con_descuento'] > 0 ? $dtinf['valor_con_descuento'] : $dtinf['precio'];
                         echo "$" . number_format($valorConDescuento, 0, ",", "."); ?>
                             <?php if ($dtinf['pordescu']) { ?>
                                 <span><?= $dtinf['pordescu']; ?>% OFF</span>
@@ -124,9 +127,9 @@
                 foreach ($dtInfPrd as $dtinf) { ?>
                     <div class="col-10 bx-car-prd">
                         <?php if ($dtinf['valor_con_descuento'] > 0) { ?>
-                            <del>$<?php echo number_format($dtinf['valorunitario'], 0, ",", "."); ?></del>
+                            <del>$<?php echo number_format($dtinf['precio'], 0, ",", "."); ?></del>
                         <?php } ?>
-                        <h4><?php $valorConDescuento = $dtinf['valor_con_descuento'] > 0 ? $dtinf['valor_con_descuento'] : $dtinf['valorunitario'];
+                        <h4><?php $valorConDescuento = $dtinf['valor_con_descuento'] > 0 ? $dtinf['valor_con_descuento'] : $dtinf['precio'];
                         echo "$" . number_format($valorConDescuento, 0, ",", "."); ?>
                             <?php if ($dtinf['pordescu']) { ?>
                                 <span><?= $dtinf['pordescu']; ?>% OFF</span>

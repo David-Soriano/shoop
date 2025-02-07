@@ -309,6 +309,7 @@ footer {
     background: #454546;
     color: #cdc1c1;
     height: 20vh;
+    width: 101%;
 }
 
 .bx-foot-info {
@@ -1108,11 +1109,8 @@ form button {
     background: #fffbfb;
     padding: 4%;
     border-radius: 8px;
-    margin: 4% 0;
-    margin-left: auto;
-    /* Centra el contenedor */
-    margin-right: auto;
-    /* Centra el contenedor */
+    margin: 4% auto;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .102);
 }
 
 .bx-art-sg {
@@ -1196,6 +1194,7 @@ form button {
 .bx-apart.bx-apart_views {
     width: 50%;
     overflow: hidden;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .102);
 }
 
 .bx-tsec {
@@ -1226,6 +1225,7 @@ form button {
     text-decoration: none;
     padding: 5%;
     border-radius: 8px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .102);
 }
 
 .bx-anres h2,
@@ -1250,7 +1250,7 @@ form button {
     .inf-perfil div {
         width: 12%;
         top: 6%;
-        right: -2.5%;
+        right: 0.5%;
     }
 }
 
@@ -1591,25 +1591,118 @@ form button {
     transition: all 400ms;
 }
 
+.bx_tusped-btn-sg-ev.vol-comp {
+    font-size: 12px;
+    background-color: rgba(65, 137, 230, .15);
+    border-color: transparent;
+    color: #3483fa;
+    font-weight: 500;
+}
+
 .bx_tusped-btn-sg-ev:hover {
     background-color: #d35454;
 }
 
+.bx_tusped-btn-sg-ev.vol-comp:hover {
+    background-color: rgba(65, 137, 230, .2);
+}
+
 .bx_tusped-opcs {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 10%;
 }
 
 .bx-seg-env {
-    height: 26vh;
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
     background: #FFF;
     border-radius: 7px;
     padding: 2% 4%;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .1);
+}
+
+.bx-seg-env_estados {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.bx-seg-env_img {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bx-seg-env_img .img-sg-env {
+    width: 70%;
+}
+
+.bx-seg-env_catg {
+    font-size: 12px;
+    font-weight: 200;
+    margin: 1% 0 0;
+}
+
+.bx-seg-env-minf_det-com .row {
+    border-bottom: 1px solid #d3d2d2;
+    padding: 4% 0;
+    margin: 0;
+}
+
+.bx-seg-env-minf_det-com .row .col,
+.bx-seg-dt_fech {
+    padding: 0;
+    color: rgba(0, 0, 0, .55);
+    font-size: 14px;
+}
+
+.bx-seg-env-minf_inf-comp .bx-seg-env-minf_inf-com-ico {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.bx-seg-env-minf_inf-comp .bx-seg-env-minf_inf-comp-ico i {
+    font-size: 25px;
+}
+
+.bx-seg-env-minf_inf-comp-des p {
+    font-size: 14px;
+}
+
+.bx-seg-env-minf_inf-comp-des a {
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.bx-seg-env-minf_help ul li {
+    background: none;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    list-style-type: none;
+    padding: 14px 16px;
+    width: 100%;
+    transition: all 400ms;
+}
+
+.bx-seg-env-minf_help ul li:hover{
+    background-color: #f5f5f5;
+}
+
+.bx-seg-env-minf_help ul li a {
+    color: rgba(0, 0, 0, .9);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.25;
+    text-decoration: none;
+}
+
+.vl-green {
+    color: #00a650;
 }
 
 .dot {
@@ -1621,7 +1714,7 @@ form button {
     transition: all 400ms;
 }
 
-.dot:hover {
+.dot-active {
     background-color: #ff0000;
     transform: scale(1.5);
 }
@@ -1645,20 +1738,22 @@ form button {
 .bx-seg-env-minf {
     display: flex;
     gap: 2%;
+    margin-bottom: 2%;
 }
 
-.bx-seg-env-minf .bx-seg-dt{
+.bx-seg-env-minf .bx-seg-dt {
     border-radius: 5px;
     min-height: 10vh;
     padding: 2%;
 }
 
-.bx-seg-env-minf .bx-seg-dt h4{
+.bx-seg-env-minf .bx-seg-dt h4 {
     font-size: 16px;
     font-weight: 600;
     border-bottom: 1px solid #d5d5d5;
     padding: 1%;
 }
+
 .bx-seg-env-minf_det-com {
     background-color: #f5f5f5;
 }
@@ -1666,4 +1761,13 @@ form button {
 .bx-seg-env-minf_help {
     background-color: #FFF;
     box-shadow: 0 1px 2px rgba(0, 0, 0, .12);
+}
+.bx-ico-favo i {
+    color: #ff6b6b; /* Rojo suave */
+    cursor: pointer; /* Cambia el cursor al puntero */
+    transition: color 0.3s ease-in-out; /* Suaviza la transición del color */
+}
+
+.bx-ico-favo i.bi-heart-fill {
+    color: #e63946; /* Un rojo más fuerte cuando está activado */
 }

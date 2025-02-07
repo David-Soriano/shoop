@@ -199,7 +199,7 @@ class Mpro
     public function getOnePrd()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.pordescu, p.productvend, p.cantidad, img.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo, prov.nomprov, prov.dirrecprov, prov.url, prov.estado, prov.desprv FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE idpro = :idpro ORDER BY ordimg ASC LIMIT 1) AS img ON p.idpro = img.idpro LEFT JOIN prodxprov AS pp ON p.idpro = pp.idpro LEFT JOIN proveedor AS prov ON pp.idprov = prov.idprov WHERE p.idpro = :idpro AND p.estado = 'activo';";
+        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.precio, p.pordescu, p.productvend, p.cantidad, img.imgpro, p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo, prov.nomprov, prov.dirrecprov, prov.url, prov.estado, prov.desprv FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE idpro = :idpro ORDER BY ordimg ASC LIMIT 1) AS img ON p.idpro = img.idpro LEFT JOIN prodxprov AS pp ON p.idpro = pp.idpro LEFT JOIN proveedor AS prov ON pp.idprov = prov.idprov WHERE p.idpro = :idpro AND p.estado = 'activo';";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -218,7 +218,7 @@ class Mpro
     public function getInfPar()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro,p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' GROUP BY p.idpro;
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, i.imgpro, p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' GROUP BY p.idpro;
 ";
         try {
             $modelo = new Conexion();
@@ -236,8 +236,8 @@ class Mpro
     public function getInfOfertas()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro, 
-            p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento 
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, i.imgpro, 
+            p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento 
             FROM producto AS p 
             LEFT JOIN imagen AS i ON p.idpro = i.idpro 
             WHERE p.estado = 'activo' AND p.pordescu > 0
@@ -259,8 +259,8 @@ class Mpro
     public function getInfOfertasAll()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro, 
-            p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento 
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, i.imgpro, 
+            p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento 
             FROM producto AS p 
             LEFT JOIN imagen AS i ON p.idpro = i.idpro 
             WHERE p.estado = 'activo' AND p.pordescu > 0
@@ -281,7 +281,7 @@ class Mpro
     public function getInfMasVendidos()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro, CASE WHEN p.pordescu > 0 THEN p.valorunitario - (p.valorunitario * (p.pordescu / 100)) ELSE 0 END AS valor_con_descuento FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' GROUP BY p.idpro ORDER BY p.productvend DESC LIMIT 4;";
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, i.imgpro, CASE WHEN p.pordescu > 0 THEN p.precio - (p.precio * (p.pordescu / 100)) ELSE 0 END AS valor_con_descuento FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' GROUP BY p.idpro ORDER BY p.productvend DESC LIMIT 4;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -297,8 +297,8 @@ class Mpro
     public function getInfMasVendidosAll()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, i.imgpro, 
-            p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento 
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, i.imgpro, 
+            p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento 
             FROM producto AS p 
             LEFT JOIN imagen AS i ON p.idpro = i.idpro 
             WHERE p.estado = 'activo' 
@@ -374,8 +374,8 @@ class Mpro
             $idsProductos = $_COOKIE['provis'];
 
             // Consulta SQL para obtener los detalles de los productos
-            $sql = "SELECT p.idpro, p.nompro, p.valorunitario, p.pordescu, i.imgpro,
-       p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE ordimg = (SELECT MIN(ordimg) FROM imagen WHERE idpro = imagen.idpro)) AS i ON p.idpro = i.idpro WHERE p.idpro IN ($idsProductos) AND p.estado = 'activo' ORDER BY FIELD(p.idpro, $idsProductos) DESC;"; // Mantener el orden de los productos
+            $sql = "SELECT p.idpro, p.nompro, p.valorunitario, p.precio, p.pordescu, i.imgpro,
+       p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE ordimg = (SELECT MIN(ordimg) FROM imagen WHERE idpro = imagen.idpro)) AS i ON p.idpro = i.idpro WHERE p.idpro IN ($idsProductos) AND p.estado = 'activo' ORDER BY FIELD(p.idpro, $idsProductos) DESC;"; // Mantener el orden de los productos
 
             try {
                 $modelo = new Conexion();
@@ -394,7 +394,7 @@ class Mpro
     public function getProductosNuevos()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.pordescu, p.feccreat, i.imgpro, i.ordimg, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo FROM producto AS p LEFT JOIN ( SELECT idpro, imgpro, ordimg FROM imagen WHERE ordimg = 1) AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' AND DATEDIFF(NOW(), p.feccreat) <= 20 ORDER BY p.feccreat DESC;";
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, p.feccreat, i.imgpro, i.ordimg, p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo FROM producto AS p LEFT JOIN ( SELECT idpro, imgpro, ordimg FROM imagen WHERE ordimg = 1) AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' AND DATEDIFF(NOW(), p.feccreat) <= 20 ORDER BY p.feccreat DESC;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -411,7 +411,7 @@ class Mpro
     public function getCatego($categoria)
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.precio, p.cantidad, p.tipro, p.valorunitario, p.feccreat, p.estado, p.pordescu, p.idval, v.nomval AS categoria, i.imgpro, p.valorunitario - (p.valorunitario * (p.pordescu / 100)) AS valor_con_descuento FROM producto p JOIN valor v ON p.idval = v.idval JOIN dominio d ON v.iddom = d.iddom LEFT JOIN (SELECT idpro, imgpro FROM imagen ORDER BY ordimg ASC) AS i ON p.idpro = i.idpro WHERE d.nomdom = 'Categorías' AND v.nomval = :categoria AND p.estado = 'activo' GROUP BY p.idpro";
+        $sql = "SELECT p.idpro, p.nompro, p.precio, p.cantidad, p.tipro, p.valorunitario, p.precio, p.feccreat, p.estado, p.pordescu, p.idval, v.nomval AS categoria, i.imgpro, p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento FROM producto p JOIN valor v ON p.idval = v.idval JOIN dominio d ON v.iddom = d.iddom LEFT JOIN (SELECT idpro, imgpro FROM imagen ORDER BY ordimg ASC) AS i ON p.idpro = i.idpro WHERE d.nomdom = 'Categorías' AND v.nomval = :categoria AND p.estado = 'activo' GROUP BY p.idpro";
 
         try {
             $modelo = new Conexion();

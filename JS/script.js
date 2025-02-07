@@ -240,14 +240,51 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
                 cantidad
             })
         })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message); // Notificar al usuario
-            console.log(data); // Verificar la respuesta
-        })
-        .catch(error => console.error('Error:', error));
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); // Notificar al usuario
+                console.log(data); // Verificar la respuesta
+            })
+            .catch(error => console.error('Error:', error));
     });
 });
+
+window.addEventListener('load', () => {
+    document.getElementById("heart-icon").addEventListener("click", function () {
+        this.classList.toggle("bi-heart-fill");
+        this.classList.toggle("bi-heart");
+    });
+});
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".bx-ico-favo i").forEach(icon => {
+        icon.addEventListener("click", async function () {
+            let idusu = this.getAttribute("data-idusu");
+            let idpro = this.getAttribute("data-idpro");
+            let accion = this.classList.contains("bi-heart-fill") ? "eliminar" : "agregar";
+
+            try {
+                let response = await fetch("controller/cfav.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: `idusu=${idusu}&idpro=${idpro}&accion=${accion}`
+                });
+                let data = await response.json();
+
+                if (data.success) {
+                    // ✅ Asegura que el icono cambia correctamente
+                    this.classList.toggle("bi-heart-fill", accion === "agregar");
+                    this.classList.toggle("bi-heart", accion === "eliminar");
+                } else {
+                    alert("Error: " + (data.error || "No se pudo actualizar"));
+                }
+            } catch (error) {
+                console.error("Error en la solicitud:", error);
+            }
+        });
+    });
+});
+
+
 
 // ======= Cargar todas las configuraciones al inicio =======
 window.addEventListener('load', () => {

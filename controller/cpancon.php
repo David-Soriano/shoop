@@ -8,10 +8,12 @@ require_once '../model/conexion.php';
 require_once '../model/mpancon.php';
 require_once '../model/mprov.php';
 require_once '../model/mpro.php';
+require_once '../model/mped.php';
 
 $control = new Mpancon();
 $prov = new Mprov();
 $mpro = new Mpro();
+$mped = new Pedido();
 
 $idusus = $_SESSION['idusu'] ?? null;
 $idProveedor = $idusus ? $prov->existeProveedor($idusus) : null;
@@ -41,12 +43,20 @@ $control->getIdPrv($idusus);
 
 // Obtener el total de productos del proveedor
 $totalResults = $idProveedor ? $mpro->getCantPrd($idProveedor) : 0;
+$totalPedidos = $mped->getTotalPed();
+
+$totalPed = ceil($totalPedidos / $resultsPerPage);
 $totalPages = ceil($totalResults / $resultsPerPage);
+
 $dtAllPrd = $mpro->getAllPrd($idProveedor, $resultsPerPage, $offset);
+$dtAllPedidos = $mped->getPedidos($_SESSION['idprov']);
 
 $start = $offset + 1;
 $end = min($offset + $resultsPerPage, $totalResults);
+$end2 = min($offset + $resultsPerPage, $totalPedidos);
+
 $recordsMessage = "Mostrando: <b>{$start}-{$end}</b> de <b>{$totalResults}</b> resultados";
+$recordsMessage2 = "Mostrando: <b>{$start}-{$end2}</b> de <b>{$totalPedidos}</b> resultados";
 
 $caracteristicas = $_POST['descripcioncr'] ?? [];
 $res = "";

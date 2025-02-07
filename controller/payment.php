@@ -4,8 +4,9 @@ session_start();
 
 // Recibir y decodificar productos
 $productosJson = $_REQUEST['product'] ?? '';
-$productos = json_decode($productosJson, true);
-
+$ubicacionJson = $_REQUEST['ubicacion'] ?? '';
+// $productos = json_decode($productosJson, true);
+// $ubicacion = json_decode($ubicacionJson, true);
 // Validaciones básicas
 if (!isset($_POST['amount'], $_POST['descripcion'])) {
     die("Error: Falta información de pago.");
@@ -46,6 +47,7 @@ $signature = md5($signatureString);
         <input type="hidden" name="responseUrl" value="<?= PAYU_RESPONSE_URL; ?>">
         <input type="hidden" name="confirmationUrl" value="<?= PAYU_CONFIRMATION_URL; ?>">
         <input type="hidden" name="extra1" value='<?= htmlspecialchars($productosJson, ENT_QUOTES, 'UTF-8'); ?>'>
+        <input type="hidden" name="extra2" value='<?= htmlspecialchars($ubicacionJson, ENT_QUOTES, 'UTF-8'); ?>'>
     </form>
 
     <script>

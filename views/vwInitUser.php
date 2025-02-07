@@ -13,6 +13,10 @@ include "../controller/cusu.php";?>
                             <div class="section text-center">
                                 <h4 class="mb-4 pb-3">Iniciar Sesión</h4>
                                 <form action="../model/control.php" method="POST">
+                                <?php $err = isset($_GET['err']) ? $_GET['err'] : NULL;
+                                    if ($err == 'Ok') {
+                                        echo "<p class='msjErr'>Usuario o contraseña incorrectos</p>";
+                                    } ?>
                                     <div class="form-group">
                                         <input type="text" class="form-style" placeholder="Usuario" name="user"
                                             id="inp-user" required>
@@ -24,10 +28,6 @@ include "../controller/cusu.php";?>
                                         <i class="bi bi-lock input-icon"></i>
                                     </div>
                                     <input type="submit" value="Ingresar" class="btn mt-4">
-                                    <?php $err = isset($_GET['err']) ? $_GET['err'] : NULL;
-                                    if ($err == 'Ok') {
-                                        echo "<p class='msjErr'>Usuario o contraseña incorrectos</p>";
-                                    } ?>
                                 </form>
                                 <p class="mb-0 mt-4 text-center"><a href="vwLogin.php?aw=01" class="link">Olvido su
                                         contraseña?</a></p>

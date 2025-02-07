@@ -33,6 +33,9 @@ function valida($usu, $psw)
         $_SESSION['fotpef'] = $res[0]['fotpef'];
         $_SESSION['nompef'] = $res[0]['nompef'];
         $_SESSION['idpef'] = $res[0]['idpef'];
+        $_SESSION['idubi'] = $res[0]['idubi'];
+        $_SESSION['departamento'] = $res[0]['departamento'];
+        $_SESSION['ciudad'] = $res[0]['ciudad'];
         $_SESSION['pagini'] = $res[0]['pagiini'];
 
         $_SESSION['aut'] = getenv('DB_KEY') ?: 'Msjh$5%khdfHSÑjsdh:-.';
@@ -60,8 +63,8 @@ function ingr($usu, $pass)
 {
     $res = NULL;
 
-    // Query para obtener los datos del usuario basándose en su correo electrónico
-    $sql = "SELECT u.idusu, u.nomusu, u.apeusu, u.docusu, u.emausu, u.pasusu, u.celusu, u.genusu, u.dirrecusu, u.tipdoc, u.fotpef, u.idpef, p.nompef, p.pagini FROM usuario AS u INNER JOIN perfil AS p ON u.idpef = p.idpef WHERE u.emausu = :emausu";
+    // Query para obtener los datos del usuario incluyendo ciudad y departamento
+    $sql = "SELECT u.idusu, u.nomusu, u.apeusu, u.docusu, u.emausu, u.pasusu, u.celusu, u.genusu, u.dirrecusu, u.tipdoc, u.fotpef, u.idpef, u.idubi, p.nompef, p.pagini, ciu.nomubi AS ciudad, dep.nomubi AS departamento FROM usuario AS u INNER JOIN perfil AS p ON u.idpef = p.idpef INNER JOIN ubicacion AS ciu ON u.idubi = ciu.idubi LEFT JOIN ubicacion AS dep ON ciu.depenubi = dep.idubi WHERE u.emausu = :emausu";
 
     $modelo = new Conexion();
     $conexion = $modelo->getConexion();
@@ -69,12 +72,14 @@ function ingr($usu, $pass)
     $result->bindParam(":emausu", $usu);
     $result->execute();
     $user = $result->fetch(PDO::FETCH_ASSOC);
+
     // Verifica si el usuario existe y si la contraseña es correcta
     if ($user && password_verify($pass, $user['pasusu'])) {
         $res = [$user];
     }
     return $res;
 }
+
 
 
 function hash_password($pass)

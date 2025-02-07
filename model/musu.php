@@ -181,7 +181,6 @@ class Musu
     }
     function saveUsu()
     {
-        $res = NULL;
         $sql = "INSERT INTO usuario(nomusu, apeusu, tipdoc, docusu, emausu, celusu, genusu, idpef, pasusu) 
             VALUES (:nomusu, :apeusu, :tipdoc, :docusu, :emausu, :celusu, :genusu, :idpef, :pasusu)";
         try {
@@ -215,7 +214,6 @@ class Musu
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
             echo "Error al registrar. Inténtalo más tarde";
         }
-        return $res;
     }
 
     function verificarCorreo($emausu)

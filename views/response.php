@@ -9,6 +9,8 @@ if (!$conn) {
 $status = $_REQUEST['transactionState'] ?? ''; // Usa $_POST en lugar de $_REQUEST
 $idusu = $_SESSION['idusu']; // ID del usuario (se mantiene con $_REQUEST)
 $total = $_REQUEST['TX_VALUE'] ?? 0; // Monto total
+$mpago = $_REQUEST['lapPaymentMethod'] ?? '';
+$npago = $_REQUEST['lapPaymentMethodType'] ?? '';
 $total = filter_var($total, FILTER_VALIDATE_FLOAT) ?: 0; // Asegurar número válido
 $message = ($status == 4) ? "¡Pago aprobado!" : "Hubo un problema con el pago.";
 
@@ -24,16 +26,25 @@ if ($status == 4 && $idusu > 0 && $total > 0) { // Verifica valores antes de con
 
         // Insertar en la tabla detalle_pedido
         $productosJson = $_REQUEST['extra1'] ?? ''; // Recibir JSON de productos
+        $ubicaionJson = $_REQUEST['extra2'] ?? '';
         $productos = json_decode($productosJson, true);
+        $ubicacion = json_decode($ubicacionJson, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            error_log("Error al decodificar JSON de productos: " . json_last_error_msg(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            error_log("Error al decodificar JSON de ubicación: " . json_last_error_msg(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
         }
 
-        if (json_last_error() === JSON_ERROR_NONE && is_array($productos)) {
-            $stmtDetalle = $conn->prepare("INSERT INTO detalle_pedido (idped, idpro, cantidad, precio) VALUES (?, ?, ?, ?)");
+        if (json_last_error() === JSON_ERROR_NONE && is_array($productos) && is_array($ubicacion)) {
+            $stmtDetalle = $conn->prepare("INSERT INTO detalle_pedido (idped, idpro, cantidad, precio, mpago, npago, direccion, idubi) 
+                                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
             foreach ($productos as $producto) {
                 if (isset($producto['id'], $producto['cantidad'], $producto['precio'])) {
-                    $stmtDetalle->execute([$idPedido, $producto['id'], $producto['cantidad'], $producto['precio']]);
+                    // Obtener dirección e idubi de la ubicación decodificada
+                    $direccion = isset($ubicacion['direccion']) ? $ubicacion['direccion'] : '';
+                    $idubi = isset($ubicacion['idubi']) ? $ubicacion['idubi'] : null;
+
+                    // Ejecutar la consulta con los valores correspondientes
+                    $stmtDetalle->execute([$idPedido, $producto['id'], $producto['cantidad'], $producto['precio'], $mpago, $npago, $direccion, $idubi]);
                 }
             }
             $conn->commit();
@@ -64,7 +75,7 @@ error_log("Estado de la transacción: " . json_encode($_REQUEST));
 
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row bx-pago-conf">
             <div class="col">
                 <h3><?= htmlspecialchars($message) ?></h3>
                 <p>Gracias Por Tu Compra</p>
@@ -73,7 +84,7 @@ error_log("Estado de la transacción: " . json_encode($_REQUEST));
     </div>
     <script>
         setTimeout(function () {
-            window.location.href = "http://localhost/shoop/home.php?pg=16&idusu=<?= urlencode($idusu) ?>";
+            window.location.href = "http://localhost/shoop/home.php?pg=17&idusu=<?= urlencode($idusu) ?>";
         }, 5000);
     </script>
 </body>

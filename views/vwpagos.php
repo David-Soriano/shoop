@@ -1,6 +1,10 @@
 <?php
 include 'controller/config.php';
 $carrito = $_SESSION['respag'] ?? [];
+$ubicacion = [
+    'idubi' => $_SESSION['idubi'],
+    'direccion' => $_SESSION['dirrecusu']
+];
 ?>
 <div class="container bx-cont-carr-pro">
     <div class="row bx-prp-carr-comp">
@@ -13,6 +17,7 @@ $carrito = $_SESSION['respag'] ?? [];
                         <?php if ($_SESSION['dirrecusu']) { ?>
                             <p class="mb-1"><strong><?= $_SESSION['nomusu'] ?>     <?= $_SESSION['apeusu'] ?> TEL:
                                     <?= $_SESSION['celusu'] ?></strong></p>
+                            <p class="text-muted"><?= $_SESSION['departamento'] ?> - <?= $_SESSION['ciudad'] ?></p>
                             <p class="text-muted"><?= $_SESSION['dirrecusu'] ?></p>
                             <button>Cambiar</button>
                         <?php } else { ?>
@@ -69,7 +74,10 @@ $carrito = $_SESSION['respag'] ?? [];
                         <form method="POST" class="form-pago" action="controller/payment.php">
                             <input type="hidden" name="amount" value="<?= $total; ?>">
                             <input type="hidden" name="descripcion" value="Artículo: <?= $descrip ?>">
-                            <input type="hidden" name="product" value="<?= htmlspecialchars(json_encode($carrito, JSON_UNESCAPED_UNICODE), ENT_QUOTES, 'UTF-8'); ?>">
+                            <input type="hidden" name="product"
+                                value="<?= htmlspecialchars(json_encode($carrito, JSON_UNESCAPED_UNICODE), ENT_QUOTES, 'UTF-8'); ?>">
+                            <input type="hidden" name="ubicacion"
+                                value="<?= htmlspecialchars(json_encode($ubicacion, JSON_UNESCAPED_UNICODE), ENT_QUOTES, 'UTF-8'); ?>">
                             <button type="submit" class="btn btn-success">Realizar Pago</button>
                         </form>
                     </div>

@@ -1468,9 +1468,11 @@
  .bx-des-gf img {
      width: 12%;
  }
-.bx-des-gf ul{
-    width: 100%;
-}
+
+ .bx-des-gf ul {
+     width: 100%;
+ }
+
  .bx-crec-tv {
      display: flex;
      flex-direction: column;
@@ -1478,30 +1480,43 @@
      justify-content: center;
  }
 
- .nav-pg ul{
-    display: flex;
-    gap: 5%;
-    list-style: none;
+ .nav-pg ul {
+     display: flex;
+     gap: 5%;
+     list-style: none;
  }
 
- .btn-pf-adm button{
-    background: none;
-    border: none;
+ .btn-pf-adm button {
+     background: none;
+     border: none;
  }
 
- .btn-pf-adm button:hover{
-    background: none;
+ .btn-pf-adm button:hover {
+     background: none;
  }
 
- .btn-pf-adm .btn-secondary{
-    --bs-btn-active-bg: #ffffff00;
+ .btn-pf-adm .btn-secondary {
+     --bs-btn-active-bg: #ffffff00;
  }
 
- .btn-pf-adm ul{
-    background: none;
-    border:none;
+ .btn-pf-adm ul {
+     background: none;
+     border: none;
  }
 
- .btn-pf-adm ul li a{
-    border-radius: 7px;
+ .btn-pf-adm ul li a {
+     border-radius: 7px;
+ }
+
+ .bx-pago-conf .col {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+
+ .bx-pago-conf .col h3 {
+     transition: all 400ms;
+     font-size: 28px;
+     margin: 2%;
+     color: #0c6d15;
  }

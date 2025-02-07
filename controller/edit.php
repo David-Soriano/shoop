@@ -6,11 +6,11 @@ error_reporting(E_ALL);
 
 include "../model/conexion.php";
 include "../model/mpro.php";
-
-header('Content-Type: application/json'); 
+include "../model/mped.php";
+header('Content-Type: application/json');
 
 $mpro = new Mpro();
-
+$mped = new Pedido();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $productos = [];
 
         foreach ($idpro as $id) {
-            $id = intval($id); 
+            $id = intval($id);
             $producto = $mpro->getProductoById($id);
             if ($producto) {
                 $productos[] = $producto;
@@ -31,18 +31,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         } else {
             echo json_encode(null);
         }
+    } elseif (isset($_GET['idped'])) {
+        $idped = explode(',', $_GET['idped']);
+        $pedidos = [];
+
+        foreach ($idped as $id) {
+            $id = intval($id);
+            $mped->setIdped($id);
+            $pedido = $mped->getOne();
+            if ($pedido) {
+                $pedidos[] = $pedido;
+            }
+        }
+
+        if (!empty($pedidos)) {
+            echo json_encode($pedidos, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        } else {
+            echo json_encode(null);
+        }
     } else {
         http_response_code(400);
         echo json_encode(['error' => 'ID del producto no proporcionado.']);
     }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    ob_clean(); 
+    ob_clean();
     header('Content-Type: application/json');
 
     $data = json_decode(file_get_contents('php://input'), true);
     $idsPro = isset($data['idpro']) ? explode(',', $data['idpro']) : [];
-    
+
     if (empty($idsPro)) {
         echo json_encode(['success' => false, 'error' => 'ID(s) de producto no proporcionado(s).']);
         exit;
