@@ -221,67 +221,210 @@ document.querySelectorAll('.btn-buy').forEach(button => {
     });
 });
 
-document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', () => {
-        const id = button.dataset.id;
-        const nombre = button.dataset.nombre;
-        const precio = button.dataset.precio;
-        const imagen = button.dataset.imagen;
-        const cantidad = 1; // O puedes permitir al usuario elegir la cantidad
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', () => {
+            const idpro = button.dataset.idpro;
+            const idusu = button.dataset.idusu;
+            const precio = button.dataset.precio;
 
-        fetch('controller/carrito.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                id,
-                nombre,
-                precio,
-                imagen,
-                cantidad
+            // Obtener la cantidad actual del input asociado
+            const inputCantidad = document.getElementById("cantidad");
+            const cantidad = inputCantidad ? inputCantidad.value : 1;
+
+            fetch('controller/ccarr.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    idpro,
+                    idusu,
+                    precio,
+                    cantidad
+                })
             })
-        })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message); // Notificar al usuario
-                console.log(data); // Verificar la respuesta
-            })
-            .catch(error => console.error('Error:', error));
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message); // Notifica al usuario
+                    console.log(data); // Verifica la respuesta
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+});
+
+
+document.querySelectorAll(".bx-ico-favo i").forEach(async icon => {
+    const idusu = icon.getAttribute("data-idusu");
+    const idpro = icon.getAttribute("data-idpro");
+
+    try {
+        let response = await fetch("controller/cfav.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `idusu=${idusu}&idpro=${idpro}&accion=verificar`
+        });
+
+        let responseText = await response.text();
+
+        let data = JSON.parse(responseText);
+
+        if (data.success) {
+            // Si el producto está en favoritos, se agrega la clase 'bi-heart-fill' y se quita 'bi-heart'
+            if (data.isFavorite) {
+                icon.classList.add("bi-heart-fill");
+                icon.classList.remove("bi-heart");
+            } else {
+                icon.classList.add("bi-heart");
+                icon.classList.remove("bi-heart-fill");
+            }
+        } else {
+            alert("Hubo un error al verificar el estado del favorito.");
+        }
+    } catch (error) {
+        console.error("Error al verificar si el producto está en favoritos:", error);
+    }
+
+    // Manejador de evento de clic para alternar entre favoritos
+    icon.addEventListener("click", async function () {
+        let accion = this.classList.contains("bi-heart-fill") ? "eliminar" : "agregar";
+
+        try {
+            let response = await fetch("controller/cfav.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `idusu=${idusu}&idpro=${idpro}&accion=${accion}`
+            });
+            let data = await response.json();
+
+            if (data.success) {
+                this.classList.toggle("bi-heart-fill", accion === "agregar");
+                this.classList.toggle("bi-heart", accion === "eliminar");
+            } else {
+                alert("Error: " + (data.error || "No se pudo actualizar"));
+            }
+        } catch (error) {
+            console.error("Error en la solicitud:", error); // Depuración
+        }
     });
 });
 
 window.addEventListener('load', () => {
-    document.getElementById("heart-icon").addEventListener("click", function () {
-        this.classList.toggle("bi-heart-fill");
-        this.classList.toggle("bi-heart");
-    });
-});
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".bx-ico-favo i").forEach(icon => {
-        icon.addEventListener("click", async function () {
-            let idusu = this.getAttribute("data-idusu");
-            let idpro = this.getAttribute("data-idpro");
-            let accion = this.classList.contains("bi-heart-fill") ? "eliminar" : "agregar";
+    document.querySelectorAll('.bx-favor-elim').forEach(btn => {
+        btn.addEventListener('click', async function () {
+            let idusu = this.getAttribute('data-idusu');
+            let idpro = this.getAttribute('data-idpro');
+
+            if (!idusu || !idpro) {
+                console.error("ID de usuario o producto no encontrados.");
+                return;
+            }
 
             try {
-                let response = await fetch("controller/cfav.php", {
-                    method: "POST",
+                let response = await fetch('controller/cfav.php', {
+                    method: 'POST',
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: `idusu=${idusu}&idpro=${idpro}&accion=${accion}`
+                    body: `idusu=${idusu}&idpro=${idpro}&accion=eliminar`
                 });
+
                 let data = await response.json();
 
                 if (data.success) {
-                    // ✅ Asegura que el icono cambia correctamente
-                    this.classList.toggle("bi-heart-fill", accion === "agregar");
-                    this.classList.toggle("bi-heart", accion === "eliminar");
+                    console.log(`Producto eliminado correctamente: ID ${idpro}`);
+                    location.reload();
                 } else {
-                    alert("Error: " + (data.error || "No se pudo actualizar"));
+                    console.error('Error al eliminar el favorito:', data.error || 'No se pudo eliminar.');
                 }
+
             } catch (error) {
-                console.error("Error en la solicitud:", error);
+                console.error('Error en la solicitud:', error);
             }
         });
     });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Obtener el input de cantidad y el botón de agregar al carrito
+    const cantidadInput = document.getElementById("cantidad");
+    const btnAddCart = document.getElementById("btn-add-carr");
+
+    if (cantidadInput && btnAddCart) {
+        // Actualizar el data-cantidad cuando cambie la cantidad
+        cantidadInput.addEventListener("input", () => {
+            let cantidad = cantidadInput.value;
+            let maxCantidad = cantidadInput.getAttribute("data-max");
+
+            // Asegurar que la cantidad no supere el stock disponible
+            if (cantidad > maxCantidad) {
+                cantidadInput.value = maxCantidad;
+                cantidad = maxCantidad;
+            } else if (cantidad < 1) {
+                cantidadInput.value = 1;
+                cantidad = 1;
+            }
+
+            // Asignar la cantidad al atributo data-cantidad del botón
+            btnAddCart.setAttribute("data-cantidad", cantidad);
+            console.log(`Cantidad actualizada: ${cantidad}`); // Depuración
+        });
+    }
+
+    document.getElementById("formPago").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Evita el envío automático
+
+        let productos = [];
+        document.querySelectorAll(".producto-carrito").forEach(item => {
+            productos.push({
+                id: item.dataset.idpro,
+                nombre: item.dataset.nombre,
+                cantidad: item.dataset.cantidad,
+                precio: item.dataset.precio,
+                imagen: item.dataset.imagen // Asegúrate de tener este atributo en el HTML
+            });
+        });
+
+        try {
+            let response = await fetch("controller/resPago.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(productos)
+            });
+
+            let data = await response.json();
+
+            if (data.status === "success") {
+                window.location.href = "home.php?pg=9"; // Redirige a la página de pago
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
+    });
+
+    document.querySelectorAll('.btn-eli-pcar').forEach(boton => {
+        boton.addEventListener('click', function (event) {
+            event.preventDefault();
+    
+            const idProducto = this.getAttribute('data-idpro');
+    
+            fetch('controller/ccarr.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idpro: idProducto, acc: "eli" })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+    
+
 });
 
 

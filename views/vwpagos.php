@@ -8,7 +8,7 @@ $ubicacion = [
 ?>
 <div class="container bx-cont-carr-pro">
     <div class="row bx-prp-carr-comp">
-        <div class="col bx-items-carr-comp">
+        <div class="col bx-items-carr-comp bx-pagos">
             <div class="col-6">
                 <div class="container mt-5">
                     <!-- Dirección de Entrega -->
@@ -39,6 +39,11 @@ $ubicacion = [
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            $total = 0; // Inicializar total antes del bucle
+                            $descripciones = []; // Para guardar la descripción de todos los productos
+                            ?>
+
                             <?php foreach ($carrito as $item) { ?>
                                 <tr>
                                     <td><img src="<?= $item['imagen']; ?>" alt="<?= $item['nombre']; ?>"
@@ -48,7 +53,13 @@ $ubicacion = [
                                     <td>$<?= number_format($item['precio'], 0, ",", "."); ?></td>
                                     <td>$<?= number_format($item['cantidad'] * $item['precio'], 0, ",", "."); ?></td>
                                 </tr>
+
+                                <?php
+                                $total += $item['cantidad'] * $item['precio']; // Acumular el total
+                                $descripciones[] = $item['nombre']; // Agregar nombre del producto a la descripción
+                                ?>
                             <?php } ?>
+
                         </tbody>
                     </table>
 
@@ -60,16 +71,18 @@ $ubicacion = [
                                 placeholder="(Opcional) Dejar un mensaje al vendedor">
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
-                            <p><strong>Opción de Envío:</strong> Estándar Rápido (Recibir antes del 4 - 16 de
-                                diciembre)</p>
+                            <p><strong>Opción de Envío:</strong> Estándar Rápido (Recibir antes del 4 - 16 de diciembre)
+                            </p>
                         </div>
                     </div>
-                    <?php $total = $item['cantidad'] * $item['precio'];
-                    $descrip = $item['nombre']; ?>
+                    <?php
+                    $descrip = implode(", ", $descripciones); // Convertir la lista de nombres en una cadena
+                    ?>
+
                     <!-- Resumen total -->
                     <div class="bx-res-tot-pag">
                         <h4>Total a pagar:
-                            <span>$<?= number_format($item['cantidad'] * $item['precio'], 0, ",", "."); ?></span> COP
+                            <span>$<?= number_format($total, 0, ",", "."); ?></span> COP
                         </h4>
                         <form method="POST" class="form-pago" action="controller/payment.php">
                             <input type="hidden" name="amount" value="<?= $total; ?>">

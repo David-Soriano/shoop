@@ -98,9 +98,7 @@
                             data-imagen="<?= $dtinf['imgpro']; ?>"><a
                                 href="<?php echo $isLoggedIn ? "home.php?pg=9&idpro=" . $dtinf['idpro'] : "views/vwLogin.php"; ?>">Lo
                                 quiero </a></button>
-                        <button id="btn-add-carr" class="add-to-cart" data-id="<?= $dtinf['idpro']; ?>"
-                            data-nombre="<?= $dtinf['nompro']; ?>" data-precio="<?= $valorConDescuento; ?>"
-                            data-imagen="<?= $dtinf['imgpro']; ?>" title="Añadir al carrito"><i
+                        <button id="btn-add-carr" class="add-to-cart" data-idpro="<?= $dtinf['idpro']; ?>" data-precio="<?= $valorConDescuento; ?>" data-cantidad="1" data-idusu="<?=$_SESSION['idusu']?>" title="Añadir al carrito"><i
                                 class="bi bi-cart2"></i></button>
                         <div class="col">
                             <h6>Información de la Tienda</h6>

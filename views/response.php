@@ -1,7 +1,9 @@
 <?php
 require_once '../model/conexion.php'; // Asegúrate de conectar a la BD
+require_once '../model/mcarr.php';
 session_start();
 $modelo = new Conexion();
+$carrito = new CarritoModel($modelo->getConexion());
 $conn = $modelo->getConexion();
 if (!$conn) {
     error_log("Error de conexión a la base de datos.", 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
@@ -18,6 +20,7 @@ if ($status == 4 && $idusu > 0 && $total > 0) { // Verifica valores antes de con
     try {
         $conn->beginTransaction();
 
+        $carrito->limpiarCarrito($idusu);
         // Insertar en la tabla pedido
         $stmt = $conn->prepare("INSERT INTO pedido (idusu, total, fecha, estped) VALUES (?, ?, NOW(), 'Aprobado')");
         $stmt->execute([$idusu, $total]);
@@ -26,7 +29,7 @@ if ($status == 4 && $idusu > 0 && $total > 0) { // Verifica valores antes de con
 
         // Insertar en la tabla detalle_pedido
         $productosJson = $_REQUEST['extra1'] ?? ''; // Recibir JSON de productos
-        $ubicaionJson = $_REQUEST['extra2'] ?? '';
+        $ubicacionJson = $_REQUEST['extra2'] ?? '';
         $productos = json_decode($productosJson, true);
         $ubicacion = json_decode($ubicacionJson, true);
         if (json_last_error() !== JSON_ERROR_NONE) {

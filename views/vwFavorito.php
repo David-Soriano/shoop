@@ -1,42 +1,54 @@
 <?php require_once("controller/cfav.php"); ?>
 <div class="container bx-cont-carr-pro">
     <div class="row bx-prp-carr-comp">
-        <?php if(!$dtFavoritos){?>
-        <div class="col bx-items-carr-comp">
-            <div class="col-6">
-                <?php echo $isLoggedIn ? "<h4>Aquí veras tus favoritos</h4>" : "<h4>Inicia sesión para guardar tus favoritos</h4>" ?>
-                <p>Encuentra productos y coleccionalos</p>
+    <?php if (empty($dtFavoritos)) { ?>
+            <div class="col bx-items-carr-comp">
+                <div class="col-6">
+                    <?php echo $isLoggedIn ? "<h4>Aquí veras tus favoritos</h4>" : "<h4>Inicia sesión para guardar tus favoritos</h4>" ?>
+                    <p>Encuentra productos y coleccionalos</p>
+                </div>
+                <div class="col-4">
+                    <img src="IMG/favoritos.svg" alt="favoritos">
+                </div>
             </div>
-            <div class="col-4">
-                <img src="IMG/favoritos.svg" alt="favoritos">
-            </div>
-        </div>
-        <?php } else{?>
-        <div class="p-3 bx-tusped-gen-n2">
-            <h2 class="text-center fw-bold">Tus Favoritos</h2>
+        <?php } else { ?>
+            <div class="p-3 bx-tusped-gen-n2">
+                <h2 class="text-center fw-bold">Tus Favoritos</h2>
 
-            <div class="my-3">
-                <?php foreach ($dtFavoritos as $dtf) { ?>
-                    <div class="card-body bx_tusped">
-                        <div class="row bx_tusped-dtp">
-                            <div class="col-2 bx_tusped-img"><img src="<?= $dtf['imgpro'] ?>" alt="<?= $dtf['nompro'] ?>">
-                            </div>
-                            <div class="col">
-                                <div class="bx_tusped-inf-nompro">
-                                    <p class="bx_tusped-nompro"><?= $dtf['nompro'] ?></p>
-                                    <p class="bx_tusped-nompro">$<?= $dtf['precio'] ?></p>
+                <div class="my-3">
+                    <?php foreach ($dtFavoritos as $dtf) { ?>
+                        <div class="card-body bx_tusped bx-favor">
+                            <a href="home.php?pg=001&idpro=<?= $dtf['idpro'] ?>" class="row bx_tusped-dtp bx-favor-dtp">
+                                <div class="col-2 bx_tusped-img">
+                                    <img src="<?= $dtf['imgpro'] ?>" alt="<?= $dtf['nompro'] ?>">
                                 </div>
-                            </div>
-                            <div class="col">
-                                <p class="bx_tusped-tienda"><?= $dtf['pordescu'] ?></p>
-                            </div>
-                            <div class="col bx_tusped-opcs"><a href="home.php?pg=28&idpro=<?= $dtf['idpro'] ?>"
-                                    class="bx_tusped-btn-sg-ev">Ver Producto</a></div>
+                                <div class="col">
+                                    <div class="bx_tusped-inf-nompro bx-favor-inf-nompro">
+                                        <div>
+                                            <p class="bx_tusped-nompro bx-favor-nompro"><?= $dtf['nompro'] ?></p>
+                                            <?php if ($dtf['pordescu'] > 0) { ?>
+                                                <del
+                                                    class="bx-favor-del">$<?php echo number_format($dtf['precio'], 0, ",", "."); ?></del>
+                                            <?php } ?>
+                                            <p class="bx_tusped-nompro">
+                                                $<?= number_format($dtf['valor_con_descuento'], 0, ",", "."); ?></p>
+                                        </div>
+                                        <p class="bx-favor-prd-vend"><?= $dtf['productvend'] ?> Vendidos</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p class="bx-favor-nomv"><?= $dtf['nomval'] ?></p>
+                                    <?php if ($dtf['pordescu'] > 0) { ?>
+                                        <p class="bx_tusped-tienda bx-favor-descu"><?= $dtf['pordescu'] ?>% OFF</p>
+                                    <?php } ?>
+                                </div>
+                            </a>
+                            <div class="col bx_tusped-opcs bx-favor-opc"><button class="bx-favor-elim"
+                                    id="btn-eli-fav" data-idusu="<?= $_SESSION['idusu'] ?>" data-idpro="<?= $dtf['idpro'] ?>">Eliminar</button></div>
                         </div>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
-        <?php }?>
+        <?php } ?>
     </div>
 </div>
