@@ -17,6 +17,7 @@ class Musu
     private $fotpef;
     private $idpef;
     private $pasusu;
+    private $estusu;
     function getIdusu()
     {
         return $this->idusu;
@@ -80,6 +81,10 @@ class Musu
     function getPasusu()
     {
         return $this->pasusu;
+    }
+    function getEstusu()
+    {
+        return $this->estusu;
     }
     function setIdusu($idusu)
     {
@@ -145,6 +150,10 @@ class Musu
     {
         $this->pasusu = $pasusu;
     }
+    function setEstusu($estusu)
+    {
+        $this->estusu = $estusu;
+    }
     function getAll()
     {
         $res = NULL;
@@ -181,8 +190,8 @@ class Musu
     }
     function saveUsu()
     {
-        $sql = "INSERT INTO usuario(nomusu, apeusu, tipdoc, docusu, emausu, celusu, genusu, idpef, pasusu) 
-            VALUES (:nomusu, :apeusu, :tipdoc, :docusu, :emausu, :celusu, :genusu, :idpef, :pasusu)";
+        $sql = "INSERT INTO usuario(nomusu, apeusu, tipdoc, docusu, emausu, celusu, genusu, idubi, dirrecusu, idpef, pasusu) 
+        VALUES (:nomusu, :apeusu, :tipdoc, :docusu, :emausu, :celusu, :genusu, :idubi, :dirrecusu, :idpef, :pasusu)";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -195,6 +204,8 @@ class Musu
             $emausu = $this->getEmausu();
             $celusu = $this->getCelusu();
             $genusu = $this->getGenusu();
+            $idubi = $this->getIdubi();
+            $dirrecusu = $this->getDirrecusu();
             $idpef = $this->getIdpef();
             $pasusu = $this->getPasusu();
 
@@ -205,16 +216,32 @@ class Musu
             $result->bindParam(':emausu', $emausu, PDO::PARAM_STR);
             $result->bindParam(':celusu', $celusu, PDO::PARAM_STR);
             $result->bindParam(':genusu', $genusu, PDO::PARAM_STR);
+            $result->bindParam(':idubi', $idubi, PDO::PARAM_INT);
+            $result->bindParam(':dirrecusu', $dirrecusu, PDO::PARAM_STR);
             $result->bindParam(':idpef', $idpef, PDO::PARAM_INT);
             $result->bindParam(':pasusu', $pasusu, PDO::PARAM_STR);
 
             $result->execute();
-            // $res = $result->rowCount(); // Cambiado a rowCount() para ver si se insertaron filas
+
+            // Obtener el ID del usuario recién insertado
+            $lastId = $conexion->lastInsertId();
+
+            // Consultar el idpef del usuario recién insertado
+            $query = $conexion->prepare("SELECT idpef FROM usuario WHERE idusu = :lastId");
+            $query->bindParam(':lastId', $lastId, PDO::PARAM_INT);
+            $query->execute();
+
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+
+            return $data ? $data['idpef'] : null;
+
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
             echo "Error al registrar. Inténtalo más tarde";
+            return null;
         }
     }
+
 
     function verificarCorreo($emausu)
     {

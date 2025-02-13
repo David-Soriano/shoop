@@ -87,8 +87,12 @@
                                                         </td>
                                                         <td>
                                                             <div class="widget-26-job-title">
-                                                                <p><?= $dtu['nomusu']; ?> <?=$dtu['apeusu']; ?> - <?=$dtu['genusu']; ?></p>
-                                                                <p class="text-muted m-0"><span class="location"><?= $dtu['tipdoc']; ?> - <?= $dtu['docusu']; ?></span></p>
+                                                                <p><?= $dtu['nomusu']; ?>         <?= $dtu['apeusu']; ?> -
+                                                                    <?= $dtu['genusu']; ?>
+                                                                </p>
+                                                                <p class="text-muted m-0"><span
+                                                                        class="location"><?= $dtu['tipdoc']; ?> -
+                                                                        <?= $dtu['docusu']; ?></span></p>
 
                                                             </div>
                                                         </td>
@@ -96,22 +100,30 @@
                                                             <div class="widget-26-job-info">
                                                                 <p class="text-muted m-0"><span
                                                                         class="location"><?= $dtu['emausu']; ?></span></p>
-                                                                        <p><?= $dtu['celusu']; ?></p>
+                                                                <p><?= $dtu['celusu']; ?></p>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="widget-26-job-category indicator-wrap bg-soft-success" style="<?php if($dtu['estusu'] == 'Inactivo') echo "background-color: #ff96967a;";?>">
-                                                                <i class="indicator bg-success" style="<?php if($dtu['estusu'] == 'Inactivo') echo "background-color: rgb(224, 67, 46)!important; ";?>"></i>
+                                                            <div class="widget-26-job-category indicator-wrap bg-soft-success"
+                                                                style="<?php if ($dtu['estusu'] == 'Inactivo')
+                                                                    echo "background-color: #ff96967a;"; ?>">
+                                                                <i class="indicator bg-success"
+                                                                    style="<?php if ($dtu['estusu'] == 'Inactivo')
+                                                                        echo "background-color: rgb(224, 67, 46)!important; "; ?>"></i>
                                                                 <span><?= $dtu['estusu']; ?></span>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <?php if($dtu['nompef']){?>
-                                                            <div class="widget-26-job-category indicator-wrap bg-soft-success" style="<?php if($dtu['nompef'] == 'Administrador') echo "background-color: #ffce4aa6;";?>">
-                                                                <i class="indicator bg-success" style="<?php if($dtu['nompef'] == 'Administrador') echo "background-color: rgb(165, 128, 0)!important; ";?>"></i>
-                                                                <span><?= $dtu['nompef']; ?></span>
-                                                            </div>
-                                                            <?php }?>
+                                                            <?php if ($dtu['nompef']) { ?>
+                                                                <div class="widget-26-job-category indicator-wrap bg-soft-success"
+                                                                    style="<?php if ($dtu['nompef'] == 'Administrador')
+                                                                        echo "background-color: #ffce4aa6;"; ?>">
+                                                                    <i class="indicator bg-success"
+                                                                        style="<?php if ($dtu['nompef'] == 'Administrador')
+                                                                            echo "background-color: rgb(165, 128, 0)!important; "; ?>"></i>
+                                                                    <span><?= $dtu['nompef']; ?></span>
+                                                                </div>
+                                                            <?php } ?>
                                                         </td>
                                                     </tr>
                                                 <?php }
@@ -166,6 +178,150 @@
                     </ul>
                 </nav>
 
+            </div>
+        </div>
+    </div>
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Más Opciones
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModalrg"
+                    data-bs-whatever="@mdo">Nuevo Administrador</a></li>
+            <li><a class="dropdown-item" href="#">Perfiles</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalrg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <?php include "../controller/cubi.php"; ?>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar Administrador</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    title="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="../controller/cusu.php" id="form-rg-adm">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="nomusu" class="col-form-label">Nombre</label>
+                                <input type="text" class="form-control" name="nomusu" id="nomusu" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="apeusu" class="col-form-label">Apellido</label>
+                                <input type="text" class="form-control" name="apeusu" id="apeusu" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="tipdoc" class="col-form-label">Tipo Documento</label>
+                                <select class="form-control" id="tipdoc" name="tipdoc" required>
+                                    <option value="">Seleccione</option>
+                                    <option value="CC">C.C</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="docusu" class="col-form-label">No. Documento</label>
+                                <input type="number" class="form-control" name="docusu" id="docusu" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="emausu" class="col-form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" name="emausu" id="emausu" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="celusu" class="col-form-label">Teléfono</label>
+                                <input type="number" class="form-control" name="celusu" id="celusu" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Sexo</label>
+                                <div class="row">
+                                    <div class="col bx_rgadm-rad-sex">
+                                        <label for="genmas">M</label>
+                                        <input type="radio" name="genusu" id="genmas" value="M" required>
+                                    </div>
+                                    <div class="col bx_rgadm-rad-sex">
+                                        <label for="genfem">F</label>
+                                        <input type="radio" name="genusu" id="genfem" value="F" required>
+                                    </div>
+                                    <div class="col bx_rgadm-rad-sex">
+                                        <label for="genoth">Otro</label>
+                                        <input type="radio" name="genusu" id="genoth" value="O" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="depart" class="col-form-label">Departamento</label>
+                                <select name="depart" id="depart" class="form-control" required>
+                                    <option value="">Seleccione</option>
+                                    <?php if ($dtDtp) {
+                                        foreach ($dtDtp as $dtD) { ?>
+                                            <option value="<?= $dtD['idubi']; ?>"><?= $dtD['nomubi']; ?></option>
+                                        <?php }
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="ciudad" class="col-form-label">Ciudad</label>
+                                <select name="ciudad" id="ciudad" class="form-control" required>
+                                    <option value="">Seleccione un departamento</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="dirrecusu" class="col-form-label">Dirección</label>
+                                <input type="text" name="dirrecusu" id="dirrecusu" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="pasusu" class="col-form-label">Contraseña</label>
+                                <input type="password" class="form-control" name="pasusu" id="pasusu"
+                                    placeholder="Mínimo 6 caracteres" required>
+                                <p><i class="bi bi-question-circle-fill"></i> El usuario es su correo electrónico.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="hidden" name="idpef" value="2">
+                        <input type="hidden" name="ope" value="save">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Registrar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

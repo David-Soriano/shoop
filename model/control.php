@@ -7,36 +7,41 @@ $pass = isset($_POST['pass']) ? $_POST['pass'] : NULL;
 if ($usu && $pass) {
     valida($usu, $pass);
 } else {
-    red();
+    red("empty");
 }
 
 function valida($usu, $psw)
 {
-    $res = ingr($usu, $psw);
-    $res = isset($res) ? $res : NULL;
+    $user = obtenerUsuario($usu);
 
-    if ($res) {
-        ini_set('session.cookie_httponly', 1);  // Evita que JavaScript acceda a las cookies
-        ini_set('session.cookie_secure', 1);    // Solo permite el envío de cookies a través de HTTPS
+    if (!$user) {
+        red("email"); // Error por correo incorrecto
+    } elseif ($user['estusu'] === "Inactivo") {
+        red("inactivo"); // Usuario inactivo
+    } elseif (!password_verify($psw, $user['pasusu'])) {
+        red("password"); // Error por contraseña incorrecta
+    } else {
+        ini_set('session.cookie_httponly', 1);
+        ini_set('session.cookie_secure', 1);
         ini_set('session.cookie_samesite', 'Strict');
         session_start();
 
-        $_SESSION['idusu'] = $res[0]['idusu'];
-        $_SESSION['nomusu'] = $res[0]['nomusu'];
-        $_SESSION['apeusu'] = $res[0]['apeusu'];
-        $_SESSION['docusu'] = $res[0]['docusu'];
-        $_SESSION['emausu'] = $res[0]['emausu'];
-        $_SESSION['celusu'] = $res[0]['celusu'];
-        $_SESSION['genusu'] = $res[0]['genusu'];
-        $_SESSION['dirrecusu'] = $res[0]['dirrecusu'];
-        $_SESSION['tipdoc'] = $res[0]['tipdoc'];
-        $_SESSION['fotpef'] = $res[0]['fotpef'];
-        $_SESSION['nompef'] = $res[0]['nompef'];
-        $_SESSION['idpef'] = $res[0]['idpef'];
-        $_SESSION['idubi'] = $res[0]['idubi'];
-        $_SESSION['departamento'] = $res[0]['departamento'];
-        $_SESSION['ciudad'] = $res[0]['ciudad'];
-        $_SESSION['pagini'] = $res[0]['pagiini'];
+        $_SESSION['idusu'] = $user['idusu'];
+        $_SESSION['nomusu'] = $user['nomusu'];
+        $_SESSION['apeusu'] = $user['apeusu'];
+        $_SESSION['docusu'] = $user['docusu'];
+        $_SESSION['emausu'] = $user['emausu'];
+        $_SESSION['celusu'] = $user['celusu'];
+        $_SESSION['genusu'] = $user['genusu'];
+        $_SESSION['dirrecusu'] = $user['dirrecusu'];
+        $_SESSION['tipdoc'] = $user['tipdoc'];
+        $_SESSION['fotpef'] = $user['fotpef'];
+        $_SESSION['nompef'] = $user['nompef'];
+        $_SESSION['idpef'] = $user['idpef'];
+        $_SESSION['idubi'] = $user['idubi'];
+        $_SESSION['departamento'] = $user['departamento'];
+        $_SESSION['ciudad'] = $user['ciudad'];
+        $_SESSION['pagini'] = $user['pagiini'];
 
         $_SESSION['aut'] = getenv('DB_KEY') ?: 'Msjh$5%khdfHSÑjsdh:-.';
 
@@ -47,40 +52,26 @@ function valida($usu, $psw)
             header("Location: ../home.php");
             exit();
         }
-    } else {
-        red();
     }
 }
 
-
-function red()
+function red($error)
 {
-    header("Location: ../views/vwLogin.php?err=Ok");
+    header("Location: ../views/vwLogin.php?err=$error");
+    exit();
 }
 
-
-function ingr($usu, $pass)
+function obtenerUsuario($usu)
 {
-    $res = NULL;
-
-    // Query para obtener los datos del usuario incluyendo ciudad y departamento
-    $sql = "SELECT u.idusu, u.nomusu, u.apeusu, u.docusu, u.emausu, u.pasusu, u.celusu, u.genusu, u.dirrecusu, u.tipdoc, u.fotpef, u.idpef, u.idubi, p.nompef, p.pagini, ciu.nomubi AS ciudad, dep.nomubi AS departamento FROM usuario AS u INNER JOIN perfil AS p ON u.idpef = p.idpef INNER JOIN ubicacion AS ciu ON u.idubi = ciu.idubi LEFT JOIN ubicacion AS dep ON ciu.depenubi = dep.idubi WHERE u.emausu = :emausu";
+    $sql = "SELECT u.idusu, u.nomusu, u.apeusu, u.docusu, u.emausu, u.pasusu, u.celusu, u.genusu, u.dirrecusu, u.tipdoc, u.fotpef, u.idpef, u.idubi, u.estusu, p.nompef, p.pagini, ciu.nomubi AS ciudad, dep.nomubi AS departamento FROM usuario AS u INNER JOIN perfil AS p ON u.idpef = p.idpef INNER JOIN ubicacion AS ciu ON u.idubi = ciu.idubi LEFT JOIN ubicacion AS dep ON ciu.depenubi = dep.idubi WHERE u.emausu = :emausu";
 
     $modelo = new Conexion();
     $conexion = $modelo->getConexion();
     $result = $conexion->prepare($sql);
     $result->bindParam(":emausu", $usu);
     $result->execute();
-    $user = $result->fetch(PDO::FETCH_ASSOC);
-
-    // Verifica si el usuario existe y si la contraseña es correcta
-    if ($user && password_verify($pass, $user['pasusu'])) {
-        $res = [$user];
-    }
-    return $res;
+    return $result->fetch(PDO::FETCH_ASSOC);
 }
-
-
 
 function hash_password($pass)
 {

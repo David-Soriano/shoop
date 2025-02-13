@@ -362,10 +362,10 @@ function populateModal(data) {
         const product = data[0]; // Tomar el primer producto
         // Llenar los campos del formulario con los datos
         const estadoPedido = product.estped;
-        
+
         // Seleccionar el input correspondiente
         document.querySelectorAll('input[name="estped"]').forEach(radio => {
-            if(estadoPedido == 'Cancelado'){
+            if (estadoPedido == 'Cancelado') {
                 radio.disabled = true;
                 document.querySelector('.bx-st-ped_st').innerHTML = "Los pedidos CANCELADOS no se pueden actualizar.";
             } else if (radio.value === estadoPedido) {
@@ -694,6 +694,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
+$(document).ready(function () {
+    $("#depart").change(function () {
+        var departamentoID = $(this).val();
+        
+        if (departamentoID != "") {
+            $.ajax({
+                url: "../controller/cubi.php",
+                type: "POST",
+                data: { idubi: departamentoID },
+                dataType: "json",
+                success: function (data) {
+                    var opciones = '<option value="">Seleccione</option>';
+                    $.each(data, function (index, ciudad) {
+                        opciones += '<option value="' + ciudad.idubi + '">' + ciudad.nomubi + '</option>';
+                    });
+                    $("#ciudad").html(opciones);
+                }
+            });
+        } else {
+            $("#ciudad").html('<option value="">Seleccione un departamento primero</option>');
+        }
+    });
+});
 document.addEventListener('DOMContentLoaded', function () {
     cerrarModal();
     buttonsTablePedidos();

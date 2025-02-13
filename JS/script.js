@@ -404,30 +404,51 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.btn-eli-pcar').forEach(boton => {
         boton.addEventListener('click', function (event) {
             event.preventDefault();
-    
+
             const idProducto = this.getAttribute('data-idpro');
-    
+
             fetch('controller/ccarr.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ idpro: idProducto, acc: "eli" })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    location.reload();
-                } else {
-                    alert('Error: ' + data.message);
-                }
-            })
-            .catch(error => console.error('Error:', error));
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         });
     });
-    
+
 
 });
 
-
+$(document).ready(function () {
+    $("#depart").change(function () {
+        var departamentoID = $(this).val();
+        if (departamentoID != "") {
+            $.ajax({
+                url: "../controller/cubi.php",
+                type: "POST",
+                data: { idubi: departamentoID },
+                dataType: "json",
+                success: function (data) {
+                    var opciones = '<option value="">Seleccione</option>';
+                    $.each(data, function (index, ciudad) {
+                        opciones += '<option value="' + ciudad.idubi + '">' + ciudad.nomubi + '</option>';
+                    });
+                    $("#ciudad").html(opciones);
+                }
+            });
+        } else {
+            $("#ciudad").html('<option value="">Seleccione un departamento primero</option>');
+        }
+    });
+});
 
 // ======= Cargar todas las configuraciones al inicio =======
 window.addEventListener('load', () => {
