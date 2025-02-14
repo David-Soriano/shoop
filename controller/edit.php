@@ -7,10 +7,12 @@ error_reporting(E_ALL);
 include "../model/conexion.php";
 include "../model/mpro.php";
 include "../model/mped.php";
+include "../model/mpag.php";
 header('Content-Type: application/json');
 
 $mpro = new Mpro();
 $mped = new Pedido();
+$mpag = new Mpag();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
@@ -49,11 +51,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         } else {
             echo json_encode(null);
         }
+    } elseif (isset($_GET['idpag'])) {
+        $idpag = explode(',', $_GET['idpag']);
+        $paginas = [];
+        
+        foreach ($idpag as $id) {
+            $id = intval($id);
+            $mpag->setIdpag($id);
+            $pag = $mpag->getOnePage();
+            if ($pag) {
+                $paginas[] = $pag;
+            }
+        }
+        
+        if (!empty($paginas)) {
+            echo json_encode($paginas, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        } else {
+            echo json_encode(null);
+        }
     } else {
         http_response_code(400);
-        echo json_encode(['error' => 'ID del producto no proporcionado.']);
+        echo json_encode(['error' => 'ID no proporcionado.']);
     }
 }
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ob_clean();
     header('Content-Type: application/json');

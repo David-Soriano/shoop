@@ -56,12 +56,16 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <nav class="nav-pg">
-                                        <ul>
-                                            <li>Slider</li>
-                                            <li>Nueva Página</li>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Más Opciones
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Nueva Página</a></li>
+                                            <li><a class="dropdown-item" href="#">Slider</a></li>
                                         </ul>
-                                    </nav>
+                                    </div>
                                 </div>
                             </div>
                             <div class="result-body">
@@ -75,12 +79,13 @@
                                                 <th>Lugar Página</th>
                                                 <th>Ícono</th>
                                                 <th></th>
+                                                <th>Estado</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            if (isset($dtPag) && count($dtPag) > 0) {
-                                                foreach ($dtPag as $dtp) { ?>
+                                            if (isset($dtPags) && count($dtPags) > 0) {
+                                                foreach ($dtPags as $dtp) { ?>
                                                     <tr>
                                                         <td>
                                                             <div class="widget-26-job-starred">
@@ -124,7 +129,15 @@
                                                                 </div>
                                                             <?php } ?>
                                                         </td>
-                                                    </tr>
+                                                        <td>
+                                                            <div class="widget-26-job-info">
+                                                                <?php if ($dtp['Ver Pagina'] == 1)
+                                                                    echo "<p style='color: #00a650; font-weight: 600;'>Visible</p>";
+                                                                else
+                                                                    echo "<p style='color:rgb(166, 39, 0); font-weight: 600;'>Deshabilitada</p>" ?>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
                                                 <?php }
                                             } else { ?>
                                                 <tr>
@@ -134,9 +147,9 @@
                                         </tbody>
                                     </table>
                                     <div class="table-options-bar mt-3 d-flex justify-content-end">
-                                        <button type="button" class="btn me-2" id="editButton" title="Editar"><i
+                                        <button type="button" class="btn me-2" id="editButton3" title="Editar"><i
                                                 class="bi bi-pen-fill"></i></button>
-                                        <button class="" id="deleteButton" title="Eliminar"><i
+                                        <button class="" id="deleteButton3" title="Eliminar"><i
                                                 class="bi bi-trash-fill"></i>
                                         </button>
                                     </div>
@@ -180,104 +193,45 @@
             </div>
         </div>
     </div>
+    <!-- <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Más Opciones
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModalrg"
+                    data-bs-whatever="@mdo">Nuevo Administrador</a></li>
+            <li><a class="dropdown-item" href="#">Perfiles</a></li>
+        </ul>
+    </div> -->
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Sin artículo</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel2">Sin Página</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form enctype="multipart/form-data" method="POST" id="formUpdatePrd" action="../controller/cpancon.php">
-                    <div class="row">
+                <form enctype="multipart/form-data" method="POST" id="formUpdatePag"
+                    action="../controller/ceditpag.php">
+                    <div class="row bx-cont-vsi">
+                        <label for="actpag" class="col-form-label">Visibilidad</label>
                         <div class="col">
-                            <input type="text" name="nompro" placeholder="Nombre del artículo" required>
+                            <label for="hab-act">Habilitar</label>
+                            <input type="radio" name="actpag" value="1" id="hab-act">
                         </div>
                         <div class="col">
-                            <textarea name="descripcion" placeholder="Añade una descripción" required></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="number" name="cantidad" placeholder="Cantidad disponible" required>
-                        </div>
-                        <div class="col">
-                            <select name="idval" required>
-                                <option value="">Categoría</option>
-                                <?php if (!empty($dtCatego)) {
-                                    foreach ($dtCatego as $dtcat) { ?>
-                                        <option value="<?= $dtcat['idval'] ?>"><?= $dtcat['categoria'] ?></option>
-                                    <?php }
-                                } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row bx-subprd_valor">
-                        <div class="col">
-                            <i class="bi bi-question-circle-fill"
-                                title="Valor unitario: Es el precio por unidad antes de aplicar descuentos o recargos."></i>
-                            <input type="number" id="valorunitario" name="valorunitario" placeholder="Valor Unitario"
-                                required>
-                        </div>
-                        <div class="col">
-                            <i class="bi bi-question-circle-fill"
-                                title="Precio: Es el costo final que paga el cliente, incluyendo descuentos o recargos."></i>
-                            <input type="number" id="precio" name="precio" placeholder="Precio del producto" readonly>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h6>¿Algún descuento en especial?</h6>
-                        </div>
-                        <div class="col">
-                            <input type="number" id="pordescu" name="pordescu" oninput="mostrarFechaFin()"
-                                placeholder="Valor. Ej: 5%">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="fechaInicio">Fecha de inicio de la oferta:</label>
-                            <input type="date" id="fechaInicio" name="fechiniofer">
-                        </div>
-                    </div>
-                    <div class="row" id="fechaOferta">
-                        <div class="col">
-                            <label for="fechaFin">Fecha fin de la oferta:</label>
-                            <input type="date" id="fechaFin" name="fechfinofer">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <Label>Características del producto</Label>
-                            <i class="bi bi-question-circle-fill" title="Cantidad de característica a registrar"></i>
-                            <input type="number" name="" id="cantcr" placeholder="Cantidad" oninput="cantCr()">
-                        </div>
-                        <div class="col" id="descar">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="imgpro">Selecciona imágenes:</label>
-                            <input type="file" name="imgpro[]" id="imgpro" multiple accept=".jpg, .jpeg, .png, .webp"
-                                onchange="actualizarOrden()">
-                        </div>
-                    </div>
-                    <div class="row" id="orden-imagenes">
-                        <!-- Aquí se mostrarán las imágenes con su orden -->
-                    </div>
-                    <div class="row" id="image_exist">
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="hidden" name="idpro">
-                            <input type="hidden" name="ope" value="edit">
+                            <label for="des-act">Deshabilitar</label>
+                            <input type="radio" name="actpag" value="0" id="des-act">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input class="btn" type="submit" onclick="actualizarOrdenImagenes()" value="Actualizar">
+                        <input type="hidden" value="" name="idpag">
+                        <input type="hidden" name="ope" value="edit">
+                        <button class="btn btn-primary" type="submit">Actualizar</button>
                     </div>
                 </form>
             </div>

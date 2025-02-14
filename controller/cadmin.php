@@ -25,7 +25,7 @@ $totalPages = ceil($totalPagesRegistered / $resultsPerPage);
 $totalUsers = ceil($totalUsersRegistered / $resultsPerPage);
 
 // Obtener las páginas correspondientes a la página actual
-$dtPag = $pag->getPages($resultsPerPage, $offset); // Implementa este método en tu modelo
+$dtPags = $pag->getPages($resultsPerPage, $offset); // Implementa este método en tu modelo
 $dtUsu = $usu->getUsers($resultsPerPage, $offset); // Implementa
 
 $start = $offset + 1;

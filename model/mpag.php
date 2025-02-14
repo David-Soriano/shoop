@@ -13,6 +13,9 @@ class Mpag
     private $url2;
     private $idmen;
     private $lugmen;
+    private $actpag;
+    private $estpagn;
+
     public function getIdpag()
     {
         return $this->idpag;
@@ -56,6 +59,12 @@ class Mpag
     public function getLugmen()
     {
         return $this->lugmen;
+    }
+    public function getActpag(){
+        return $this->actpag;
+    }
+    public function getEstpagn(){
+        return $this->estpagn;
     }
     public function setIdpag($idpag)
     {
@@ -101,6 +110,12 @@ class Mpag
     {
         $this->lugmen = $lugmen;
     }
+    public function setActpag($actpag){
+        $this->actpag = $actpag;
+    }
+    public function setEstpagn($estpagn){
+        $this->estpagn = $estpagn;
+    }
     //Traer todas las paginas de la base de datos
     function getAll()
     {
@@ -118,12 +133,28 @@ class Mpag
         }
         return $res;
     }
+    function getOnePage(){
+        $res = NULL;
+        $sql = "SELECT idpag, nompag, rutpag, mospag, icopag, lugpag, estpagn, actpag FROM pagina WHERE idpag = :idpag;";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->bindParam(':idpag', $this->idpag, PDO::PARAM_INT);
+            $result->execute();
+            $res = $result->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
+            echo "Error. Intentalo mas tarde";
+        }
+        return $res;
+    }
     //Traer una pagina en especifico de la base de datos
     function getOne($idpag, $idpef, $lugpag)
     {
         $res = NULL;
         $lugpag = $lugpag ?: null;
-        $sql = "SELECT p.idpef, p.nompef, p.pagini, pxp.idperpf, pg.idpag, pg.nompag, pg.rutpag, pg.mospag, pg.icopag, pg.lugpag FROM pagxperfil AS pxp INNER JOIN perfil AS p ON pxp.idpef = p.idpef INNER JOIN pagina AS pg ON pxp.idpag = pg.idpag WHERE pxp.idpef = :idpef AND ((pg.idpag = :idpag AND (pg.lugpag = :lugpag OR :lugpag IS NULL))) LIMIT 1;";
+        $sql = "SELECT p.idpef, p.nompef, p.pagini, pxp.idperpf, pg.idpag, pg.nompag, pg.rutpag, pg.mospag, pg.icopag, pg.lugpag FROM pagxperfil AS pxp INNER JOIN perfil AS p ON pxp.idpef = p.idpef INNER JOIN pagina AS pg ON pxp.idpag = pg.idpag WHERE pxp.idpef = :idpef AND ((pg.idpag = :idpag AND (pg.lugpag = :lugpag OR :lugpag IS NULL))) AND (pg.estpagn = 'Activo' AND pg.actpag = 1) LIMIT 1;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -268,21 +299,15 @@ class Mpag
     {
         //implementar la logica de guardado en la base de datos
         $res = NULL;
-        $sql = "UPDATE pagina SET idpag=:idpag, nompag=:nompag, rutpag=:rutpag, mospag=:mospag, icopag=:icopag)";
+        $sql = "UPDATE pagina SET actpag=:actpag WHERE idpag = :idpag";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
             $result = $conexion->prepare($sql);
             $idpag = $this->getIdpag();
-            $nompag = $this->getNompag();
-            $rutpag = $this->getRutpag();
-            $mospag = $this->getMospag();
-            $icopag = $this->getIcopag();
+            $actpag = $this->getActpag();
             $result->bindParam(':idpag', $idpag, PDO::PARAM_INT);
-            $result->bindParam(':nompag', $nompag, PDO::PARAM_STR);
-            $result->bindParam(':rutpag', $rutpag, PDO::PARAM_STR);
-            $result->bindParam(':mospag', $mospag, PDO::PARAM_BOOL);
-            $result->bindParam(':icopag', $icopag, PDO::PARAM_STR);
+            $result->bindParam(':actpag', $actpag, PDO::PARAM_INT);
             $res = $result->execute();
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
@@ -312,7 +337,7 @@ class Mpag
     {
         $modelo = new Conexion();
         $conexion = $modelo->getConexion();
-        $query = "SELECT COUNT(*) AS total FROM pagina p LEFT JOIN pagxperfil pxp ON p.idpag = pxp.idpag LEFT JOIN perfil pe ON pxp.idpef = pe.idpef"; // Ajusta el nombre de tu tabla
+        $query = "SELECT COUNT(*) AS total FROM pagina p LEFT JOIN pagxperfil pxp ON p.idpag = pxp.idpag LEFT JOIN perfil pe ON pxp.idpef = pe.idpef WHERE p.estpagn = 'Activo'"; // Ajusta el nombre de tu tabla
         $stmt = $conexion->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -323,7 +348,7 @@ class Mpag
     {
         $modelo = new Conexion();
         $conexion = $modelo->getConexion();
-        $query = 'SELECT p.idpag AS "ID Página", p.nompag AS "Nombre Página", p.rutpag AS "Ruta Página", p.mospag AS "Mostrar Página", p.icopag AS "Ícono", p.lugpag AS "Lugar Página", pe.idpef AS "ID Perfil", pe.nompef AS "Perfil", pe.pagini AS "Página Inicial"  FROM pagina p LEFT JOIN pagxperfil pxp ON p.idpag = pxp.idpag LEFT JOIN perfil pe ON pxp.idpef = pe.idpef LIMIT :limit OFFSET :offset'; // Ajusta según tus columnas
+        $query = 'SELECT p.idpag AS "ID Página", p.nompag AS "Nombre Página", p.rutpag AS "Ruta Página", p.mospag AS "Mostrar Página", p.icopag AS "Ícono", p.lugpag AS "Lugar Página", p.actpag AS "Ver Pagina", pe.idpef AS "ID Perfil", pe.nompef AS "Perfil", pe.pagini AS "Página Inicial"  FROM pagina p LEFT JOIN pagxperfil pxp ON p.idpag = pxp.idpag LEFT JOIN perfil pe ON pxp.idpef = pe.idpef WHERE p.estpagn = "Activo" LIMIT :limit OFFSET :offset '; // Ajusta según tus columnas
         $stmt = $conexion->prepare($query);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);

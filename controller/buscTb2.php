@@ -1,7 +1,7 @@
 <?php
 ini_set('session.cookie_httponly', 1);  // Evita que JavaScript acceda a las cookies
 ini_set('session.cookie_secure', 1);    // Solo permite el envío de cookies a través de HTTPS
-ini_set('session.cookie_samesite', 'Strict'); 
+ini_set('session.cookie_samesite', 'Strict');
 session_start();
 include("../model/conexion.php");
 include "../model/mpancon.php";
@@ -9,7 +9,8 @@ include "../model/mpro.php";
 
 $control = new Mpancon();
 $mpro = new Mpro();
-function buscarPaginas($busqueda, $limit, $offset) {
+function buscarPaginas($busqueda, $limit, $offset)
+{
     $res = "";
     // Si hay búsqueda, se agrega el filtro por nombre de la página o perfil
     if (!empty($busqueda)) {
@@ -20,6 +21,7 @@ function buscarPaginas($busqueda, $limit, $offset) {
                     p.mospag AS 'Mostrar Página', 
                     p.icopag AS 'Ícono', 
                     p.lugpag AS 'Lugar Página', 
+                    p.actpag AS 'Ver Pagina',
                     pe.idpef AS 'ID Perfil', 
                     pe.nompef AS 'Perfil', 
                     pe.pagini AS 'Página Inicial' 
@@ -35,7 +37,8 @@ function buscarPaginas($busqueda, $limit, $offset) {
                     p.rutpag AS 'Ruta Página', 
                     p.mospag AS 'Mostrar Página', 
                     p.icopag AS 'Ícono', 
-                    p.lugpag AS 'Lugar Página', 
+                    p.lugpag AS 'Lugar Página',
+                    p.actpag AS 'Ver Pagina',
                     pe.idpef AS 'ID Perfil', 
                     pe.nompef AS 'Perfil', 
                     pe.pagini AS 'Página Inicial' 
@@ -120,6 +123,13 @@ if (isset($dtAllPages) && count($dtAllPages) > 0) {
             echo '<span>' . $dtp['Perfil'] . '</span>';
             echo '</div>';
         }
+        echo '</td>';
+        echo '<td>';
+        echo '<div class="widget-26-job-info">';
+        if ($dtp['Ver Pagina'] == 1)
+        echo "<p style='color: #00a650; font-weight: 600;'>Visible</p>";
+        else
+        echo "<p style='color:rgb(166, 39, 0); font-weight: 600;'>Deshabilitada</p>";
         echo '</td>';
         echo '</tr>';
     }

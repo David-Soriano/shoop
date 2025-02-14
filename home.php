@@ -37,7 +37,9 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
         if (!empty($rut) && isset($rut[0]['rutpag'])) {
             include $rut[0]['rutpag'];
         } else {
-            include "views/vwTienda.php";
+            echo "<div class='bx-404'><img src='IMG/404.svg' alt='404'>
+            <p class='msj-404'>Estamos trabajando para volver a estar en línea.</p>
+            <p>¡Vuelve Pronto!</p></div>";
         }
         ?>
     </main>

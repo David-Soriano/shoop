@@ -190,7 +190,8 @@
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModalrg"
                     data-bs-whatever="@mdo">Nuevo Administrador</a></li>
-            <li><a class="dropdown-item" href="#">Perfiles</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModalperf"
+                    data-bs-whatever="@mdo">Perfiles</a></li>
         </ul>
     </div>
 </div>
@@ -323,6 +324,46 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalperf" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Control de Permisos - Perfiles</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <h5 for="recipient-name" class="col-form-label">Cliente - Prv</h5>
+                            </div>
+                            <div class="mb-3">
+                                <input type="checkbox" name="" id="">
+                                <label for="">Página</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <h5 for="message-text" class="col-form-label">Administrador</h5>
+                            </div>
+                            <div class="mb-3">
+                                <input type="checkbox" name="" id="">
+                                <label for="">Página</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

@@ -40,8 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'imagen' => $producto['imagen']
         ];
     }
-
-    echo json_encode(['status' => 'success', 'message' => 'Producto(s) añadido(s) al respag']);
     exit;
 }
 

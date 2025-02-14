@@ -67,9 +67,13 @@ include "../controller/cadmin.php"; ?>
 
     <div class="container">
         <?php $pg = isset($_GET['pg']) ? $_GET['pg'] : NULL;
-        if ($pg)
+        if ($pg){
             $rut = getPagAdm($pg);
-        else {
+            if(!$rut){
+                echo "<div class='bx-404'><img src='../IMG/404.svg' alt='404'>
+        <p class='msj-404'>Estamos trabajando para volver a estar en línea.</p></div>";
+            }
+        } else {
             $rut = null; ?>
             <div class="row">
                 <section class="tickets col">

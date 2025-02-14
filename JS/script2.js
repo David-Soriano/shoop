@@ -263,6 +263,31 @@ function buttonsTablePedidos() {
         }
     });
 }
+function buttonsTablePaginas() {
+    document.getElementById('editButton3').addEventListener('click', function () {
+        const selectedIds = getSelectedProductIds();
+        console.log(selectedIds);
+        if (selectedIds.length > 0) {
+            const idProParam = selectedIds.join(',');
+            fetchProductData('idpag', idProParam);
+            const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
+            modalElement.show();
+        } else {
+            alert("Selecciona al menos un pedido para editar.");
+        }
+    });
+    document.getElementById('deleteButton3').addEventListener('click', function () {
+        const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
+        if (selectedIds.length > 0) {
+            if (confirm('¿Desea cancelar este pedido?')) {
+                const idProParam = selectedIds.join(',');
+                cancelPedData(idProParam);
+            }
+        } else {
+            alert("Selecciona al menos un producto para eliminar.");
+        }
+    });
+}
 function deleteProductData(idpro) {
 
     fetch(`../controller/edit.php`, {
@@ -362,7 +387,15 @@ function populateModal(data) {
         const product = data[0]; // Tomar el primer producto
         // Llenar los campos del formulario con los datos
         const estadoPedido = product.estped;
+        
+        const estadoPagina = product.actpag; // 1 para habilitado, 0 para deshabilitado
 
+        // Seleccionar el input correspondiente
+        document.querySelectorAll('input[name="actpag"]').forEach(radio => {
+            if (parseInt(radio.value) === estadoPagina) {
+                radio.checked = true; // Marcar la opción correspondiente
+            }
+        });
         // Seleccionar el input correspondiente
         document.querySelectorAll('input[name="estped"]').forEach(radio => {
             if (estadoPedido == 'Cancelado') {
@@ -378,7 +411,14 @@ function populateModal(data) {
         if (modalLabel) {
             modalLabel.innerHTML = product.nompro;
         }
-
+        const modalLabel2 = document.getElementById('exampleModalLabel2');
+        if (modalLabel2) {
+            modalLabel2.innerHTML = product.nompag;
+        }
+        const idpaagInput = document.querySelector('[name="idpag"]');
+        if (idpaagInput) {
+            idpaagInput.value = product.idpag;
+        }
         // Verificar si el input 'idped' existe antes de actualizarlo
         const idpedInput = document.querySelector('[name="idped2"]');
         if (idpedInput) {
@@ -698,7 +738,7 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function () {
     $("#depart").change(function () {
         var departamentoID = $(this).val();
-        
+
         if (departamentoID != "") {
             $.ajax({
                 url: "../controller/cubi.php",
@@ -718,6 +758,9 @@ $(document).ready(function () {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    buttonsTablePaginas();
+})
 document.addEventListener('DOMContentLoaded', function () {
     cerrarModal();
     buttonsTablePedidos();

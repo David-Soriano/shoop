@@ -605,11 +605,13 @@
      cursor: pointer;
  }
 
- #editButton {
+ #editButton,
+ #editButton3 {
      color: #4b4d04;
  }
 
- #deleteButton {
+ #deleteButton,
+ #deleteButton3 {
      color: rgb(243, 76, 76);
  }
 
@@ -1512,12 +1514,6 @@
      justify-content: center;
  }
 
- .nav-pg ul {
-     display: flex;
-     gap: 5%;
-     list-style: none;
- }
-
  .btn-pf-adm button {
      background: none;
      border: none;
@@ -1552,3 +1548,30 @@
      margin: 2%;
      color: #0c6d15;
  }
+
+ .bx-cont-vsi{
+    margin-bottom: 4%;
+ }
+ .bx-cont-vsi .col {
+     display: flex;
+     align-items: center;
+     flex-direction: column;
+ }
+
+ .bx-404 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10% 0;
+}
+
+.bx-404 img {
+    width: 40%;
+}
+
+.msj-404 {
+    margin: 5% 0;
+    font-size: 20px;
+    font-weight: 300;
+}

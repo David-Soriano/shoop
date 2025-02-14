@@ -35,7 +35,8 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
             $rut = getRut(14);
         if ($rut)
             include $rut[0]['rutpag'];
-        else echo "404 - Not Found";
+        else echo "<div class='bx-404'><img src='IMG/404.svg' alt='404'>
+        <p class='msj-404'>Estamos trabajando para volver a estar en línea.</p></div>";
         ?>
     </main>
 

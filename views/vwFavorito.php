@@ -3,11 +3,11 @@
     <div class="row bx-prp-carr-comp">
     <?php if (empty($dtFavoritos)) { ?>
             <div class="col bx-items-carr-comp">
-                <div class="col-6">
+                <div class="col-6 bx-items-carr-comp_favo">
                     <?php echo $isLoggedIn ? "<h4>Aquí veras tus favoritos</h4>" : "<h4>Inicia sesión para guardar tus favoritos</h4>" ?>
                     <p>Encuentra productos y coleccionalos</p>
                 </div>
-                <div class="col-4">
+                <div class="col-4 bx-items-carr-comp_favo">
                     <img src="IMG/favoritos.svg" alt="favoritos">
                 </div>
             </div>
