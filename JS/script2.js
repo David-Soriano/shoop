@@ -348,6 +348,67 @@ function cancelPedData(idped) {
         });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector("[data-bs-target='#exampleModalperf']").addEventListener("click", function () {
+        fetch("../controller/cperf.php")
+            .then(response => response.json())
+            .then(data => {
+                let modalBodyCliente = document.querySelector("#exampleModalperf .bx-pagi-client");
+                let modalBodyAdmin = document.querySelector("#exampleModalperf .bx-pagi-admin");
+                modalBodyCliente.innerHTML = "";
+                modalBodyAdmin.innerHTML = "";
+
+                let clientes = data.filter(page => page.idpef == 1);
+                let admins = data.filter(page => page.idpef == 2);
+
+                clientes.forEach(page => {
+                    let checked = page.tiene_permiso ? "checked" : "";
+                    modalBodyCliente.innerHTML += `
+                        <div class='mb-3'>
+                            <input type='checkbox' class='permiso' data-perfil='1' value='${page.idpag}' ${checked}>
+                            <label>${page.nompag}</label>
+                        </div>`;
+                });
+
+                admins.forEach(page => {
+                    let checked = page.tiene_permiso ? "checked" : "";
+                    modalBodyAdmin.innerHTML += `
+                        <div class='mb-3'>
+                            <input type='checkbox' class='permiso' data-perfil='2' value='${page.idpag}' ${checked}>
+                            <label>${page.nompag}</label>
+                        </div>`;
+                });
+            });
+    });
+
+    // Guardar los cambios de permisos
+    document.getElementById("guardarPermisos").addEventListener("click", function () {
+        let permisos = [];
+
+        document.querySelectorAll(".permiso").forEach(checkbox => {
+            permisos.push({
+                idpag: checkbox.value,
+                idpef: checkbox.dataset.perfil,
+                tiene_permiso: checkbox.checked ? 1 : 0
+            });
+        });
+
+        fetch("../controller/cperf.php", {
+            method: "POST",
+            body: JSON.stringify({ permisos: permisos }),
+            headers: { "Content-Type": "application/json" }
+        })
+            .then(response => response.json())
+            .then(result => {
+                alert(result.message);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+    });
+});
+
+
 
 // Función que obtiene los IDs de los productos seleccionados
 function getSelectedProductIds() {
@@ -387,7 +448,7 @@ function populateModal(data) {
         const product = data[0]; // Tomar el primer producto
         // Llenar los campos del formulario con los datos
         const estadoPedido = product.estped;
-        
+
         const estadoPagina = product.actpag; // 1 para habilitado, 0 para deshabilitado
 
         // Seleccionar el input correspondiente

@@ -60,10 +60,12 @@ class Mpag
     {
         return $this->lugmen;
     }
-    public function getActpag(){
+    public function getActpag()
+    {
         return $this->actpag;
     }
-    public function getEstpagn(){
+    public function getEstpagn()
+    {
         return $this->estpagn;
     }
     public function setIdpag($idpag)
@@ -110,10 +112,12 @@ class Mpag
     {
         $this->lugmen = $lugmen;
     }
-    public function setActpag($actpag){
+    public function setActpag($actpag)
+    {
         $this->actpag = $actpag;
     }
-    public function setEstpagn($estpagn){
+    public function setEstpagn($estpagn)
+    {
         $this->estpagn = $estpagn;
     }
     //Traer todas las paginas de la base de datos
@@ -133,7 +137,8 @@ class Mpag
         }
         return $res;
     }
-    function getOnePage(){
+    function getOnePage()
+    {
         $res = NULL;
         $sql = "SELECT idpag, nompag, rutpag, mospag, icopag, lugpag, estpagn, actpag FROM pagina WHERE idpag = :idpag;";
         try {
@@ -333,6 +338,33 @@ class Mpag
         }
         return $res;
     }
+    public function getPagxPer()
+    {
+        $res = [];
+
+        $sql = "SELECT p.idpag, p.nompag, pe.idpef, 
+                   IF(pp.idpag IS NOT NULL, 1, 0) AS tiene_permiso 
+            FROM pagina p
+            CROSS JOIN perfil pe
+            LEFT JOIN pagxperfil pp 
+            ON p.idpag = pp.idpag AND pe.idpef = pp.idpef
+            ORDER BY pe.idpef, p.idpag";
+
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            return ["error" => "Error al obtener páginas", "message" => $e->getMessage()];
+        }
+
+        return $res;
+    }
+
+
     public function getTotalPages()
     {
         $modelo = new Conexion();
