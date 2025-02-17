@@ -245,18 +245,25 @@ class Musu
 
     function verificarCorreo($emausu)
     {
-        $modelo = new Conexion();
-        $conexion = $modelo->getConexion();
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
 
-        // Consulta para verificar si el correo ya existe
-        $sql = "SELECT COUNT(*) FROM usuario WHERE emausu = :emausu";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bindParam(':emausu', $emausu);
-        $stmt->execute();
-        $count = $stmt->fetchColumn();
+            // Consulta preparada
+            $sql = "SELECT idusu, nomusu FROM usuario WHERE emausu = :email";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindParam(":email", $emausu, PDO::PARAM_STR);
+            $stmt->execute();
 
-        return $count > 0; // Retorna true si el correo ya existe
+            // Obtener resultado
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $resultado ?: false; // Si encuentra el usuario, lo devuelve; si no, devuelve false.
+        } catch (PDOException $e) {
+            die("Error en la consulta: " . $e->getMessage());
+        }
     }
+
     public function getUsers($limit, $offset)
     {
         $modelo = new Conexion();

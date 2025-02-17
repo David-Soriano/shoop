@@ -167,11 +167,10 @@ function setupDataTable() {
 }
 
 // ======= Función para leer y mostrar correos =======
-function setupLeerCorreo(id1, id2, id3) {
-    const correo = document.getElementById(id1)?.value;
+function setupLeerCorreo(id1, id2) {
+    const correo = document.getElementById(id1).value;
     if (correo) {
         document.getElementById(id2).innerHTML = correo;
-        document.getElementById(id3).innerHTML = correo;
     }
 }
 
@@ -460,5 +459,7 @@ window.addEventListener('load', () => {
     setupMaxQuantity();
     setupBoxToggle();
     setupDataTable();
+});
+window.addEventListener('load', () => {
     setupInputSearch();
 });

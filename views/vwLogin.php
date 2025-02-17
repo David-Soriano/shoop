@@ -22,8 +22,6 @@
             } 
             if($aw == "01"){
                 require_once("vwRecContrasena.php");
-            } else if($aw == "02"){
-                require_once("vwToken.php");
             }
             ?>
         </div>
