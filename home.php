@@ -22,7 +22,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
     include "model/conexion.php";
     include("controller/cpag.php");
     include("controller/cpro.php");
-    
+
     include("controller/ccom.php");
     require_once("views/vwHeader.php");
     $pg = isset($_REQUEST["pg"]) ? $_REQUEST["pg"] : NULL;
@@ -30,16 +30,20 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
 
     <main id="bx-section">
         <?php
-        if ($pg)
-            $rut = getRut($pg);
-        else
-            $rut = getRut(14);
-        if (!empty($rut) && isset($rut[0]['rutpag'])) {
-            include $rut[0]['rutpag'];
-        } else {
-            echo "<div class='bx-404'><img src='IMG/404.svg' alt='404'>
+        try {
+            if ($pg)
+                $rut = getRut($pg);
+            else
+                $rut = getRut(14);
+            if (!empty($rut) && isset($rut[0]['rutpag'])) {
+                include $rut[0]['rutpag'];
+            } else {
+                echo "<div class='bx-404'><img src='IMG/404.svg' alt='404'>
             <p class='msj-404'>Estamos trabajando para volver a estar en línea.</p>
             <p>¡Vuelve Pronto!</p></div>";
+            }
+        } catch (PDOException $e) {
+            echo "Error";
         }
         ?>
     </main>

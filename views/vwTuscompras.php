@@ -4,7 +4,7 @@
         <h2 class="text-center fw-bold">Tus Compras</h2>
 
         <div class="my-3">
-            <?php
+            <?php if(!empty($dtCompras)){
             foreach ($dtCompras as $dtpd) {
                 $fecha = new DateTime($dtpd['fecha']);
                 $meses = [
@@ -51,7 +51,15 @@
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            <?php } 
+            } else{?>
+            <div class="row bx-msj-null">
+                    <div class="col">
+                        <img src="IMG/Compras.svg" alt="">
+                        <p>No a realizado ningúna compra</p>
+                    </div>
+                </div>
+            <?php }?>
 
         </div>
 
