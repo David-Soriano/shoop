@@ -1,6 +1,7 @@
 <?php include_once('../model/musu.php');
 include_once('../model/conexion.php');
 
+$idusu = isset($_REQUEST['idusu']) ? $_REQUEST['idusu'] : NULL;
 $nomusu = isset($_POST['nomusu']) ? $_POST['nomusu'] : NULL;
 $apeusu = isset($_POST['apeusu']) ? $_POST['apeusu'] : NULL;
 $tipdoc = isset($_POST['tipdoc']) ? $_POST['tipdoc'] : NULL;
@@ -33,17 +34,25 @@ if ($ope == "save") {
         $hashedPassword = password_hash($pasusu, PASSWORD_DEFAULT); // Hashear la contraseña
         $usu->setPasusu($hashedPassword);
         
-        $res = $usu->saveUsu(); // Aquí se recibe el idpef
-
-        var_dump($res); // Para depuración, puedes eliminar esto después
-
+        $res = $usu->saveUsu();
         if ($res == 2) {
-            header("Location: ../views/admin.php?pg=31");
-            exit(); // Detiene la ejecución después de la redirección
+            header("Location: ../views/admin.php?pg=31&error=4");
+            exit();
         }
 
         // Si no es 2, redirige a la misma página
         header("Location: " . $_SERVER['PHP_SELF']);
         exit();
     }
+} else if($ope == 'eliUs'){
+    header("Content-Type: application/json"); 
+    $usu->setIdusu($idusu);
+
+    if ($usu->delUsu()) {
+        echo json_encode(["success" => true]);
+    } else {
+        echo json_encode(["success" => false, "error" => "No se pudo eliminar usuario"]);
+    }
+} else {
+    echo json_encode(["success" => false, "error" => "ID de usuario no recibido"]);
 }

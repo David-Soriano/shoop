@@ -5,7 +5,9 @@ class Mpag
     private $nompag;
     private $rutpag;
     private $mospag;
+    private $lugpag;
     private $icopag;
+    private $idpef;
     //Menú
     private $idsbm;
     private $nombre;
@@ -68,6 +70,19 @@ class Mpag
     {
         return $this->estpagn;
     }
+    public function getLugpag()
+    {
+        return $this->lugpag;
+    }
+    public function getIdpef()
+    {
+        return $this->idpef;
+    }
+
+    public function setLugpag($lugpag)
+    {
+        $this->lugpag = $lugpag;
+    }
     public function setIdpag($idpag)
     {
         $this->idpag = $idpag;
@@ -119,6 +134,10 @@ class Mpag
     public function setEstpagn($estpagn)
     {
         $this->estpagn = $estpagn;
+    }
+    public function setIdpef($idpef)
+    {
+        $this->idpef = $idpef;
     }
     //Traer todas las paginas de la base de datos
     function getAll()
@@ -278,28 +297,48 @@ class Mpag
     function savePag()
     {
         $res = NULL;
-        $sql = "INSERT INTO pagina(idpag, nompag, rutpag, mospag, icopag) VALUES (:idpag, :nompag, :rutpag, :mospag, :icopag)";
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+
         try {
-            $modelo = new Conexion();
-            $conexion = $modelo->getConexion();
-            $result = $conexion->prepare($sql);
-            $idpag = $this->getIdpag();
             $nompag = $this->getNompag();
             $rutpag = $this->getRutpag();
-            $mospag = $this->getMospag();
             $icopag = $this->getIcopag();
-            $result->bindParam(':idpag', $idpag, PDO::PARAM_INT);
-            $result->bindParam(':nompag', $nompag, PDO::PARAM_STR);
-            $result->bindParam(':rutpag', $rutpag, PDO::PARAM_STR);
-            $result->bindParam(':mospag', $mospag, PDO::PARAM_BOOL);
-            $result->bindParam(':icopag', $icopag, PDO::PARAM_STR);
-            $res = $result->execute();
+            $lugpag = $this->getLugpag();
+
+            // 🚀 1. Verificar si la página ya existe y está inactiva
+            $sqlCheck = "SELECT idpag FROM pagina WHERE nompag = :nompag AND estpagn = 'Inactivo'";
+            $stmtCheck = $conexion->prepare($sqlCheck);
+            $stmtCheck->bindParam(':nompag', $nompag, PDO::PARAM_STR);
+            $stmtCheck->execute();
+            $paginaInactiva = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+
+            if ($paginaInactiva) {
+                // 🚀 2. Si existe y está inactiva, activarla nuevamente
+                $idpag = $paginaInactiva['idpag'];
+                $sqlUpdate = "UPDATE pagina SET estpagn = 'Activo' WHERE idpag = :idpag";
+                $stmtUpdate = $conexion->prepare($sqlUpdate);
+                $stmtUpdate->bindParam(':idpag', $idpag, PDO::PARAM_INT);
+                $res = $stmtUpdate->execute();
+            } else {
+                // 🚀 3. Si no existe, proceder con la inserción normal
+                $sqlInsert = "INSERT INTO pagina (nompag, rutpag, icopag, lugpag) VALUES (:nompag, :rutpag, :icopag, :lugpag)";
+                $stmtInsert = $conexion->prepare($sqlInsert);
+                $stmtInsert->bindParam(':nompag', $nompag, PDO::PARAM_STR);
+                $stmtInsert->bindParam(':rutpag', $rutpag, PDO::PARAM_STR);
+                $stmtInsert->bindParam(':icopag', $icopag, PDO::PARAM_STR);
+                $stmtInsert->bindParam(':lugpag', $lugpag, PDO::PARAM_INT);
+                $res = $stmtInsert->execute();
+            }
         } catch (PDOException $e) {
-            error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
-            echo "Error al guardar la página";
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo json_encode(["success" => false, "error" => "Error al guardar la página"]);
+            return false;
         }
+
         return $res;
     }
+
     function ediPag()
     {
         //implementar la logica de guardado en la base de datos
@@ -322,22 +361,33 @@ class Mpag
     }
     function delPag()
     {
-        //implementar la logica de guardado en la base de datos
         $res = NULL;
-        $sql = "DELETE FROM pagina WHERE idpag=:idpag;";
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+
         try {
-            $modelo = new Conexion();
-            $conexion = $modelo->getConexion();
-            $result = $conexion->prepare($sql);
             $idpag = $this->getIdpag();
-            $result->bindParam(':idpag', $idpag, PDO::PARAM_INT);
-            $res = $result->execute();
+
+            // Eliminar relacion en la tabla `pagxperfil`
+            $sql1 = "DELETE FROM pagxperfil WHERE idpag = :idpag";
+            $result1 = $conexion->prepare($sql1);
+            $result1->bindParam(':idpag', $idpag, PDO::PARAM_INT);
+            $result1->execute();
+
+            $sql2 = "UPDATE pagina SET estpagn = 'Inactivo' WHERE idpag = :idpag";
+            $result2 = $conexion->prepare($sql2);
+            $result2->bindParam(':idpag', $idpag, PDO::PARAM_INT);
+            $res = $result2->execute();
+
         } catch (PDOException $e) {
-            error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
-            echo "Error al eliminar la página";
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo json_encode(["success" => false, "error" => "Error al eliminar la página"]);
+            return false;
         }
+
         return $res;
     }
+
     public function getPagxPer()
     {
         $res = [];

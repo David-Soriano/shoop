@@ -50,3 +50,8 @@ Decoded JSON: Array
     [estped] => Enviado
 )
 
+Recibido: Array
+(
+    [idped] => 34
+)
+

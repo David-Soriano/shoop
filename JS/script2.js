@@ -264,27 +264,50 @@ function buttonsTablePedidos() {
     });
 }
 function buttonsTablePaginas() {
-    document.getElementById('editButton3').addEventListener('click', function () {
+    document.getElementById('editButton30').addEventListener('click', function () {
         const selectedIds = getSelectedProductIds();
-        console.log(selectedIds);
         if (selectedIds.length > 0) {
             const idProParam = selectedIds.join(',');
             fetchProductData('idpag', idProParam);
             const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
             modalElement.show();
         } else {
-            alert("Selecciona al menos un pedido para editar.");
+            alert("Selecciona al menos una página para editar.");
         }
     });
-    document.getElementById('deleteButton3').addEventListener('click', function () {
+    document.getElementById('deleteButton30').addEventListener('click', function () {
         const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
         if (selectedIds.length > 0) {
-            if (confirm('¿Desea cancelar este pedido?')) {
+            if (confirm('¿Desea eliminar esta página?')) {
                 const idProParam = selectedIds.join(',');
-                cancelPedData(idProParam);
+                borrarPag(idProParam);
             }
         } else {
-            alert("Selecciona al menos un producto para eliminar.");
+            alert("Selecciona al menos una página para eliminar.");
+        }
+    });
+}
+function buttonsTableUsers() {
+    document.getElementById('editButton40').addEventListener('click', function () {
+        const selectedIds = getSelectedProductIds();
+        if (selectedIds.length > 0) {
+            const idProParam = selectedIds.join(',');
+            fetchProductData('idusu', idProParam);
+            const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
+            modalElement.show();
+        } else {
+            alert("Selecciona al menos un usuario para editar.");
+        }
+    });
+    document.getElementById('deleteButton40').addEventListener('click', function () {
+        const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
+        if (selectedIds.length > 0) {
+            if (confirm('¿Desea eliminar este usuario?')) {
+                const idProParam = selectedIds.join(',');
+                borrarUser(idProParam);
+            }
+        } else {
+            alert("Selecciona al menos un usuario para eliminar.");
         }
     });
 }
@@ -316,8 +339,6 @@ function deleteProductData(idpro) {
         });
 }
 function cancelPedData(idped) {
-    console.log("Enviando idped:", idped); // Verifica el valor antes de enviarlo
-
     fetch(`../controller/cped.php`, {
         method: 'POST',
         headers: {
@@ -327,7 +348,6 @@ function cancelPedData(idped) {
     })
         .then(async response => {
             const rawText = await response.text();
-            console.log("Respuesta sin procesar:", rawText); // Verificar lo que devuelve el servidor
 
             if (!response.ok) {
                 throw new Error('Error en la respuesta: ' + response.status);
@@ -335,7 +355,6 @@ function cancelPedData(idped) {
             return rawText ? JSON.parse(rawText) : {};
         })
         .then(data => {
-            console.log("Respuesta procesada:", data); // Verifica la respuesta JSON
 
             if (data.success) {
                 location.reload();
@@ -348,6 +367,61 @@ function cancelPedData(idped) {
         });
 }
 
+function borrarPag(idpag) {
+    let formData = new FormData();
+    formData.append("ope", "eliPg");
+    formData.append("idusu", idpag);
+    fetch("../controller/cpag.php", {
+        method: "POST",
+        body: formData,
+    })
+        .then(async response => {
+            const rawText = await response.text();
+            if (!response.ok) {
+                throw new Error("Error en la respuesta: " + response.status);
+            }
+            return rawText ? JSON.parse(rawText) : {};
+        })
+        .then(data => {
+            if (data.success) {
+                window.location.href = window.location.pathname + "?pg=30&error=3";
+            }
+            else {
+                alert("No se pudo eliminar la página: " + data.error);
+            }
+        })
+        .catch(error => {
+            console.error("Hubo un problema con la solicitud:", error);
+        });
+}
+
+function borrarUser(idusu) {
+    let formData = new FormData();
+    formData.append("ope", "eliUs");
+    formData.append("idusu", idusu);
+    fetch("../controller/cusu.php", {
+        method: "POST",
+        body: formData,
+    })
+        .then(async response => {
+            const rawText = await response.text();
+            if (!response.ok) {
+                throw new Error("Error en la respuesta: " + response.status);
+            }
+            return rawText ? JSON.parse(rawText) : {};
+        })
+        .then(data => {
+            if (data.success) {
+                window.location.href = window.location.pathname + "?pg=31&error=5";
+            }
+            else {
+                alert("No se pudo eliminar el usuario: " + data.error);
+            }
+        })
+        .catch(error => {
+            console.error("Hubo un problema con la solicitud:", error);
+        });
+}
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("[data-bs-target='#exampleModalperf']").addEventListener("click", function () {
         fetch("../controller/cperf.php")
@@ -820,7 +894,19 @@ $(document).ready(function () {
     });
 });
 document.addEventListener('DOMContentLoaded', function () {
+    // Espera 15 segundos para ocultar el mensaje
+    setTimeout(function () {
+        var message = document.getElementById('errorMessage');
+        if (message) {
+            message.style.display = 'none';
+        }
+    }, 10000); // 15000 milisegundos = 15 segundos
+});
+document.addEventListener('DOMContentLoaded', function () {
     buttonsTablePaginas();
+})
+document.addEventListener('DOMContentLoaded', function () {
+    buttonsTableUsers();
 })
 document.addEventListener('DOMContentLoaded', function () {
     cerrarModal();

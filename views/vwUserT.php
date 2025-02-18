@@ -54,6 +54,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php $err = isset($_GET['error']) ? $_GET['error'] : NULL;
+                                if($err == 4){
+                                    echo "<div id='errorMessage' style='color: rgb(47, 154, 225);font-weight: 500;'>Administrador Registrado</div>";
+                                } else if($err == 5){
+                                    echo "<div id='errorMessage' style='color: rgba(225, 75, 47, 1);font-weight: 500;'>Administrador Eliminado</div>";
+                                }?>
                             </div>
                             <div class="result-body">
                                 <div class="table-responsive">
@@ -135,9 +141,9 @@
                                         </tbody>
                                     </table>
                                     <div class="table-options-bar mt-3 d-flex justify-content-end">
-                                        <button type="button" class="btn me-2" id="editButton" title="Editar"><i
+                                        <button type="button" class="btn me-2" id="editButton40" title="Editar"><i
                                                 class="bi bi-pen-fill"></i></button>
-                                        <button class="" id="deleteButton" title="Eliminar"><i
+                                        <button class="" id="deleteButton40" title="Eliminar"><i
                                                 class="bi bi-trash-fill"></i>
                                         </button>
                                     </div>

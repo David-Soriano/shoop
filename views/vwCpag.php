@@ -62,11 +62,20 @@
                                             Más Opciones
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Nueva Página</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal2">Nueva Página</a></li>
                                             <li><a class="dropdown-item" href="#">Slider</a></li>
                                         </ul>
                                     </div>
                                 </div>
+                                <?php $err = isset($_GET['error']) ? $_GET['error'] : NULL;
+                                if ($err == 1) {
+                                    echo "<div id='errorMessage' style='color: rgba(225, 75, 47, 1);font-weight: 500;'>No se logró guardar la página</div>";
+                                } else if ($err == 2) {
+                                    echo "<div id='errorMessage' style='color: rgb(47, 154, 225);font-weight: 500;'>Página guardada exitosamente</div>";
+                                } elseif ($err == 3){
+                                     echo "<div id='errorMessage' style='color: rgb(225, 75, 47, 1);font-weight: 500;'>Página Eliminada</div>";
+                                } ?>
                             </div>
                             <div class="result-body">
                                 <div class="table-responsive">
@@ -141,15 +150,15 @@
                                                 <?php }
                                             } else { ?>
                                                 <tr>
-                                                    <td colspan="6">No se encontraron productos.</td>
+                                                    <td colspan="6">No se encontraron páginas.</td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
                                     </table>
                                     <div class="table-options-bar mt-3 d-flex justify-content-end">
-                                        <button type="button" class="btn me-2" id="editButton3" title="Editar"><i
+                                        <button type="button" class="btn me-2" id="editButton30" title="Editar"><i
                                                 class="bi bi-pen-fill"></i></button>
-                                        <button class="" id="deleteButton3" title="Eliminar"><i
+                                        <button class="" id="deleteButton30" title="Eliminar"><i
                                                 class="bi bi-trash-fill"></i>
                                         </button>
                                     </div>
@@ -237,6 +246,53 @@
             </div>
             <div class="row">
                 <div class="col" id="detalle"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Agrega una Nueva Página</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="../controller/cpag.php" method="POST">
+                    <div class="mb-3">
+                        <label for="nompag" class="col-form-label">Nombre de la Página:</label>
+                        <input type="text" class="form-control" id="nompag" name="nompag" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="icopag" class="col-form-label">Ícono (Bootstrap class):</label>
+                        <input type="text" class="form-control" id="icopag" name="icopag">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lugpag" class="col-form-label">Lugar donde aparecerá:</label>
+                        <select class="form-control" id="lugpag" name="lugpag">
+                            <option value="">General</option>
+                            <option value="1">Menú Header</option>
+                            <option value="2">Panel de Control Proveedor</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="col-form-label">Perfil que puede acceder:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="idpef" id="cliente" value="1" checked>
+                            <label class="form-check-label" for="cliente">Cliente</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="idpef" id="admin" value="2">
+                            <label class="form-check-label" for="admin">Administrador</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="ope" value="savePg">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Página</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

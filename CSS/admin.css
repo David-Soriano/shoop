@@ -606,12 +606,14 @@
  }
 
  #editButton,
- #editButton3 {
+ #editButton30,
+ #editButton40 {
      color: #4b4d04;
  }
 
  #deleteButton,
- #deleteButton3 {
+ #deleteButton30,
+ #deleteButton40 {
      color: rgb(243, 76, 76);
  }
 

@@ -15,21 +15,23 @@ function buscarPaginas($busqueda, $limit, $offset)
     // Si hay búsqueda, se agrega el filtro por nombre de la página o perfil
     if (!empty($busqueda)) {
         $sql = "SELECT 
-                    p.idpag AS 'ID Página', 
-                    p.nompag AS 'Nombre Página', 
-                    p.rutpag AS 'Ruta Página', 
-                    p.mospag AS 'Mostrar Página', 
-                    p.icopag AS 'Ícono', 
-                    p.lugpag AS 'Lugar Página', 
-                    p.actpag AS 'Ver Pagina',
-                    pe.idpef AS 'ID Perfil', 
-                    pe.nompef AS 'Perfil', 
-                    pe.pagini AS 'Página Inicial' 
-                FROM pagina p 
-                LEFT JOIN pagxperfil pxp ON p.idpag = pxp.idpag 
-                LEFT JOIN perfil pe ON pxp.idpef = pe.idpef 
-                WHERE p.nompag LIKE :searchTerm OR pe.nompef LIKE :searchTerm
-                LIMIT :limit OFFSET :offset";
+        p.idpag AS 'ID Página', 
+        p.nompag AS 'Nombre Página', 
+        p.rutpag AS 'Ruta Página', 
+        p.mospag AS 'Mostrar Página', 
+        p.icopag AS 'Ícono', 
+        p.lugpag AS 'Lugar Página', 
+        p.actpag AS 'Ver Pagina',
+        pe.idpef AS 'ID Perfil', 
+        pe.nompef AS 'Perfil', 
+        pe.pagini AS 'Página Inicial' 
+    FROM pagina p 
+    LEFT JOIN pagxperfil pxp ON p.idpag = pxp.idpag 
+    LEFT JOIN perfil pe ON pxp.idpef = pe.idpef 
+    WHERE (p.nompag LIKE :searchTerm OR pe.nompef LIKE :searchTerm) 
+    AND p.estpagn = 'Activo'
+    LIMIT :limit OFFSET :offset;
+    ";
     } else {
         $sql = "SELECT 
                     p.idpag AS 'ID Página', 
@@ -45,6 +47,7 @@ function buscarPaginas($busqueda, $limit, $offset)
                 FROM pagina p 
                 LEFT JOIN pagxperfil pxp ON p.idpag = pxp.idpag 
                 LEFT JOIN perfil pe ON pxp.idpef = pe.idpef 
+                WHERE p.estpagn = 'Activo'
                 LIMIT :limit OFFSET :offset";
     }
 
@@ -127,9 +130,9 @@ if (isset($dtAllPages) && count($dtAllPages) > 0) {
         echo '<td>';
         echo '<div class="widget-26-job-info">';
         if ($dtp['Ver Pagina'] == 1)
-        echo "<p style='color: #00a650; font-weight: 600;'>Visible</p>";
+            echo "<p style='color: #00a650; font-weight: 600;'>Visible</p>";
         else
-        echo "<p style='color:rgb(166, 39, 0); font-weight: 600;'>Deshabilitada</p>";
+            echo "<p style='color:rgb(166, 39, 0); font-weight: 600;'>Deshabilitada</p>";
         echo '</td>';
         echo '</tr>';
     }

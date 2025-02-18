@@ -242,7 +242,21 @@ class Musu
         }
     }
 
-
+    function delUsu(){
+        $sql = "UPDATE usuario SET esteli = 1 WHERE idusu = :idusu;";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $idusu = $this->getIdusu();
+            $result->bindParam(':idusu', $idusu, PDO::PARAM_INT);
+            return $result->execute();
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al eliminar. Inténtalo más tarde";
+            return 0;
+        }
+    }
     function verificarCorreo($emausu)
     {
         try {
@@ -268,7 +282,7 @@ class Musu
     {
         $modelo = new Conexion();
         $conexion = $modelo->getConexion();
-        $query = 'SELECT u.idusu, u.nomusu, u.apeusu, u.docusu, u.emausu, u.celusu, u.genusu, u.dirrecusu, u.tipdoc, u.idubi, u.idpef, u.estusu, p.nompef FROM usuario AS u INNER JOIN perfil AS p ON p.idpef = u.idpef LIMIT :limit OFFSET :offset;'; // Ajusta según tus columnas
+        $query = 'SELECT u.idusu, u.nomusu, u.apeusu, u.docusu, u.emausu, u.celusu, u.genusu, u.dirrecusu, u.tipdoc, u.idubi, u.idpef, u.estusu, p.nompef FROM usuario AS u INNER JOIN perfil AS p ON p.idpef = u.idpef WHERE u.esteli = 0 LIMIT :limit OFFSET :offset;'; // Ajusta según tus columnas
         $stmt = $conexion->prepare($query);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
