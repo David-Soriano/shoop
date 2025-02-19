@@ -1,6 +1,8 @@
 <?php
 include_once(__DIR__ . "/../model/mcarr.php");
-include_once(__DIR__ . "/../model/conexion.php");
+if(!class_exists('Conexion')){
+    include_once(__DIR__ . "/../model/conexion.php");
+}
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

@@ -841,6 +841,48 @@ class Mpro
             return false;
         }
     }
+    public function getProductosSugeridos($idusu)
+    {
+        $res = [];
+        $sql = "SELECT DISTINCT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, i.imgpro, 
+    p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento
+FROM producto AS p
+LEFT JOIN imagen AS i ON p.idpro = i.idpro
+LEFT JOIN carrito AS c ON c.idusu = :idusu
+LEFT JOIN detallecarrito AS dc ON dc.idcar = c.idcar AND dc.idpro = p.idpro
+LEFT JOIN favoritos AS f ON f.idusu = :idusu
+LEFT JOIN detallefavoritos AS df ON df.idfav = f.idfav AND df.idpro = p.idpro
+LEFT JOIN busquedas AS b ON b.idusu = :idusu AND p.nompro LIKE CONCAT('%', b.termino_busqueda, '%') -- Se relaciona con términos de búsqueda
+WHERE p.estado = 'activo'
+AND (
+    p.idval = (SELECT idval FROM producto WHERE idpro = :idpro) -- Productos de la misma categoría
+    OR dc.idpro IS NOT NULL -- Productos en el carrito
+    OR df.idpro IS NOT NULL -- Productos en favoritos
+    OR b.termino_busqueda IS NOT NULL -- Productos relacionados con búsquedas recientes
+)
+GROUP BY p.idpro
+ORDER BY 
+    CASE 
+        WHEN df.idpro IS NOT NULL THEN 1 -- Prioriza favoritos
+        WHEN dc.idpro IS NOT NULL THEN 2 -- Luego productos en el carrito
+        WHEN b.termino_busqueda IS NOT NULL THEN 3 -- Luego productos según búsquedas
+        ELSE 4 -- Finalmente, productos de la misma categoría
+    END, p.productvend DESC;";
 
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $idpro = $this->getIdpro();
+            $result->bindValue(':idpro', $idpro);
+            $result->bindValue(':idusu', $idusu);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al obtener productos sugeridos. Intentalo más tarde";
+        }
+        return $res;
+    }
 
 }

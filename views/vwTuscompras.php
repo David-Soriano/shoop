@@ -56,7 +56,7 @@
             <div class="row bx-msj-null">
                     <div class="col">
                         <img src="IMG/Compras.svg" alt="">
-                        <p>No a realizado ningúna compra</p>
+                        <p>Culmina un pedido para ver tus compras</p>
                     </div>
                 </div>
             <?php }?>

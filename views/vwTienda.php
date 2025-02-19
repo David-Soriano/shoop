@@ -92,7 +92,7 @@
             </section>
         </section>
         <!-- Sección Ofertas -->
-        <section class="bx-apart">
+        <section class="bx-apart bx-apart_p2">
             <h2>Ofertas para ti</h2>
             <div class="row d-flex gap-5 justify-content-center">
                 <?php if ($productosOfertas) {
@@ -146,7 +146,7 @@
         </div> -->
 
         <!-- Sección Lo Más Vendido -->
-        <section class="bx-apart">
+        <section class="bx-apart bx-apart_p2">
             <h2>Lo Más Vendido</h2>
             <div class="row d-flex gap-5 justify-content-center">
                 <?php if($productosMasVendidos){

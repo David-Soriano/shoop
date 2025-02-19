@@ -75,4 +75,64 @@ No se encontró el producto con el ID proporcionado.No se encontró el producto 
 [14-Feb-2025 15:11:59 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 6
 [14-Feb-2025 15:12:11 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 6
 No se encontró el producto con el ID proporcionado.SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexiónSQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión[15-Feb-2025 14:48:11 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\shoop\views\vwMenu.php on line 4
-SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexiónSQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`shoop`.`pagxperfil`, CONSTRAINT `pagxperfil_ibfk_2` FOREIGN KEY (`idpag`) REFERENCES `pagina` (`idpag`))SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`shoop`.`pagxperfil`, CONSTRAINT `pagxperfil_ibfk_2` FOREIGN KEY (`idpag`) REFERENCES `pagina` (`idpag`))SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`shoop`.`pagxperfil`, CONSTRAINT `pagxperfil_ibfk_2` FOREIGN KEY (`idpag`) REFERENCES `pagina` (`idpag`))SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`shoop`.`pagxperfil`, CONSTRAINT `pagxperfil_ibfk_2` FOREIGN KEY (`idpag`) REFERENCES `pagina` (`idpag`))SQLSTATE[42S22]: Column not found: 1054 Unknown column 'estudu' in 'field list'
+SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexiónSQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`shoop`.`pagxperfil`, CONSTRAINT `pagxperfil_ibfk_2` FOREIGN KEY (`idpag`) REFERENCES `pagina` (`idpag`))SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`shoop`.`pagxperfil`, CONSTRAINT `pagxperfil_ibfk_2` FOREIGN KEY (`idpag`) REFERENCES `pagina` (`idpag`))SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`shoop`.`pagxperfil`, CONSTRAINT `pagxperfil_ibfk_2` FOREIGN KEY (`idpag`) REFERENCES `pagina` (`idpag`))SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`shoop`.`pagxperfil`, CONSTRAINT `pagxperfil_ibfk_2` FOREIGN KEY (`idpag`) REFERENCES `pagina` (`idpag`))SQLSTATE[42S22]: Column not found: 1054 Unknown column 'estudu' in 'field list'[19-Feb-2025 02:17:10 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 6
+[19-Feb-2025 02:17:18 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 6
+[19-Feb-2025 02:18:38 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 8
+[19-Feb-2025 02:18:42 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 8
+[19-Feb-2025 02:18:43 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 8
+[19-Feb-2025 02:21:12 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 8
+[19-Feb-2025 02:21:19 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 8
+[19-Feb-2025 02:35:52 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 8
+[19-Feb-2025 02:49:30 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\htdocs\shoop\controller\ccarr.php on line 8
+SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexiónSQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexiónSQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexiónSQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexiónSQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexiónSQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión[19-Feb-2025 15:49:57 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\shoop\views\vwHeader.php on line 22
+[19-Feb-2025 15:49:57 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\shoop\views\vwMenu.php on line 4
+[19-Feb-2025 16:15:53 Europe/Berlin] PHP Warning:  Undefined global variable $_SESSION in C:\xampp\htdocs\shoop\views\vwPrdPart.php on line 49
+[19-Feb-2025 16:15:53 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\shoop\views\vwPrdPart.php on line 49
+[19-Feb-2025 16:15:53 Europe/Berlin] PHP Warning:  Undefined global variable $_SESSION in C:\xampp\htdocs\shoop\views\vwPrdPart.php on line 101
+[19-Feb-2025 16:15:53 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\shoop\views\vwPrdPart.php on line 101
+[19-Feb-2025 16:22:16 Europe/Berlin] PHP Warning:  Undefined array key "idusu" in C:\xampp\htdocs\shoop\controller\cpro.php on line 69
+[19-Feb-2025 16:22:16 Europe/Berlin] PHP Warning:  Undefined array key "idusu" in C:\xampp\htdocs\shoop\views\vwPrdPart.php on line 49
+[19-Feb-2025 16:22:16 Europe/Berlin] PHP Warning:  Undefined array key "idusu" in C:\xampp\htdocs\shoop\views\vwPrdPart.php on line 101
+[19-Feb-2025 16:22:16 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 3
+[19-Feb-2025 16:23:33 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 3
+[19-Feb-2025 16:25:57 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\shoop\views/controller/cpro.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 2
+[19-Feb-2025 16:25:57 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\shoop\views/controller/cpro.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\shoop\views\vwMrdPrd.php:2
+Stack trace:
+#0 C:\xampp\htdocs\shoop\controller\funciones.php(4): include()
+#1 C:\xampp\htdocs\shoop\views\vwInfoPrd.php(5): insertText('Algunos Product...')
+#2 C:\xampp\htdocs\shoop\home.php(39): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 2
+[19-Feb-2025 16:26:09 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\shoop\views../controller/cpro.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 2
+[19-Feb-2025 16:26:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\shoop\views../controller/cpro.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\shoop\views\vwMrdPrd.php:2
+Stack trace:
+#0 C:\xampp\htdocs\shoop\controller\funciones.php(4): include()
+#1 C:\xampp\htdocs\shoop\views\vwInfoPrd.php(5): insertText('Algunos Product...')
+#2 C:\xampp\htdocs\shoop\home.php(39): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 2
+[19-Feb-2025 16:26:21 Europe/Berlin] PHP Warning:  require_once(../controller/cpro.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 2
+[19-Feb-2025 16:26:21 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../controller/cpro.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\shoop\views\vwMrdPrd.php:2
+Stack trace:
+#0 C:\xampp\htdocs\shoop\controller\funciones.php(4): include()
+#1 C:\xampp\htdocs\shoop\views\vwInfoPrd.php(5): insertText('Algunos Product...')
+#2 C:\xampp\htdocs\shoop\home.php(39): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 2
+[19-Feb-2025 16:27:04 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:27:58 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:28:34 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:30:25 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:30:54 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:32:31 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:32:37 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:34:45 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:35:09 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:35:24 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:38:29 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:40:29 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:41:00 Europe/Berlin] PHP Warning:  Undefined variable $dtProdsSuge in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 4
+[19-Feb-2025 16:45:50 Europe/Berlin] PHP Warning:  Undefined array key "nomimg" in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 12
+[19-Feb-2025 16:45:50 Europe/Berlin] PHP Warning:  Undefined array key "nomimg" in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 12
+[19-Feb-2025 16:46:36 Europe/Berlin] PHP Warning:  Undefined array key "nomimg" in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 12
+[19-Feb-2025 16:46:36 Europe/Berlin] PHP Warning:  Undefined array key "nomimg" in C:\xampp\htdocs\shoop\views\vwMrdPrd.php on line 12

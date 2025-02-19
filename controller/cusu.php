@@ -53,6 +53,4 @@ if ($ope == "save") {
     } else {
         echo json_encode(["success" => false, "error" => "No se pudo eliminar usuario"]);
     }
-} else {
-    echo json_encode(["success" => false, "error" => "ID de usuario no recibido"]);
 }

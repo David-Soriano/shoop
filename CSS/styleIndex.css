@@ -300,6 +300,29 @@ img {
     clip-path: polygon(0% 0%, 95% 0%, 100% 100%, 0% 100%);
     color: #000;
 }
+.carousel-inner img {
+    width: 100%;
+    max-width: 1900px; /* Ajusta esto según el tamaño deseado */
+    height: auto;
+    max-height: 600px; /* Ajusta esto según el tamaño deseado */
+    margin: auto;
+}
+.carousel-inner {
+    position: relative;
+}
+
+.carousel-inner::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Ajusta la altura del degradado */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ebebeb);
+    pointer-events: none; /* No bloquea la interacción */
+}
+
+
 
 footer {
     display: flex;
@@ -469,7 +492,9 @@ h4 {
     scroll-snap-align: start;
     transition: 400ms;
 }
-
+.bx-mr-prd a img{
+    width: -webkit-fill-available;
+}
 .bx-mr-prd a:hover {
     transform: scale(1.01);
     -webkit-box-shadow: 0px 9px 21px -12px rgba(0, 0, 0, 0.75);
@@ -1123,7 +1148,7 @@ form button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 85%;
     position: relative;
 }
 
@@ -1155,7 +1180,7 @@ form button {
 }
 
 .bx-item img {
-    width: 70%;
+    width: 75%;
     height: auto;
     border-radius: 5px;
 }
@@ -1169,6 +1194,10 @@ form button {
     margin: 0;
 }
 
+.bx-apart_p2 .bx-item{
+    width: 175px;
+    height: 35vh;
+}
 #val-sindes {
     margin: 0;
 }
@@ -1190,11 +1219,11 @@ form button {
 }
 
 #btn-left {
-    left: -23px;
+    left: -90px;
 }
 
 #btn-right {
-    right: -23px;
+    right: -90px;
 }
 
 .bx-apart.bx-apart_views {
@@ -1478,7 +1507,9 @@ form button {
 .bx-car-comp-imgnn,
 .bx-car-comp-imgnn h4 {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 
 }
 
@@ -1740,6 +1771,11 @@ form button {
     .bx-item {
         height: 20vh;
         margin: 5% 0;
+    }
+
+    .bx-apart_p2 .bx-item{
+        width: 220px;
+        height: 24vh;
     }
 }
 

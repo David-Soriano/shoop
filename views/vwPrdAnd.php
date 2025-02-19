@@ -6,7 +6,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <section class="bx-apart">
+            <section class="bx-apart bx-apart_p2">
                 <div class="row d-flex gap-5 justify-content-center">
                     <?php if ($productosNuevos) {
                         foreach ($productosNuevos as $producto): ?>

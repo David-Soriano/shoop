@@ -1,16 +1,15 @@
-<?php include_once(__DIR__ . "/../controller/ccarr.php"); ?>
 <div class="container bx-cont-carr-pro">
     <div class="row bx-prp-carr-comp" <?php if (!$isLoggedIn)
         echo "style='display: flex; justify-content: center;'"; ?>>
         <div class="col-8 bx-items-carr-comp">
-            <?php if ($isLoggedIn) { ?>
-                <?php if (!empty($dtCarrito)) { ?>
-                    <?php foreach ($dtCarrito as $producto) { ?>
+            <?php if ($isLoggedIn) {
+                include_once(__DIR__ . "/../controller/ccarr.php");
+                if (!empty($dtCarrito)) {
+                    foreach ($dtCarrito as $producto) { ?>
                         <div class="card-body">
                             <div class="row product producto-carrito" data-idpro="<?= $producto['idpro'] ?>"
                                 data-nombre="<?= $producto['nompro'] ?>" data-cantidad="<?= $producto['cantidad'] ?>"
-                                data-precio="<?= $producto['precio_final'] ?>"
-                                data-imagen="<?= $producto['imgpro'] ?>">
+                                data-precio="<?= $producto['precio_final'] ?>" data-imagen="<?= $producto['imgpro'] ?>">
                                 <div class="col-2 bx_tusped-img">
                                     <a href="home.php?pg=001&idpro=<?= $producto['idpro'] ?>"><img
                                             src="<?php echo htmlspecialchars($producto['imgpro'] ?? 'default-image.png'); ?>"
@@ -44,15 +43,16 @@
                                 <div class="col-1 product-actions">
                                     <div class="row product-actions_opt">
                                         <div class="col">
-                                            <a href="#" title="Eliminar" class="btn-eli-pcar" data-idpro="<?= $producto['idpro'] ?>"><i class="bi bi-x"></i></a>
+                                            <a href="#" title="Eliminar" class="btn-eli-pcar"
+                                                data-idpro="<?= $producto['idpro'] ?>"><i class="bi bi-x"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                    <?php } ?>
-                <?php } else { ?>
+                    <?php }
+                } else { ?>
                     <div class="col-4 bx-car-comp-imgnn">
                         <img src="IMG/carroVacio.svg" alt="">
                     </div>
@@ -115,10 +115,10 @@
             } ?>
         </div>
     <?php } else { ?>
-        <div class="col-4">
+        <div class="col-4 bx-car-comp-imgnn">
             <img src="IMG/carroVacio.svg" alt="">
         </div>
-        <div class="col-6">
+        <div class="col-6 bx-car-comp-imgnn">
             <h4>Inicia sesión para ver tu carrito</h4>
 
             <p>Agrega productos y los veras aquí</p>

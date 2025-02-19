@@ -2,6 +2,9 @@
 
 include "model/mpro.php";
 
+if(session_status() === PHP_SESSION_NONE){
+    session_start();
+}
 $mpro = new Mpro();
 $idpro = isset($_REQUEST['idpro']) ? $_REQUEST['idpro'] : NULL;
 $cg = isset($_REQUEST['cg']) ? $_REQUEST['cg'] : NULL;
@@ -38,6 +41,8 @@ $dtInfPrd = $mpro->getOnePrd();
 $dtCarprd = $mpro->getCarPrd();
 $dtImgpro = $mpro->getImagesByProduct($idpro);
 $dtSliders = $mpro->getImagesByProduct(NULL, 1);
+
+$dtProdsSuge = $mpro->getProductosSugeridos($_SESSION['idusu']);
 
 $productosOfertas = $mpro->getInfOfertas();
 $productosMasVendidos = $mpro->getInfMasVendidos();
