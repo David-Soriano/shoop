@@ -4,7 +4,6 @@ USE shoop;
 
 
 
-
 --
 -- Base de datos: `shoop`
 --
@@ -23,6 +22,26 @@ CREATE TABLE `auditoria` (
   `detalles` text DEFAULT NULL,
   `tipo_evento` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `busquedas`
+--
+
+CREATE TABLE `busquedas` (
+  `idbusqueda` int(11) NOT NULL,
+  `idusu` int(5) NOT NULL,
+  `termino_busqueda` varchar(255) DEFAULT NULL,
+  `fecha_busqueda` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `busquedas`
+--
+
+INSERT INTO `busquedas` (`idbusqueda`, `idusu`, `termino_busqueda`, `fecha_busqueda`) VALUES
+(1, 20, 'Samsung', '2025-02-19 15:02:59');
 
 -- --------------------------------------------------------
 
@@ -53,7 +72,8 @@ CREATE TABLE `carrito` (
 --
 
 INSERT INTO `carrito` (`idcar`, `idusu`, `fecha_creacion`) VALUES
-(2, 20, '2025-02-07 16:42:16');
+(2, 20, '2025-02-07 16:42:16'),
+(3, 27, '2025-02-20 02:02:19');
 
 -- --------------------------------------------------------
 
@@ -266,7 +286,10 @@ INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`,
 (151, 'proinf/imagen_674f53f351d12.webp', 'samsung', 'image/webp', 57, 1, NULL, NULL),
 (155, 'proinf/imagen_6766f324cb69f.jpg', 'camisa2', 'image/jpeg', 61, 1, NULL, NULL),
 (156, 'proinf/imagen_67682488cd298.jpg', 'camisa2', 'image/jpeg', 62, 1, NULL, NULL),
-(157, 'proinf/imagen_676824eb18550.png', 'signature_pandadoc', 'image/png', 63, 1, NULL, NULL);
+(157, 'proinf/imagen_676824eb18550.png', 'signature_pandadoc', 'image/png', 63, 1, NULL, NULL),
+(158, 'proinf/imagen_67b74a2ba5154.jpg', 'Articulo9', 'image/jpeg', 64, 1, NULL, NULL),
+(159, 'proinf/imagen_67b74c9c5a003.jpg', 'Articulo9', 'image/jpeg', 65, 1, NULL, NULL),
+(160, 'proinf/imagen_67b74e1fa6b26.webp', 'Articulo 5', 'image/webp', 66, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -296,7 +319,6 @@ INSERT INTO `menu` (`idmen`, `nombre`, `url`, `ordmen`, `estmen`, `url2`, `subme
 (2, 'Nosotros', 'index.php?pg=5', 2, NULL, 'home.php?pg=5', 0, 0, NULL, NULL),
 (3, 'Ayuda/PQR', 'index.php?pg=8', 3, NULL, 'home.php?pg=8', 1, 0, NULL, NULL),
 (4, 'Iniciar Sesión', 'views/vwLogin.php', 4, 0, 'views/vwLogin.php', 0, 0, NULL, NULL),
-(5, 'Productos', '#', 5, 1, NULL, 0, 0, NULL, NULL),
 (6, 'Vender', NULL, 6, 1, 'views/vwpanpro.php', 0, 0, NULL, NULL),
 (7, 'Cerrar Sesión', 'views/vwExit.php', 10, 1, NULL, 0, 1, NULL, NULL),
 (8, 'Perfil', 'home.php?pg=15', 7, 1, NULL, 0, 1, NULL, NULL),
@@ -318,47 +340,49 @@ CREATE TABLE `pagina` (
   `rutpag` varchar(255) DEFAULT NULL,
   `mospag` tinyint(1) DEFAULT NULL,
   `icopag` varchar(100) DEFAULT NULL,
-  `lugpag` int(4) DEFAULT NULL
+  `lugpag` int(4) DEFAULT NULL,
+  `estpagn` varchar(20) DEFAULT 'Activo',
+  `actpag` tinyint(4) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pagina`
 --
 
-INSERT INTO `pagina` (`idpag`, `nompag`, `rutpag`, `mospag`, `icopag`, `lugpag`) VALUES
-(1, 'Información del Producto', 'views/vwInfoPrd.php', 0, NULL, NULL),
-(2, 'Favoritos', 'views/vwFavorito.php', 0, 'bi bi-heart', 1),
-(3, 'Carro de Compras', 'views/vwCarrComp.php', 0, 'bi bi-basket3', 1),
-(4, 'LogIn', 'views/vwLogin.php', 0, NULL, NULL),
-(5, 'Nosotros', 'views/vwNosotros.php\"', 0, NULL, NULL),
-(6, 'Preguntas Frecuentes', 'views/vwfaq.php', 0, NULL, NULL),
-(7, 'Recursos Educativos', 'views/vwRecuredu.php', 0, NULL, NULL),
-(8, 'Soporte', 'views/vwsoport.php', 0, NULL, NULL),
-(9, 'Pagos', 'views/vwpagos.php', 0, NULL, NULL),
-(10, 'Pedido', 'views/vwpedido.php', 0, NULL, NULL),
-(11, 'Políticas', 'views/vwPoliticas.php', 0, NULL, NULL),
-(12, 'Tarjeta', 'views/vwtarjeta.php', 0, NULL, NULL),
-(13, 'Tienda', 'views/vwTienda.php', 0, NULL, NULL),
-(14, 'Bienvenida', 'views/vwTienda.php', 0, NULL, NULL),
-(15, 'Perfil', 'views/vwPerfil.php', 0, 'bi bi-person-circle', 1),
-(16, 'Tus Compras', 'views/vwTuscompras.php', 0, NULL, NULL),
-(17, 'Tus Pedidos', 'views/vwTusPedidos.php', NULL, NULL, NULL),
-(18, 'Productos Añadidos', 'views/vwPrdAnd.php', 0, NULL, NULL),
-(19, 'Ofertas', 'views/vwOfer.php', NULL, NULL, NULL),
-(20, 'Más vendido', 'views/vwMVen.php', NULL, NULL, NULL),
-(21, 'Categorías', 'views/vwCatego.php', NULL, NULL, NULL),
-(22, 'Administrador', 'views/admin.php', NULL, NULL, NULL),
-(23, 'Almacén', 'views/vwTable.php', NULL, NULL, 2),
-(24, 'Subir Productos', 'views/vwven.php', NULL, NULL, 2),
-(25, 'Lista de pedidos', 'views/vwListPed.php', NULL, NULL, 2),
-(26, 'Panel Control WC', 'views/vwDefPan.php', NULL, NULL, 2),
-(27, 'PQR prv', 'views/vista_pqr.php', NULL, NULL, 2),
-(28, 'Seguir Envío', 'views/vwSeguirenv.php', NULL, NULL, NULL),
-(29, 'Pagos', 'views/vwpagos.php', NULL, NULL, NULL),
-(30, 'Ver paginas', 'views/vwCpag.php', NULL, NULL, NULL),
-(31, 'Lista Usuarios', 'views/vwUserT.php', NULL, NULL, NULL),
-(32, 'Balances', 'views/vwBal.php', NULL, NULL, NULL),
-(33, 'Control Productos', 'views/vwProdC.php', NULL, NULL, NULL);
+INSERT INTO `pagina` (`idpag`, `nompag`, `rutpag`, `mospag`, `icopag`, `lugpag`, `estpagn`, `actpag`) VALUES
+(1, 'Información del Producto', 'views/vwInfoPrd.php', 0, NULL, NULL, 'Activo', 1),
+(2, 'Favoritos', 'views/vwFavorito.php', 0, 'bi bi-heart', 1, 'Activo', 1),
+(3, 'Carro de Compras', 'views/vwCarrComp.php', 0, 'bi bi-basket3', 1, 'Activo', 1),
+(4, 'LogIn', 'views/vwLogin.php', 0, NULL, NULL, 'Activo', 1),
+(5, 'Nosotros', 'views/vwNosotros.php\"', 0, NULL, NULL, 'Activo', 1),
+(6, 'Preguntas Frecuentes', 'views/vwfaq.php', 0, NULL, NULL, 'Activo', 1),
+(7, 'Recursos Educativos', 'views/vwRecuredu.php', 0, NULL, NULL, 'Activo', 1),
+(8, 'Soporte', 'views/vwsoport.php', 0, NULL, NULL, 'Activo', 1),
+(9, 'Pagos', 'views/vwpagos.php', 0, NULL, NULL, 'Activo', 1),
+(10, 'Pedido', 'views/vwpedido.php', 0, NULL, NULL, 'Activo', 1),
+(11, 'Políticas', 'views/vwPoliticas.php', 0, NULL, NULL, 'Activo', 1),
+(12, 'Tarjeta', 'views/vwtarjeta.php', 0, NULL, NULL, 'Activo', 1),
+(13, 'Tienda', 'views/vwTienda.php', 0, NULL, NULL, 'Activo', 1),
+(14, 'Bienvenida', 'views/vwTienda.php', 0, NULL, NULL, 'Activo', 1),
+(15, 'Perfil', 'views/vwPerfil.php', 0, 'bi bi-person-circle', 1, 'Activo', 1),
+(16, 'Tus Compras', 'views/vwTuscompras.php', 0, NULL, NULL, 'Activo', 1),
+(17, 'Tus Pedidos', 'views/vwTusPedidos.php', NULL, NULL, NULL, 'Activo', 1),
+(18, 'Productos Añadidos', 'views/vwPrdAnd.php', 0, NULL, NULL, 'Activo', 1),
+(19, 'Ofertas', 'views/vwOfer.php', NULL, NULL, NULL, 'Activo', 1),
+(20, 'Más vendido', 'views/vwMVen.php', NULL, NULL, NULL, 'Activo', 1),
+(21, 'Categorías', 'views/vwCatego.php', NULL, NULL, NULL, 'Activo', 1),
+(22, 'Administrador', 'views/admin.php', NULL, NULL, NULL, 'Activo', 1),
+(23, 'Almacén', 'views/vwTable.php', NULL, NULL, 2, 'Activo', 1),
+(24, 'Subir Productos', 'views/vwven.php', NULL, NULL, 2, 'Activo', 1),
+(25, 'Lista de pedidos', 'views/vwListPed.php', NULL, NULL, 2, 'Activo', 1),
+(26, 'Panel Control WC', 'views/vwDefPan.php', NULL, NULL, 2, 'Activo', 1),
+(27, 'PQR prv', 'views/vista_pqr.php', NULL, NULL, 2, 'Activo', 1),
+(28, 'Seguir Envío', 'views/vwSeguirenv.php', NULL, NULL, NULL, 'Activo', 1),
+(30, 'Ver paginas', 'views/vwCpag.php', NULL, NULL, NULL, 'Activo', 1),
+(31, 'Lista Usuarios', 'views/vwUserT.php', NULL, NULL, NULL, 'Activo', 1),
+(32, 'Balances', 'views/vwBal.php', NULL, NULL, NULL, 'Activo', 1),
+(33, 'Control Productos', 'views/vwProdC.php', NULL, NULL, NULL, 'Activo', 1),
+(34, 'Página Prueba', 'views/vwpáginaprueba.php', NULL, 'bi bi-123', 0, 'Activo', 1);
 
 -- --------------------------------------------------------
 
@@ -392,38 +416,37 @@ CREATE TABLE `pagxperfil` (
 --
 
 INSERT INTO `pagxperfil` (`idpag`, `idpef`, `idperpf`) VALUES
-(13, 1, 1),
-(1, 1, 2),
-(3, 1, 3),
-(4, 1, 4),
-(5, 1, 5),
-(6, 1, 6),
-(7, 1, 7),
-(8, 1, 8),
-(9, 1, 9),
-(10, 1, 10),
-(11, 1, 11),
-(12, 1, 12),
-(2, 1, 13),
-(14, 1, 15),
-(18, 1, 16),
-(19, 1, 17),
-(20, 1, 18),
-(21, 1, 19),
-(22, 2, 20),
-(23, 1, 21),
-(24, 1, 22),
-(25, 1, 23),
-(26, 1, 24),
-(27, 1, 25),
-(16, 1, 26),
-(17, 1, 27),
-(28, 1, 28),
-(29, 1, 29),
-(30, 2, 30),
-(31, 2, 31),
-(32, 2, 32),
-(33, 2, 33);
+(30, 2, 1),
+(31, 2, 2),
+(22, 2, 3),
+(32, 2, 4),
+(33, 2, 5),
+(1, 1, 6),
+(2, 1, 7),
+(3, 1, 8),
+(4, 1, 9),
+(5, 1, 10),
+(6, 1, 11),
+(7, 1, 12),
+(8, 1, 13),
+(9, 1, 14),
+(10, 1, 15),
+(11, 1, 16),
+(12, 1, 17),
+(13, 1, 18),
+(14, 1, 19),
+(15, 1, 20),
+(16, 1, 21),
+(17, 1, 22),
+(18, 1, 23),
+(19, 1, 24),
+(20, 1, 25),
+(21, 1, 26),
+(23, 1, 27),
+(24, 1, 28),
+(25, 1, 29),
+(26, 1, 30),
+(27, 1, 31);
 
 -- --------------------------------------------------------
 
@@ -525,7 +548,10 @@ INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valor
 (57, 'Samsung S21+', 2420000, 6, NULL, 2000000, 'Teléfono 5g', '2024-12-03 18:54:43', '2024-12-03 18:54:43', '2024-12-03 05:00:00', '2024-12-03 05:00:00', 'activo', 5, 2, 0, NULL),
 (61, 'Carro', 29, 2, NULL, 23, 'dsg', '2024-12-21 16:56:04', '2024-12-21 16:56:04', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 2, 0, NULL),
 (62, 'Camisa', 29, 2, NULL, 23, 'sfsd', '2024-12-22 14:39:05', '2024-12-22 14:48:58', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(63, 'Carro', 43, 5, NULL, 34, 'dsfgs', '2024-12-22 14:40:43', '2024-12-22 14:46:49', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 2, 0, NULL);
+(63, 'Carro', 43, 5, NULL, 34, 'dsfgs', '2024-12-22 14:40:43', '2024-12-22 14:46:49', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 2, 0, NULL),
+(64, 'Mouse Logitech', 69600, 10, NULL, 60000, 'Mouse inalambrico color azul, perfecto para el trabajo diario y una gran comodidad.', '2025-02-20 15:28:43', '2025-02-20 15:28:43', NULL, NULL, 'activo', 10, 2, 0, NULL),
+(65, 'Mouse Logitech', 69600, 10, NULL, 60000, 'Mouse inalambrico color azul, perfecto para el trabajo diario y una gran comodidad.', '2025-02-20 15:39:08', '2025-02-20 15:39:08', NULL, NULL, 'activo', 10, 2, 0, NULL),
+(66, 'Mouse Logitech', 69600, 10, NULL, 60000, 'Mouse inalambrico color azul, perfecto para el trabajo diario y una gran comodidad.', '2025-02-20 15:45:35', '2025-02-20 15:45:35', NULL, NULL, 'activo', 10, 2, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -547,7 +573,9 @@ INSERT INTO `prodxprov` (`idpro`, `idprov`, `idprodprv`) VALUES
 (57, 72, 23),
 (62, 81, 26),
 (63, 81, 27),
-(61, 81, 28);
+(61, 81, 28),
+(65, 81, 29),
+(66, 81, 30);
 
 -- --------------------------------------------------------
 
@@ -1812,17 +1840,24 @@ CREATE TABLE `usuario` (
   `fotpef` varchar(255) DEFAULT NULL,
   `idpef` int(5) NOT NULL,
   `pasusu` varchar(300) NOT NULL,
-  `estusu` varchar(10) DEFAULT 'Activo'
+  `estusu` varchar(10) DEFAULT 'Activo',
+  `token_recuperacion` varchar(255) DEFAULT NULL,
+  `token_expira` datetime DEFAULT NULL,
+  `esteli` tinyint(4) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idusu`, `nomusu`, `apeusu`, `docusu`, `emausu`, `celusu`, `genusu`, `dirrecusu`, `tipdoc`, `idval`, `idubi`, `feccreate`, `fecupdate`, `fotpef`, `idpef`, `pasusu`, `estusu`) VALUES
-(16, 'David', 'Soriano', 101564, 'admin@gmail.com', '3186274255', 'M', NULL, 'CC', NULL, NULL, '2024-11-27 21:20:01', '2025-01-28 23:34:08', NULL, 2, '$2y$10$aGcbgN7SK.mxZRsTEfI3jeOcW7sueH9H4d.vRli3ouesWF6NG.SS6', 'Inactivo'),
-(19, 'Kevin', 'Galindo', 1069302546, 'kevin@gmail.com', '3124855148', 'M', NULL, 'CC', NULL, NULL, '2024-12-03 18:05:44', '2024-12-03 18:05:44', NULL, 1, '$2y$10$t5cP9amsNh24ypzs6efIEOpalENYHZ42Y5Vhk1WaU9VweD97U8Z8e', 'Activo'),
-(20, 'DavidX', 'ss', 104544, 'davidx@gmail.com', '45674658', 'M', 'Vereda la balsa', 'CC', NULL, 47030, '2024-12-13 23:20:35', '2025-02-04 14:24:00', NULL, 1, '$2y$10$rkzjvt6ZirdI5g2OKCyyeONzPP9T1vd0oTb3iJXoaWDh3AyA.ajnG', 'Activo');
+INSERT INTO `usuario` (`idusu`, `nomusu`, `apeusu`, `docusu`, `emausu`, `celusu`, `genusu`, `dirrecusu`, `tipdoc`, `idval`, `idubi`, `feccreate`, `fecupdate`, `fotpef`, `idpef`, `pasusu`, `estusu`, `token_recuperacion`, `token_expira`, `esteli`) VALUES
+(16, 'David', 'Soriano', 101564, 'admin@gmail.com', '3186274255', 'M', NULL, 'CC', NULL, 15322, '2024-11-27 21:20:01', '2025-02-13 02:21:53', NULL, 2, '$2y$10$aGcbgN7SK.mxZRsTEfI3jeOcW7sueH9H4d.vRli3ouesWF6NG.SS6', 'Activo', NULL, NULL, 0),
+(19, 'Kevin', 'Galindo', 1069302546, 'kevin@gmail.com', '3124855148', 'M', NULL, 'CC', NULL, NULL, '2024-12-03 18:05:44', '2025-02-18 16:02:40', NULL, 1, '$2y$10$t5cP9amsNh24ypzs6efIEOpalENYHZ42Y5Vhk1WaU9VweD97U8Z8e', 'Activo', NULL, NULL, 1),
+(20, 'DavidX', 'ss', 104544, 'davidx@gmail.com', '45674658', 'M', 'Vereda la balsa', 'CC', NULL, 47030, '2024-12-13 23:20:35', '2025-02-18 16:02:55', NULL, 1, '$2y$10$rkzjvt6ZirdI5g2OKCyyeONzPP9T1vd0oTb3iJXoaWDh3AyA.ajnG', 'Activo', '89fc8200fefff72640e1770ae9050ced307e8e6fe4d1253d93d5dc1e3d4e2bbff1196eef608d6e2333763e263f765ada1598', '2025-02-17 10:38:43', 1),
+(25, 'KEVIN', 'Galindo', 104544, 'sarmientod990@gmail.com', '45674658', 'M', 'clle 2', 'CC', NULL, 54313, '2025-02-13 15:33:13', '2025-02-18 16:02:23', NULL, 2, '$2y$10$KXmrX4Z98cgEx69qQpPmkOThntnDZbW9mD.3LsZCuUiZ32jPgzcRa', 'Activo', NULL, NULL, 1),
+(26, 'Oscar', 'Galindo', 104544, 'oscar@gmail.com', '45674658', 'M', 'la balsa', 'CC', NULL, 25175, '2025-02-13 16:05:02', '2025-02-18 16:01:51', NULL, 1, '$2y$10$VT/RSk1w6bpMvgIbW9h40OLHvlPkk/Z/snYakMlJNrKfhBtapk1YW', 'Activo', NULL, NULL, 1),
+(27, 'Juan David', 'Soriano', 1049794389, 'davidscicua314@gmail.com', '3186274255', 'M', 'Vereda Gaunza Arriba', 'CC', NULL, 15322, '2025-02-17 14:41:33', '2025-02-17 16:10:57', NULL, 1, '$2y$10$GaXFMoGxk8V3Y/zZjB.t9.zH4rMmAU4wmTxRi4xhJNQLo/LytsLpa', 'Activo', NULL, NULL, 0),
+(28, 'DavidX', 'Galindo', 104544, 'ddd@dd.com', '3186274255', 'M', 'la balsa', 'CC', NULL, 17050, '2025-02-18 15:29:29', '2025-02-18 15:59:56', NULL, 2, '$2y$10$sMfnFhr/KedvAWkF7xA8wur3oq7ILELQEZfh7H20DGMHpwGyNiHGW', 'Activo', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1856,6 +1891,13 @@ INSERT INTO `valor` (`idval`, `nomval`, `act`, `idusu`, `iddom`) VALUES
 --
 ALTER TABLE `auditoria`
   ADD PRIMARY KEY (`idaud`);
+
+--
+-- Indices de la tabla `busquedas`
+--
+ALTER TABLE `busquedas`
+  ADD PRIMARY KEY (`idbusqueda`),
+  ADD KEY `idusu` (`idusu`);
 
 --
 -- Indices de la tabla `caracteristicas`
@@ -2061,6 +2103,12 @@ ALTER TABLE `valor`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `busquedas`
+--
+ALTER TABLE `busquedas`
+  MODIFY `idbusqueda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `caracteristicas`
 --
 ALTER TABLE `caracteristicas`
@@ -2070,7 +2118,7 @@ ALTER TABLE `caracteristicas`
 -- AUTO_INCREMENT de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  MODIFY `idcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
@@ -2088,7 +2136,7 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detallecarrito`
 --
 ALTER TABLE `detallecarrito`
-  MODIFY `iddetcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `iddetcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `detallecompra`
@@ -2100,7 +2148,7 @@ ALTER TABLE `detallecompra`
 -- AUTO_INCREMENT de la tabla `detallefavoritos`
 --
 ALTER TABLE `detallefavoritos`
-  MODIFY `iddetfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `iddetfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
@@ -2124,13 +2172,13 @@ ALTER TABLE `dominio`
 -- AUTO_INCREMENT de la tabla `favoritos`
 --
 ALTER TABLE `favoritos`
-  MODIFY `idfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2142,7 +2190,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
@@ -2154,7 +2202,7 @@ ALTER TABLE `pago`
 -- AUTO_INCREMENT de la tabla `pagxperfil`
 --
 ALTER TABLE `pagxperfil`
-  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
@@ -2178,13 +2226,13 @@ ALTER TABLE `pqr`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de la tabla `prodxprov`
 --
 ALTER TABLE `prodxprov`
-  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
@@ -2214,7 +2262,7 @@ ALTER TABLE `ubicacion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusu` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idusu` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `valor`
@@ -2225,6 +2273,12 @@ ALTER TABLE `valor`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `busquedas`
+--
+ALTER TABLE `busquedas`
+  ADD CONSTRAINT `busquedas_ibfk_1` FOREIGN KEY (`idusu`) REFERENCES `usuario` (`idusu`);
 
 --
 -- Filtros para la tabla `caracteristicas`

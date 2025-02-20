@@ -82,7 +82,8 @@
                     <input type="submit" value="Cargar">
                 </div>
                 <div class="col">
-                    <p>¿Tienes muchos artículos para subir? Ingresa <a href="#">Aquí</a></p>
+                    <p>¿Tienes muchos artículos para subir? Ingresa <a href="#" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Aquí</a></p>
                 </div>
             </div>
         </form>
@@ -100,3 +101,62 @@
     </div>
 
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Carga Masiva de Productos</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formCargaMasiva" action="../controller/cargar_productos.php" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="archivo-excel" class="col-form-label">Selecciona el archivo Excel:</label>
+                        <input type="file" class="form-control" id="archivo-excel" name="archivo_excel" accept=".xlsx,.xls" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagenes-productos" class="col-form-label">Selecciona las imágenes de los productos:</label>
+                        <input type="file" class="form-control" id="imagenes-productos" name="imagenes_productos[]" accept="image/*" multiple required>
+                    </div>
+                    <!-- Contenedor para la vista previa de imágenes -->
+                    <div id="preview-container" class="d-flex flex-wrap gap-2"></div>
+                    <div class="modal-footer">
+                        <a href="../plantillas/Plantilla_Carga_Productos.xlsx" class="btn btn-info" download>Descargar Plantilla</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" form="formCargaMasiva">Cargar Productos</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedImages = []; // Array para almacenar imágenes seleccionadas
+
+    document.getElementById("imagenes-productos").addEventListener("change", function (event) {
+        let previewContainer = document.getElementById("preview-container");
+        const files = event.target.files;
+
+        if (files.length > 0) {
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith("image/")) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        let img = document.createElement("img");
+                        img.src = e.target.result;
+                        img.classList.add("img-thumbnail");
+                        img.style.width = "100px";
+                        img.style.height = "100px";
+                        previewContainer.appendChild(img);
+                        
+                        // Agregar la imagen al array global
+                        selectedImages.push(file);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    });
+</script>
