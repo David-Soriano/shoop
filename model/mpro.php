@@ -891,7 +891,7 @@ UNION ALL
     LIMIT 10
 )
 ORDER BY RAND() -- Mezcla los resultados finales
-LIMIT 20;";
+LIMIT 16;";
 
         try {
             $modelo = new Conexion();
@@ -911,25 +911,8 @@ LIMIT 20;";
     public function getProductosPorCategoria($idpro)
     {
         $res = [];
-        $sql = "SELECT 
-    p.idpro, 
-    p.nompro, 
-    p.estado, 
-    p.tipro, 
-    p.valorunitario, 
-    p.precio, 
-    p.pordescu, 
-    i.imgpro, 
-    p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento,
-    p.idval
-FROM producto AS p
-LEFT JOIN imagen AS i ON p.idpro = i.idpro
-WHERE p.estado = 'activo' 
-AND p.idval = (SELECT idval FROM producto WHERE idpro = :idpro)
-AND p.nompro LIKE (SELECT CONCAT('%', nompro, '%') FROM producto WHERE idpro = :idpro)
-AND p.idpro <> :idpro  -- Evita traer el mismo producto
-ORDER BY p.productvend DESC 
-LIMIT 10";
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, i.imgpro, p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento, p.idval FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' AND p.idpro <> :idpro AND ( p.idval = (SELECT idval FROM producto WHERE idpro = :idpro) OR p.nompro LIKE CONCAT('%', (SELECT nompro FROM producto WHERE idpro = :idpro), '%') OR p.nompro REGEXP (SELECT REPLACE(nompro, ' ', '|') FROM producto WHERE idpro = :idpro)) GROUP BY p.idpro ORDER BY p.productvend DESC, p.precio ASC LIMIT 10;
+";
 
         try {
             $modelo = new Conexion();
@@ -947,7 +930,4 @@ LIMIT 10";
 
         return $res;
     }
-
-
-
 }

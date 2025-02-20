@@ -500,7 +500,7 @@ h4 {
 }
 
 .bx-mr-prd a img {
-    width: 70%;
+    width: 50%;
     padding: 2%;
 }
 
@@ -974,6 +974,8 @@ form button {
 }
 
 .contact-form-container {
+    background: #FFF;
+    margin: 10% auto;
     width: 800px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -981,6 +983,9 @@ form button {
     grid-template-areas: "contact-us header header header" "contact-us address phone email" "contact-us contact-form contact-form contact-form";
 }
 
+.contact-form-container .formsop{
+    width: 95%;
+}
 .contact-us {
     grid-area: contact-us;
 }
@@ -1175,8 +1180,8 @@ form button {
 .bx-mr-prd a {
     scroll-snap-align: center;
     box-sizing: border-box;
-    min-height: 27vh;
-    max-height: 27vh;
+    min-height: 30vh;
+    max-height: 30vh;
     border: 1px solid #e0dada;
     padding: 1%;
     text-decoration: none;
@@ -2029,6 +2034,26 @@ form button {
 
 .bx-mr-prd-gene .bx-mr-prd{
     padding: 2%;
+}
+.bx-mr-prd.bx-mr-prd-gene_sec{
+    width: 100%;
+    overflow-x: hidden; /* Ocultar el desplazamiento horizontal */
+    display: flex;
+    flex-wrap: wrap; /* Envolver elementos en múltiples filas */
+    gap: 20px; /* Espacio entre los productos */
+    box-sizing: border-box;
+}
+.bx-mr-prd.bx-mr-prd-gene_sec a{
+    flex: 1 1 calc(25% - 20px); /* Ajustar el ancho de cada producto */
+    box-sizing: border-box;
+    min-height: 30vh;
+    max-height: 30vh;
+    max-width: 26vh;
+    min-width: 26vh;
+    border: 1px solid #e0dada;
+    padding: 1%;
+    text-decoration: none;
+    scroll-snap-align: center;
 }
 .no-pr-suge{
     margin: auto;

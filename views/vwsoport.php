@@ -1,4 +1,5 @@
-<div class="contact-form-container">
+<div class="container">
+    <div class="contact-form-container">
         <div class="contact-us">
             <div class="contact-header">
                 <h1>
@@ -52,5 +53,4 @@
             </form>
         </div>
     </div>
-    
-    
+</div>
