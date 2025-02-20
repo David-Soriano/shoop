@@ -841,33 +841,57 @@ class Mpro
             return false;
         }
     }
-    public function getProductosSugeridos($idusu)
+    public function getProductosSugeridos($idusu = null)
     {
         $res = [];
-        $sql = "SELECT DISTINCT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, i.imgpro, 
-    p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento
-FROM producto AS p
-LEFT JOIN imagen AS i ON p.idpro = i.idpro
-LEFT JOIN carrito AS c ON c.idusu = :idusu
-LEFT JOIN detallecarrito AS dc ON dc.idcar = c.idcar AND dc.idpro = p.idpro
-LEFT JOIN favoritos AS f ON f.idusu = :idusu
-LEFT JOIN detallefavoritos AS df ON df.idfav = f.idfav AND df.idpro = p.idpro
-LEFT JOIN busquedas AS b ON b.idusu = :idusu AND p.nompro LIKE CONCAT('%', b.termino_busqueda, '%') -- Se relaciona con términos de búsqueda
-WHERE p.estado = 'activo'
-AND (
-    p.idval = (SELECT idval FROM producto WHERE idpro = :idpro) -- Productos de la misma categoría
-    OR dc.idpro IS NOT NULL -- Productos en el carrito
-    OR df.idpro IS NOT NULL -- Productos en favoritos
-    OR b.termino_busqueda IS NOT NULL -- Productos relacionados con búsquedas recientes
+        $sql = "(
+    SELECT DISTINCT 
+        p.idpro, 
+        p.nompro, 
+        p.estado, 
+        p.tipro, 
+        p.valorunitario, 
+        p.precio, 
+        p.pordescu, 
+        i.imgpro, 
+        p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento
+    FROM producto AS p
+    LEFT JOIN imagen AS i ON p.idpro = i.idpro
+    LEFT JOIN carrito AS c ON c.idusu = COALESCE(:idusu, 0)
+    LEFT JOIN detallecarrito AS dc ON dc.idcar = c.idcar AND dc.idpro = p.idpro
+    LEFT JOIN favoritos AS f ON f.idusu = COALESCE(:idusu, 0)
+    LEFT JOIN detallefavoritos AS df ON df.idfav = f.idfav AND df.idpro = p.idpro
+    LEFT JOIN busquedas AS b ON (COALESCE(:idusu, 0) > 0 AND b.idusu = :idusu AND p.nompro LIKE CONCAT('%', b.termino_busqueda, '%')) 
+    WHERE p.estado = 'activo'
+    AND (
+        p.idval = (SELECT idval FROM producto WHERE idpro = :idpro) 
+        OR EXISTS (SELECT 1 FROM detallecarrito AS dc WHERE dc.idpro = p.idpro AND dc.idcar = c.idcar)
+        OR EXISTS (SELECT 1 FROM detallefavoritos AS df WHERE df.idpro = p.idpro AND df.idfav = f.idfav)
+        OR EXISTS (SELECT 1 FROM busquedas AS b WHERE b.idusu = :idusu AND p.nompro LIKE CONCAT('%', b.termino_busqueda, '%'))
+    )
+    GROUP BY p.idpro
+    LIMIT 10
 )
-GROUP BY p.idpro
-ORDER BY 
-    CASE 
-        WHEN df.idpro IS NOT NULL THEN 1 -- Prioriza favoritos
-        WHEN dc.idpro IS NOT NULL THEN 2 -- Luego productos en el carrito
-        WHEN b.termino_busqueda IS NOT NULL THEN 3 -- Luego productos según búsquedas
-        ELSE 4 -- Finalmente, productos de la misma categoría
-    END, p.productvend DESC;";
+UNION ALL
+(
+    SELECT DISTINCT 
+        p.idpro, 
+        p.nompro, 
+        p.estado, 
+        p.tipro, 
+        p.valorunitario, 
+        p.precio, 
+        p.pordescu, 
+        i.imgpro, 
+        p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento
+    FROM producto AS p
+    LEFT JOIN imagen AS i ON p.idpro = i.idpro
+    WHERE p.estado = 'activo'
+    ORDER BY RAND()
+    LIMIT 10
+)
+ORDER BY RAND() -- Mezcla los resultados finales
+LIMIT 20;";
 
         try {
             $modelo = new Conexion();
@@ -875,14 +899,55 @@ ORDER BY
             $result = $conexion->prepare($sql);
             $idpro = $this->getIdpro();
             $result->bindValue(':idpro', $idpro);
-            $result->bindValue(':idusu', $idusu);
+            $result->bindValue(':idusu', $idusu, PDO::PARAM_INT);
             $result->execute();
             $res = $result->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            echo "Error al obtener productos sugeridos. Intentalo más tarde";
+            echo "Error al obtener productos sugeridos. Inténtalo más tarde";
         }
         return $res;
     }
+    public function getProductosPorCategoria($idpro)
+    {
+        $res = [];
+        $sql = "SELECT 
+    p.idpro, 
+    p.nompro, 
+    p.estado, 
+    p.tipro, 
+    p.valorunitario, 
+    p.precio, 
+    p.pordescu, 
+    i.imgpro, 
+    p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento,
+    p.idval
+FROM producto AS p
+LEFT JOIN imagen AS i ON p.idpro = i.idpro
+WHERE p.estado = 'activo' 
+AND p.idval = (SELECT idval FROM producto WHERE idpro = :idpro)
+AND p.nompro LIKE (SELECT CONCAT('%', nompro, '%') FROM producto WHERE idpro = :idpro)
+AND p.idpro <> :idpro  -- Evita traer el mismo producto
+ORDER BY p.productvend DESC 
+LIMIT 10";
+
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+
+            $result->bindValue(':idpro', $idpro, PDO::PARAM_INT);
+
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al obtener productos por categoría y nombre. Inténtalo más tarde";
+        }
+
+        return $res;
+    }
+
+
 
 }

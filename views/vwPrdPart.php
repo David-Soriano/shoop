@@ -46,7 +46,7 @@
                         <div class="bx-compu">
                             <section>
                                 <div class="bx-ico-favo">
-                                    <i class="bi bi-heart" id="heart-icon" data-idusu="<?=$_SESSION['idusu']?>" data-idpro="<?=$dtinf['idpro']?>"></i>
+                                    <i class="bi bi-heart" id="heart-icon" data-idusu="<?php if(!empty($_SESSION['idusu'])) echo $_SESSION['idusu'];?>" data-idpro="<?=$dtinf['idpro']?>"></i>
                                 </div>
                                 <p><?php if ($dtinf['es_nuevo']) { ?>Nuevo | <?php }
                                 echo $dtinf['productvend']; ?> vendidos</p>
@@ -98,7 +98,7 @@
                             data-imagen="<?= $dtinf['imgpro']; ?>"><a
                                 href="<?php echo $isLoggedIn ? "home.php?pg=9&idpro=" . $dtinf['idpro'] : "views/vwLogin.php"; ?>">Lo
                                 quiero </a></button>
-                        <button id="btn-add-carr" class="add-to-cart" data-idpro="<?= $dtinf['idpro']; ?>" data-precio="<?= $valorConDescuento; ?>" data-cantidad="1" data-idusu="<?=$_SESSION['idusu']?>" title="Añadir al carrito"><i
+                        <button id="btn-add-carr" class="add-to-cart" data-idpro="<?= $dtinf['idpro']; ?>" data-precio="<?= $valorConDescuento; ?>" data-cantidad="1" data-idusu="<?php if(!empty($_SESSION['idusu'])) echo $_SESSION['idusu'];?>" title="Añadir al carrito"><i
                                 class="bi bi-cart2"></i></button>
                         <div class="col">
                             <h6>Información de la Tienda</h6>

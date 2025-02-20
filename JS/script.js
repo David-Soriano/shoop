@@ -227,6 +227,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const idusu = button.dataset.idusu;
             const precio = button.dataset.precio;
 
+            // Si no hay un usuario logueado, asignar evento para redirigir al login
+
+            if (!idusu) {
+                button.addEventListener("click", () => {
+                    Swal.fire({
+                        title: "Inicia sesión",
+                        text: "Debes iniciar sesión para agregar productos al carrito.",
+                        confirmButtonText: "Iniciar Sesión",
+                        confirmButtonColor: "#3085d6",
+                        showCancelButton: true,
+                        cancelButtonText: "Cancelar",
+                        cancelButtonColor: "#d33",
+                        customClass: {
+                            popup: 'custom-popup',
+                            title: 'custom-title',
+                            confirmButton: 'custom-confirm-button',
+                            cancelButton: 'custom-cancel-button'
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "views/vwLogin.php";
+                        }
+                    });
+                });
+                return;
+            }
+
             // Obtener la cantidad actual del input asociado
             const inputCantidad = document.getElementById("cantidad");
             const cantidad = inputCantidad ? inputCantidad.value : 1;
@@ -256,6 +283,33 @@ document.querySelectorAll(".bx-ico-favo i").forEach(async icon => {
     const idusu = icon.getAttribute("data-idusu");
     const idpro = icon.getAttribute("data-idpro");
 
+    // Si no hay un usuario logueado, asignar evento para redirigir al login
+    if (!idusu) {
+        icon.addEventListener("click", () => {
+            Swal.fire({
+                title: "Inicia sesión",
+                text: "Debes iniciar sesión para guardar tus favoritos.",
+                confirmButtonText: "Iniciar Sesión",
+                confirmButtonColor: "#3085d6",
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                cancelButtonColor: "#d33",
+                customClass: {
+                    popup: 'custom-popup',
+                    title: 'custom-title',
+                    confirmButton: 'custom-confirm-button',
+                    cancelButton: 'custom-cancel-button'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "views/vwLogin.php";
+                }
+            });
+        });
+        return;
+    }
+
+
     try {
         let response = await fetch("controller/cfav.php", {
             method: "POST",
@@ -264,11 +318,9 @@ document.querySelectorAll(".bx-ico-favo i").forEach(async icon => {
         });
 
         let responseText = await response.text();
-
         let data = JSON.parse(responseText);
 
         if (data.success) {
-            // Si el producto está en favoritos, se agrega la clase 'bi-heart-fill' y se quita 'bi-heart'
             if (data.isFavorite) {
                 icon.classList.add("bi-heart-fill");
                 icon.classList.remove("bi-heart");
@@ -302,10 +354,11 @@ document.querySelectorAll(".bx-ico-favo i").forEach(async icon => {
                 alert("Error: " + (data.error || "No se pudo actualizar"));
             }
         } catch (error) {
-            console.error("Error en la solicitud:", error); // Depuración
+            console.error("Error en la solicitud:", error);
         }
     });
 });
+
 
 window.addEventListener('load', () => {
     document.querySelectorAll('.bx-favor-elim').forEach(btn => {

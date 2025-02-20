@@ -2,7 +2,7 @@
 
 include "model/mpro.php";
 
-if(session_status() === PHP_SESSION_NONE){
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $mpro = new Mpro();
@@ -42,7 +42,8 @@ $dtCarprd = $mpro->getCarPrd();
 $dtImgpro = $mpro->getImagesByProduct($idpro);
 $dtSliders = $mpro->getImagesByProduct(NULL, 1);
 
-$dtProdsSuge = $mpro->getProductosSugeridos($_SESSION['idusu']);
+$dtProdsSuge = $mpro->getProductosSugeridos($_SESSION['idusu'] ?? null);
+$dtProdSugeCatego = $mpro->getProductosPorCategoria($idpro);
 
 $productosOfertas = $mpro->getInfOfertas();
 $productosMasVendidos = $mpro->getInfMasVendidos();

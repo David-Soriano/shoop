@@ -300,13 +300,17 @@ img {
     clip-path: polygon(0% 0%, 95% 0%, 100% 100%, 0% 100%);
     color: #000;
 }
+
 .carousel-inner img {
     width: 100%;
-    max-width: 1900px; /* Ajusta esto según el tamaño deseado */
+    max-width: 1900px;
+    /* Ajusta esto según el tamaño deseado */
     height: auto;
-    max-height: 600px; /* Ajusta esto según el tamaño deseado */
+    max-height: 600px;
+    /* Ajusta esto según el tamaño deseado */
     margin: auto;
 }
+
 .carousel-inner {
     position: relative;
 }
@@ -317,9 +321,11 @@ img {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 100px; /* Ajusta la altura del degradado */
+    height: 100px;
+    /* Ajusta la altura del degradado */
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ebebeb);
-    pointer-events: none; /* No bloquea la interacción */
+    pointer-events: none;
+    /* No bloquea la interacción */
 }
 
 
@@ -492,9 +498,12 @@ h4 {
     scroll-snap-align: start;
     transition: 400ms;
 }
-.bx-mr-prd a img{
-    width: -webkit-fill-available;
+
+.bx-mr-prd a img {
+    width: 70%;
+    padding: 2%;
 }
+
 .bx-mr-prd a:hover {
     transform: scale(1.01);
     -webkit-box-shadow: 0px 9px 21px -12px rgba(0, 0, 0, 0.75);
@@ -1032,10 +1041,8 @@ form button {
 }
 
 #mainImage {
-    width: 60%;
-    /* Ajusta el tamaño inicial */
+    width: 80%;
     transition: transform 0.3s ease;
-    /* Suaviza el efecto al entrar y salir */
 }
 
 .image-zoom-container.zoom #mainImage {
@@ -1148,7 +1155,7 @@ form button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 85%;
+    width: 80%;
     position: relative;
 }
 
@@ -1168,9 +1175,54 @@ form button {
 .bx-mr-prd a {
     scroll-snap-align: center;
     box-sizing: border-box;
+    min-height: 27vh;
+    max-height: 27vh;
+    border: 1px solid #e0dada;
+    padding: 1%;
+    text-decoration: none;
 }
 
+.bx-mr-prd.vistos a{
+    border: none;
+    padding: 0;
+    min-height: 18vh;
+    max-height: 18vh;
+}
+.bx-mr-prd a .row {
+    flex-direction: column;
+}
 
+.bx-mr-prd .bx-mr-prd_img {
+    display: flex;
+    justify-content: center;
+    min-height: 18vh;
+    border-bottom: 1px solid #e0dada;
+}
+
+.bx-mr-prd_nompro{
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, .9);
+}
+.bx-mr-prd_precio{
+    font-size: 24px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, .9);
+    line-height: 1.25;
+}
+.bx-mr-prd_del{
+    font-size: 12px;
+    color: rgba(0, 0, 0, .55);
+    font-weight: 400;
+}
+.bx-mr-prd_pordesc{
+    color: #fd0000;
+    font-weight: 400;
+    font-size: 15px;
+}
+.bx-mr-prd_descrip{
+    padding: 5%;
+}
 .bx-item {
     flex-shrink: 0;
     width: 140px;
@@ -1194,10 +1246,11 @@ form button {
     margin: 0;
 }
 
-.bx-apart_p2 .bx-item{
+.bx-apart_p2 .bx-item {
     width: 175px;
     height: 35vh;
 }
+
 #val-sindes {
     margin: 0;
 }
@@ -1219,11 +1272,11 @@ form button {
 }
 
 #btn-left {
-    left: -90px;
+    left: -100px;
 }
 
 #btn-right {
-    right: -90px;
+    right: -100px;
 }
 
 .bx-apart.bx-apart_views {
@@ -1249,6 +1302,7 @@ form button {
 
 .bx-art-sg section {
     width: 100vw;
+    padding: 2%;
 }
 
 .bx-anres {
@@ -1773,7 +1827,7 @@ form button {
         margin: 5% 0;
     }
 
-    .bx-apart_p2 .bx-item{
+    .bx-apart_p2 .bx-item {
         width: 220px;
         height: 24vh;
     }
@@ -1933,7 +1987,49 @@ form button {
     align-items: center;
 }
 
-.bx-msj-null .col img{
+.bx-msj-null .col img {
     width: 30%;
     margin-bottom: 2%;
+}
+
+/* Personalizar altura, ancho y estilo del popup */
+.custom-popup {
+    height: 225px !important;
+    width: 400px !important;
+    background: #f9f9f9 !important;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+/* Personalizar el título */
+.custom-title {
+    color: #333 !important;
+    font-size: 22px !important;
+}
+
+/* Botón de confirmación */
+.custom-confirm-button {
+    background-color: #3085d6 !important;
+    font-size: 16px !important;
+}
+
+/* Botón de cancelar */
+.custom-cancel-button {
+    background-color: #d33 !important;
+    font-size: 16px !important;
+}
+
+.bx-mr-prd-gene{
+    margin-top: 10%;
+    background: #FFF;
+    padding: 5%;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+}
+
+.bx-mr-prd-gene .bx-mr-prd{
+    padding: 2%;
+}
+.no-pr-suge{
+    margin: auto;
 }

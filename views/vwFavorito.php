@@ -51,4 +51,5 @@
             </div>
         <?php } ?>
     </div>
+    <?php insertText("Productos hechos para ti", $dtProdsSuge, 2)?>
 </div>

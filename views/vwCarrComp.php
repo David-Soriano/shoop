@@ -124,5 +124,6 @@
             <p>Agrega productos y los veras aquí</p>
         </div>
         <button><a href='views/vwLogin.php'>Iniciar Sesión</a></button>
-    <?php } ?>
+    <?php } 
+    insertText("Productos hechos para ti", $dtProdsSuge, 2)?>
 </div>

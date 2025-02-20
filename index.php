@@ -47,6 +47,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
 
     <script src="JS/script.js"></script>
     <script src="https://kit.fontawesome.com/e2ac9cc532.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
