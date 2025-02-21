@@ -2,7 +2,15 @@ DROP DATABASE IF EXISTS shoop;
 CREATE DATABASE shoop;
 USE shoop;
 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `shoop`
@@ -92,18 +100,6 @@ CREATE TABLE `compra` (
   `fechareg` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `compra`
---
-
-INSERT INTO `compra` (`idcom`, `tiproduct`, `cantidad`, `preciocom`, `idubi`, `idusu`, `idped`, `fechareg`) VALUES
-(1, 'Tecnología', '1', '29', NULL, 20, 6, '2025-02-04 15:26:54'),
-(2, 'Tecnología', '1', '23', NULL, 20, 5, '2025-02-04 15:29:48'),
-(3, 'Tecnología', '1', '23', NULL, 20, 5, '2025-02-04 15:31:21'),
-(4, 'Tecnología', '1', '23', NULL, 20, 5, '2025-02-04 15:35:57'),
-(5, 'Tecnología', '1', '23', NULL, 20, 5, '2025-02-04 15:38:24'),
-(6, 'Tecnología', '1', '23', NULL, 20, 5, '2025-02-04 15:40:47');
-
 -- --------------------------------------------------------
 
 --
@@ -148,18 +144,6 @@ CREATE TABLE `detallecompra` (
   `idcom` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `detallecompra`
---
-
-INSERT INTO `detallecompra` (`iddell`, `subtotal`, `iva`, `total`, `idpro`, `direccomp`, `idcom`) VALUES
-(1, 24.3697, NULL, NULL, NULL, '', 1),
-(2, 19.3277, NULL, NULL, NULL, '', 2),
-(3, 19.3277, NULL, NULL, NULL, '', 3),
-(4, 19.3277, 3.67227, NULL, NULL, '', 4),
-(5, 19.3277, 3.67227, 23, NULL, '', 5),
-(6, 19.3277, 3.67227, 23, 61, '', 6);
-
 -- --------------------------------------------------------
 
 --
@@ -195,17 +179,7 @@ CREATE TABLE `detalle_pedido` (
 --
 
 INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`, `mpago`, `npago`, `direccion`, `idubi`) VALUES
-(2, 2, 57, 1, 2420000.00, NULL, NULL, '', NULL),
-(3, 4, 61, 1, 23.00, NULL, NULL, '', NULL),
-(4, 5, 61, 1, 23.00, NULL, NULL, '', NULL),
-(5, 6, 61, 1, 29.00, 'VISA', 'CREDIT_CARD', '', NULL),
-(6, 7, 61, 1, 29.00, 'VISA', 'CREDIT_CARD', '', NULL),
-(7, 8, 61, 1, 29.00, 'VISA', 'CREDIT_CARD', '', NULL),
-(8, 9, 61, 1, 29.00, 'VISA', 'CREDIT_CARD', '', NULL),
-(9, 10, 61, 1, 29.00, 'VISA', 'CREDIT_CARD', '', NULL),
-(10, 11, 61, 1, 29.00, 'VISA', 'CREDIT_CARD', '', NULL),
-(11, 13, 61, 1, 29.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
-(12, 14, 61, 1, 29.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030);
+(2, 2, 57, 1, 2420000.00, NULL, NULL, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -284,12 +258,9 @@ INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`,
 (149, 'IMG/Balances.png', 'Balances', 'png', NULL, 3, 2, 32),
 (150, 'IMG/Productos.png', 'Productos', 'png', NULL, 4, 2, 33),
 (151, 'proinf/imagen_674f53f351d12.webp', 'samsung', 'image/webp', 57, 1, NULL, NULL),
-(155, 'proinf/imagen_6766f324cb69f.jpg', 'camisa2', 'image/jpeg', 61, 1, NULL, NULL),
-(156, 'proinf/imagen_67682488cd298.jpg', 'camisa2', 'image/jpeg', 62, 1, NULL, NULL),
-(157, 'proinf/imagen_676824eb18550.png', 'signature_pandadoc', 'image/png', 63, 1, NULL, NULL),
-(158, 'proinf/imagen_67b74a2ba5154.jpg', 'Articulo9', 'image/jpeg', 64, 1, NULL, NULL),
-(159, 'proinf/imagen_67b74c9c5a003.jpg', 'Articulo9', 'image/jpeg', 65, 1, NULL, NULL),
-(160, 'proinf/imagen_67b74e1fa6b26.webp', 'Articulo 5', 'image/webp', 66, 1, NULL, NULL);
+(272, 'proinf/imagen_67b87d52c93e4.webp', 'Articulo3', 'image/webp', 134, 1, NULL, NULL),
+(273, 'proinf/imagen_67b87d52dca21.jpg', 'Articulo_10', 'image/jpeg', 135, 1, NULL, NULL),
+(274, 'proinf/imagen_67b87d52e46dc.webp', 'Articulo_5', 'image/webp', 136, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -546,12 +517,9 @@ CREATE TABLE `producto` (
 
 INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `feccreat`, `fecupdate`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`, `temporada`) VALUES
 (57, 'Samsung S21+', 2420000, 6, NULL, 2000000, 'Teléfono 5g', '2024-12-03 18:54:43', '2024-12-03 18:54:43', '2024-12-03 05:00:00', '2024-12-03 05:00:00', 'activo', 5, 2, 0, NULL),
-(61, 'Carro', 29, 2, NULL, 23, 'dsg', '2024-12-21 16:56:04', '2024-12-21 16:56:04', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 2, 0, NULL),
-(62, 'Camisa', 29, 2, NULL, 23, 'sfsd', '2024-12-22 14:39:05', '2024-12-22 14:48:58', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(63, 'Carro', 43, 5, NULL, 34, 'dsfgs', '2024-12-22 14:40:43', '2024-12-22 14:46:49', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 2, 0, NULL),
-(64, 'Mouse Logitech', 69600, 10, NULL, 60000, 'Mouse inalambrico color azul, perfecto para el trabajo diario y una gran comodidad.', '2025-02-20 15:28:43', '2025-02-20 15:28:43', NULL, NULL, 'activo', 10, 2, 0, NULL),
-(65, 'Mouse Logitech', 69600, 10, NULL, 60000, 'Mouse inalambrico color azul, perfecto para el trabajo diario y una gran comodidad.', '2025-02-20 15:39:08', '2025-02-20 15:39:08', NULL, NULL, 'activo', 10, 2, 0, NULL),
-(66, 'Mouse Logitech', 69600, 10, NULL, 60000, 'Mouse inalambrico color azul, perfecto para el trabajo diario y una gran comodidad.', '2025-02-20 15:45:35', '2025-02-20 15:45:35', NULL, NULL, 'activo', 10, 2, 0, NULL);
+(134, 'Tenis Nike Jordan Am', 139200, 10, NULL, 120000, 'Los Tenis Nike Jordan Amarillos son una declaración de estilo y rendimiento, diseñados para quienes buscan comodidad y un look audaz. Inspirados en la legendaria línea Air Jordan, estos tenis combinan materiales de alta calidad con un diseño llamativo que no pasa desapercibido.\n\nCaracterísticas:\n\nDiseño icónico: Inspirado en la línea Air Jordan, con un estilo urbano y deportivo.\nMaterial premium: Fabricados con cuero sintético y malla transpirable para mayor comodidad y durabilidad.\nAmortiguación superior: Incorporan tecnología Air-Sole en la entresuela para una excelente absorción de impactos.\nSuela de goma resistente: Proporciona una tracción óptima en diferentes superficies.\nColor vibrante: Su tonalidad amarilla con detalles en negro y blanco los hace perfectos para destacar en cualquier ocasión.\nIdeal para:\n\nUso diario o deportivo.\nFanáticos del estilo urbano y la moda sneaker.\nAmantes de la marca Jordan y coleccionistas de ediciones llamativas.', '2025-02-21 13:19:14', '2025-02-21 13:27:57', NULL, NULL, 'activo', 0, 1, 0, NULL),
+(135, 'Camisa beige y verde', 23600, 50, NULL, 20000, 'La Camisa Beige y Verde es una prenda versátil y elegante, perfecta para cualquier ocasión. Su combinación de colores neutros y terrosos brinda un toque sofisticado sin perder frescura y comodidad.\n\nCaracterísticas:\n\nMaterial: Confeccionada en algodón y lino, ofreciendo frescura y suavidad al contacto con la piel.\nDiseño bicolor: Beige como color base con detalles en verde, lo que le da un aspecto moderno y estilizado.\nCorte clásico: Ajuste regular que se adapta bien a diferentes tipos de cuerpo.\nManga larga con puño ajustable: Permite usarla con las mangas completas o arremangadas según la ocasión.\nCierre de botones: Práctico y elegante, ideal para un look formal o casual.\nIdeal para:\n\nEventos semi-formales o casuales.\nCombinaciones con jeans, pantalones de vestir o bermudas.\nClimas cálidos gracias a su tejido transpirable.', '2025-02-21 13:19:14', '2025-02-21 13:19:14', NULL, NULL, 'activo', 8, 1, 0, NULL),
+(136, 'Monitor Curvo Samsun', 882000, 2, NULL, 700000, 'El Monitor Curvo Samsung redefine la experiencia visual con su diseño envolvente y tecnología avanzada. Diseñado para mejorar la inmersión en juegos, productividad y entretenimiento, este monitor es la opción ideal para quienes buscan calidad y rendimiento.\n\nCaracterísticas:\n\nPantalla curva: Mejora la percepción visual y reduce la fatiga ocular con un ángulo de visión más natural.\nResolución Full HD / 2K / 4K (según modelo): Ofrece imágenes nítidas y colores vibrantes.\nFrecuencia de actualización de hasta 144Hz: Ideal para gamers y profesionales que requieren una imagen fluida.\nTecnología AMD FreeSync: Reduce el tearing y el stuttering en videojuegos.\nModo Eye Saver y Flicker-Free: Minimiza la fatiga ocular durante sesiones prolongadas.\nDiseño elegante y minimalista: Base delgada y marco reducido para mayor área de visualización.\nIdeal para:\n\nGamers que buscan una experiencia envolvente.\nProfesionales de diseño y edición de video.\nUso en oficinas y entretenimiento en casa.', '2025-02-21 13:19:15', '2025-02-21 13:31:20', NULL, NULL, 'activo', 0, 2, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -570,12 +538,10 @@ CREATE TABLE `prodxprov` (
 --
 
 INSERT INTO `prodxprov` (`idpro`, `idprov`, `idprodprv`) VALUES
-(57, 72, 23),
-(62, 81, 26),
-(63, 81, 27),
-(61, 81, 28),
-(65, 81, 29),
-(66, 81, 30);
+(57, 81, 23),
+(134, 81, 65),
+(135, 81, 66),
+(136, 81, 67);
 
 -- --------------------------------------------------------
 
@@ -2178,7 +2144,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=275;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2226,13 +2192,13 @@ ALTER TABLE `pqr`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT de la tabla `prodxprov`
 --
 ALTER TABLE `prodxprov`
-  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
