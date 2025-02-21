@@ -341,3 +341,169 @@ SQLSTATE[42S02]: Base table or view not found: 1146 Table 'shoop.busquedas' does
 [21-Feb-2025 14:37:25 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
 [21-Feb-2025 14:37:25 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
 [21-Feb-2025 14:37:25 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 14:54:10 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 14:54:10 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 14:54:10 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 14:54:10 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 14:54:12 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 14:54:12 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 14:54:12 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 14:54:12 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 14:56:31 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 14:56:31 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 14:56:31 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 14:56:31 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 14:57:05 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 14:57:05 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 14:57:05 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 14:57:05 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 14:58:38 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 14:58:38 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 14:58:38 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 14:58:38 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:04:33 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:04:33 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:04:33 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:04:33 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:05:37 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:05:37 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:05:37 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:05:37 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:07:13 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:07:13 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:07:13 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:07:13 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:09:57 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:09:57 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:09:57 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:09:57 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:10:22 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:10:22 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:10:22 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:10:22 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:11:43 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:11:43 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:11:43 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:11:43 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:11:58 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:11:58 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:11:58 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:11:58 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:17:46 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:17:46 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:17:46 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:17:46 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:19:57 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:19:57 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:19:57 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:19:57 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:21:42 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:21:42 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:21:42 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:21:42 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:24:32 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:24:32 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:24:32 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:24:32 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:24:50 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:24:50 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:24:50 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:24:50 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:25:44 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:25:44 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:25:44 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:25:44 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:26:33 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:26:33 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:26:33 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:26:33 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:28:38 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:28:38 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:28:38 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:28:38 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:30:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:30:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:30:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:30:41 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:31:51 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:31:51 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:31:51 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:31:51 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:32:47 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:32:47 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:32:47 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:32:47 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:32:49 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:32:49 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:32:49 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:32:49 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:32:52 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:32:52 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:32:52 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:32:52 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:33:26 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:33:26 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:33:26 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:33:26 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:33:33 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:33:33 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:33:33 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:33:33 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:33:37 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:33:37 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:33:37 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:33:37 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:33:49 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:33:49 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:33:49 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:33:49 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:33:50 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:33:50 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:33:50 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:33:50 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:33:52 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:33:52 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:33:52 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:33:52 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:35:26 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:35:26 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:35:26 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:35:26 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:35:28 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:35:28 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:35:28 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:35:28 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:37:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:37:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:37:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:37:41 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:37:42 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:37:42 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:37:42 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:37:42 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:37:47 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:37:47 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:37:47 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:37:47 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:37:48 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:37:48 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:37:48 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:37:48 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:37:50 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:37:50 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:37:50 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:37:50 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:37:50 Europe/Berlin] PHP Warning:  Undefined variable $pqrs in C:\xampp\htdocs\shoop\views\vista_pqr.php on line 14
+[21-Feb-2025 15:37:50 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\shoop\views\vista_pqr.php on line 14
+[21-Feb-2025 15:37:52 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:37:52 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:37:52 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:37:52 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:37:54 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:37:54 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:37:54 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:37:54 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5
+[21-Feb-2025 15:37:56 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
+[21-Feb-2025 15:37:56 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
+[21-Feb-2025 15:37:56 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[21-Feb-2025 15:37:56 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 5

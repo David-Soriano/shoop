@@ -480,7 +480,8 @@ footer {
     color: #4b4d04;
 }
 
-#deleteButton, #deleteButton2 {
+#deleteButton,
+#deleteButton2 {
     color: rgb(243, 76, 76);
 }
 
@@ -654,6 +655,9 @@ footer {
     width: fit-content;
 }
 
+.title-items-panel{
+    text-align: center;
+}
 .bx-st-ped .bx-st-ped_st {
     display: flex;
     justify-content: center;
@@ -664,4 +668,35 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#formCargaMasiva .modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+#formCargaMasiva p, #formCargaMasiva .lbconfirmInd{
+    font-size: 14px;
+}
+#imagenesContainer {
+    padding: 4%;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    background: #e7e7e773;
+}
+
+#imagenesContainer input {
+    margin: 3% 0;
+}
+
+/* Estilo para el asterisco rojo */
+.lbconfirmInd::after {
+    content: " *";
+    color: red;
+    font-weight: bold;
+}
+
+/* Borde rojo cuando el input está deshabilitado */
+#archivo-excel:disabled {
+    background-color: #f8d7da;
 }

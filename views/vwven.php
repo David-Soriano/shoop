@@ -112,61 +112,94 @@
             <div class="modal-body">
                 <form id="formCargaMasiva" action="../controller/cargar_productos.php" method="POST"
                     enctype="multipart/form-data">
+                    <p>Antes de continuar siga las <a href="" title="Instrucciones">Indicaciones</a></p>
+                    <div class="row">
+                        <div class="col">
+                            <input type="checkbox" name="confirmInd" id="confirmInd">
+                            <label for="confirmInd" class="lbconfirmInd">Leí las indicaciones</label>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label for="archivo-excel" class="col-form-label">Selecciona el archivo Excel:</label>
                         <input type="file" class="form-control" id="archivo-excel" name="archivo_excel"
                             accept=".xlsx,.xls" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="imagenes-productos" class="col-form-label">Selecciona las imágenes de los
-                            productos:</label>
-                        <input type="file" class="form-control" id="imagenes-productos" name="imagenes_productos[0][]"
-                            accept=".jpg, .jpeg, .png, .webp*" multiple required>
-                        <input type="file" class="form-control" id="imagenes-productos" name="imagenes_productos[1][]"
-                            accept=".jpg, .jpeg, .png, .webp" multiple required>
-                        <input type="file" class="form-control" id="imagenes-productos" name="imagenes_productos[2][]"
-                            accept=".jpg, .jpeg, .png, .webp" multiple required>
 
+                    <div id="imagenesContainer" class="mb-3">
+                        <!-- Aquí se insertarán dinámicamente los inputs de imágenes -->
                     </div>
-                    <!-- Contenedor para la vista previa de imágenes -->
-                    <div id="preview-container" class="d-flex flex-wrap gap-2"></div>
+
                     <div class="modal-footer">
-                        <a href="../plantillas/Plantilla_Carga_Productos.xlsx" class="btn btn-info" download>Descargar
+                        <a href="../plantillas/Plantilla_Carga_Productos.xlsx" download>Descargar
                             Plantilla</a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" form="formCargaMasiva">Cargar Productos</button>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Cargar Productos</button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </div>
 
 <script>
-    let selectedImages = []; // Array para almacenar imágenes seleccionadas
+    const contFiles = document.getElementById('imagenesContainer');
+    const confirmCheckbox = document.getElementById("confirmInd");
+    const fileInput = document.getElementById("archivo-excel");
 
-    document.getElementById("imagenes-productos").addEventListener("change", function (event) {
-        let previewContainer = document.getElementById("preview-container");
-        const files = event.target.files;
+    // Deshabilitar input al cargar la página
+    fileInput.disabled = true;
 
-        if (files.length > 0) {
-            Array.from(files).forEach(file => {
-                if (file.type.startsWith("image/")) {
-                    let reader = new FileReader();
-                    reader.onload = function (e) {
-                        let img = document.createElement("img");
-                        img.src = e.target.result;
-                        img.classList.add("img-thumbnail");
-                        img.style.width = "100px";
-                        img.style.height = "100px";
-                        previewContainer.appendChild(img);
+    // Habilitar/deshabilitar según el checkbox
+    confirmCheckbox.addEventListener("change", function () {
+        fileInput.disabled = !this.checked;
+    });
+    
+    contFiles.style.display = 'none';
 
-                        // Agregar la imagen al array global
-                        selectedImages.push(file);
-                    };
-                    reader.readAsDataURL(file);
-                }
+    fileInput.addEventListener('change', function (event) {
+        contFiles.style.display = 'block';
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+            // Limpiar contenedor antes de agregar nuevos inputs
+            const imagenesContainer = document.getElementById('imagenesContainer');
+            imagenesContainer.innerHTML = '';
+
+            // Iterar desde la segunda fila (para ignorar el encabezado)
+            jsonData.slice(1).forEach((row, index) => {
+                const productName = row[0]; // Columna A - Nombre del producto
+                const imageName = row[6]; // Columna G - Nombre de la imagen
+
+                if (!productName || !imageName) return; // Ignorar filas sin datos
+
+                // Crear el label y el input
+                const label = document.createElement('label');
+                label.innerHTML = `Imagen para <u><i>${productName}</i></u> (<u><b>${imageName}</b></u>):`;
+                label.classList.add('col-form-label');
+
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.classList.add('form-control');
+                input.name = `imagenes_productos[${index}][]`;
+                input.accept = ".jpg, .jpeg, .png, .webp";
+                input.multiple = true;
+
+                // Agregar al contenedor
+                imagenesContainer.appendChild(label);
+                imagenesContainer.appendChild(input);
             });
-        }
+        };
+
+        reader.readAsArrayBuffer(file);
     });
 </script>
