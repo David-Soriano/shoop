@@ -504,32 +504,6 @@ h4 {
     padding: 2%;
 }
 
-@media screen and (min-width: 2000px) {
-    .bx-mr-prd a img {
-        width: 60%;
-    }
-}
-
-@media screen and (max-height: 1050px) {
-    .bx-mr-prd a {
-        min-height: 34vh !important;
-        max-height: 34vh !important;
-    }
-}
-
-@media screen and (max-height: 920px) {
-    .bx-mr-prd a {
-        min-height: 37vh !important;
-        max-height: 37vh !important;
-    }
-}
-
-@media screen and (max-height: 815px) {
-    .bx-mr-prd a {
-        min-height: 39vh !important;
-        max-height: 39vh !important;
-    }
-}
 
 .bx-mr-prd a:hover {
     transform: scale(1.01);
@@ -1317,9 +1291,9 @@ form button {
 }
 
 .btn-direct {
-    width: 4vw;
+    width: 3vw;
     height: 6vh;
-    border-radius: 50%;
+    border-radius: 20%;
     border: none;
     background: #FFF;
     position: absolute;
@@ -2122,6 +2096,84 @@ form button {
     justify-content: center;
 }
 
+@media screen and (min-width: 1900px) {
+    .bx-mr-prd.vistos a img {
+        width: 80%;
+        padding: 0%;
+    }
+
+    .bx-mr-prd.vistos a {
+        min-height: 20vh !important;
+        max-height: 20vh !important;
+    }
+
+    .bx-art-sg {
+        width: 85% !important;
+    }
+    .bx-art-sg.vistos{
+        width: 100% !important;
+    }
+    #btn-left {
+        left: -33px;
+    }
+
+    #btn-right {
+        left: 483px;
+    }
+
+    .bx-apart_p2 .bx-item {
+        width: 185px !important;
+    }
+
+    .bx-mr-prd a {
+        min-height: 32vh !important;
+        max-height: 32vh !important;
+    }
+
+    .bx-mr-prd .bx-mr-prd_img {
+        min-height: 21vh !important;
+        max-height: 21vh !important;
+    }
+
+    .bx-mr-prd a img {
+        width: 75%;
+    }
+
+    .btn-direct.general.rg {
+        left: 96% !important;
+    }
+    .btn-direct.general.lf {
+        left: -4% !important;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .bx-mr-prd a img {
+        width: 60%;
+    }
+}
+
+@media screen and (max-height: 1050px) {
+    .bx-mr-prd a {
+        min-height: 34vh !important;
+        max-height: 34vh !important;
+    }
+}
+
+@media screen and (max-height: 920px) {
+    .bx-mr-prd a {
+        min-height: 37vh !important;
+        max-height: 37vh !important;
+    }
+}
+
+@media screen and (max-height: 815px) {
+    .bx-mr-prd a {
+        min-height: 39vh !important;
+        max-height: 39vh !important;
+    }
+}
+
 @media screen and (min-width: 2000px) {
     .bx-mr-prd.bx-mr-prd-gene_sec a {
         min-height: 22vh;
@@ -2142,13 +2194,16 @@ form button {
     .bx-mr-prd.vistos a img {
         width: 90%;
     }
+
     .bx-art-sg {
         width: 100%;
     }
-    #btn-right{
+
+    #btn-right {
         right: -60px;
     }
-    #btn-left{
+
+    #btn-left {
         left: -60px;
     }
 }
@@ -2171,4 +2226,18 @@ form button {
         padding: 0;
     }
 
+}
+
+.inf-artc h6 {
+    white-space: nowrap;
+    /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;
+    /* Oculta el texto que se desborda */
+    text-overflow: ellipsis;
+    /* Muestra '...' al final del texto que no cabe */
+    display: block;
+    /* Asegura que el h6 se comporte como un bloque */
+    width: 100%;
+    /* Se ajusta al ancho del contenedor */
+    text-overflow: ellipsis;
 }

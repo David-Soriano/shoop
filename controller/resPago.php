@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // **IMPORTANTE: Devolver una respuesta JSON de éxito**
-    echo json_encode(['status' => 'success', 'message' => 'Productos guardados correctamente']);
+    echo json_encode(['status' => 'success']);
     exit;
 }
 

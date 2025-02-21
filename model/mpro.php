@@ -934,4 +934,21 @@ LIMIT 16;";
 
         return $res;
     }
+
+    public function actualizarCantidadVendida($idpro, $cantidadVendida)
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            // Consulta para actualizar la cantidad de productos vendidos
+            $sql = "UPDATE producto SET productvend = productvend + :cantidadVendida WHERE idpro = :idpro";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindParam(':cantidadVendida', $cantidadVendida, PDO::PARAM_INT);
+            $stmt->bindParam(':idpro', $idpro, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (Exception $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            throw new Exception("Error al actualizar la cantidad de productos vendidos.");
+        }
+    }
 }

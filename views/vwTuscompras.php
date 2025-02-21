@@ -6,7 +6,7 @@
         <div class="my-3">
             <?php if(!empty($dtCompras)){
             foreach ($dtCompras as $dtpd) {
-                $fecha = new DateTime($dtpd['fecha']);
+                $fecha = new DateTime($dtpd['fechareg']);
                 $meses = [
                     "January" => "enero",
                     "February" => "febrero",

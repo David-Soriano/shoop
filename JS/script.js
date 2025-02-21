@@ -210,9 +210,7 @@ document.querySelectorAll('.btn-buy').forEach(button => {
         })
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'success') {
-                    alert(data.message);
-                } else {
+                if (!data.status === 'success') {
                     alert('Error al añadir el producto');
                 }
             })

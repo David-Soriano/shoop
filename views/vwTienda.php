@@ -40,7 +40,7 @@
             <?php if (!empty($productosRecientes)) { ?>
                 <section class="col bx-apart bx-apart_views">
                     <h2>Porque lo viste</h2>
-                    <div class="row bx-art-sg">
+                    <div class="row bx-art-sg vistos">
                         <button class="btn-direct" id="btn-left"><i class="bi bi-chevron-compact-left"></i></button>
                         <section>
                             <div class="col d-flex bx-mr-prd vistos" id="product-section">

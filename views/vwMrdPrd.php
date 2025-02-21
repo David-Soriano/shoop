@@ -2,7 +2,7 @@
     <h5><span id="title-mrart"><?php
     echo $title; ?></span></h5>
     <div class="row bx-art-sg">
-        <button class="btn-direct" id="btn-left"><i class="bi bi-chevron-compact-left"></i></button>
+        <button class="btn-direct general lf" id="btn-left"><i class="bi bi-chevron-compact-left"></i></button>
         <section class="section col d-flex align-items-center bx-mr-prd" id="product-section">
             <?php if (!empty($data)) {
                 foreach ($data as $dt) { ?>
@@ -31,6 +31,6 @@
             <p class="no-pr-suge">No hay productos sugeridos</p>
             <?php }?>
         </section>
-        <button class="btn-direct" id="btn-right"><i class="bi bi-chevron-compact-right"></i></button>
+        <button class="btn-direct general rg" id="btn-right"><i class="bi bi-chevron-compact-right"></i></button>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <?php error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 ini_set('display_errors', 1);
 include_once __DIR__ . '/../model/mped.php';
-
+include_once __DIR__ . '/../model/mpro.php';
 include_once __DIR__ . '/../model/mtcom.php';
 include_once(__DIR__ . '/../model/conexion.php');
 
@@ -88,6 +88,7 @@ function actualizarPedidoYGuardarCompra($pedido, $compra, $data)
                 // Calcular subtotal e IVA
                 $subtotal = $total / (1 + $ivaPorcentaje);
                 $iva = $total - $subtotal;
+
                 // Asignar valores a los setters
                 $compra->setTiproduct($data['nomval']);
                 $compra->setCantidad($data['cantidad']);
@@ -107,6 +108,13 @@ function actualizarPedidoYGuardarCompra($pedido, $compra, $data)
 
                 // Guardar el detalle de la compra
                 $compra->saveDetalleCompra();
+
+                // Actualizar la cantidad de productos vendidos
+                $idpro = $data['idpro']; 
+                $cantidadVendida = $data['cantidad'];
+
+                $producto = new Mpro();  
+                $producto->actualizarCantidadVendida($idpro, $cantidadVendida);
             }
         }
         header('Location:../views/vwpanpro.php?vw=25');
