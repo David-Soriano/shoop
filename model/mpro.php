@@ -281,7 +281,7 @@ class Mpro
     public function getInfMasVendidos()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, i.imgpro, CASE WHEN p.pordescu > 0 THEN p.precio - (p.precio * (p.pordescu / 100)) ELSE 0 END AS valor_con_descuento FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' GROUP BY p.idpro ORDER BY p.productvend DESC LIMIT 4;";
+        $sql = "SELECT p.idpro, p.nompro, p.estado, p.tipro, p.valorunitario, p.precio, p.pordescu, i.imgpro, CASE WHEN p.pordescu > 0 THEN p.precio - (p.precio * (p.pordescu / 100)) ELSE 0 END AS valor_con_descuento FROM producto AS p LEFT JOIN imagen AS i ON p.idpro = i.idpro WHERE p.estado = 'activo' AND p.productvend > 0 GROUP BY p.idpro ORDER BY p.productvend DESC LIMIT 4;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -301,7 +301,7 @@ class Mpro
             p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento 
             FROM producto AS p 
             LEFT JOIN imagen AS i ON p.idpro = i.idpro 
-            WHERE p.estado = 'activo' 
+            WHERE p.estado = 'activo' AND p.productvend > 0
             GROUP BY p.idpro
             ORDER BY p.productvend DESC";
         try {
@@ -480,6 +480,7 @@ class Mpro
 
             // Inserta las imágenes asociadas al producto
             if ($idProducto) {
+
                 $this->insertImagenes($conexion, $idProducto, $imagenes);
                 $this->saveCaracterísticas($conexion, $idProducto, $caracteristicas); //
             }
@@ -515,14 +516,17 @@ class Mpro
         }
 
         $stmt->execute();
-        return $conexion->lastInsertId(); // Retorna el ID del producto recién insertado
+        $idproducto = $conexion->lastInsertId(); // Retorna el ID del producto recién insertado
+        return $idproducto;
     }
     private function insertImagenes($conexion, $idProducto, $imagenes)
     {
         $sql = "INSERT INTO imagen(imgpro, nomimg, tipimg, idpro, ordimg) 
                 VALUES (:imgpro, :nomimg, :tipimg, :idpro, :ordimg)";
         $stmt = $conexion->prepare($sql);
-
+        echo "<pre>";
+            print_r($imagenes);
+            echo "</pre>";
         foreach ($imagenes as $index => $imagen) {
             $params = [
                 ':imgpro' => $imagen['imgpro'],
@@ -890,7 +894,7 @@ UNION ALL
     ORDER BY RAND()
     LIMIT 10
 )
-ORDER BY RAND() -- Mezcla los resultados finales
+ORDER BY RAND()
 LIMIT 16;";
 
         try {

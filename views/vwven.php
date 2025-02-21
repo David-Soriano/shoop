@@ -110,19 +110,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="formCargaMasiva" action="../controller/cargar_productos.php" method="POST" enctype="multipart/form-data">
+                <form id="formCargaMasiva" action="../controller/cargar_productos.php" method="POST"
+                    enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="archivo-excel" class="col-form-label">Selecciona el archivo Excel:</label>
-                        <input type="file" class="form-control" id="archivo-excel" name="archivo_excel" accept=".xlsx,.xls" required>
+                        <input type="file" class="form-control" id="archivo-excel" name="archivo_excel"
+                            accept=".xlsx,.xls" required>
                     </div>
                     <div class="mb-3">
-                        <label for="imagenes-productos" class="col-form-label">Selecciona las imágenes de los productos:</label>
-                        <input type="file" class="form-control" id="imagenes-productos" name="imagenes_productos[]" accept="image/*" multiple required>
+                        <label for="imagenes-productos" class="col-form-label">Selecciona las imágenes de los
+                            productos:</label>
+                        <input type="file" class="form-control" id="imagenes-productos" name="imagenes_productos[0][]"
+                            accept=".jpg, .jpeg, .png, .webp*" multiple required>
+                        <input type="file" class="form-control" id="imagenes-productos" name="imagenes_productos[1][]"
+                            accept=".jpg, .jpeg, .png, .webp" multiple required>
+                        <input type="file" class="form-control" id="imagenes-productos" name="imagenes_productos[2][]"
+                            accept=".jpg, .jpeg, .png, .webp" multiple required>
+
                     </div>
                     <!-- Contenedor para la vista previa de imágenes -->
                     <div id="preview-container" class="d-flex flex-wrap gap-2"></div>
                     <div class="modal-footer">
-                        <a href="../plantillas/Plantilla_Carga_Productos.xlsx" class="btn btn-info" download>Descargar Plantilla</a>
+                        <a href="../plantillas/Plantilla_Carga_Productos.xlsx" class="btn btn-info" download>Descargar
+                            Plantilla</a>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary" form="formCargaMasiva">Cargar Productos</button>
                     </div>
@@ -150,7 +160,7 @@
                         img.style.width = "100px";
                         img.style.height = "100px";
                         previewContainer.appendChild(img);
-                        
+
                         // Agregar la imagen al array global
                         selectedImages.push(file);
                     };

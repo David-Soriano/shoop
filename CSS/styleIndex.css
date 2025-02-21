@@ -504,6 +504,30 @@ h4 {
     padding: 2%;
 }
 
+@media screen and (min-width: 2000px) {
+    .bx-mr-prd a img {
+        width: 70%;
+    }
+}
+
+@media screen and (max-height: 1050px) {
+    .bx-mr-prd a{
+        min-height: 34vh !important;
+        max-height: 34vh !important;
+    }
+}
+@media screen and (max-height: 920px) {
+    .bx-mr-prd a{
+        min-height: 37vh !important;
+        max-height: 37vh !important;
+    }
+}
+@media screen and (max-height: 815px) {
+    .bx-mr-prd a{
+        min-height: 39vh !important;
+        max-height: 39vh !important;
+    }
+}
 .bx-mr-prd a:hover {
     transform: scale(1.01);
     -webkit-box-shadow: 0px 9px 21px -12px rgba(0, 0, 0, 0.75);
@@ -1204,6 +1228,21 @@ form button {
     border-bottom: 1px solid #e0dada;
 }
 
+@media screen and (max-height: 1170px) {
+    .bx-mr-prd .bx-mr-prd_img{
+        min-height: 21vh;
+    }
+}
+@media screen and (max-height: 1000px) {
+    .bx-mr-prd .bx-mr-prd_img{
+        min-height: 25vh;
+    }
+}
+@media screen and (max-height: 840px) {
+    .bx-mr-prd .bx-mr-prd_img{
+        min-height: 29vh;
+    }
+}
 .bx-mr-prd_nompro{
     font-size: 14px;
     font-weight: 400;

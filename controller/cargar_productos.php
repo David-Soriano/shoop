@@ -26,26 +26,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo_excel'])) {
         $errores = [];
         $productosGuardados = 0;
         $rutaImagenes = '../proinf/'; // Carpeta donde se guardarán las imágenes
-
         foreach ($datos as $index => $fila) {
             if ($index === 0)
-                continue; // Omitir la fila de encabezado
+                continue; // Saltar la fila de encabezado
 
             list($nompro, $descripcion, $cantidad, $valorunitario, $pordescu, $categoria) = $fila;
 
-            // Validar datos mínimos
             if (empty($nompro) || empty($cantidad) || empty($valorunitario)) {
                 $errores[] = "Fila " . ($index + 1) . ": Datos faltantes.";
                 continue;
             }
 
-            // Calcular el precio final con IVA, comisión y descuento
             $iva = 0.19;
             $comision = 0.07;
+            $pordescu = $pordescu ?? 0;
             $descuento = ($valorunitario * $pordescu) / 100;
             $precio = $valorunitario + ($valorunitario * $iva) + ($valorunitario * $comision) - $descuento;
 
-            // Asignar valores al objeto
             $pro->setNompro($nompro);
             $pro->setDescripcion($descripcion);
             $pro->setCantidad($cantidad);
@@ -54,53 +51,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo_excel'])) {
             $pro->setPrecio($precio);
             $pro->setIdval($categoria);
 
-            // Procesar imágenes subidas en el formulario
+            // Procesar imágenes del producto actual
             $imagenesGuardadas = [];
-            if (!empty($_FILES['imagenes_productos']['name'][0])) {
-                foreach ($_FILES['imagenes_productos']['name'] as $key => $nombreOriginal) {
-                    $archivo = [
-                        'name' => $_FILES['imagenes_productos']['name'][$key],
-                        'tmp_name' => $_FILES['imagenes_productos']['tmp_name'][$key],
-                        'type' => $_FILES['imagenes_productos']['type'][$key],
-                        'size' => $_FILES['imagenes_productos']['size'][$key],
-                    ];
-
-                    $prefijo = uniqid();
-                    $nombreBase = 'imagen';
-                    $rutaFinal = $control->procesarImagen($archivo, $rutaImagenes, $nombreBase, $prefijo);
-
-                    if ($rutaFinal) {
-                        $imagenesGuardadas[] = [
-                            'imgpro' => $rutaFinal,
-                            'nomimg' => pathinfo($nombreOriginal, PATHINFO_FILENAME),
-                            'tipimg' => $archivo['type'],
-                            'ordimg' => $key + 1,
+            if (!empty($_FILES['imagenes_productos']['name'][$index - 1])) { // Asegúrate de que el índice sea correcto
+                foreach ($_FILES['imagenes_productos']['name'][$index - 1] as $key => $nombreOriginal) {
+                    if (!empty($nombreOriginal)) {
+                        $archivo = [
+                            'name' => $_FILES['imagenes_productos']['name'][$index - 1][$key],
+                            'tmp_name' => $_FILES['imagenes_productos']['tmp_name'][$index - 1][$key],
+                            'type' => $_FILES['imagenes_productos']['type'][$index - 1][$key],
+                            'size' => $_FILES['imagenes_productos']['size'][$index - 1][$key],
                         ];
-                    } else {
-                        $errores[] = "Error al procesar imagen: $nombreOriginal (Fila " . ($index + 1) . ")";
+
+                        $prefijo = uniqid();
+                        $nombreBase = 'imagen';
+                        $rutaFinal = $control->procesarImagen($archivo, $rutaImagenes, $nombreBase, $prefijo);
+
+                        if ($rutaFinal) {
+                            $imagenesGuardadas[] = [
+                                'imgpro' => $rutaFinal,
+                                'nomimg' => pathinfo($nombreOriginal, PATHINFO_FILENAME),
+                                'tipimg' => $archivo['type'],
+                                'ordimg' => count($imagenesGuardadas) + 1,
+                            ];
+                        } else {
+                            $errores[] = "Error al procesar imagen: $nombreOriginal (Fila " . ($index + 1) . ")";
+                        }
                     }
                 }
             }
 
-            // Guardar producto en la base de datos con sus imágenes
-            $idProducto = $pro->saveProductoConImagenes($imagenesGuardadas, []);
-    
-            if ($idProducto) {
-                $productosGuardados++;
-                if ($idProveedor) {
-                    $prov->insertProdxProv($idProveedor, $idProducto);
-                }
+            // Guardar el producto y sus imágenes
+            if (!empty($imagenesGuardadas)) {
+                $idProducto = $pro->saveProductoConImagenes($imagenesGuardadas, []);
 
-                header("Location: ../views/vwpanpro.php?vw=23&prdg=$productosGuardados");
-                exit();
-            } else {
-                $errores[] = "Fila " . ($index + 1) . ": No se pudo guardar el producto.";
+                if ($idProducto) {
+                    if ($idProveedor) {
+                        $prov->insertProdxProv($idProveedor, $idProducto);
+                    }
+                } else {
+                    $errores[] = "Fila " . ($index + 1) . ": No se pudo guardar el producto.";
+                }
             }
         }
-
-
         if (!empty($errores)) {
             echo "<br>Errores:<br>" . implode("<br>", $errores);
+        } else {
+            header("Location: ../views/vwpanpro.php?vw=23");
+            exit();
         }
     } catch (Exception $e) {
         echo "Error al procesar el archivo: " . $e->getMessage();
