@@ -56,3 +56,32 @@ Recibido: Array
 )
 
 Recibido: 
+Formulario enviado con POST: Array
+(
+    [nomprov] => DavidX
+    [idusu] => 20
+    [dirrecprov] => Vereda la balsa calle 9a Sur
+    [idubi] => 25
+    [url] => 
+    [nit] => 2121
+    [desprv] => Todo lo que quieres a tu alcance
+)
+Datos enviados a la consulta: Array
+(
+    [nomprov] => DavidX
+    [idusu] => 20
+    [dirrecprov] => Vereda la balsa calle 9a Sur
+    [idubi] => 25
+    [url] => 
+    [nit] => 2121
+    [desprv] => Todo lo que quieres a tu alcance
+    [estado] => 
+)
+Recibido: 
+Recibido: Array
+(
+    [idped] => 26
+)
+
+Recibido: 
+Recibido: 

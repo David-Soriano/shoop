@@ -10,6 +10,7 @@ ini_set('session.cookie_samesite', 'Strict');
 session_start();
 
 $prov = new Mprov();
+
 //Proveedor
 $idusu = isset($_POST['idusu']) ? $_POST['idusu'] : null;
 $nomprov = isset($_POST['nomprov']) ? $_POST['nomprov'] : NULL;
@@ -27,13 +28,12 @@ $prov->setUrl($url);               // URL del proveedor
 $prov->setNit($nit);               // NIT del proveedor
 $prov->setDesprv($desprv);
 $prov->setIdusu($idusu);
-error_log("Llamando a saveProv...", 3, 'C:/xampp/htdocs/SHOOP/errors/debug_log.log');
-$res = $idprov = $prov->saveProv();
-error_log("ID retornado por saveProv: " . $idprov, 3, 'C:/xampp/htdocs/SHOOP/errors/debug_log.log');
 
+$res = $idprov = $prov->saveProv();
 
 if($res){
-    $_SESSION['idprov'] = $res;
+    $_SESSION['idprov'] = $res['idprov'];
+    $_SESSION['saldo'] = $res['saldo'];
      header("Location: ../views/vwpanpro.php");
 } else{
     echo "Error al registrar el proveedor";

@@ -63,6 +63,14 @@ CREATE TABLE `caracteristicas` (
   `descripcioncr` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `caracteristicas`
+--
+
+INSERT INTO `caracteristicas` (`idcar`, `idpro`, `descripcioncr`) VALUES
+(48, 140, 'Talla: M'),
+(49, 140, 'Año: 2024');
+
 -- --------------------------------------------------------
 
 --
@@ -99,6 +107,15 @@ CREATE TABLE `compra` (
   `idped` int(11) DEFAULT NULL,
   `fechareg` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`idcom`, `tiproduct`, `cantidad`, `preciocom`, `idubi`, `idusu`, `idped`, `fechareg`) VALUES
+(8, 'Moda', '1', '172425', 47030, 20, 25, '2025-02-21 16:12:19'),
+(9, 'Moda', '1', '37800', 47030, 20, 27, '2025-02-21 17:00:30'),
+(10, 'Moda', '1', '37800', 47030, 20, 28, '2025-02-21 17:12:55');
 
 -- --------------------------------------------------------
 
@@ -144,6 +161,15 @@ CREATE TABLE `detallecompra` (
   `idcom` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detallecompra`
+--
+
+INSERT INTO `detallecompra` (`iddell`, `subtotal`, `iva`, `total`, `idpro`, `direccomp`, `idcom`) VALUES
+(8, 144895, 27530, 172425, 139, 'Vereda la balsa', 8),
+(9, 31764.7, 6035.29, 37800, 137, 'Vereda la balsa', 9),
+(10, 31764.7, 7182, 37800, 137, 'Vereda la balsa', 10);
+
 -- --------------------------------------------------------
 
 --
@@ -179,7 +205,10 @@ CREATE TABLE `detalle_pedido` (
 --
 
 INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`, `mpago`, `npago`, `direccion`, `idubi`) VALUES
-(2, 2, 57, 1, 2420000.00, NULL, NULL, '', NULL);
+(23, 25, 139, 1, '172425.00', 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
+(24, 26, 137, 1, '37800.00', 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
+(25, 27, 137, 1, '37800.00', 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
+(26, 28, 137, 1, '37800.00', 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030);
 
 -- --------------------------------------------------------
 
@@ -257,10 +286,10 @@ INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`,
 (148, 'IMG/Usuarios.png', 'Usuarios', 'png', NULL, 2, 2, 31),
 (149, 'IMG/Balances.png', 'Balances', 'png', NULL, 3, 2, 32),
 (150, 'IMG/Productos.png', 'Productos', 'png', NULL, 4, 2, 33),
-(151, 'proinf/imagen_674f53f351d12.webp', 'samsung', 'image/webp', 57, 1, NULL, NULL),
-(272, 'proinf/imagen_67b87d52c93e4.webp', 'Articulo3', 'image/webp', 134, 1, NULL, NULL),
-(273, 'proinf/imagen_67b87d52dca21.jpg', 'Articulo_10', 'image/jpeg', 135, 1, NULL, NULL),
-(274, 'proinf/imagen_67b87d52e46dc.webp', 'Articulo_5', 'image/webp', 136, 1, NULL, NULL);
+(275, 'proinf/imagen_67b8e9e06e4f8.webp', 'camisa_argentita', 'image/webp', 137, 1, NULL, NULL),
+(276, 'proinf/imagen_67b8eaca10e8a.webp', 'camisa_argentita', 'image/webp', 138, 1, NULL, NULL),
+(277, 'proinf/imagen_67b8eaca29b3b.jpg', 'tenis', 'image/jpeg', 139, 1, NULL, NULL),
+(278, 'proinf/imagen_67b8eb71a3823.webp', 'camisa_argentita', 'image/webp', 140, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -417,7 +446,8 @@ INSERT INTO `pagxperfil` (`idpag`, `idpef`, `idperpf`) VALUES
 (24, 1, 28),
 (25, 1, 29),
 (26, 1, 30),
-(27, 1, 31);
+(27, 1, 31),
+(28, 1, 35);
 
 -- --------------------------------------------------------
 
@@ -438,17 +468,10 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idped`, `idusu`, `total`, `fecha`, `estped`) VALUES
-(2, 19, 2420000.00, '2024-12-03 18:58:17', 'Enviado'),
-(4, 20, 23.00, '2025-01-30 15:38:08', 'En Reparto'),
-(5, 20, 23.00, '2025-01-30 15:41:51', 'Recibido'),
-(6, 20, 29.00, '2025-01-31 23:26:55', 'Cancelado'),
-(7, 20, 29.00, '2025-01-31 23:26:59', 'Cancelado'),
-(8, 20, 29.00, '2025-01-31 23:27:24', 'Recibido'),
-(9, 20, 29.00, '2025-01-31 23:33:05', 'Cancelado'),
-(10, 20, 29.00, '2025-01-31 23:39:15', 'Enviado'),
-(11, 20, 29.00, '2025-01-31 23:40:11', 'Recibido'),
-(13, 20, 29.00, '2025-02-07 22:13:58', 'Aprobado'),
-(14, 20, 29.00, '2025-02-07 22:14:30', 'Aprobado');
+(25, 20, '172425.00', '2025-02-21 21:11:39', 'Recibido'),
+(26, 20, '37800.00', '2025-02-21 21:49:14', 'Cancelado'),
+(27, 20, '37800.00', '2025-02-21 22:00:08', 'Recibido'),
+(28, 20, '37800.00', '2025-02-21 22:12:28', 'Recibido');
 
 -- --------------------------------------------------------
 
@@ -516,10 +539,10 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `feccreat`, `fecupdate`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`, `temporada`) VALUES
-(57, 'Samsung S21+', 2420000, 6, NULL, 2000000, 'Teléfono 5g', '2024-12-03 18:54:43', '2024-12-03 18:54:43', '2024-12-03 05:00:00', '2024-12-03 05:00:00', 'activo', 5, 2, 0, NULL),
-(134, 'Tenis Nike Jordan Am', 139200, 10, NULL, 120000, 'Los Tenis Nike Jordan Amarillos son una declaración de estilo y rendimiento, diseñados para quienes buscan comodidad y un look audaz. Inspirados en la legendaria línea Air Jordan, estos tenis combinan materiales de alta calidad con un diseño llamativo que no pasa desapercibido.\n\nCaracterísticas:\n\nDiseño icónico: Inspirado en la línea Air Jordan, con un estilo urbano y deportivo.\nMaterial premium: Fabricados con cuero sintético y malla transpirable para mayor comodidad y durabilidad.\nAmortiguación superior: Incorporan tecnología Air-Sole en la entresuela para una excelente absorción de impactos.\nSuela de goma resistente: Proporciona una tracción óptima en diferentes superficies.\nColor vibrante: Su tonalidad amarilla con detalles en negro y blanco los hace perfectos para destacar en cualquier ocasión.\nIdeal para:\n\nUso diario o deportivo.\nFanáticos del estilo urbano y la moda sneaker.\nAmantes de la marca Jordan y coleccionistas de ediciones llamativas.', '2025-02-21 13:19:14', '2025-02-21 13:27:57', NULL, NULL, 'activo', 0, 1, 0, NULL),
-(135, 'Camisa beige y verde', 23600, 50, NULL, 20000, 'La Camisa Beige y Verde es una prenda versátil y elegante, perfecta para cualquier ocasión. Su combinación de colores neutros y terrosos brinda un toque sofisticado sin perder frescura y comodidad.\n\nCaracterísticas:\n\nMaterial: Confeccionada en algodón y lino, ofreciendo frescura y suavidad al contacto con la piel.\nDiseño bicolor: Beige como color base con detalles en verde, lo que le da un aspecto moderno y estilizado.\nCorte clásico: Ajuste regular que se adapta bien a diferentes tipos de cuerpo.\nManga larga con puño ajustable: Permite usarla con las mangas completas o arremangadas según la ocasión.\nCierre de botones: Práctico y elegante, ideal para un look formal o casual.\nIdeal para:\n\nEventos semi-formales o casuales.\nCombinaciones con jeans, pantalones de vestir o bermudas.\nClimas cálidos gracias a su tejido transpirable.', '2025-02-21 13:19:14', '2025-02-21 13:19:14', NULL, NULL, 'activo', 8, 1, 0, NULL),
-(136, 'Monitor Curvo Samsun', 882000, 2, NULL, 700000, 'El Monitor Curvo Samsung redefine la experiencia visual con su diseño envolvente y tecnología avanzada. Diseñado para mejorar la inmersión en juegos, productividad y entretenimiento, este monitor es la opción ideal para quienes buscan calidad y rendimiento.\n\nCaracterísticas:\n\nPantalla curva: Mejora la percepción visual y reduce la fatiga ocular con un ángulo de visión más natural.\nResolución Full HD / 2K / 4K (según modelo): Ofrece imágenes nítidas y colores vibrantes.\nFrecuencia de actualización de hasta 144Hz: Ideal para gamers y profesionales que requieren una imagen fluida.\nTecnología AMD FreeSync: Reduce el tearing y el stuttering en videojuegos.\nModo Eye Saver y Flicker-Free: Minimiza la fatiga ocular durante sesiones prolongadas.\nDiseño elegante y minimalista: Base delgada y marco reducido para mayor área de visualización.\nIdeal para:\n\nGamers que buscan una experiencia envolvente.\nProfesionales de diseño y edición de video.\nUso en oficinas y entretenimiento en casa.', '2025-02-21 13:19:15', '2025-02-21 13:31:20', NULL, NULL, 'activo', 0, 2, 0, NULL);
+(137, 'Camiseta Selección A', 37800, 25, NULL, 30000, 'Camiseta de la selección argentina del año 2024 para hombre talla M.', '2025-02-21 21:02:24', '2025-02-21 22:12:55', NULL, NULL, 'activo', 0, 1, 2, NULL),
+(138, 'Camiseta Selección A', 37800, 25, NULL, 30000, 'Camiseta de la selección argentina del año 2024 para hombre talla M.', '2025-02-21 21:06:18', '2025-02-21 21:10:01', NULL, NULL, 'inactivo', 0, 1, 0, NULL),
+(139, 'Tenis Nike Deportivo', 181500, 10, NULL, 150000, 'Tenis para hombre color blanco con negro diseñados para el deporte', '2025-02-21 21:06:18', '2025-02-21 21:12:19', NULL, NULL, 'activo', 5, 1, 1, NULL),
+(140, 'Camisa Argentina 202', 37800, 25, NULL, 30000, 'Camisa de la selección argentina año 2024 para hombre talla M', '2025-02-21 21:09:05', '2025-02-21 21:10:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -538,10 +561,10 @@ CREATE TABLE `prodxprov` (
 --
 
 INSERT INTO `prodxprov` (`idpro`, `idprov`, `idprodprv`) VALUES
-(57, 81, 23),
-(134, 81, 65),
-(135, 81, 66),
-(136, 81, 67);
+(137, 82, 68),
+(138, 82, 69),
+(139, 82, 70),
+(140, 82, 71);
 
 -- --------------------------------------------------------
 
@@ -558,16 +581,16 @@ CREATE TABLE `proveedor` (
   `nit` varchar(20) DEFAULT NULL,
   `idubi` int(5) DEFAULT NULL,
   `idusu` int(5) DEFAULT NULL,
-  `desprv` varchar(100) DEFAULT NULL
+  `desprv` varchar(100) DEFAULT NULL,
+  `saldo` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `proveedor`
 --
 
-INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `url`, `estado`, `nit`, `idubi`, `idusu`, `desprv`) VALUES
-(72, 'Tienda Tecnología', 'Vereda Bojacá', NULL, NULL, NULL, 5, 19, 'Tienda de tecnología de todo tipo'),
-(81, 'DavidX', 'fhgjkgh', '', NULL, '', 11, 20, 'sgz');
+INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `url`, `estado`, `nit`, `idubi`, `idusu`, `desprv`, `saldo`) VALUES
+(82, 'DavidX', 'Vereda la balsa call', '', NULL, '2121', 25, 20, 'Todo lo que quieres a tu alcance', '27972.00');
 
 -- --------------------------------------------------------
 
@@ -2078,7 +2101,7 @@ ALTER TABLE `busquedas`
 -- AUTO_INCREMENT de la tabla `caracteristicas`
 --
 ALTER TABLE `caracteristicas`
-  MODIFY `idcar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `idcar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `carrito`
@@ -2090,7 +2113,7 @@ ALTER TABLE `carrito`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -2108,7 +2131,7 @@ ALTER TABLE `detallecarrito`
 -- AUTO_INCREMENT de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  MODIFY `iddell` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `iddell` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `detallefavoritos`
@@ -2120,7 +2143,7 @@ ALTER TABLE `detallefavoritos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `devolucionreembolso`
@@ -2144,7 +2167,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=275;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2168,13 +2191,13 @@ ALTER TABLE `pago`
 -- AUTO_INCREMENT de la tabla `pagxperfil`
 --
 ALTER TABLE `pagxperfil`
-  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
@@ -2192,19 +2215,19 @@ ALTER TABLE `pqr`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT de la tabla `prodxprov`
 --
 ALTER TABLE `prodxprov`
-  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `idprov` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `idprov` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT de la tabla `review`

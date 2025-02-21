@@ -28,6 +28,9 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
       <h2>Panel de Control</h2>
     </div>
     <div>
+      <p>Saldo: $<?=number_format($saldo['saldo'], 2, ",", ".");?></p>
+    </div>
+    <div>
       <i class="bi bi-person-circle"></i>
     </div>
   </header>
@@ -70,20 +73,6 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
             include $pg;
           } else
             include("../views/vwDefPan.php");
-          // $excluirVistas = array("001", "002", "003", "004");
-          // if (!in_array($vw, $excluirVistas)) {
-          //   include("vwDefPan.php");
-          // }
-          
-          // if ($vw == "001") {
-          //   require_once("../views/vwTable.php");
-          // } else if ($vw == "002") {
-          //   require_once("../views/vwven.php");
-          // } else if ($vw == "003") {
-          //   require_once("../views/vwListPed.php");
-          // } else if ($vw == "004") {
-          //   require_once("../views/vwDetPed.php");
-          // }
           ?>
         </div>
       </div>

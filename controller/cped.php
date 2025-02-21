@@ -3,6 +3,7 @@ ini_set('display_errors', 1);
 include_once __DIR__ . '/../model/mped.php';
 include_once __DIR__ . '/../model/mpro.php';
 include_once __DIR__ . '/../model/mtcom.php';
+
 include_once(__DIR__ . '/../model/conexion.php');
 
 session_start();
@@ -82,13 +83,19 @@ function actualizarPedidoYGuardarCompra($pedido, $compra, $data)
         if ($estadoActualizado) {
             $estadoPedido = $pedido->getEstped();
             if ($estadoPedido === 'Recibido') {
-                $total = floatval($data['total']); // Convertir a número decimal
+                $modelo = new Conexion();
+                $conn = $modelo->getConexion();
+                $total = floatval($data['total']);
+                $comision = $total * 0.07;
                 $ivaPorcentaje = 0.19; // 19% de IVA
 
                 // Calcular subtotal e IVA
                 $subtotal = $total / (1 + $ivaPorcentaje);
-                $iva = $total - $subtotal;
+                $iva = $total * $ivaPorcentaje;
 
+                $total_sin_iva_comision = $total - $iva - $comision;
+                $stmProveedor = $conn->prepare("UPDATE proveedor SET saldo = saldo + ? WHERE idprov = ?");
+                $stmProveedor->execute([$total_sin_iva_comision, $_SESSION['idprov']]);
                 // Asignar valores a los setters
                 $compra->setTiproduct($data['nomval']);
                 $compra->setCantidad($data['cantidad']);
@@ -97,19 +104,16 @@ function actualizarPedidoYGuardarCompra($pedido, $compra, $data)
                 $compra->setIdpro($data['idpro']);
                 $compra->setSubtotal($subtotal);
                 $compra->setIva($iva);
-                $compra->setIdubi($data['idubi'] ?? null);  // Evita error si es NULL
+                $compra->setIdubi($data['idubi'] ?? null); 
                 $compra->setIdusu($data['idusu']);
                 $compra->setIdped($data['idped']);
                 $compra->setDireccomp($data['direccion'] ?? "");
 
-                // Guardar compra
                 $idcom = $compra->saveCompra();
                 $compra->setIdcom($idcom);
 
-                // Guardar el detalle de la compra
                 $compra->saveDetalleCompra();
 
-                // Actualizar la cantidad de productos vendidos
                 $idpro = $data['idpro']; 
                 $cantidadVendida = $data['cantidad'];
 

@@ -10,6 +10,7 @@ class Mprov
     private $idubi;
     private $idusu;
     private $desprv;
+    private $saldo;
 
     // Getter y Setter para idprov
     public function getIdprov()
@@ -100,11 +101,20 @@ class Mprov
     {
         $this->desprv = $desprv;
     }
+    public function getSaldo()
+    {
+        return $this->saldo;
+    }
+    public function setSaldo($saldo)
+    {
+        $this->saldo = $saldo;
+    }
     public function saveProv()
     {
         $res = NULL;
+        $saldo = NULL; // Variable para almacenar el saldo
         $sql = "INSERT INTO proveedor(nomprov, idusu, dirrecprov, idubi, url, nit, desprv, estado) 
-                    VALUES (:nomprov, :idusu, :dirrecprov, :idubi, :url, :nit, :desprv, :estado)";
+                VALUES (:nomprov, :idusu, :dirrecprov, :idubi, :url, :nit, :desprv, :estado)";
 
         try {
             // Establecer la conexión con la base de datos
@@ -146,6 +156,7 @@ class Mprov
             // Ejecutar la consulta
             $result->execute();
             $res = $conexion->lastInsertId();  // Devuelve idprov
+
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
             echo "Error al registrar proveedor. Inténtalo más tarde.";
@@ -153,6 +164,7 @@ class Mprov
 
         return $res;
     }
+
     public function existeProveedor($idusu)
     {
         $idprov = null; // Variable para almacenar el id del proveedor
@@ -197,5 +209,22 @@ class Mprov
         }
         return $res;
     }
+    public function traerSaldo($idprov){
+        try {
+            $res = "";
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $sql = "SELECT saldo FROM proveedor WHERE idprov = :idprov";
+            $stmt = $conexion->prepare($sql);
 
+            $stmt->bindValue(':idprov', $idprov, PDO::PARAM_INT);
+
+            $stmt->execute();
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al insertar prodxprv. Inténtalo más tarde.";
+        }
+        return $res;
+    }
 }

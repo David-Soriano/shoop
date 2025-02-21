@@ -1,19 +1,37 @@
 <?php
 require_once '../model/conexion.php'; // Asegúrate de conectar a la BD
 require_once '../model/mcarr.php';
+require_once '../model/mprov.php';
 session_start();
+
 $modelo = new Conexion();
 $carrito = new CarritoModel($modelo->getConexion());
+$mprov = new Mprov();
 $conn = $modelo->getConexion();
 if (!$conn) {
     error_log("Error de conexión a la base de datos.", 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
 }
-$status = $_REQUEST['transactionState'] ?? ''; // Usa $_POST en lugar de $_REQUEST
-$idusu = $_SESSION['idusu']; // ID del usuario (se mantiene con $_REQUEST)
-$total = $_REQUEST['TX_VALUE'] ?? 0; // Monto total
+
+$status = $_REQUEST['transactionState'] ?? '';
+$idusu = $_SESSION['idusu'];
+$total = $_REQUEST['TX_VALUE'] ?? 0;
 $mpago = $_REQUEST['lapPaymentMethod'] ?? '';
 $npago = $_REQUEST['lapPaymentMethodType'] ?? '';
 $total = filter_var($total, FILTER_VALIDATE_FLOAT) ?: 0; // Asegurar número válido
+// Calcular el IVA (19%)
+// $iva = $total * 0.19;
+
+// // Calcular la comisión (7%)
+// $comision = $total * 0.07;
+
+// // Calcular el total sin IVA ni comisión
+// $total_sin_iva_comision = $total - $iva - $comision;
+
+// // Guardar los resultados en diferentes variables
+// $total_con_iva = $total;  // El total original incluye el IVA
+// $total_sin_iva = $total_sin_iva_comision; // El total sin IVA
+// $total_sin_comision = $total - $comision; // El total sin la comisión
+// $total_con_descuentos = $total_sin_iva_comision; // El total con ambos descuentos (IVA y comisión)
 $message = ($status == 4) ? "¡Pago aprobado!" : "Hubo un problema con el pago.";
 
 if ($status == 4 && $idusu > 0 && $total > 0) { // Verifica valores antes de continuar
@@ -39,7 +57,6 @@ if ($status == 4 && $idusu > 0 && $total > 0) { // Verifica valores antes de con
         if (json_last_error() === JSON_ERROR_NONE && is_array($productos) && is_array($ubicacion)) {
             $stmtDetalle = $conn->prepare("INSERT INTO detalle_pedido (idped, idpro, cantidad, precio, mpago, npago, direccion, idubi) 
                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-
             foreach ($productos as $producto) {
                 if (isset($producto['id'], $producto['cantidad'], $producto['precio'])) {
                     // Obtener dirección e idubi de la ubicación decodificada
@@ -61,7 +78,6 @@ if ($status == 4 && $idusu > 0 && $total > 0) { // Verifica valores antes de con
     }
 }
 
-// Registrar en el log
 error_log("Estado de la transacción: " . json_encode($_REQUEST));
 
 ?>
@@ -86,7 +102,7 @@ error_log("Estado de la transacción: " . json_encode($_REQUEST));
         </div>
     </div>
     <script>
-        setTimeout(function () {
+        setTimeout(function() {
             window.location.href = "http://localhost/shoop/home.php?pg=17&idusu=<?= urlencode($idusu) ?>";
         }, 5000);
     </script>

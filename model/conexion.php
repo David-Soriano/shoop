@@ -5,6 +5,10 @@ class Conexion
     {
         include "datos.php";
         $conect = new PDO("mysql:host=$host;dbname=$db;", $user, $pass);
-        return $conect;
+        if ($conect) {
+            return $conect;
+        } else {
+            echo "No hay conexion con la base de datos.";
+        }
     }
 }

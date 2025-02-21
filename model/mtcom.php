@@ -214,25 +214,24 @@ class Compra
             $result = $conexion->prepare($sql);
 
             // Obtenemos los valores con sus respectivos getters
-            $subtotal = $this->getSubtotal(); // Asegúrate de crear el getter para este valor
+            $subtotal = $this->getSubtotal(); 
             $result->bindParam(':subtotal', $subtotal);
 
-            $iva = $this->getIva(); // Asegúrate de crear el getter para este valor
+            $iva = $this->getIva(); 
             $result->bindParam(':iva', $iva);
 
-            $total = $this->getTotal(); // Asegúrate de crear el getter para este valor
+            $total = $this->getTotal(); 
             $result->bindParam(':total', $total);
 
-            $idpro = $this->getIdpro(); // Asegúrate de tener este getter
+            $idpro = $this->getIdpro();
             $result->bindParam(':idpro', $idpro);
 
-            $direccomp = $this->getDireccomp(); // Asegúrate de tener este getter
+            $direccomp = $this->getDireccomp(); 
             $result->bindParam(':direccomp', $direccomp);
 
-            $idcom = $this->getIdcom(); // Asegúrate de tener este getter
+            $idcom = $this->getIdcom();
             $result->bindParam(':idcom', $idcom);
 
-            // Ejecutamos la consulta
             $result->execute();
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');

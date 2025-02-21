@@ -24,7 +24,12 @@
                         </div>
                     </div>
                 </a>
-        <?php }
-        } ?>
+            <?php }
+        } else { ?>
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <h5 class="">Pronto añadiremos productos nuevos</h5>
+                <p>Vuelve Pronto</p>
+            </div>
+        <?php } ?>
     </section>
 </div>
