@@ -506,28 +506,31 @@ h4 {
 
 @media screen and (min-width: 2000px) {
     .bx-mr-prd a img {
-        width: 70%;
+        width: 60%;
     }
 }
 
 @media screen and (max-height: 1050px) {
-    .bx-mr-prd a{
+    .bx-mr-prd a {
         min-height: 34vh !important;
         max-height: 34vh !important;
     }
 }
+
 @media screen and (max-height: 920px) {
-    .bx-mr-prd a{
+    .bx-mr-prd a {
         min-height: 37vh !important;
         max-height: 37vh !important;
     }
 }
+
 @media screen and (max-height: 815px) {
-    .bx-mr-prd a{
+    .bx-mr-prd a {
         min-height: 39vh !important;
         max-height: 39vh !important;
     }
 }
+
 .bx-mr-prd a:hover {
     transform: scale(1.01);
     -webkit-box-shadow: 0px 9px 21px -12px rgba(0, 0, 0, 0.75);
@@ -1007,9 +1010,10 @@ form button {
     grid-template-areas: "contact-us header header header" "contact-us address phone email" "contact-us contact-form contact-form contact-form";
 }
 
-.contact-form-container .formsop{
+.contact-form-container .formsop {
     width: 95%;
 }
+
 .contact-us {
     grid-area: contact-us;
 }
@@ -1211,12 +1215,13 @@ form button {
     text-decoration: none;
 }
 
-.bx-mr-prd.vistos a{
+.bx-mr-prd.vistos a {
     border: none;
     padding: 0;
     min-height: 18vh;
     max-height: 18vh;
 }
+
 .bx-mr-prd a .row {
     flex-direction: column;
 }
@@ -1229,44 +1234,52 @@ form button {
 }
 
 @media screen and (max-height: 1170px) {
-    .bx-mr-prd .bx-mr-prd_img{
+    .bx-mr-prd .bx-mr-prd_img {
         min-height: 21vh;
     }
 }
+
 @media screen and (max-height: 1000px) {
-    .bx-mr-prd .bx-mr-prd_img{
+    .bx-mr-prd .bx-mr-prd_img {
         min-height: 25vh;
     }
 }
+
 @media screen and (max-height: 840px) {
-    .bx-mr-prd .bx-mr-prd_img{
+    .bx-mr-prd .bx-mr-prd_img {
         min-height: 29vh;
     }
 }
-.bx-mr-prd_nompro{
+
+.bx-mr-prd_nompro {
     font-size: 14px;
     font-weight: 400;
     color: rgba(0, 0, 0, .9);
 }
-.bx-mr-prd_precio{
+
+.bx-mr-prd_precio {
     font-size: 24px;
     font-weight: 400;
     color: rgba(0, 0, 0, .9);
     line-height: 1.25;
 }
-.bx-mr-prd_del{
+
+.bx-mr-prd_del {
     font-size: 12px;
     color: rgba(0, 0, 0, .55);
     font-weight: 400;
 }
-.bx-mr-prd_pordesc{
+
+.bx-mr-prd_pordesc {
     color: #fd0000;
     font-weight: 400;
     font-size: 15px;
 }
-.bx-mr-prd_descrip{
+
+.bx-mr-prd_descrip {
     padding: 5%;
 }
+
 .bx-item {
     flex-shrink: 0;
     width: 140px;
@@ -2063,7 +2076,7 @@ form button {
     font-size: 16px !important;
 }
 
-.bx-mr-prd-gene{
+.bx-mr-prd-gene {
     margin-top: 10%;
     background: #FFF;
     padding: 5%;
@@ -2071,19 +2084,25 @@ form button {
     border-top-right-radius: 40px;
 }
 
-.bx-mr-prd-gene .bx-mr-prd{
+.bx-mr-prd-gene .bx-mr-prd {
     padding: 2%;
 }
-.bx-mr-prd.bx-mr-prd-gene_sec{
+
+.bx-mr-prd.bx-mr-prd-gene_sec {
     width: 100%;
-    overflow-x: hidden; /* Ocultar el desplazamiento horizontal */
+    overflow-x: hidden;
+    /* Ocultar el desplazamiento horizontal */
     display: flex;
-    flex-wrap: wrap; /* Envolver elementos en múltiples filas */
-    gap: 20px; /* Espacio entre los productos */
+    flex-wrap: wrap;
+    /* Envolver elementos en múltiples filas */
+    gap: 20px;
+    /* Espacio entre los productos */
     box-sizing: border-box;
 }
-.bx-mr-prd.bx-mr-prd-gene_sec a{
-    flex: 1 1 calc(25% - 20px); /* Ajustar el ancho de cada producto */
+
+.bx-mr-prd.bx-mr-prd-gene_sec a {
+    flex: 1 1 calc(25% - 20px);
+    /* Ajustar el ancho de cada producto */
     box-sizing: border-box;
     min-height: 30vh;
     max-height: 30vh;
@@ -2094,6 +2113,62 @@ form button {
     text-decoration: none;
     scroll-snap-align: center;
 }
-.no-pr-suge{
+
+.no-pr-suge {
     margin: auto;
+}
+
+.bx-mr-prd.bx-mr-prd-gene_sec {
+    justify-content: center;
+}
+
+@media screen and (min-width: 2000px) {
+    .bx-mr-prd.bx-mr-prd-gene_sec a {
+        min-height: 22vh;
+        max-height: 22vh;
+        max-width: 20vh;
+        min-width: 20vh;
+    }
+
+    .bx-mr-prd .bx-mr-prd_img {
+        min-height: 13vh;
+    }
+
+    .bx-mr-prd.vistos a {
+        min-height: 20vh;
+        max-height: 20vh;
+    }
+
+    .bx-mr-prd.vistos a img {
+        width: 90%;
+    }
+    .bx-art-sg {
+        width: 100%;
+    }
+    #btn-right{
+        right: -60px;
+    }
+    #btn-left{
+        left: -60px;
+    }
+}
+
+@media screen and (max-width: 810px) {
+    .bx-mr-prd.bx-mr-prd-gene_sec a {
+        min-height: 20vh;
+        max-height: 20vh;
+        max-width: 13vh;
+        min-width: 13vh;
+    }
+
+    .bx-mr-prd .bx-mr-prd_img {
+        min-height: 8vh;
+        padding: 0;
+    }
+
+    .bx-mr-prd a img {
+        width: 60%;
+        padding: 0;
+    }
+
 }
