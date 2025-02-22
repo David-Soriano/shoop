@@ -64,7 +64,8 @@
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal2">Nueva Página</a></li>
-                                            <li><a class="dropdown-item" href="#">Slider</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal3">Slider</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -73,8 +74,8 @@
                                     echo "<div id='errorMessage' style='color: rgba(225, 75, 47, 1);font-weight: 500;'>No se logró guardar la página</div>";
                                 } else if ($err == 2) {
                                     echo "<div id='errorMessage' style='color: rgb(47, 154, 225);font-weight: 500;'>Página guardada exitosamente</div>";
-                                } elseif ($err == 3){
-                                     echo "<div id='errorMessage' style='color: rgb(225, 75, 47, 1);font-weight: 500;'>Página Eliminada</div>";
+                                } elseif ($err == 3) {
+                                    echo "<div id='errorMessage' style='color: rgb(225, 75, 47, 1);font-weight: 500;'>Página Eliminada</div>";
                                 } ?>
                             </div>
                             <div class="result-body">
@@ -297,3 +298,183 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Control de publicidad - Slider</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="col-form-label">Publicidad Actual</label>
+                        <div id="imagenesContainer2" class="mb-3">
+                            <!-- Aquí se insertarán dinámicamente las imágenes -->
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="col-form-label">Añadir nueva imagen</label>
+                        <input type="file" class="form-control" id="inputImagen" accept=".jpg, .jpeg, .png, .webp">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="guardarImagen">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("../controller/cimage.php")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const container = document.getElementById("imagenesContainer2");
+                container.innerHTML = "";
+
+                if (data.error) {
+                    container.innerHTML = `<p class="text-danger">${data.error}</p>`;
+                    return;
+                }
+
+                data.forEach(imagen => {
+                    const div = document.createElement("div");
+                    div.classList.add("mb-2");
+
+                    div.innerHTML = `
+                    <img src="../${imagen.imgpro}" alt="${imagen.nomimg}" class="img-thumbnail" style="width: auto; height: auto;">
+                    <div class="row">
+                        <div class="col">
+                            <p style="margin: 0;font-size: 15px;font-weight: 500;">${imagen.nomimg}</p>
+                        </div>
+                        <div class="col" style="display: flex;justify-content: flex-end;">
+                            <a href="" class="btn-eli-pbc" data-idimag="${imagen.idimag}" style="text-decoration: none;font-size: 14px;font-weight: 500;">Eliminar</a>
+                        </div>
+                    </div>`;
+
+                    container.appendChild(div);
+                });
+            })
+            .catch(error => console.error("Error al cargar imágenes:", error));
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const fileInput = document.getElementById("inputImagen");
+        const guardarBtn = document.getElementById("guardarImagen");
+
+        let resizedFile = null; // Variable para almacenar la imagen redimensionada
+
+        fileInput.addEventListener("change", function (event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const img = new Image();
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    img.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+
+                img.onload = function () {
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+
+                    // Dimensiones requeridas
+                    const width = 1900;
+                    const height = 500;
+
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    // Ajustar la imagen al nuevo tamaño sin deformarla
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Convertir la imagen a formato Blob (archivo)
+                    canvas.toBlob(function (blob) {
+                        resizedFile = new File([blob], file.name, { type: "image/jpeg" });
+                        console.log("✅ Imagen redimensionada lista para subir.");
+                    }, "image/jpeg", 0.9); // Calidad 90%
+                };
+            }
+        });
+
+        guardarBtn.addEventListener("click", function () {
+            if (!resizedFile) {
+                alert("⚠️ Primero selecciona una imagen.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("imagen", resizedFile);
+
+            fetch("../controller/cimage.php", {
+                method: "POST",
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("✅ Imagen subida correctamente.");
+                        location.reload(); // Recargar para ver la imagen nueva
+                    } else {
+                        alert("❌ " + data.message);
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const imagenesContainer = document.getElementById("imagenesContainer2");
+
+        // Delegación de eventos para los botones de eliminar
+        imagenesContainer.addEventListener("click", function (event) {
+            const botonEliminar = event.target.closest(".btn-eli-pbc"); // Verifica si se hizo clic en un botón válido
+
+            if (botonEliminar) {
+                event.preventDefault();
+                const idimag = botonEliminar.getAttribute("data-idimag");
+
+                if (!idimag) {
+                    console.error("❌ Error: ID de imagen no válido.");
+                    return;
+                }
+
+                if (confirm("¿Seguro que deseas eliminar esta imagen?")) {
+                    fetch("../controller/cimage.php", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: new URLSearchParams({ accion: "eliminar", idimag: idimag })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+            
+                                const divPadre = botonEliminar.closest(".mb-2");
+                                if (divPadre) {
+                                    divPadre.remove();
+                                }
+                            } else {
+                                console.error("❌ Error del servidor:", data);
+                                alert("❌ No se pudo eliminar la imagen.");
+                            }
+                        })
+                        .catch(error => console.error("❌ Error en la solicitud:", error));
+                }
+            }
+        });
+    });
+
+
+
+</script>
