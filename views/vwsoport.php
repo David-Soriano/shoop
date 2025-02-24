@@ -1,55 +1,42 @@
 <div class="container">
-    <div class="contact-form-container">
-        <div class="contact-us">
-            <div class="contact-header">
-                <h1>
-                    &#9135;&#9135;&#9135;&#9135;&nbsp;&nbsp;CONTACTANOS
-                </h1>
-            </div>
-            <div class="social-bar">
-                <ul>
-                    <li>
-                        <i class="fab fa-facebook-f"></i>
-                    </li>
-                    <li>
-                        <i class="fab fa-twitter"></i>
-                    </li>
-                    <li>
-                        <i class="fab fa-instagram"></i>
-                    </li>
-                    <li>
-                        <i class="fab fa-dribbble"></i>
-                    </li>
-                </ul>
-            </div>
+    <div class="row bx-suport">
+        <div class="col-3">
+            <h5>Estamos para ayudarte</h5>
+            <p><i class="bi bi-at"></i> toshoop2024@gmail.com</p>
         </div>
-        <div class="bx-cabecera">
-            <h1>
-                SHOOP Soporte y comunicación.
-            </h1>
-        </div>
-        <div class="address">
-            <i class="fas fa-map-marker-alt"></i>
-            <h3>
-                Chia cundinamarca
-            </h3>
-        </div>
-        <div class="phone">
-            <i class="fas fa-phone-alt"></i>
-            <h3>
-                3124855149
-            </h3>
-        </div>
-        <div class="email">
-            <i class="fas fa-envelope"></i>
-            <h3>
-                toshoop2024@gmail.com
-            </h3>
-        </div>
-        <div class="contact-form">
-            <form class="formsop">
-                <input placeholder="NOMBRE" type="text" /><input placeholder="Email" type="email" /><textarea
-                    placeholder="En que podemos ayudarte" rows="4"></textarea><button type="button">ENVIAR </button>
+        <div class="col bx-form-suport">
+            <h5></h5>
+            <form action="" method="post">
+                <div class="row">
+                    <div class="col">
+                        <label for="nomusu">Nombre Completo</label>
+                        <input type="text" name="nomusu" id="nomusu">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-9">
+                        <label for="corusu">Correo Electrònico</label>
+                        <input type="email" name="corusu" id="corusu">
+                    </div>
+                    <div class="col">
+                        <label for="tipo">Tipo</label>
+                        <select name="tipo" id="tipo">
+                            <option value="Queja">Queja</option>
+                            <option value="Sugerencia">Sugerencia</option>
+                            <option value="Reclamo">Reclamo</option>
+                            <option value="Felicitaciones">Felicitaciones</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="asunto">Asunto</label>
+                        <textarea name="asunto" id="asunto"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="submit"></button>
+                </div>
             </form>
         </div>
     </div>

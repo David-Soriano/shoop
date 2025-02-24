@@ -205,10 +205,10 @@ CREATE TABLE `detalle_pedido` (
 --
 
 INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`, `mpago`, `npago`, `direccion`, `idubi`) VALUES
-(23, 25, 139, 1, '172425.00', 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
-(24, 26, 137, 1, '37800.00', 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
-(25, 27, 137, 1, '37800.00', 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
-(26, 28, 137, 1, '37800.00', 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030);
+(23, 25, 139, 1, 172425.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
+(24, 26, 137, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
+(25, 27, 137, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
+(26, 28, 137, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030);
 
 -- --------------------------------------------------------
 
@@ -279,9 +279,6 @@ CREATE TABLE `imagen` (
 --
 
 INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`, `lugimg`, `urlimg`) VALUES
-(22, 'IMG/publicidad4.jpg', 'Sport', 'jpg', NULL, 1, 1, NULL),
-(23, 'IMG/publicidad7.jpg', 'Mac Mini', 'jpg', NULL, 3, 1, NULL),
-(24, 'IMG/publicidad3.jpg', 'Yu Na', 'jpg', NULL, 2, 1, NULL),
 (146, 'IMG/Paginas.png', 'Paginas', 'png', NULL, 1, 2, 30),
 (148, 'IMG/Usuarios.png', 'Usuarios', 'png', NULL, 2, 2, 31),
 (149, 'IMG/Balances.png', 'Balances', 'png', NULL, 3, 2, 32),
@@ -289,7 +286,12 @@ INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`,
 (275, 'proinf/imagen_67b8e9e06e4f8.webp', 'camisa_argentita', 'image/webp', 137, 1, NULL, NULL),
 (276, 'proinf/imagen_67b8eaca10e8a.webp', 'camisa_argentita', 'image/webp', 138, 1, NULL, NULL),
 (277, 'proinf/imagen_67b8eaca29b3b.jpg', 'tenis', 'image/jpeg', 139, 1, NULL, NULL),
-(278, 'proinf/imagen_67b8eb71a3823.webp', 'camisa_argentita', 'image/webp', 140, 1, NULL, NULL);
+(278, 'proinf/imagen_67b8eb71a3823.webp', 'camisa_argentita', 'image/webp', 140, 1, NULL, NULL),
+(285, 'IMG/publicidad/publicidad_67ba004884f85.jpg', 'publicidad_67ba004884f85.jpg', 'jpg', NULL, 1, 1, NULL),
+(286, 'IMG/publicidad/publicidad_67ba0055acc80.jpg', 'publicidad_67ba0055acc80.jpg', 'jpg', NULL, 1, 1, NULL),
+(290, 'IMG/publicidad/publicidad_67ba00f4e5c5b.jpg', 'publicidad_67ba00f4e5c5b.jpg', 'jpg', NULL, 1, 1, NULL),
+(291, 'IMG/publicidad/publicidad_67ba012e5c66c.jpg', 'publicidad_67ba012e5c66c.jpg', 'jpg', NULL, 1, 1, NULL),
+(293, 'IMG/publicidad/publicidad_67ba0297c2697.jpg', 'publicidad_67ba0297c2697.jpg', 'jpg', NULL, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -468,10 +470,10 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idped`, `idusu`, `total`, `fecha`, `estped`) VALUES
-(25, 20, '172425.00', '2025-02-21 21:11:39', 'Recibido'),
-(26, 20, '37800.00', '2025-02-21 21:49:14', 'Cancelado'),
-(27, 20, '37800.00', '2025-02-21 22:00:08', 'Recibido'),
-(28, 20, '37800.00', '2025-02-21 22:12:28', 'Recibido');
+(25, 20, 172425.00, '2025-02-21 21:11:39', 'Recibido'),
+(26, 20, 37800.00, '2025-02-21 21:49:14', 'Cancelado'),
+(27, 20, 37800.00, '2025-02-21 22:00:08', 'Recibido'),
+(28, 20, 37800.00, '2025-02-21 22:12:28', 'Recibido');
 
 -- --------------------------------------------------------
 
@@ -500,13 +502,16 @@ INSERT INTO `perfil` (`idpef`, `nompef`, `pagini`) VALUES
 --
 
 CREATE TABLE `pqr` (
-  `idpqr` int(5) NOT NULL,
-  `fechacrea` datetime(6) DEFAULT NULL,
-  `nomusu` varchar(20) DEFAULT NULL,
-  `emausu` varchar(20) DEFAULT NULL,
-  `tiopqr` varchar(20) DEFAULT NULL,
-  `idprov` int(5) DEFAULT NULL,
-  `idusu` int(5) DEFAULT NULL
+  `idpqr` int(11) NOT NULL,
+  `fechacrea` datetime DEFAULT current_timestamp(),
+  `emausu` varchar(255) NOT NULL,
+  `tiopqr` enum('Queja','Reclamo','Sugerencia','Felicitación') NOT NULL,
+  `idprov` int(11) DEFAULT NULL,
+  `idusu` int(11) DEFAULT NULL,
+  `asunto` varchar(255) NOT NULL,
+  `mensaje` text NOT NULL,
+  `estado` enum('Pendiente','En proceso','Resuelto','Cerrado') DEFAULT 'Pendiente',
+  `fecha_respuesta` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -590,7 +595,21 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `url`, `estado`, `nit`, `idubi`, `idusu`, `desprv`, `saldo`) VALUES
-(82, 'DavidX', 'Vereda la balsa call', '', NULL, '2121', 25, 20, 'Todo lo que quieres a tu alcance', '27972.00');
+(82, 'DavidX', 'Vereda la balsa call', '', NULL, '2121', 25, 20, 'Todo lo que quieres a tu alcance', 27972.00);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `respuestas_pqr`
+--
+
+CREATE TABLE `respuestas_pqr` (
+  `idrespuesta` int(11) NOT NULL,
+  `idpqr` int(11) NOT NULL,
+  `fecha_respuesta` datetime DEFAULT current_timestamp(),
+  `respuesta` text NOT NULL,
+  `idusu` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2051,6 +2070,14 @@ ALTER TABLE `proveedor`
   ADD KEY `idubi` (`idubi`);
 
 --
+-- Indices de la tabla `respuestas_pqr`
+--
+ALTER TABLE `respuestas_pqr`
+  ADD PRIMARY KEY (`idrespuesta`),
+  ADD KEY `idpqr` (`idpqr`),
+  ADD KEY `idusu` (`idusu`);
+
+--
 -- Indices de la tabla `review`
 --
 ALTER TABLE `review`
@@ -2167,7 +2194,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2209,7 +2236,7 @@ ALTER TABLE `perfil`
 -- AUTO_INCREMENT de la tabla `pqr`
 --
 ALTER TABLE `pqr`
-  MODIFY `idpqr` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpqr` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -2228,6 +2255,12 @@ ALTER TABLE `prodxprov`
 --
 ALTER TABLE `proveedor`
   MODIFY `idprov` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+
+--
+-- AUTO_INCREMENT de la tabla `respuestas_pqr`
+--
+ALTER TABLE `respuestas_pqr`
+  MODIFY `idrespuesta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `review`
@@ -2383,6 +2416,13 @@ ALTER TABLE `prodxprov`
 ALTER TABLE `proveedor`
   ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`idusu`) REFERENCES `usuario` (`idusu`),
   ADD CONSTRAINT `proveedor_ibfk_2` FOREIGN KEY (`idubi`) REFERENCES `ubicacion` (`idubi`);
+
+--
+-- Filtros para la tabla `respuestas_pqr`
+--
+ALTER TABLE `respuestas_pqr`
+  ADD CONSTRAINT `respuestas_pqr_ibfk_1` FOREIGN KEY (`idpqr`) REFERENCES `pqr` (`idpqr`) ON DELETE CASCADE,
+  ADD CONSTRAINT `respuestas_pqr_ibfk_2` FOREIGN KEY (`idusu`) REFERENCES `usuario` (`idusu`);
 
 --
 -- Filtros para la tabla `review`

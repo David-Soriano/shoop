@@ -970,44 +970,27 @@ form button {
     outline: none;
 }
 
-.contact-form {
-    padding-bottom: 40px;
-}
-
-.contact-form-container {
+.bx-suport{
     background: #FFF;
-    margin: 10% auto;
-    width: 800px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 0.5fr 0.5fr 2fr;
-    grid-template-areas: "contact-us header header header" "contact-us address phone email" "contact-us contact-form contact-form contact-form";
+    width: 75%;
+    margin: 2% auto;
+    border-radius: 5px;
 }
 
-.contact-form-container .formsop {
-    width: 95%;
+.bx-form-suport{
+    padding: 18px;
 }
 
-.contact-us {
-    grid-area: contact-us;
+.bx-form-suport form{
+    padding: 0;
+    width: auto;
+    background: none;
+    box-shadow: none;
 }
-
-.address {
-    grid-area: address;
+.bx-form-suport form textarea{
+    resize: none;
+    border-bottom: 1px solid rgba(68, 68, 68, 0.3);
 }
-
-.phone {
-    grid-area: phone;
-}
-
-.email {
-    grid-area: email;
-}
-
-.contact-form {
-    grid-area: contact-form;
-}
-
 .bx-min-fot {
     display: flex;
     flex-direction: column;
