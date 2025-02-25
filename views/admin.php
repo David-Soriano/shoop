@@ -82,7 +82,7 @@ include "../controller/cadmin.php"; ?>
                         <div class="ticket">
                             <div class="messages-section">
                                 <div class="messages">
-                                    <?php if (isset($dtPqr)) {
+                                    <?php if (isset($dtPqr) && $dtPqr) {
                                         foreach ($dtPqr as $dt) { ?>
                                             <a href="#" class="message-box" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                 data-id="<?= $dt['idpqr'] ?>" data-nombre="<?= htmlspecialchars($dt['nomusu']) ?>"
