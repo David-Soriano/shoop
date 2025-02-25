@@ -900,7 +900,31 @@ document.addEventListener('DOMContentLoaded', function () {
         if (message) {
             message.style.display = 'none';
         }
-    }, 10000); // 15000 milisegundos = 15 segundos
+    }, 10000);
+});
+document.addEventListener("DOMContentLoaded", function () {
+    // Capturar todas las PQRs
+    const pqrLinks = document.querySelectorAll(".message-box");
+
+    // Agregar evento de clic a cada PQR
+    pqrLinks.forEach(link => {
+        link.addEventListener("click", function () {
+            // Obtener datos de la PQR seleccionada
+            let nombre = this.getAttribute("data-nombre");
+            let tipo = this.getAttribute("data-tipo");
+            let mensaje = this.getAttribute("data-mensaje");
+            let idpqr = this.getAttribute("data-id");
+            let emausu = this.getAttribute("data-emausu");
+            // Actualizar contenido del modal
+            document.getElementById("pqrNombre").textContent = nombre;
+            document.getElementById("pqrNombretx").value = nombre;
+            document.getElementById("pqrTipo").textContent = tipo;
+            document.getElementById("pqrMensajetx").textContent = mensaje;
+            document.getElementById("pqrMensaje").value = mensaje;
+            document.getElementById("idpqr").value = idpqr;
+            document.getElementById("emausu").value = emausu;
+        });
+    });
 });
 document.addEventListener('DOMContentLoaded', function () {
     buttonsTablePaginas();

@@ -67,9 +67,9 @@ include "../controller/cadmin.php"; ?>
 
     <div class="container">
         <?php $pg = isset($_GET['pg']) ? $_GET['pg'] : NULL;
-        if ($pg){
+        if ($pg) {
             $rut = getPagAdm($pg);
-            if(!$rut){
+            if (!$rut) {
                 echo "<div class='bx-404'><img src='../IMG/404.svg' alt='404'>
         <p class='msj-404'>Estamos trabajando para volver a estar en línea.</p></div>";
             }
@@ -82,118 +82,31 @@ include "../controller/cadmin.php"; ?>
                         <div class="ticket">
                             <div class="messages-section">
                                 <div class="messages">
-                                    <div class="message-box">
-                                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                                            alt="profile image">
-                                        <div class="message-content">
-                                            <div class="message-header">
-                                                <div class="name">Stephanie</div>
-                                                <div class="star-checkbox">
-                                                    <input type="checkbox" id="star-1">
-                                                    <label for="star-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-star">
-                                                            <polygon
-                                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                                                        </svg>
-                                                    </label>
+                                    <?php if (isset($dtPqr)) {
+                                        foreach ($dtPqr as $dt) { ?>
+                                            <a href="#" class="message-box" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                data-id="<?= $dt['idpqr'] ?>" data-nombre="<?= htmlspecialchars($dt['nomusu']) ?>"
+                                                data-tipo="<?= htmlspecialchars($dt['tippqr']) ?>"
+                                                data-mensaje="<?= htmlspecialchars($dt['mensaje']) ?>"
+                                                data-emausu="<?= $dt['emausu'] ?>">
+                                                <div class="avatar">
+                                                    <?= strtoupper(substr($dt['nomusu'], 0, 1)) ?>
                                                 </div>
-                                            </div>
-                                            <p class="message-line">
-                                                I got your first assignment. It was quite good. 🥳 We can continue with the
-                                                next assignment.
-                                            </p>
-                                            <p class="message-line time">
-                                                Dec, 12
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="message-box">
-                                        <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                                            alt="profile image">
-                                        <div class="message-content">
-                                            <div class="message-header">
-                                                <div class="name">Mark</div>
-                                                <div class="star-checkbox">
-                                                    <input type="checkbox" id="star-2">
-                                                    <label for="star-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-star">
-                                                            <polygon
-                                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                                                        </svg>
-                                                    </label>
+                                                <div class="message-content">
+                                                    <div class="message-header">
+                                                        <div class="name"><?= $dt['nomusu'] ?></div>
+                                                    </div>
+                                                    <p class="message-line">
+                                                        <?= strlen($dt['mensaje']) > 20 ? substr($dt['mensaje'], 0, 20) . '...' : $dt['mensaje']; ?>
+                                                    </p>
                                                 </div>
-                                            </div>
-                                            <p class="message-line">
-                                                Hey, can tell me about progress of project? I'm waiting for your response.
-                                            </p>
-                                            <p class="message-line time">
-                                                Dec, 12
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="message-box">
-                                        <img src="https://images.unsplash.com/photo-1543965170-4c01a586684e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDZ8fG1hbnxlbnwwfDB8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                                            alt="profile image">
-                                        <div class="message-content">
-                                            <div class="message-header">
-                                                <div class="name">David</div>
-                                                <div class="star-checkbox">
-                                                    <input type="checkbox" id="star-3">
-                                                    <label for="star-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-star">
-                                                            <polygon
-                                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <p class="message-line">
-                                                Awesome! 🤩 I like it. We can schedule a meeting for the next one.
-                                            </p>
-                                            <p class="message-line time">
-                                                Dec, 12
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="message-box">
-                                        <img src="https://images.unsplash.com/photo-1533993192821-2cce3a8267d1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTl8fHdvbWFuJTIwbW9kZXJufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                                            alt="profile image">
-                                        <div class="message-content">
-                                            <div class="message-header">
-                                                <div class="name">Jessica</div>
-                                                <div class="star-checkbox">
-                                                    <input type="checkbox" id="star-4">
-                                                    <label for="star-4">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-star">
-                                                            <polygon
-                                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <p class="message-line">
-                                                I am really impressed! Can't wait to see the final result.
-                                            </p>
-                                            <p class="message-line time">
-                                                Dec, 11
-                                            </p>
-                                        </div>
-                                    </div>
+                                            </a>
+                                        <?php }
+                                    } else { ?>
+                                        <p>Sin PQRs por ahora</p>
+                                    <?php } ?>
                                 </div>
                             </div>
-                            <p>Sin PQRs por ahora</p>
                         </div>
                     </section>
                 </section>
@@ -238,6 +151,40 @@ include "../controller/cadmin.php"; ?>
             $pg = '../' . $rut[0]['rutpag'];
             include $pg;
         } ?>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            <span id="pqrTipo"></span> de <span id="pqrNombre"></span>
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-res-pqr" action="../controller/cpqr.php" method="POST">
+                            <div class="mb-3">
+                                <h6>Mensaje recibido:</h6>
+                                <p class="msj-rcb" id="pqrMensajetx" name="pqrMensaje"></p>
+                                <input type="hidden" name="pqrMensaje" id="pqrMensaje">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Tu respuesta:</label>
+                                <textarea class="form-control" id="message-text" name="respuesta"
+                                    placeholder="Escribe la respuesta aquí..."></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" name="nomusu" id="pqrNombretx">
+                                <input type="hidden" name="acc" value="res">
+                                <input type="hidden" name="idpqr" id="idpqr">
+                                <input type="hidden" name="emausu" id="emausu">
+                                <button type="submit" class="btn btn-primary">Responder</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     </div>
     <?php include "vwFooter.php"; ?>

@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['correo'])) {
                 $mail->Password = MAIL_PASS; // Define EMAIL_PASS en config.php
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
-                $mail->setFrom(MAIL_USER, 'Soporte Shoop');
+                $mail->setFrom(MAIL_USER, 'Soporte SHOOP');
                 $mail->addAddress($correo);
                 $mail->isHTML(true);
                 $mail->Subject = 'Recuperación de Contraseña';

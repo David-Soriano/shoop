@@ -2,11 +2,14 @@
 include "../model/madmin.php";
 include "../model/mpag.php";
 include "../model/musu.php";
+include "../model/mpqr.php";
 
 $admin = new Madmin();
 $pag = new Mpag();
 $usu = new Musu();
+$mpqr = new Mpqr();
 
+$dtPqr = $mpqr->getAllPqr();
 $dtImg = $admin->getImgItem();
 $dtPag = $admin->getPaginas();
 function getPagAdm($pg){
