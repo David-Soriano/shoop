@@ -256,7 +256,7 @@ function buttonsTablePedidos() {
         if (selectedIds.length > 0) {
             if (confirm('¿Desea cancelar este pedido?')) {
                 const idProParam = selectedIds.join(','); // Convertir los IDs en una cadena separada por comas
-                cancelPedData(idProParam); // Llamar a la función de eliminación
+                updatePedData(idProParam, "cancelar"); // Llamar a la función de eliminación
             }
         } else {
             alert("Selecciona al menos un producto para eliminar.");
@@ -311,6 +311,14 @@ function buttonsTableUsers() {
         }
     });
 }
+function recibirPedido(){
+    let btn = document.getElementById("btn-rec-ped");
+    let idped = btn.dataset.idped;
+    btn.addEventListener('click', () => {
+        console.log("click");
+        updatePedData(idped, 'recibir'); // Aquí pasamos 'recibir' como operación
+    })
+}
 function deleteProductData(idpro) {
 
     fetch(`../controller/edit.php`, {
@@ -338,13 +346,13 @@ function deleteProductData(idpro) {
             console.error('Hubo un problema con la solicitud:', error);
         });
 }
-function cancelPedData(idped) {
-    fetch(`../controller/cped.php`, {
+function updatePedData(idped, ope) {
+    fetch(`http://localhost/SHOOP/controller/cped.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ idped }), // Enviar como JSON
+        body: JSON.stringify({ idped, ope }), // Enviar 'ope' junto con 'idped'
     })
         .then(async response => {
             const rawText = await response.text();
@@ -359,7 +367,7 @@ function cancelPedData(idped) {
             if (data.success) {
                 location.reload();
             } else {
-                alert('No se pudo cancelar el pedido: ' + data.error);
+                alert('No se pudo actualizar el pedido: ' + data.error);
             }
         })
         .catch(error => {
@@ -938,6 +946,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 document.addEventListener('DOMContentLoaded', function () {
     buttonsTable();
+});
+document.addEventListener('DOMContentLoaded', function () {
+    recibirPedido();
 });
 window.addEventListener('load', () => {
     document.getElementById('valorunitario').addEventListener('input', calcularPrecio);

@@ -213,11 +213,6 @@
                                 <label for="estped">En Reparto</label>
                                 <input type="radio" name="estped" id="Reparto" value="En Reparto">
                             </div>
-                            <div>
-                                <i class="bi bi-person-walking"></i>
-                                <label for="estped">Recibido</label>
-                                <input type="radio" name="estped" id="Reparto" value="Recibido">
-                            </div>
                         </div>
                         <p id="msj-ped"></p>
                     </div>

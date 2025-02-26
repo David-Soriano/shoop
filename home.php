@@ -52,6 +52,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log");
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="JS/bootstrap.min.js"></script>
     <script src="JS/script.js"></script>
+    <script src="JS/script2.js"></script>
     <script src="https://kit.fontawesome.com/e2ac9cc532.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

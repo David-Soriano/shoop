@@ -1,3 +1,1 @@
-SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`shoop`.`pqr`, CONSTRAINT `pqr_ibfk_2` FOREIGN KEY (`idusu`) REFERENCES `usuario` (`idusu`))[26-Feb-2025 14:56:37 Europe/Berlin] PHP Warning:  include(views/vwPerfil.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\shoop\home.php on line 39
-[26-Feb-2025 14:56:37 Europe/Berlin] PHP Warning:  include(): Failed opening 'views/vwPerfil.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\shoop\home.php on line 39
-✅ Favorito eliminado correctamente para usuario ID = 27, producto ID = 139✅ Favorito eliminado correctamente: ID Usuario = 27, ID Producto = 139[26-Feb-2025 17:33:36 Europe/Berlin] PHP Warning:  Undefined variable $userName in C:\xampp\htdocs\shoop\views\vwHeader.php on line 34
+

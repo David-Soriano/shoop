@@ -254,7 +254,7 @@ class Pedido
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return (int) $result['total'];
     }
-    function updatePedido()
+    function updatePedido($estped)
     {
         $sql = "UPDATE pedido SET estped = :estped WHERE idped = :idped;";
 
@@ -263,33 +263,7 @@ class Pedido
             $conexion = $modelo->getConexion();
             $result = $conexion->prepare($sql);
             $idped = $this->getIdped();
-            $estped = $this->getEstped();
-            $result->bindValue(':idped', $idped);
-            $result->bindValue(':estped', $estped);
-            $result->execute();
-
-            // Verificamos si la actualización afectó alguna fila
-            if ($result->rowCount() > 0) {
-                return true;  // Si se actualizó correctamente
-            } else {
-                return false; // Si no se actualizó
-            }
-        } catch (PDOException $e) {
-            error_log($e->getMessage(), 3, 'C:/xampp\htdocs/SHOOP/errors/error_log.log');
-            echo "Error. Intentalo más tarde";
-            return false;
-        }
-    }
-    function cancelPedido()
-    {
-        $sql = "UPDATE pedido SET estped = :estped WHERE idped = :idped;";
-
-        try {
-            $modelo = new Conexion();
-            $conexion = $modelo->getConexion();
-            $result = $conexion->prepare($sql);
-            $idped = $this->getIdped();
-            $estped = 'Cancelado';
+            // $estped = $this->getEstped();
             $result->bindValue(':idped', $idped);
             $result->bindValue(':estped', $estped);
             $result->execute();

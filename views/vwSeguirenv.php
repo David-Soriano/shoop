@@ -24,18 +24,18 @@ $dtSegEnv = segEnv($idped);
                 ?>
                     <div class="d-flex align-items-center mt-2">
                         <?php foreach ($estados as $estado) {
-                            if($dts['estped'] != "Cancelado"){
-                            $activeClass = ($dts['estped'] == $estado) ? 'dot-active' : '';
-                            ?>
-                            <div class="me-3 text-center">
-                                <span class="dot <?= $activeClass; ?>"></span>
-                                <p class="small"><?= $estado; ?></p>
-                            </div>
-                        <?php } else{
-                            echo "<p>El pedido fue CANCELADO</p>";
-                            break;
-                        }
-                        }?>
+                            if ($dts['estped'] != "Cancelado") {
+                                $activeClass = ($dts['estped'] == $estado) ? 'dot-active' : '';
+                                ?>
+                                <div class="me-3 text-center">
+                                    <span class="dot <?= $activeClass; ?>"></span>
+                                    <p class="small"><?= $estado; ?></p>
+                                </div>
+                            <?php } else {
+                                echo "<p>El pedido fue CANCELADO</p>";
+                                break;
+                            }
+                        } ?>
                     </div>
                 </div>
                 <div class="col bx-seg-env_img">
@@ -45,9 +45,13 @@ $dtSegEnv = segEnv($idped);
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <a href="#" class="btn btn-outline-danger">Detalles</a>
                     <?php foreach ($dtSegEnv as $dts) {
-                        if ($dts['estped'] != "Recibido" && $dts['estped'] != "Cancelado" ) { ?>
-                            <a href="#" class="btn btn-link">Cancelar pedido</a>
-                            <a href="#" class="btn btn-outline-success">Recibido</a>
+                        if ($dts['estped'] != "Recibido" && $dts['estped'] != "Cancelado") { ?>
+                            <?php if ($dts['estped'] != "En Tránsito" && $dts['estped'] != "En Reparto" && $dts['estped'] != "Recibido") { ?>
+                                <a href="#" class="btn btn-link">Cancelar pedido</a>
+                            <?php } ?>
+                            <?php if ($dts['estped'] == "En Reparto") { ?>
+                                <a href="#" class="btn btn-outline-success" id="btn-rec-ped" data-idped="<?=$dts['idped']?>">Recibido</a>
+                            <?php } ?>
                         <?php }
                     } ?>
 

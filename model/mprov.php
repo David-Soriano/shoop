@@ -112,7 +112,6 @@ class Mprov
     public function saveProv()
     {
         $res = NULL;
-        $saldo = NULL; // Variable para almacenar el saldo
         $sql = "INSERT INTO proveedor(nomprov, idusu, dirrecprov, idubi, url, nit, desprv, estado) 
                 VALUES (:nomprov, :idusu, :dirrecprov, :idubi, :url, :nit, :desprv, :estado)";
 
