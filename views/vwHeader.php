@@ -27,7 +27,15 @@
         </div>
         <div class="inf-perfil">
             <a href="#" id="btnPrf">
-                <i class="bi bi-person-circle"></i>
+                <?php if (!$isLoggedIn) { ?>
+                    <i class="bi bi-person-circle"></i>
+                <?php } else {
+                    // Obtener la inicial del nombre
+                    $nomusu = isset($_SESSION['nomusu']) ? $_SESSION['nomusu'] : "";
+                    $inicial = strtoupper(substr($nomusu, 0, 1));
+                    ?>
+                    <div class="perfil-circulo"><?php echo $inicial; ?></div>
+                <?php } ?>
             </a>
             <?php include "views/vwOpcMen.php"; ?>
         </div>

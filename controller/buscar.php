@@ -13,8 +13,9 @@ if (isset($_GET['query'])) {
     p.idpro,
     p.nompro,
     p.valorunitario,
+    p.precio,
     p.pordescu,
-    (p.valorunitario - (p.valorunitario * (p.pordescu / 100))) AS valor_con_descuento,
+    (p.precio - (p.precio * (p.pordescu / 100))) AS valor_con_descuento,
     i.imgpro
 FROM 
     producto AS p
@@ -48,11 +49,11 @@ LIMIT 1;";
                 echo "<div class='col'>";
 
                 // Mostrar precio con descuento tachado si es mayor a 0
-                if ($product['valor_con_descuento'] > 0) {
-                    echo "<del>$" . number_format($product['valorunitario'], 0, ",", ".") . "</del>";
+                if ($product['pordescu'] > 0) {
+                    echo "<del>$" . number_format($product['precio'], 0, ",", ".") . "</del>";
                 }
 
-                echo "<p>" . number_format($product['valor_con_descuento'] > 0 ? $product['valor_con_descuento'] : $product['valorunitario'], 0, ",", ".") . " $</p>";
+                echo "<p>$" . number_format($product['pordescu'] > 0 ? $product['valor_con_descuento'] : $product['precio'], 0, ",", ".")."</p>";
 
                 // Mostrar descuento si existe
                 if ($product['pordescu']) {

@@ -88,17 +88,25 @@ class CarritoModel
                 $idCarrito = $carrito['idcar'];
             }
 
-            // 3️⃣ Insertar el producto en detallecarrito o actualizar cantidad si ya existe
-            $sqlDetalle = "INSERT INTO detallecarrito (idcar, idpro, cantidad, precar) 
-                           VALUES (:idcar, :idpro, :cantidad, :precar) 
-                           ON DUPLICATE KEY UPDATE cantidad = cantidad + :cantidad";
-            $stmtDetalle = $this->conexion->prepare($sqlDetalle);
-            $stmtDetalle->bindParam(':idcar', $idCarrito, PDO::PARAM_INT);
-            $stmtDetalle->bindParam(':idpro', $idpro, PDO::PARAM_INT);
-            $stmtDetalle->bindParam(':cantidad', $cantidad, PDO::PARAM_INT);
-            $stmtDetalle->bindParam(':precar', $precio, PDO::PARAM_STR);
-            $stmtDetalle->execute();
+            // 3️⃣ Verificar si el producto ya está en el carrito
+            $sqlVerificar = "SELECT iddetcar FROM detallecarrito WHERE idcar = :idcar AND idpro = :idpro";
+            $stmtVerificar = $this->conexion->prepare($sqlVerificar);
+            $stmtVerificar->bindParam(':idcar', $idCarrito, PDO::PARAM_INT);
+            $stmtVerificar->bindParam(':idpro', $idpro, PDO::PARAM_INT);
+            $stmtVerificar->execute();
+            $detalleCarrito = $stmtVerificar->fetch(PDO::FETCH_ASSOC);
 
+            if (!$detalleCarrito) {
+                // Si el producto no está en el carrito, insertarlo
+                $sqlDetalle = "INSERT INTO detallecarrito (idcar, idpro, cantidad, precar) 
+                               VALUES (:idcar, :idpro, :cantidad, :precar)";
+                $stmtDetalle = $this->conexion->prepare($sqlDetalle);
+                $stmtDetalle->bindParam(':idcar', $idCarrito, PDO::PARAM_INT);
+                $stmtDetalle->bindParam(':idpro', $idpro, PDO::PARAM_INT);
+                $stmtDetalle->bindParam(':cantidad', $cantidad, PDO::PARAM_INT);
+                $stmtDetalle->bindParam(':precar', $precio, PDO::PARAM_STR);
+                $stmtDetalle->execute();
+            } 
             $this->conexion->commit(); // Confirmar la transacción
 
             return true;

@@ -266,12 +266,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     cantidad
                 })
             })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message); // Notifica al usuario
-                    console.log(data); // Verifica la respuesta
-                })
-                .catch(error => console.error('Error:', error));
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) { // Asegúrate de que el servidor envía "success: true" en la respuesta
+                    let btn = document.getElementById("btn-add-carr");
+                    if (btn) {
+                        btn.style.backgroundColor = "#00a650"; // Cambiar color a verde
+                        btn.innerHTML = '<i class="bi bi-cart-check" style="color: #FFF"></i>'; // Cambiar icono
+                    }
+                }
+            })
+            .catch(error => console.error('Error:', error));
+            
         });
     });
 });

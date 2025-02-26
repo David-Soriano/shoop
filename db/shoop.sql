@@ -145,6 +145,13 @@ CREATE TABLE `detallecarrito` (
   `precar` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detallecarrito`
+--
+
+INSERT INTO `detallecarrito` (`iddetcar`, `idcar`, `idpro`, `cantidad`, `precar`) VALUES
+(13, 3, 139, 1, 172425);
+
 -- --------------------------------------------------------
 
 --
@@ -199,16 +206,6 @@ CREATE TABLE `detalle_pedido` (
   `direccion` varchar(255) NOT NULL,
   `idubi` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `detalle_pedido`
---
-
-INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`, `mpago`, `npago`, `direccion`, `idubi`) VALUES
-(23, 25, 139, 1, 172425.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
-(24, 26, 137, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
-(25, 27, 137, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
-(26, 28, 137, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030);
 
 -- --------------------------------------------------------
 
@@ -505,14 +502,27 @@ CREATE TABLE `pqr` (
   `idpqr` int(11) NOT NULL,
   `fechacrea` datetime DEFAULT current_timestamp(),
   `emausu` varchar(255) NOT NULL,
-  `tiopqr` enum('Queja','Reclamo','Sugerencia','Felicitación') NOT NULL,
+  `tippqr` enum('Queja','Reclamo','Sugerencia','Felicitación') NOT NULL,
   `idprov` int(11) DEFAULT NULL,
   `idusu` int(11) DEFAULT NULL,
-  `asunto` varchar(255) NOT NULL,
   `mensaje` text NOT NULL,
   `estado` enum('Pendiente','En proceso','Resuelto','Cerrado') DEFAULT 'Pendiente',
-  `fecha_respuesta` datetime DEFAULT NULL
+  `nomusu` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pqr`
+--
+
+INSERT INTO `pqr` (`idpqr`, `fechacrea`, `emausu`, `tippqr`, `idprov`, `idusu`, `mensaje`, `estado`, `nomusu`) VALUES
+(3, '2025-02-25 10:05:53', 'davidscicua314@gmail.com', 'Felicitación', NULL, NULL, 'Para felicitarlos por el proyecto', 'Resuelto', 'Juan David Soriano'),
+(4, '2025-02-25 10:11:53', 'davidscicua314@gmail.com', 'Sugerencia', NULL, NULL, 'Mejorar en el diseño', 'Resuelto', 'Juan David Soriano'),
+(5, '2025-02-25 10:17:53', 'davidscicua314@gmail.com', 'Reclamo', NULL, NULL, 'No a llegado el pedido', 'Resuelto', 'Juan David Soriano'),
+(17, '2025-02-25 16:13:19', 'davidscicua314@gmail.com', 'Queja', NULL, 20, 'prueba', 'Resuelto', 'Juan David Soriano'),
+(18, '2025-02-25 18:22:26', 'davidscicua314@gmail.com', 'Queja', NULL, NULL, 'prueba', 'Resuelto', 'Juan David Soriano'),
+(19, '2025-02-25 18:36:07', 'davidscicua314@gmail.com', 'Queja', NULL, NULL, 'dfghsfdhsdhsdfhxcvfgbcdfh', 'Resuelto', 'Juan David Soriano'),
+(20, '2025-02-25 18:38:41', 'davidscicua314@gmail.com', 'Queja', NULL, NULL, 'jkz<sgfkjasdkgfkj<sbhdsbjvg', 'Resuelto', 'Juan David Soriano'),
+(21, '2025-02-25 18:45:53', 'cicua1994@gmail.com', 'Sugerencia', NULL, NULL, 'Me parece que no es viable esta página.', 'Resuelto', 'Edison Ferney Soriano');
 
 -- --------------------------------------------------------
 
@@ -607,9 +617,23 @@ CREATE TABLE `respuestas_pqr` (
   `idrespuesta` int(11) NOT NULL,
   `idpqr` int(11) NOT NULL,
   `fecha_respuesta` datetime DEFAULT current_timestamp(),
-  `respuesta` text NOT NULL,
-  `idusu` int(11) NOT NULL
+  `respuesta` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `respuestas_pqr`
+--
+
+INSERT INTO `respuestas_pqr` (`idrespuesta`, `idpqr`, `fecha_respuesta`, `respuesta`) VALUES
+(7, 3, '2025-02-25 15:58:53', 'gracias'),
+(8, 4, '2025-02-25 16:02:13', 'estamos en eso'),
+(9, 4, '2025-02-25 16:03:56', 'estamos en eso'),
+(10, 5, '2025-02-25 16:04:55', 'lastima chamo'),
+(11, 17, '2025-02-25 18:30:35', 'respuesta'),
+(12, 18, '2025-02-25 18:34:18', 'pruevbaaa'),
+(13, 19, '2025-02-25 18:37:18', 'kjsdhgadlsf hsairf vjakd'),
+(14, 20, '2025-02-25 18:39:07', 'dsfgnhjdgrfnbfdzxn'),
+(15, 21, '2025-02-25 18:47:29', 'Lo invitamos a que conozca mejor nuestra página y compre algo primero');
 
 -- --------------------------------------------------------
 
@@ -2074,8 +2098,7 @@ ALTER TABLE `proveedor`
 --
 ALTER TABLE `respuestas_pqr`
   ADD PRIMARY KEY (`idrespuesta`),
-  ADD KEY `idpqr` (`idpqr`),
-  ADD KEY `idusu` (`idusu`);
+  ADD KEY `idpqr` (`idpqr`);
 
 --
 -- Indices de la tabla `review`
@@ -2152,7 +2175,7 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detallecarrito`
 --
 ALTER TABLE `detallecarrito`
-  MODIFY `iddetcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `iddetcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `detallecompra`
@@ -2164,13 +2187,13 @@ ALTER TABLE `detallecompra`
 -- AUTO_INCREMENT de la tabla `detallefavoritos`
 --
 ALTER TABLE `detallefavoritos`
-  MODIFY `iddetfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `iddetfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `devolucionreembolso`
@@ -2188,7 +2211,7 @@ ALTER TABLE `dominio`
 -- AUTO_INCREMENT de la tabla `favoritos`
 --
 ALTER TABLE `favoritos`
-  MODIFY `idfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `idfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `imagen`
@@ -2224,7 +2247,7 @@ ALTER TABLE `pagxperfil`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
@@ -2236,7 +2259,7 @@ ALTER TABLE `perfil`
 -- AUTO_INCREMENT de la tabla `pqr`
 --
 ALTER TABLE `pqr`
-  MODIFY `idpqr` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpqr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -2260,7 +2283,7 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `respuestas_pqr`
 --
 ALTER TABLE `respuestas_pqr`
-  MODIFY `idrespuesta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idrespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `review`
@@ -2421,8 +2444,7 @@ ALTER TABLE `proveedor`
 -- Filtros para la tabla `respuestas_pqr`
 --
 ALTER TABLE `respuestas_pqr`
-  ADD CONSTRAINT `respuestas_pqr_ibfk_1` FOREIGN KEY (`idpqr`) REFERENCES `pqr` (`idpqr`) ON DELETE CASCADE,
-  ADD CONSTRAINT `respuestas_pqr_ibfk_2` FOREIGN KEY (`idusu`) REFERENCES `usuario` (`idusu`);
+  ADD CONSTRAINT `respuestas_pqr_ibfk_1` FOREIGN KEY (`idpqr`) REFERENCES `pqr` (`idpqr`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `review`

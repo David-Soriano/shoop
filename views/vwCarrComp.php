@@ -1,7 +1,7 @@
 <div class="container bx-cont-carr-pro">
     <div class="row bx-prp-carr-comp" <?php if (!$isLoggedIn)
         echo "style='display: flex; justify-content: center;'"; ?>>
-        <div class="bx-items-carr-comp">
+        <div class="col bx-items-carr-comp">
             <?php if ($isLoggedIn) {
                 include_once(__DIR__ . "/../controller/ccarr.php");
                 if (!empty($dtCarrito)) {

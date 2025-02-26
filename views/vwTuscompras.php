@@ -59,7 +59,8 @@
                         <p>Culmina un pedido para ver tus compras</p>
                     </div>
                 </div>
-            <?php }?>
+            <?php insertText("Productos hechos para ti", $dtProdsSuge, 2);
+         }?>
 
         </div>
 

@@ -2,6 +2,13 @@
 require_once '../model/conexion.php'; // Asegúrate de conectar a la BD
 require_once '../model/mcarr.php';
 require_once '../model/mprov.php';
+require_once "../config/config.php";
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once "../vendor/autoload.php";
+
 session_start();
 
 $modelo = new Conexion();
@@ -17,24 +24,12 @@ $idusu = $_SESSION['idusu'];
 $total = $_REQUEST['TX_VALUE'] ?? 0;
 $mpago = $_REQUEST['lapPaymentMethod'] ?? '';
 $npago = $_REQUEST['lapPaymentMethodType'] ?? '';
-$total = filter_var($total, FILTER_VALIDATE_FLOAT) ?: 0; // Asegurar número válido
-// Calcular el IVA (19%)
-// $iva = $total * 0.19;
+$idfactura = $_REQUEST['reference_pol'];
+$total = filter_var($total, FILTER_VALIDATE_FLOAT) ?: 0;
 
-// // Calcular la comisión (7%)
-// $comision = $total * 0.07;
-
-// // Calcular el total sin IVA ni comisión
-// $total_sin_iva_comision = $total - $iva - $comision;
-
-// // Guardar los resultados en diferentes variables
-// $total_con_iva = $total;  // El total original incluye el IVA
-// $total_sin_iva = $total_sin_iva_comision; // El total sin IVA
-// $total_sin_comision = $total - $comision; // El total sin la comisión
-// $total_con_descuentos = $total_sin_iva_comision; // El total con ambos descuentos (IVA y comisión)
 $message = ($status == 4) ? "¡Pago aprobado!" : "Hubo un problema con el pago.";
 
-if ($status == 4 && $idusu > 0 && $total > 0) { // Verifica valores antes de continuar
+if ($status == 4 && $idusu > 0 && $total > 0) {
     try {
         $conn->beginTransaction();
 
@@ -57,6 +52,7 @@ if ($status == 4 && $idusu > 0 && $total > 0) { // Verifica valores antes de con
         if (json_last_error() === JSON_ERROR_NONE && is_array($productos) && is_array($ubicacion)) {
             $stmtDetalle = $conn->prepare("INSERT INTO detalle_pedido (idped, idpro, cantidad, precio, mpago, npago, direccion, idubi) 
                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                                   enviarFactura($_SESSION['emausu'], $_SESSION['nomusu'], $productos, $total, $ubicacion['direccion'], $idfactura);
             foreach ($productos as $producto) {
                 if (isset($producto['id'], $producto['cantidad'], $producto['precio'])) {
                     // Obtener dirección e idubi de la ubicación decodificada
@@ -80,6 +76,162 @@ if ($status == 4 && $idusu > 0 && $total > 0) { // Verifica valores antes de con
 
 error_log("Estado de la transacción: " . json_encode($_REQUEST));
 
+function enviarFactura($correo, $nombreCliente, $productos, $total, $direccion, $idfactura){
+    $mail = new PHPMailer(true);
+    $mail->CharSet = 'UTF-8';
+    try{
+        $mail->isSMTP();
+        $mail->Host ='smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = MAIL_USER;
+        $mail->Password = MAIL_PASS;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+        $mail->setFrom(MAIL_USER, 'Soporte SHOOP');
+        $mail->addAddress($correo);
+        $mail->addReplyTo(MAIL_USER, 'Equipo SHOOP');
+        $mail->isHTML(true);
+        $mail->Subject = 'Factura de Compra';
+        $mail->addBCC('toshoop2024@gmail.com');
+        
+        $productosHtml = '';
+        foreach ($productos as $producto) {
+            $productosHtml .= "<tr>
+                <td>{$producto['nombre']}</td>
+                <td>{$producto['cantidad']}</td>
+                <td>{$producto['precio']}</td>
+            </tr>";
+        }
+
+        $mail->Body = "
+        <html>
+        <head>
+            <style>
+            .invoice-box {
+                max-width: 800px;
+                margin: auto;
+                padding: 30px;
+                border: 1px solid #eee;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+                font-size: 16px;
+                line-height: 24px;
+                font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+                color: #555;
+            }
+            .invoice-box table {
+                width: 100%;
+                line-height: inherit;
+                text-align: left;
+            }
+            .invoice-box table td {
+                padding: 5px;
+                vertical-align: top;
+            }
+            .invoice-box table tr td:nth-child(3) {
+                text-align: right;
+            }
+            .invoice-box table tr.top table td {
+                padding-bottom: 20px;
+            }
+            .invoice-box table tr.information table td {
+                padding-bottom: 40px;
+            }
+            .invoice-box table tr.heading td {
+                background: #eee;
+                border-bottom: 1px solid #ddd;
+                font-weight: bold;
+            }
+            .invoice-box table tr.details td {
+                padding-bottom: 20px;
+            }
+            .invoice-box table tr.item td {
+                border-bottom: 1px solid #eee;
+            }
+            .invoice-box table tr.item.last td {
+                border-bottom: none;
+            }
+            .invoice-box table tr.total td:nth-child(2) {
+                border-top: 2px solid #eee;
+                font-weight: bold;
+            }
+            .banner {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .banner img {
+                max-width: 100px;
+            }
+            </style>
+        </head>
+        <body>
+            <div class='invoice-box'>
+            <div class='banner'>
+                <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='Shoop, Inc'>
+            </div>
+            <table>
+                <tr class='top'>
+                <td colspan='2'>
+                    <table>
+                    <tr>
+                        <td class='title'>
+                        <h2>Factura de Compra</h2>
+                        </td>
+                        <td>
+                        Fecha: " . date('d-m-Y') . "<br>
+                        Número de Factura: {$idfactura}
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+                <tr class='information'>
+                <td colspan='2'>
+                    <table>
+                    <tr>
+                        <td>
+                        <h4>Detalles de la Tienda</h4>
+                        SHOOP, Inc.<br>
+                        www.shoop.com<br>
+                        Chía, Colombia
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <h4>Detalles del Cliente</h4>
+                        Nombre: {$nombreCliente}<br>
+                        Correo: {$correo}<br>
+                        Dirección: {$direccion}
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+                <tr class='heading'>
+                <td>Producto</td>
+                <td>Cantidad</td>
+                <td>Precio</td>
+                </tr>
+                {$productosHtml}
+                <tr class='total'>
+                <td></td>
+                <td></td>
+                <td>Total: $". number_format($total, 2, ",", ".") ."</td>
+                </tr>
+            </table>
+            <br>
+            <h3>Consejos y Recomendaciones</h3>
+            <p>Gracias por tu compra. Te recomendamos revisar nuestros nuevos productos y ofertas especiales.</p>
+            <p>Si tienes alguna pregunta, no dudes en contactarnos a través de nuestro correo de soporte.</p>
+            <p>¡Esperamos verte pronto!</p>
+            </div>
+        </body>
+        </html>";
+
+        $mail->send();
+    } catch(\Exception $e){
+        error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+    }
+}
 ?>
 
 <!DOCTYPE html>

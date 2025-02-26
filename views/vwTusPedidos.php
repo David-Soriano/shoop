@@ -60,7 +60,9 @@ include_once("controller/cped.php"); ?>
                         <p>No a realizado ningún pedido</p>
                     </div>
                 </div>
-                <?php } ?>
+                
+                <?php insertText("Productos hechos para ti", $dtProdsSuge, 2);
+             } ?>
 
         </div>
 

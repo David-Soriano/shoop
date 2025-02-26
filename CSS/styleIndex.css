@@ -224,6 +224,7 @@ img {
 
 #btnPrf {
     font-size: 24px;
+    text-decoration: none;
 }
 
 .inf-perfil {
@@ -245,6 +246,20 @@ img {
     border-radius: 12px;
     transition: all 1s;
     overflow: hidden;
+}
+
+.inf-perfil div.perfil-circulo {
+    position: initial;
+    width: 30px;
+    height: 30px;
+    background-color: #4795df; /* Azul claro */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: 400;
+    text-transform: uppercase;
 }
 
 .inf-perfil div ul {
@@ -282,7 +297,7 @@ img {
 .img-artc {
     display: flex;
     justify-content: center;
-    padding: 12px 10px 0px 10px;
+
     max-height: 65%;
     min-height: 65%;
 }
@@ -2071,6 +2086,7 @@ form button {
 }
 
 .bx-mr-prd-gene {
+    width: 100%;
     margin-top: 10%;
     background: #FFF;
     padding: 5%;
@@ -2172,7 +2188,7 @@ form button {
 
 @media screen and (min-width: 2000px) {
     .bx-mr-prd a img {
-        width: 60%;
+        width: 100%;
     }
 }
 
@@ -2215,7 +2231,7 @@ form button {
     }
 
     .bx-mr-prd.vistos a img {
-        width: 90%;
+        width: 100%;
     }
 
     .bx-art-sg {
