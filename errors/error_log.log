@@ -406,3 +406,6 @@
 [27-Feb-2025 17:36:00 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 2
 [27-Feb-2025 17:36:00 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 3
 [27-Feb-2025 17:36:00 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\shoop\controller\cpancon.php on line 4
+[27-Feb-2025 20:26:14 Europe/Berlin] PHP Warning:  include(views/vwPerfil.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\shoop\home.php on line 39
+[27-Feb-2025 20:26:14 Europe/Berlin] PHP Warning:  include(): Failed opening 'views/vwPerfil.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\shoop\home.php on line 39
+[27-Feb-2025 22:05:21 Europe/Berlin] PHP Warning:  Undefined array key "corusu" in C:\xampp\htdocs\shoop\views\vwPerfil.php on line 8
