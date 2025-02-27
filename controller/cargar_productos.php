@@ -12,12 +12,17 @@ $control = new Mpancon(); // Procesador de imágenes
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo_excel'])) {
     $archivo = $_FILES['archivo_excel']['tmp_name'];
-
     try {
         $spreadsheet = IOFactory::load($archivo);
         $hoja = $spreadsheet->getActiveSheet();
         $datos = $hoja->toArray();
-
+        // Filtrar filas vacías
+        $datos_limpios = array_filter($datos, function ($fila) {
+            // Eliminar filas donde todas las celdas están vacías o solo tienen espacios
+            return array_filter($fila, function ($celda) {
+                return trim($celda) !== "";
+            });
+        });
         $pro = new Mpro();
         $prov = new Mprov();
 
@@ -26,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo_excel'])) {
         $errores = [];
         $productosGuardados = 0;
         $rutaImagenes = '../proinf/'; // Carpeta donde se guardarán las imágenes
-        foreach ($datos as $index => $fila) {
+        foreach ($datos_limpios as $index => $fila) {
             if ($index === 0)
                 continue; // Saltar la fila de encabezado
 

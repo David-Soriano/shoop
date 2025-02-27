@@ -119,10 +119,7 @@ if ($idusus) {
                 }
             }
         }
-        // echo "<pre>Imagenes guardadas";
-        // print_r($imagenesGuardadas);
-        // echo "</pre>";
-        // die();
+
         if (!empty($imagenesGuardadas)) {
             try {
                 $res = $pro->saveProductoConImagenes($imagenesGuardadas, $caracteristicas);
@@ -142,7 +139,9 @@ if ($idusus) {
             }
         }
     } elseif ($idpro && $ope === 'edit') {
+
         try {
+            // **Asignar valores al objeto del producto**
             $mpro->setIdpro($idpro);
             $mpro->setNompro($nompro);
             $mpro->setDescripcion($descripcion);
@@ -154,17 +153,48 @@ if ($idusus) {
             $mpro->setFechiniofer($fechiniofer);
             $mpro->setFechfinofer($fechfinofer);
 
-            $imagenesActualizadas = $_POST['imagenesExistentes'] ?? [];
+            // **Obtener imágenes existentes enviadas por POST**
+            $imagenesActualizadas = [];
 
-            if (!empty($_FILES['imgpro']['name'][0])) {
-                $ruta = '../proinf';
-                foreach ($_FILES['imgpro']['name'] as $key => $nombreOriginal) {
-                    $archivo = [
+            if (!empty($_POST['imagenesExistentes']) && is_array($_POST['imagenesExistentes'])) {
+                foreach ($_POST['imagenesExistentes'] as $ruta) {
+                    // Extraer solo el nombre del archivo
+                    $nombreArchivo = basename($ruta);
+
+                    // Asegurar que la ruta esté correctamente formateada
+                    $rutaCorrecta = "proinf/" . $nombreArchivo;
+
+                    // Agregar la imagen al array con la ruta corregida
+                    $imagenesActualizadas[] = [
+                        'imgpro' => $rutaCorrecta,
+                        'nomimg' => pathinfo($nombreArchivo, PATHINFO_FILENAME),
+                        'tipimg' => $rutaCorrecta, // Detectar tipo de archivo
+                        'ordimg' => count($imagenesActualizadas) + 1,
+                    ];
+                }
+            }
+
+            var_dump($imagenesActualizadas);
+            // **Procesar imágenes nuevas**
+            
+            $archivosValidos = [];
+            foreach ($_FILES['imgpro']['name'] as $key => $nombreArchivo) {
+                if (!empty($nombreArchivo) && $_FILES['imgpro']['error'][$key] === UPLOAD_ERR_OK) {
+                    $archivosValidos[] = [
                         'name' => $_FILES['imgpro']['name'][$key],
                         'tmp_name' => $_FILES['imgpro']['tmp_name'][$key],
                         'type' => $_FILES['imgpro']['type'][$key],
                         'size' => $_FILES['imgpro']['size'][$key],
                     ];
+                }
+            }
+            var_dump($archivosValidos);
+            
+            if (!empty($archivosValidos)) {
+
+                $ruta = '../proinf';
+
+                foreach ($archivosValidos as $key => $archivo) {
                     $prefijo = uniqid();
                     $nombreBase = 'imagen';
                     $rutaFinal = $control->procesarImagen($archivo, $ruta, $nombreBase, $prefijo);
@@ -172,16 +202,18 @@ if ($idusus) {
                     if ($rutaFinal) {
                         $imagenesActualizadas[] = [
                             'imgpro' => $rutaFinal,
-                            'nomimg' => pathinfo($nombreOriginal, PATHINFO_FILENAME),
+                            'nomimg' => pathinfo($archivo['name'], PATHINFO_FILENAME),
                             'tipimg' => $archivo['type'],
-                            'ordimg' => $key + 1,
+                            'ordimg' => count($imagenesActualizadas) + 1, // Agrega al final
                         ];
                     }
                 }
             }
 
+            // **4. Actualizar el orden de las imágenes**
             if (!empty($_POST['ordenImagenes'])) {
                 $ordenImagenes = array_map(fn($item) => json_decode($item, true), $_POST['ordenImagenes']);
+
                 foreach ($ordenImagenes as $orden) {
                     foreach ($imagenesActualizadas as &$imagen) {
                         if ($imagen['imgpro'] === $orden['imgpro']) {
@@ -191,7 +223,9 @@ if ($idusus) {
                     }
                 }
             }
-
+            var_dump($imagenesActualizadas);
+            
+            // **Guardar cambios en la base de datos**
             if (!empty($imagenesActualizadas)) {
                 $mpro->updateImagenesProducto($imagenesActualizadas);
             }

@@ -173,8 +173,8 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Sin artículo</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form enctype="multipart/form-data" method="POST" id="formUpdatePrd" action="../controller/cpancon.php">
+            <div class="modal-body" id="formven">
+                <form enctype="multipart/form-data" class="marco" method="POST" id="formUpdatePrd" action="../controller/cpancon.php" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col">
                             <input type="text" name="nompro" placeholder="Nombre del artículo" required>
@@ -236,7 +236,7 @@
                         <div class="col">
                             <Label>Características del producto</Label>
                             <i class="bi bi-question-circle-fill" title="Cantidad de característica a registrar"></i>
-                            <input type="number" name="" id="cantcr" placeholder="Cantidad" oninput="cantCr()">
+                            <input type="number" name="caracteristicas" id="cantcr" placeholder="Cantidad" oninput="cantCr()">
                         </div>
                         <div class="col" id="descar">
                         </div>
@@ -256,7 +256,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="hidden" name="idpro">
+                            <input type="hidden" name="idpro" id="idpro">
                             <input type="hidden" name="ope" value="edit">
                         </div>
                     </div>

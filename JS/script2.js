@@ -571,6 +571,7 @@ function fetchProductData(param, id) {
 
 // Función que llena el modal con los datos obtenidos
 function populateModal(data) {
+    console.log(data);
     if (data && Array.isArray(data) && data.length > 0) {
         const product = data[0]; // Tomar el primer producto
         // Llenar los campos del formulario con los datos
@@ -597,6 +598,10 @@ function populateModal(data) {
         });
 
         // Verificar si el elemento 'exampleModalLabel' existe antes de actualizarlo
+        const idproInput = document.getElementById('idpro');
+        if (idproInput) {
+            idproInput.value = product.idpro;
+        }
         const modalLabel = document.getElementById('exampleModalLabel');
         if (modalLabel) {
             modalLabel.innerHTML = product.nompro;
@@ -631,9 +636,34 @@ function populateModal(data) {
         if (cantidadInput) {
             cantidadInput.value = product.cantidad;
         }
-
-        // Repetir este patrón para otros campos...
-
+        const categoInput = document.querySelector('[name="idval"]');
+        if (categoInput) {
+            categoInput.value = product.idval;
+        }
+        const valUniInput = document.querySelector('[name="valorunitario"]');
+        if (valUniInput) {
+            valUniInput.value = product.valorunitario;
+        }
+        const precioInput = document.querySelector('[name="precio"]');
+        if (precioInput) {
+            precioInput.value = product.precio;
+        }
+        const descuInput = document.querySelector('[name="pordescu"]');
+        if (descuInput) {
+            descuInput.value = product.pordescu;
+        }
+        const inioferInput = document.querySelector('[name="fechiniofer"]');
+        if (inioferInput) {
+            inioferInput.value = product.fechiniofer;
+        }
+        const finoferInput = document.querySelector('[name="fechfinofer"]');
+        if (finoferInput) {
+            finoferInput.value = product.fechfinofer;
+        }
+        const caracInput = document.querySelector('[name="caracteristicas"]');
+        if (caracInput) {
+            caracInput.value = product.caracteristicas;
+        }
         // Llenar las características
         const caracteristicasContainer = document.getElementById('descar');
         if (caracteristicasContainer) {
@@ -673,8 +703,9 @@ function populateModal(data) {
                             <input type="radio" name="imagenPrincipal" value="${index}" ${index === 0 ? 'checked' : ''} data-imgpro="${imagen.imgpro}" onclick="actualizarOrdenImagenes()">
                             Principal
                         </label>
-                        <button type="button" onclick="eliminarImagen(${index}, true)" class="btn-del">
-                            <i class="bi bi-x-circle-fill"></i>
+                        <button type="button" onclick="eliminarImagen(${index})" class="btn-del">
+                    <i class="bi bi-x-circle-fill"></i>
+                </button>
                         </button>
                     `;
                     imageExistContainer.appendChild(imgDiv);
@@ -702,52 +733,81 @@ function populateModal(data) {
 
 // Esta función se ejecuta cada vez que se marca un radio button
 function actualizarOrdenImagenes() {
-    const imagenesPrincipales = document.querySelectorAll('input[name="imagenPrincipal"]'); // Radios de imágenes principales
-    const formulario = document.getElementById('formUpdatePrd'); // Asegúrate de que este ID sea correcto
+    const imagenesPrincipales = document.querySelectorAll('input[name="imagenPrincipal"]');
+    const formulario = document.getElementById('formUpdatePrd');
+    const inputFiles = document.getElementById("imgpro");
 
     if (!formulario) {
         console.error("El formulario con ID 'formUpdatePrd' no se encuentra en el DOM.");
         return;
     }
 
-    // Eliminar inputs ocultos existentes para evitar duplicados
-    const camposOrdenImagenes = formulario.querySelectorAll('input[name="ordenImagenes[]"]');
-    camposOrdenImagenes.forEach(campo => campo.remove());
+    // **Eliminar inputs ocultos previos para evitar duplicados**
+    formulario.querySelectorAll('input[name="ordenImagenes[]"], input[name="imagenesExistentes[]"]').forEach(campo => campo.remove());
 
-    // Crear nuevo orden de imágenes
-    const ordenImagenes = [];
-    imagenesPrincipales.forEach((radio, index) => {
-        // Verifica si el radio tiene el atributo `data-imgpro`
-        const imgpro = radio.dataset.imgpro || "";
-        if (!imgpro) {
-            console.warn(`El radio en la posición ${index} no tiene un atributo 'data-imgpro'.`);
-            return;
-        }
+    // **Obtener imágenes existentes**
+    const imagenesExistentes = obtenerImagenesExistentes();
+    console.log("Existentes", imagenesExistentes);
 
-        // Determinar el orden
-        const imagen = {
-            imgpro, // Ruta de la imagen
-            ordimg: radio.checked ? 1 : index + 2 // 1 si es principal, orden secuencial para las demás
-        };
-        ordenImagenes.push(imagen);
-
-        // Crear input oculto para enviar al servidor
-        const inputHidden = document.createElement('input');
-        inputHidden.type = 'hidden';
-        inputHidden.name = 'ordenImagenes[]'; // Nombre del campo enviado
-        inputHidden.value = JSON.stringify(imagen); // Convertir a JSON
+    // **Agregar imágenes existentes como inputs ocultos**
+    imagenesExistentes.forEach((imgpro) => {
+        const inputHidden = document.createElement("input");
+        inputHidden.type = "hidden";
+        inputHidden.name = "imagenesExistentes[]"; // 💡 Mismo nombre que en PHP
+        inputHidden.value = imgpro;
         formulario.appendChild(inputHidden);
     });
+    console.log(document.querySelectorAll('input[name="imagenesExistentes[]"]'));
+
+    console.log("Imágenes existentes añadidas al formulario.");
+    imagenesExistentes.forEach((imgpro) => {
+        console.log("Imagen existente añadida:", imgpro);
+    });
+    
+    // **🔹 Manejo de archivos nuevos**
+    const validFiles = selectedFiles.filter(file => file.size > 0);
+
+    // **Eliminar solo los inputs file adicionales generados dinámicamente**
+    formulario.querySelectorAll('input[name="imgpro[]"]').forEach(campo => {
+        if (campo !== inputFiles) {
+            campo.remove();
+        }
+    });
+    console.log("Formulario actualizado:", formulario.innerHTML);
+
+    // **Agregar archivos nuevos sin eliminar `#imgpro`**
+    validFiles.forEach((file) => {
+        const inputFile = document.createElement('input');
+        inputFile.type = 'file';
+        inputFile.name = 'imgpro[]';
+
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        inputFile.files = dt.files;
+
+        formulario.appendChild(inputFile);
+        console.log("Input oculto agregado:", inputHidden);
+    });
+
+    console.log("selectedFiles después del filtrado: ", validFiles);
 }
 
+
+
+
+
+// Obtener imágenes existentes del formulario
 function obtenerImagenesExistentes() {
-    // Selecciona todos los inputs con name="imagenesExistentes[]"
-    const inputsExistentes = document.querySelectorAll('input[name="imagenesExistentes[]"]');
-    // Extrae los valores de los inputs
-    const valores = Array.from(inputsExistentes).map(input => input.value);
-
-    return valores; // Devuelve un array con los valores
+    let imagenes = [];
+    document.querySelectorAll("#image_exist .imagen-preview img").forEach((img) => {
+        imagenes.push(img.getAttribute("src"));
+    });
+    return imagenes;
 }
+
+document.getElementById("imgpro").addEventListener("change", function () {
+    console.log("Archivos seleccionados:", selectedFiles);
+});
 
 function limpiarModal() {
     // Limpiar campos del formulario
