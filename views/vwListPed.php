@@ -195,7 +195,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form enctype="multipart/form-data" method="POST" id="formUpdatePrd" action="../controller/cped.php">
+                <form enctype="multipart/form-data" method="POST" id="formUpdatePed" action="../controller/cped.php">
                     <div class="row bx-st-ped">
                         <div class="col bx-st-ped_st">
                             <div>

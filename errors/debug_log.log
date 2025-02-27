@@ -1,2 +1,26 @@
+Recibido: Array
+(
+    [idped] => 42
+    [idprov] => cancelar
+)
 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: 
+Id Pedido: 43
+EStado Ped: En Reparto
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: Array
+(
+    [idped] => 43
+    [idprov] => 82
+    [ope] => recibir
+)
 

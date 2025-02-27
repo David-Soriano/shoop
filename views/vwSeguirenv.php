@@ -50,7 +50,7 @@ $dtSegEnv = segEnv($idped);
                                 <a href="#" class="btn btn-link">Cancelar pedido</a>
                             <?php } ?>
                             <?php if ($dts['estped'] == "En Reparto") { ?>
-                                <a href="#" class="btn btn-outline-success" id="btn-rec-ped" data-idped="<?=$dts['idped']?>">Recibido</a>
+                                <a href="#" class="btn btn-outline-success" id="btn-rec-ped" data-idped="<?=$dts['idped']?>" data-idprov="<?=$dts['idprov']?>">Recibido</a>
                             <?php } ?>
                         <?php }
                     } ?>

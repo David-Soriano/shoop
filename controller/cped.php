@@ -41,54 +41,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $resultado = $pedido->updatePedido("Cancelado");
                 break;
             case 'recibir':
-                $resultado = $pedido->updatePedido("Recibido"); // Cambio de estado a "Recibido"
+                $resultado = $pedido->updatePedido("Recibido");
 
-                // Ahora realizamos las operaciones adicionales que antes se realizaban en actualizarPedidoYGuardarCompra
                 if ($resultado) {
-                    // Obtener los datos del pedido y compra
-                    $pedidoData = $pedido->getOne(); // Datos del pedido
-                    $compra = new Compra();
-                    $compra->setIdped($idped);
+                    try {
+                        // Obtener los datos del pedido y compra
+                        $pedidoData = $pedido->getOne(); // Datos del pedido
+                        $compra = new Compra();
+                        $compra->setIdped($idped);
 
-                    // Calcular el total, comisiones, IVA, etc., si es necesario
-                    $total = floatval($pedidoData['total']);
-                    $comision = $total * 0.07;
-                    $ivaPorcentaje = 0.19;
-                    $subtotal = $total / (1 + $ivaPorcentaje);
-                    $iva = $total * $ivaPorcentaje;
+                        // Calcular el total, comisiones, IVA, etc., si es necesario
+                        $total = floatval($pedidoData['total']);
+                        $comision = $total * 0.07;
+                        $ivaPorcentaje = 0.19;
+                        $subtotal = $total / (1 + $ivaPorcentaje);
+                        $iva = $total * $ivaPorcentaje;
 
-                    // Actualizar saldo del proveedor (esto depende de la lógica de tu aplicación)
-                    $modelo = new Conexion();
-                    $conn = $modelo->getConexion();
-                    $total_sin_iva_comision = $total - $iva - $comision;
-                    $stmProveedor = $conn->prepare("UPDATE proveedor SET saldo = saldo + ? WHERE idprov = ?");
-                    $stmProveedor->execute([$total_sin_iva_comision, $_SESSION['idprov']]);
+                        // Actualizar saldo del proveedor (esto depende de la lógica de tu aplicación)
+                        $modelo = new Conexion();
+                        $conn = $modelo->getConexion();
+                        $total_sin_iva_comision = $total - $iva - $comision;
 
-                    // Guardar los datos de la compra
-                    $compra->setTiproduct($pedidoData['nomval']);
-                    $compra->setCantidad($pedidoData['cantidad']);
-                    $compra->setPreciocom($total);
-                    $compra->setTotal($total);
-                    $compra->setIdpro($pedidoData['idpro']);
-                    $compra->setSubtotal($subtotal);
-                    $compra->setIva($iva);
-                    $compra->setIdubi($pedidoData['idubi'] ?? null);
-                    $compra->setIdusu($pedidoData['idusu']);
-                    $compra->setDireccomp($pedidoData['direccion'] ?? "");
 
-                    // Guardar la compra
-                    $idcom = $compra->saveCompra();
-                    $compra->setIdcom($idcom);
+                        $stmProveedor = $conn->prepare("UPDATE proveedor SET saldo = saldo + ? WHERE idprov = ?");
+                        $stmProveedor->execute([$total_sin_iva_comision, $data['idprov']]);
 
-                    // Guardar los detalles de la compra
-                    $compra->saveDetalleCompra();
+                        // Guardar los datos de la compra
+                        $compra->setTiproduct($pedidoData['nomval']);
+                        $compra->setCantidad($pedidoData['cantidad']);
+                        $compra->setPreciocom($total);
+                        $compra->setTotal($total);
+                        $compra->setIdpro($pedidoData['idpro']);
+                        $compra->setSubtotal($subtotal);
+                        $compra->setIva($iva);
+                        $compra->setIdubi($pedidoData['idubi'] ?? null);
+                        $compra->setIdusu($pedidoData['idusu']);
+                        $compra->setDireccomp($pedidoData['direccion'] ?? "");
 
-                    // Actualizar cantidad vendida
-                    $idpro = $pedidoData['idpro'];
-                    $cantidadVendida = $pedidoData['cantidad'];
+                        // Guardar la compra
+                        $idcom = $compra->saveCompra();
+                        $compra->setIdcom($idcom);
 
-                    $producto = new Mpro();
-                    $producto->actualizarCantidadVendida($idpro, $cantidadVendida);
+                        // Guardar los detalles de la compra
+                        $compra->saveDetalleCompra();
+
+                        // Actualizar cantidad vendida
+                        $idpro = $pedidoData['idpro'];
+                        $cantidadVendida = $pedidoData['cantidad'];
+
+                        $producto = new Mpro();
+                        $producto->actualizarCantidadVendida($idpro, $cantidadVendida);
+                    } catch (PDOException $e) {
+                        error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+                        echo json_encode(['success' => false, 'error' => 'Error al guardar la compra.']);
+                    }
                 }
                 break;
             default:
@@ -111,7 +117,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($idpedido || $idusu) {
     $pedido = new pedido();
     $compra = new Compra();
-
+    file_put_contents('C:/xampp\htdocs/SHOOP/errors/debug_log.log', "Id Pedido: " . print_r($idpedido, true) . "\n", FILE_APPEND);
+    file_put_contents('C:/xampp\htdocs/SHOOP/errors/debug_log.log', "EStado Ped: " . print_r($estadop, true) . "\n", FILE_APPEND);
+    file_put_contents('C:/xampp\htdocs/SHOOP/errors/debug_log.log', "Operación: " . print_r($ope, true) . "\n", FILE_APPEND);
     $pedido->setIdped($idpedido);
     $dtOnePed = $pedido->getOne();
 
@@ -123,7 +131,7 @@ if ($idpedido || $idusu) {
     $dtCompras = $compra->getCompras($_SESSION['idusu']);
 
     // Actualizar el estado del pedido y guardar la compra
-    actualizarPedidoYGuardarCompra($pedido,   $estadop);
+    actualizarPedidoYGuardarCompra($pedido, $estadop, $idpedido, $ope);
 }
 
 
@@ -137,12 +145,12 @@ function segEnv($idped)
 }
 
 // Método para actualizar el estado del pedido y guardar la compra y su detalle
-function actualizarPedidoYGuardarCompra($pedido, $estped)
+function actualizarPedidoYGuardarCompra($pedido, $estped, $idped, $ope)
 {
     try {
-        // Actualizar el estado del pedido
         $pedido->updatePedido($estped);
         header('Location:../views/vwpanpro.php?vw=25');
+
     } catch (Exception $e) {
         error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
         echo "Error. Inténtalo más tarde.";

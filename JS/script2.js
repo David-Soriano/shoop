@@ -314,9 +314,10 @@ function buttonsTableUsers() {
 function recibirPedido(){
     let btn = document.getElementById("btn-rec-ped");
     let idped = btn.dataset.idped;
+    let idprov = btn.dataset.idprov;
     btn.addEventListener('click', () => {
         console.log("click");
-        updatePedData(idped, 'recibir'); // Aquí pasamos 'recibir' como operación
+        updatePedData(idped, idprov, 'recibir'); // Aquí pasamos 'recibir' como operación
     })
 }
 function deleteProductData(idpro) {
@@ -346,13 +347,13 @@ function deleteProductData(idpro) {
             console.error('Hubo un problema con la solicitud:', error);
         });
 }
-function updatePedData(idped, ope) {
+function updatePedData(idped, idprov, ope) {
     fetch(`http://localhost/SHOOP/controller/cped.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ idped, ope }), // Enviar 'ope' junto con 'idped'
+        body: JSON.stringify({ idped, idprov, ope }), // Enviar 'ope' junto con 'idped'
     })
         .then(async response => {
             const rawText = await response.text();
@@ -544,6 +545,8 @@ function populateModal(data) {
             if (estadoPedido == 'Cancelado') {
                 radio.disabled = true;
                 document.querySelector('.bx-st-ped_st').innerHTML = "Los pedidos CANCELADOS no se pueden actualizar.";
+            } else if(estadoPedido == 'Recibido'){
+                document.querySelector('.bx-st-ped_st').innerHTML = "El pedido fue RECIBIDO correctamente.";
             } else if (radio.value === estadoPedido) {
                 radio.checked = true;
             }
