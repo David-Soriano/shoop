@@ -78,7 +78,7 @@ class Mpancon
                 imagedestroy($imagenRedimensionada);
                 imagedestroy($imagenOriginal);
             } else {
-                echo "<script>alert('Formato de archivo no permitido. Solo JPG, PNG y WebP.');</script>";
+                echo "<script>alert('Formato de archivo no permitido. Solo JPG, JPEG, PNG y WebP.');</script>";
             }
         }
         return $rutaFinal;

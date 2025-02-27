@@ -69,7 +69,7 @@
                 <div class="col">
                     <label for="imgpro">Selecciona imágenes:</label>
                     <input type="file" name="imgpro[]" id="imgpro" multiple accept=".jpg, .jpeg, .png, .webp"
-                        onchange="actualizarOrden()" required>
+                        onchange="actualizarOrden()">
                 </div>
             </div>
             <div class="row" id="orden-imagenes">
@@ -79,7 +79,7 @@
                 <input type="hidden" name="idusu" value="<?= $_SESSION['idusu'] ?>">
                 <input type="hidden" name="ope" value="save">
                 <div class="col">
-                    <input type="submit" value="Cargar">
+                    <input type="submit" value="Cargar" onclick="añadirImagenes()">
                 </div>
                 <div class="col">
                     <p>¿Tienes muchos artículos para subir? Ingresa <a href="#" data-bs-toggle="modal"

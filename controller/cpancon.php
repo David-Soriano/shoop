@@ -2,7 +2,7 @@
 ini_set('session.cookie_httponly', 1); // Evita que JavaScript acceda a las cookies
 ini_set('session.cookie_secure', 1); // Solo permite el envío de cookies a través de HTTPS
 ini_set('session.cookie_samesite', 'Strict');
-if(session_status() === PHP_SESSION_NONE){
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
@@ -85,7 +85,14 @@ if ($idusus) {
         $pro->setFechfinofer($fechfinofer);
 
         $imagenesGuardadas = [];
-        if (!empty($_FILES['imgpro']['name'][0])) {
+        // echo "<pre> imagenes Recibidas";
+        // print_r($_FILES['imgpro']);
+        // echo "</pre>";
+        $archivos_validos = array_filter($_FILES['imgpro']['name'], function ($nombre, $key) {
+            return !empty($nombre) && $_FILES['imgpro']['error'][$key] === 0;
+        }, ARRAY_FILTER_USE_BOTH);
+
+        if (!empty($archivos_validos)) {
             $ruta = '../proinf';
             foreach ($_FILES['imgpro']['name'] as $key => $nombreOriginal) {
                 $archivo = [
@@ -97,7 +104,9 @@ if ($idusus) {
                 $prefijo = uniqid();
                 $nombreBase = 'imagen';
                 $rutaFinal = $control->procesarImagen($archivo, $ruta, $nombreBase, $prefijo);
-
+                // echo "<pre>Ruta Final";
+                // print_r($rutaFinal);
+                // echo "</pre>";
                 if ($rutaFinal) {
                     $imagenesGuardadas[] = [
                         'imgpro' => $rutaFinal,
@@ -110,7 +119,10 @@ if ($idusus) {
                 }
             }
         }
-
+        // echo "<pre>Imagenes guardadas";
+        // print_r($imagenesGuardadas);
+        // echo "</pre>";
+        // die();
         if (!empty($imagenesGuardadas)) {
             try {
                 $res = $pro->saveProductoConImagenes($imagenesGuardadas, $caracteristicas);

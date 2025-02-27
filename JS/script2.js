@@ -29,43 +29,87 @@ function calcularPrecio() {
     document.getElementById('detalle').innerHTML = desglose;
 }
 let selectedFiles = [];
+
 function actualizarOrden() {
     const input = document.getElementById('imgpro');
     const ordenContenedor = document.getElementById('orden-imagenes');
-    const files = input.files;
+    const files = Array.from(input.files);
 
-    // Añadir las nuevas imágenes seleccionadas al array
-    for (let i = 0; i < files.length; i++) {
-        if (!selectedFiles.includes(files[i])) {
-            selectedFiles.push(files[i]);  // Añadir archivo al array si no está ya
+    // Agregar nuevas imágenes sin duplicarlas
+    files.forEach(file => {
+        if (!selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
+            selectedFiles.push(file);
         }
-    }
+    });
 
-    // Limpiar el contenedor antes de agregar las nuevas imágenes
+    // Limpiar el contenedor antes de agregar las imágenes
     ordenContenedor.innerHTML = "";
 
-    // Mostrar todas las imágenes en selectedFiles (nuevas y antiguas)
+    // Iterar correctamente sobre `selectedFiles`
     selectedFiles.forEach((archivo, index) => {
         const reader = new FileReader();
-
-        reader.onload = (e) => {
+        reader.onload = function (e) {
             const imgDiv = document.createElement('div');
             imgDiv.classList.add('col', 'imagen-preview');
-
             imgDiv.innerHTML = `
                 <img src="${e.target.result}" alt="Imagen ${index + 1}" class="img-thumbnail" style="max-width: 100px; margin: 5px;">
                 <label>
                     <input type="radio" name="imagenPrincipal" value="${index}" ${index === 0 ? "checked" : ""}>
                     Principal
                 </label>
-                <button type="button" onclick="eliminarImagen(${index})" class="btn-del"><i class="bi bi-x-circle-fill"></i></button>
+                <button type="button" onclick="eliminarImagen(${index})" class="btn-del">
+                    <i class="bi bi-x-circle-fill"></i>
+                </button>
             `;
             ordenContenedor.appendChild(imgDiv);
         };
-
         reader.readAsDataURL(archivo);
     });
+
+    // Restablecer el input sin afectar required
+    input.value = "";
 }
+
+function añadirImagenes() {
+    document.querySelector("form[name='frm1']").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evita el envío tradicional del formulario
+
+        let formData = new FormData(this);
+
+        // Obtener el índice de la imagen principal seleccionada
+        let imagenPrincipalIndex = document.querySelector("input[name='imagenPrincipal']:checked")?.value;
+
+        if (imagenPrincipalIndex !== undefined) {
+            imagenPrincipalIndex = parseInt(imagenPrincipalIndex, 10);
+
+            // Reordenar el array: colocar la imagen principal al inicio
+            if (imagenPrincipalIndex >= 0 && imagenPrincipalIndex < selectedFiles.length) {
+                let imagenPrincipal = selectedFiles.splice(imagenPrincipalIndex, 1)[0]; // Sacar la imagen
+                selectedFiles.unshift(imagenPrincipal); // Insertarla al inicio
+            }
+        }
+        selectedFiles = selectedFiles.filter(file => file.name && file.size > 0);
+        console.log("Archivos seleccionados antes de enviar:", selectedFiles);
+        // Agregar las imágenes de `selectedFiles` al `formData` en el nuevo orden
+        selectedFiles.forEach((file) => {
+            formData.append("imgpro[]", file);
+        });
+
+        fetch(this.action, {
+            method: this.method,
+            body: formData,
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log("Respuesta del servidor:", data);
+                alert("Formulario enviado correctamente");
+                window.location.reload();
+            })
+            .catch(error => console.error("Error en el envío:", error));
+    });
+}
+
+
 function eliminarImagen(index, existente = false) {
     if (existente) {
         // Contenedor de imágenes existentes
@@ -311,7 +355,7 @@ function buttonsTableUsers() {
         }
     });
 }
-function recibirPedido(){
+function recibirPedido() {
     let btn = document.getElementById("btn-rec-ped");
     let idped = btn.dataset.idped;
     let idprov = btn.dataset.idprov;
@@ -545,7 +589,7 @@ function populateModal(data) {
             if (estadoPedido == 'Cancelado') {
                 radio.disabled = true;
                 document.querySelector('.bx-st-ped_st').innerHTML = "Los pedidos CANCELADOS no se pueden actualizar.";
-            } else if(estadoPedido == 'Recibido'){
+            } else if (estadoPedido == 'Recibido') {
                 document.querySelector('.bx-st-ped_st').innerHTML = "El pedido fue RECIBIDO correctamente.";
             } else if (radio.value === estadoPedido) {
                 radio.checked = true;
