@@ -28,7 +28,7 @@
                 }?>
             </div>
             <div class="row bx-conf-pef">
-                <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('views/vwInfo-Personal.php')">
+                <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('../views/vwInfo-general.php')">
                     <h5>Información General</h5>
                 </a>
                 <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('views/vwDatos-Cuenta.php')">
@@ -53,3 +53,4 @@
         </div>
     </div>
 </div>
+<script src="../JS/script.js"></script>

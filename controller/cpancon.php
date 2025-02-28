@@ -1,7 +1,9 @@
 <?php
-ini_set('session.cookie_httponly', 1); // Evita que JavaScript acceda a las cookies
+if(session_status() == PHP_SESSION_NONE){
+    ini_set('session.cookie_httponly', 1); // Evita que JavaScript acceda a las cookies
 ini_set('session.cookie_secure', 1); // Solo permite el envío de cookies a través de HTTPS
 ini_set('session.cookie_samesite', 'Strict');
+}
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

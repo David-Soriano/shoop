@@ -22,6 +22,12 @@ header {
     height: 18vh;
 }
 
+@media screen and (max-width:2000px) {
+    header {
+        height: 20vh;
+    }
+}
+
 header h1 {
     font-size: 2.5rem;
 }
@@ -39,6 +45,7 @@ header p {
 .bx-wel {
     margin-top: 0%;
 }
+
 .btn-pf-adm button {
     background: none;
     border: none;
@@ -47,30 +54,40 @@ header p {
 .btn-pf-adm button:hover {
     background: none;
 }
+
 .btn-pf-adm ul {
     background: none;
     border: none;
 }
+
 .btn-pf-adm ul li a {
     border-radius: 7px;
 }
+
 .bx-opc-in a {
     text-decoration: none;
     color: #ffffff;
 }
-.dropdown-item.active, .dropdown-item:active {
+
+.dropdown-item.active,
+.dropdown-item:active {
     background: #FFF;
     color: #000;
- }
- .dropdown-toggle{
+}
+
+.dropdown-toggle {
     background: none;
- }
- .btn.show{
+}
+
+.btn.show {
     background-color: #8c8d8d2e;
- }
- .btn.show, .btn:first-child:active{
+}
+
+.btn.show,
+.btn:first-child:active {
     background-color: #8c8d8d2e;
- }
+}
+
 main {
     background: #ebebeb;
     min-height: 100%;
@@ -698,9 +715,10 @@ footer {
     width: fit-content;
 }
 
-.title-items-panel{
+.title-items-panel {
     text-align: center;
 }
+
 .bx-st-ped .bx-st-ped_st {
     display: flex;
     justify-content: center;
@@ -718,9 +736,11 @@ footer {
     justify-content: space-between;
 }
 
-#formCargaMasiva p, #formCargaMasiva .lbconfirmInd{
+#formCargaMasiva p,
+#formCargaMasiva .lbconfirmInd {
     font-size: 14px;
 }
+
 #imagenesContainer {
     padding: 4%;
     border: 1px solid #d0d0d0;
@@ -743,7 +763,9 @@ footer {
 #archivo-excel:disabled {
     background-color: #f8d7da;
 }
-.bx-conf-pef, .bx-conf-pef-bx {
+
+.bx-conf-pef,
+.bx-conf-pef-bx {
     flex-wrap: wrap;
     gap: 3%;
     margin: 2% 0;
@@ -805,7 +827,7 @@ footer {
     min-height: 50vh;
 }
 
-.bx-conf-pef-prin #contenido{
+.bx-conf-pef-prin #contenido {
     margin: 5% 0;
 }
 
@@ -817,21 +839,40 @@ footer {
     font-weight: 400;
 }
 
-.bx-conf-pef-prin #contenido .btn-vol-pf:active{
+.bx-conf-pef-prin #contenido .btn-vol-pf:active {
     border: none;
 }
-.bx-conf-pef-prin #contenido .btn-vol-pf:hover{
+
+.bx-conf-pef-prin #contenido .btn-vol-pf:hover {
     border-bottom: 1px solid;
 }
-.bx-content-pf{
-    background: #feffee;
+
+.bx-content-pf {
+    background: #fff;
     padding: 2%;
     border-radius: 7px;
 }
-#contenido .form-conf-pef{
+
+#contenido .form-conf-pef {
     box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
-#contenido .form-conf-pef button{
+#contenido .form-conf-pef input{
+    border: none;
+    border-bottom: 1px solid #bdbbbb;
+    margin: 1% 0;
+    padding: 1% 0.5%;
+}
+#contenido .form-conf-pef textarea{
+    resize: none;
+    border: 1px solid #c3c3c3;
+    border-radius: 5px;
+    padding: 1%;
+    margin: 2% 0px;
+}
+#contenido .form-conf-pef button {
     position: initial;
     width: auto;
     height: auto;
