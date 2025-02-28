@@ -208,7 +208,8 @@ class Mprov
         }
         return $res;
     }
-    public function traerSaldo($idprov){
+    public function traerSaldo($idprov)
+    {
         try {
             $res = "";
             $modelo = new Conexion();
@@ -220,6 +221,23 @@ class Mprov
 
             $stmt->execute();
             $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al insertar prodxprv. Inténtalo más tarde.";
+        }
+        return $res;
+    }
+    public function getOneProv()
+    {
+        try {
+            $res = "";
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $sql = "SELECT * FROM proveedor WHERE idprov = :idprov";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindValue(':idprov', $this->getIdprov(), PDO::PARAM_INT);
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
             echo "Error al insertar prodxprv. Inténtalo más tarde.";

@@ -33,3 +33,31 @@ Operación:
 Id Pedido: 
 EStado Ped: 
 Operación: 
+Formulario enviado con POST: Array
+(
+)
+Datos enviados a la consulta: Array
+(
+    [nomprov] => 
+    [idusu] => 
+    [dirrecprov] => 
+    [idubi] => 
+    [url] => 
+    [nit] => 
+    [desprv] => 
+    [estado] => 
+)
+Formulario enviado con POST: Array
+(
+)
+Datos enviados a la consulta: Array
+(
+    [nomprov] => 
+    [idusu] => 
+    [dirrecprov] => 
+    [idubi] => 
+    [url] => 
+    [nit] => 
+    [desprv] => 
+    [estado] => 
+)

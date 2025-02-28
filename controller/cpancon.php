@@ -53,7 +53,13 @@ $totalPages = ceil($totalResults / $resultsPerPage);
 $dtAllPrd = $mpro->getAllPrd($idProveedor, $resultsPerPage, $offset);
 $dtAllPedidos = $mped->getPedidos($_SESSION['idprov']);
 
+//se utiliza vwpanpro
 $saldo = $prov->traerSaldo($idProveedor);
+function getDtProv($idprov){
+    $prov = new Mprov();
+    $prov->setIdprov($idprov);
+    return $prov->getOneProv();
+}
 
 $start = $offset + 1;
 $end = min($offset + $resultsPerPage, $totalResults);

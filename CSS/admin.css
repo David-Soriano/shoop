@@ -1538,6 +1538,10 @@
  .btn-pf-adm ul li a {
      border-radius: 7px;
  }
+ .dropdown-item.active, .dropdown-item:active {
+    background: #FFF;
+    color: #000;
+ }
 
  .bx-pago-conf .col {
      display: flex;

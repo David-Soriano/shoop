@@ -18,22 +18,44 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
   <?php
   require_once("../controller/cpancon.php");
   require_once("../controller/cpagprv.php");
+
   if (!$idProveedor) {
     header("Location:vwRegPrv.php");
     exit();
-  } ?>
+  }
+  $dtProvData = getDtProv($_SESSION['idprov']);
+  $dtProv = $dtProvData[0];?>
   <header>
-    <a href="../home.php"><img src="../IMG/LogoAnimado.gif" alt=""></a>
-    <div>
-      <h2>Panel de Control</h2>
+    <div class="row bx-opc-in">
+      <div class="col">
+        <a href="../views/admin.php">SHOOP S.A</a>
+      </div>
+      <div class="col">
+        <div class="btn-group btn-pf-adm">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <?= $dtProv['nomprov'] ?>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="vwpanpro.php?vw=36">Perfil</a></li>
+            <li><a class="dropdown-item" href="vwExit.php">Cerrar Sesión</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div>
-      <p>Saldo: $<?=number_format($saldo['saldo'], 2, ",", ".");?></p>
-    </div>
-    <div>
-      <i class="bi bi-person-circle"></i>
-    </div>
-  </header>
+    <div class="row bx-wel">
+      <div class="col">
+        <h1>Hola <?= $dtProv['nomprov'] ?>,</h1>
+        <p>Bienvenid<?php if ($_SESSION['genusu'] == 'M') {
+          echo "o";
+        } else if ($_SESSION['genusu'] == 'M') {
+          echo "a";
+        } else
+          echo "@" ?> al Portal de Administración</p>
+          </div>
+          <p>Saldo: $<?= number_format($saldo['saldo'], 2, ",", "."); ?></p>
+        </div>
+      </header>
   <main>
     <div class="container-fluid">
       <div class="row bx-prc">

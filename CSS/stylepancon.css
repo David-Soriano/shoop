@@ -12,22 +12,65 @@ body {
     padding: 0;
 }
 
+/* Header */
 header {
-    display: flex;
-    height: 10vh;
+    text-align: center;
+    padding: 20px;
+    background: rgb(225, 75, 47);
+    background: linear-gradient(112deg, rgba(225, 75, 47, 1) 0%, rgba(233, 105, 74, 1) 23%, rgba(240, 134, 100, 1) 64%, rgba(248, 164, 127, 1) 84%, rgba(255, 255, 255, 1) 100%);
+    color: #fff;
+    height: 18vh;
+}
+
+header h1 {
+    font-size: 2.5rem;
+}
+
+header p {
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.bx-opc-in a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.bx-wel {
+    margin-top: 0%;
+}
+.btn-pf-adm button {
+    background: none;
+    border: none;
+}
+
+.btn-pf-adm button:hover {
+    background: none;
+}
+.btn-pf-adm ul {
+    background: none;
+    border: none;
+}
+.btn-pf-adm ul li a {
+    border-radius: 7px;
+}
+.bx-opc-in a {
+    text-decoration: none;
+    color: #ffffff;
+}
+.dropdown-item.active, .dropdown-item:active {
     background: #FFF;
-    align-items: center;
-    justify-content: space-around;
-}
-
-header a {
-    width: 10%;
-}
-
-header img {
-    width: 72%;
-}
-
+    color: #000;
+ }
+ .dropdown-toggle{
+    background: none;
+ }
+ .btn.show{
+    background-color: #8c8d8d2e;
+ }
+ .btn.show, .btn:first-child:active{
+    background-color: #8c8d8d2e;
+ }
 main {
     background: #ebebeb;
     min-height: 100%;
@@ -699,4 +742,97 @@ footer {
 /* Borde rojo cuando el input está deshabilitado */
 #archivo-excel:disabled {
     background-color: #f8d7da;
+}
+.bx-conf-pef, .bx-conf-pef-bx {
+    flex-wrap: wrap;
+    gap: 3%;
+    margin: 2% 0;
+}
+
+.bx-conf-pef .bx-conf-pef-item {
+    min-height: 10vh;
+    display: flex;
+    align-items: center;
+    border: 1px solid #c9c5c580;
+    border-radius: 5px;
+    background: #fff;
+    margin: 1% 0;
+    text-decoration: none;
+    color: #000;
+}
+
+.bx-conf-pef .bx-conf-pef-item h5 {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.bx-conf-pef-ini {
+    min-height: 12vh;
+    border: 1px solid #d9d8d8;
+    background: #fbfbfb;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bx-conf-pef-ini .circle {
+    display: flex;
+    height: 5vh;
+    border-radius: 50%;
+    background: #dfdfdf;
+    justify-content: center;
+    align-items: center;
+}
+
+.bx-conf-pef-ini .circle p {
+    font-size: 22px;
+    margin: 0;
+}
+
+.bx-conf-pef-ini .nombre {
+    text-align: center;
+}
+
+.bx-conf-pef-ini .nombre p {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.bx-conf-pef-prin {
+    display: flex;
+    align-content: space-between;
+    min-height: 50vh;
+}
+
+.bx-conf-pef-prin #contenido{
+    margin: 5% 0;
+}
+
+.bx-conf-pef-prin #contenido .btn-vol-pf {
+    margin: 0 0 2%;
+    padding: 0;
+    border-radius: 0;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.bx-conf-pef-prin #contenido .btn-vol-pf:active{
+    border: none;
+}
+.bx-conf-pef-prin #contenido .btn-vol-pf:hover{
+    border-bottom: 1px solid;
+}
+.bx-content-pf{
+    background: #feffee;
+    padding: 2%;
+    border-radius: 7px;
+}
+#contenido .form-conf-pef{
+    box-shadow: none;
+}
+#contenido .form-conf-pef button{
+    position: initial;
+    width: auto;
+    height: auto;
 }

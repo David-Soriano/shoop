@@ -7,7 +7,9 @@ require_once("../model/mprov.php");
 ini_set('session.cookie_httponly', 1);  // Evita que JavaScript acceda a las cookies
 ini_set('session.cookie_secure', 1);    // Solo permite el envío de cookies a través de HTTPS
 ini_set('session.cookie_samesite', 'Strict'); 
-session_start();
+if(session_status() === PHP_SESSION_NONE){
+    session_start();
+}
 
 $prov = new Mprov();
 
@@ -29,11 +31,10 @@ $prov->setNit($nit);               // NIT del proveedor
 $prov->setDesprv($desprv);
 $prov->setIdusu($idusu);
 
-$res = $idprov = $prov->saveProv();
+$res = $prov->saveProv();
 
 if($res){
     $_SESSION['idprov'] = $res['idprov'];
-    $_SESSION['saldo'] = $res['saldo'];
      header("Location: ../views/vwpanpro.php");
 } else{
     echo "Error al registrar el proveedor";
