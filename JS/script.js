@@ -145,6 +145,7 @@ function setupMaxQuantity() {
 function setupBoxToggle() {
     const btnPrf = document.getElementById("btnPrf");
     const boxOpcPrf = document.getElementById('bx-opc-prf');
+    boxOpcPrf.style.display = "none";
     if (btnPrf && boxOpcPrf) {
         let bandera = false;
         btnPrf.addEventListener('click', () => {
@@ -482,7 +483,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
-
+function cargarContenido(url) {
+    console.log("Intentando cargar: " + url);
+    
+    // Ocultar el menú
+    $(".bx-conf-pef").hide();
+    
+    $.ajax({
+        url: url,
+        type: "GET",
+        beforeSend: function() {
+            $("#contenido").html("<p>Cargando...</p>");
+        },
+        success: function(data) {    
+            // Agregar botón de volver dentro del contenido cargado
+            let botonVolver = '<button onclick="volverMenu()" class="btn btn-vol-pf"><i class="bi bi-arrow-bar-left"></i> Volver</button>';
+            
+            $("#contenido").html(botonVolver + data);
+        },
+        error: function(xhr, status, error) {
+            console.log("Error:", status, error);
+            $("#contenido").html("<p>Error al cargar el contenido.</p>");
+        }
+    });
+}
+function volverMenu() {
+    $("#contenido").html("");  // Borra el contenido cargado
+    $(".bx-conf-pef").show();  // Muestra el menú
+}
 $(document).ready(function () {
     $("#depart").change(function () {
         var departamentoID = $(this).val();

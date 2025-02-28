@@ -19,7 +19,7 @@ $ubicacion = [
                                     <?= $_SESSION['celusu'] ?></strong></p>
                             <p class="text-muted"><?= $_SESSION['departamento'] ?> - <?= $_SESSION['ciudad'] ?></p>
                             <p class="text-muted"><?= $_SESSION['dirrecusu'] ?></p>
-                            <button>Cambiar</button>
+                            <button><a href="home.php?pg=15">Cambiar</a></button>
                         <?php } else { ?>
                             <button class="btn btn-link text-primary" style="font-size: 14px;">Añadir Dirección</button>
                         <?php } ?>

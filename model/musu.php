@@ -257,6 +257,73 @@ class Musu
             return 0;
         }
     }
+    function editUsu(){
+        $sql = "UPDATE usuario SET nomusu = :nomusu, apeusu = :apeusu, emausu = :emausu, celusu = :celusu WHERE idusu = :idusu;";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $idusu = $this->getIdusu();
+            $nomusu = $this->getNomusu();
+            $apeusu = $this->getApeusu();
+            $emausu = $this->getEmausu();
+            $celusu = $this->getCelusu();
+            $result->bindParam(':idusu', $idusu, PDO::PARAM_INT);
+            $result->bindParam(':nomusu', $nomusu, PDO::PARAM_STR);
+            $result->bindParam(':apeusu', $apeusu, PDO::PARAM_STR);
+            $result->bindParam(':emausu', $emausu, PDO::PARAM_STR);
+            $result->bindParam(':celusu', $celusu, PDO::PARAM_STR);
+            if ($result->execute()) {
+                return $result->rowCount(); // Devuelve el número de filas afectadas
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al eliminar. Inténtalo más tarde";
+            return 0;
+        }
+    }
+    function editContraseña(){
+        $sql = "UPDATE usuario SET pasusu = :pasusu WHERE idusu = :idusu;";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $idusu = $this->getIdusu();
+            $pasusu = $this->getPasusu();
+            $result->bindParam(':idusu', $idusu, PDO::PARAM_INT);
+            $result->bindParam(':pasusu', $pasusu, PDO::PARAM_STR);
+            return $result->execute();
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al eliminar. Inténtalo más tarde";
+            return 0;
+        }
+    }
+    function editDireccion(){
+        $sql = "UPDATE usuario SET dirrecusu = :dirrecusu, idubi = :idubi WHERE idusu = :idusu;";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $idusu = $this->getIdusu();
+            $dirrecusu = $this->getDirrecusu();
+            $idubi = $this->getIdubi();
+            $result->bindParam(':idusu', $idusu, PDO::PARAM_INT);
+            $result->bindParam(':dirrecusu', $dirrecusu, PDO::PARAM_STR);
+            $result->bindParam(':idubi', $idubi, PDO::PARAM_INT);
+            if ($result->execute()) {
+                return $result->rowCount(); // Devuelve el número de filas afectadas
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al eliminar. Inténtalo más tarde";
+            return 0;
+        }
+    }
     function verificarCorreo($emausu)
     {
         try {

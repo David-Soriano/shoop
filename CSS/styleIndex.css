@@ -110,15 +110,6 @@ p {
     background: #cd1717;
 }
 
-.icons a {
-    cursor: pointer;
-    transition: all 400ms;
-}
-
-.icons a:hover {
-    transform: scale(1.2);
-}
-
 .men-hrz {
     display: flex;
     gap: 10%;
@@ -253,14 +244,21 @@ img {
     width: 30px;
     height: 30px;
     background-color: #4795df;
-    /* Azul claro */
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    font-weight: 400;
+    font-weight: 300;
+    font-size: 18px;
     text-transform: uppercase;
+    transition: all 400ms;
+}
+
+.inf-perfil div.perfil-circulo:hover {
+    -webkit-box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.16);
 }
 
 .inf-perfil div ul {
@@ -2276,9 +2274,10 @@ form button {
     width: 100%;
 }
 
-.bx-conf-pef {
+.bx-conf-pef, .bx-conf-pef-bx {
     flex-wrap: wrap;
     gap: 3%;
+    margin: 2% 0;
 }
 
 .bx-conf-pef .bx-conf-pef-item {
@@ -2310,9 +2309,9 @@ form button {
 
 .bx-conf-pef-ini .circle {
     display: flex;
-    height: 7vh;
+    height: 5vh;
     border-radius: 50%;
-    background: #f2f2f2;
+    background: #dfdfdf;
     justify-content: center;
     align-items: center;
 }
@@ -2330,12 +2329,40 @@ form button {
     font-weight: 300;
 }
 
-.bx-conf-pef {
-    margin: 2% 0;
-}
-
-.bx-conf-pef-prin{
+.bx-conf-pef-prin {
     display: flex;
     align-content: space-between;
     height: 80vh;
+}
+
+.bx-conf-pef-prin #contenido{
+    margin: 5% 0;
+}
+
+.bx-conf-pef-prin #contenido .btn-vol-pf {
+    margin: 0 0 2%;
+    padding: 0;
+    border-radius: 0;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.bx-conf-pef-prin #contenido .btn-vol-pf:active{
+    border: none;
+}
+.bx-conf-pef-prin #contenido .btn-vol-pf:hover{
+    border-bottom: 1px solid;
+}
+.bx-content-pf{
+    background: #feffee;
+    padding: 2%;
+    border-radius: 7px;
+}
+#contenido .form-conf-pef{
+    box-shadow: none;
+}
+#contenido .form-conf-pef button{
+    position: initial;
+    width: auto;
+    height: auto;
 }
