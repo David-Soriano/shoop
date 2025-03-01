@@ -155,7 +155,22 @@ if ($ope == "save") {
 
     if ($usu->editDireccion()) {
         updateSession();
-        var_dump($_SESSION);
+        header("Location: ../home.php?pg=15&msj=1");
+    } else {
+        header("Location: ../home.php?pg=15&msj=2");
+    }
+} else if ($ope == "inactivar"){
+    $usu->setIdusu($idusu);
+    if ($usu->inactivarUsu()) {
+        session_destroy();
+        header("Location: ../index.php");
+        exit();
+    } else {
+        header("Location: ../home.php?pg=15&msj=2");
+    }
+} else if ($ope == "activar"){
+    $usu->setIdusu($idusu);
+    if ($usu->activarUsu()) {
         header("Location: ../home.php?pg=15&msj=1");
     } else {
         header("Location: ../home.php?pg=15&msj=2");

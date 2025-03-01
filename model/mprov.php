@@ -112,8 +112,8 @@ class Mprov
     public function saveProv()
     {
         $res = NULL;
-        $sql = "INSERT INTO proveedor(nomprov, idusu, dirrecprov, idubi, urlt, nit, desprv, estado) 
-                VALUES (:nomprov, :idusu, :dirrecprov, :idubi, :urlt, :nit, :desprv, :estado)";
+        $sql = "INSERT INTO proveedor(nomprov, idusu, dirrecprov, idubi, urlt, nit, desprv ) 
+                VALUES (:nomprov, :idusu, :dirrecprov, :idubi, :urlt, :nit, :desprv)";
 
         try {
             // Establecer la conexión con la base de datos
@@ -129,7 +129,6 @@ class Mprov
             $url = $this->getUrlt();
             $nit = $this->getNit();
             $desprv = $this->getDesprv();
-            $estado = $this->getEstado();
 
             error_log("Datos enviados a la consulta: " . print_r([
                 'nomprov' => $nomprov,
@@ -139,7 +138,6 @@ class Mprov
                 'urlt' => $url,
                 'nit' => $nit,
                 'desprv' => $desprv,
-                'estado' => $estado,
             ], true), 3, 'C:/xampp/htdocs/SHOOP/errors/debug_log.log');
 
             // Vincular los parámetros
@@ -150,7 +148,6 @@ class Mprov
             $result->bindParam(':urlt', $url, PDO::PARAM_STR);
             $result->bindParam(':nit', $nit, PDO::PARAM_STR);
             $result->bindParam(':desprv', $desprv, PDO::PARAM_STR);
-            $result->bindParam(':estado', $estado, PDO::PARAM_INT);
 
             // Ejecutar la consulta
             $result->execute();

@@ -199,7 +199,7 @@ class Mpro
     public function getOnePrd()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.precio, p.pordescu, p.productvend, p.cantidad, img.imgpro, p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo, prov.nomprov, prov.dirrecprov, prov.urlt, prov.estado, prov.desprv FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE idpro = :idpro ORDER BY ordimg ASC LIMIT 1) AS img ON p.idpro = img.idpro LEFT JOIN prodxprov AS pp ON p.idpro = pp.idpro LEFT JOIN proveedor AS prov ON pp.idprov = prov.idprov WHERE p.idpro = :idpro AND p.estado = 'activo';";
+        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.precio, p.pordescu, p.productvend, p.cantidad, img.imgpro, p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo, prov.nomprov, prov.dirrecprov, prov.urlt, prov.estprv, prov.desprv FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE idpro = :idpro ORDER BY ordimg ASC LIMIT 1) AS img ON p.idpro = img.idpro LEFT JOIN prodxprov AS pp ON p.idpro = pp.idpro LEFT JOIN proveedor AS prov ON pp.idprov = prov.idprov WHERE p.idpro = :idpro AND p.estado = 'activo';";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();

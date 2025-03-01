@@ -48,7 +48,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <p>Si lo deseas puedes <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Cancelar tu
+                <p>Si lo deseas puedes <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Cancelar tu
                         cuenta</a></p>
             </div>
         </div>

@@ -242,7 +242,8 @@ class Musu
         }
     }
 
-    function delUsu(){
+    function delUsu()
+    {
         $sql = "UPDATE usuario SET esteli = 1 WHERE idusu = :idusu;";
         try {
             $modelo = new Conexion();
@@ -257,7 +258,8 @@ class Musu
             return 0;
         }
     }
-    function editUsu(){
+    function editUsu()
+    {
         $sql = "UPDATE usuario SET nomusu = :nomusu, apeusu = :apeusu, emausu = :emausu, celusu = :celusu WHERE idusu = :idusu;";
         try {
             $modelo = new Conexion();
@@ -284,7 +286,8 @@ class Musu
             return 0;
         }
     }
-    function editContraseña(){
+    function editContraseña()
+    {
         $sql = "UPDATE usuario SET pasusu = :pasusu WHERE idusu = :idusu;";
         try {
             $modelo = new Conexion();
@@ -301,7 +304,8 @@ class Musu
             return 0;
         }
     }
-    function editDireccion(){
+    function editDireccion()
+    {
         $sql = "UPDATE usuario SET dirrecusu = :dirrecusu, idubi = :idubi WHERE idusu = :idusu;";
         try {
             $modelo = new Conexion();
@@ -365,5 +369,25 @@ class Musu
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return (int) $result['total'];
+    }
+    public function inactivarUsu()
+    {
+        $sql = "UPDATE usuario SET estusu = 'Inactivo' WHERE idusu = :idusu;";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $idusu = $this->getIdusu();
+            $result->bindParam(':idusu', $idusu, PDO::PARAM_INT);
+            if ($result->execute()) {
+                return $result->rowCount();
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al eliminar. Inténtalo más tarde";
+            return 0;
+        }
     }
 }
