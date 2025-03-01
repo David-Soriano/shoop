@@ -63,16 +63,6 @@ CREATE TABLE `caracteristicas` (
   `descripcioncr` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `caracteristicas`
---
-
-INSERT INTO `caracteristicas` (`idcar`, `idpro`, `descripcioncr`) VALUES
-(48, 140, 'Talla: M'),
-(49, 140, 'Año: 2024'),
-(50, 141, 'Talla: M'),
-(51, 141, 'Año: 2024');
-
 -- --------------------------------------------------------
 
 --
@@ -109,13 +99,6 @@ CREATE TABLE `compra` (
   `idped` int(11) DEFAULT NULL,
   `fechareg` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `compra`
---
-
-INSERT INTO `compra` (`idcom`, `tiproduct`, `cantidad`, `preciocom`, `idubi`, `idusu`, `idped`, `fechareg`) VALUES
-(15, 'Moda', '1', '24304', 47030, 20, 43, '2025-02-26 21:26:27');
 
 -- --------------------------------------------------------
 
@@ -161,13 +144,6 @@ CREATE TABLE `detallecompra` (
   `idcom` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `detallecompra`
---
-
-INSERT INTO `detallecompra` (`iddell`, `subtotal`, `iva`, `total`, `idpro`, `direccomp`, `idcom`) VALUES
-(15, 20423.5, 4617.76, 24304, 141, 'Vereda la balsa', 15);
-
 -- --------------------------------------------------------
 
 --
@@ -197,13 +173,6 @@ CREATE TABLE `detalle_pedido` (
   `direccion` varchar(255) NOT NULL,
   `idubi` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `detalle_pedido`
---
-
-INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`, `mpago`, `npago`, `direccion`, `idubi`) VALUES
-(41, 43, 141, 1, 24304.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030);
 
 -- --------------------------------------------------------
 
@@ -278,56 +247,11 @@ INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`,
 (148, 'IMG/Usuarios.png', 'Usuarios', 'png', NULL, 2, 2, 31),
 (149, 'IMG/Balances.png', 'Balances', 'png', NULL, 3, 2, 32),
 (150, 'IMG/Productos.png', 'Productos', 'png', NULL, 4, 2, 33),
-(275, 'proinf/imagen_67b8e9e06e4f8.webp', 'camisa_argentita', 'image/webp', 137, 1, NULL, NULL),
-(276, 'proinf/imagen_67b8eaca10e8a.webp', 'camisa_argentita', 'image/webp', 138, 1, NULL, NULL),
-(277, 'proinf/imagen_67b8eaca29b3b.jpg', 'tenis', 'image/jpeg', 139, 1, NULL, NULL),
-(278, 'proinf/imagen_67b8eb71a3823.webp', 'camisa_argentita', 'image/webp', 140, 1, NULL, NULL),
 (285, 'IMG/publicidad/publicidad_67ba004884f85.jpg', 'publicidad_67ba004884f85.jpg', 'jpg', NULL, 1, 1, NULL),
 (286, 'IMG/publicidad/publicidad_67ba0055acc80.jpg', 'publicidad_67ba0055acc80.jpg', 'jpg', NULL, 1, 1, NULL),
 (290, 'IMG/publicidad/publicidad_67ba00f4e5c5b.jpg', 'publicidad_67ba00f4e5c5b.jpg', 'jpg', NULL, 1, 1, NULL),
 (291, 'IMG/publicidad/publicidad_67ba012e5c66c.jpg', 'publicidad_67ba012e5c66c.jpg', 'jpg', NULL, 1, 1, NULL),
-(293, 'IMG/publicidad/publicidad_67ba0297c2697.jpg', 'publicidad_67ba0297c2697.jpg', 'jpg', NULL, 1, 1, NULL),
-(294, 'proinf/imagen_67bfcbf553ca3.webp', 'review-camiseta-titular-adidas-de-argentina-2024-2', 'image/webp', 141, 1, NULL, NULL),
-(295, 'proinf/imagen_67bfd5251dd7d.jpeg', 'descarga', 'image/jpeg', 142, 1, NULL, NULL),
-(296, 'proinf/imagen_67bfd5708ee71.jpeg', 'descarga', 'image/jpeg', 143, 1, NULL, NULL),
-(297, 'proinf/imagen_67bfd5a14d0c7.webp', 'review-camiseta-titular-adidas-de-argentina-2024-2', 'image/webp', 144, 1, NULL, NULL),
-(298, 'proinf/imagen_67c053ef95a11.webp', 'imagen_67b8e9e06e4f8', 'image/webp', 145, 1, NULL, NULL),
-(299, 'proinf/imagen_67c053efa8612.jpeg', 'descarga', 'image/jpeg', 145, 2, NULL, NULL),
-(300, 'proinf/imagen_67c053efa9d12.webp', 'review-camiseta-titular-adidas-de-argentina-2024-2', 'image/webp', 145, 3, NULL, NULL),
-(301, 'proinf/imagen_67c053efcd139.webp', 'imagen_67b8e9e06e4f8', 'image/webp', 145, 4, NULL, NULL),
-(302, 'proinf/imagen_67c05576dd0f4.webp', 'imagen_67c053efa9d12', 'image/webp', 146, 1, NULL, NULL),
-(303, 'proinf/imagen_67c05576ec4a5.webp', 'imagen_67c053ef95a11', 'image/webp', 146, 2, NULL, NULL),
-(304, 'proinf/imagen_67c0557708a40.jpeg', 'imagen_67bfd5708ee71', 'image/jpeg', 146, 3, NULL, NULL),
-(305, 'proinf/imagen_67c05577098f8.webp', 'imagen_67c053efa9d12', 'image/webp', 146, 4, NULL, NULL),
-(306, 'proinf/imagen_67c05660af9ec.webp', 'imagen_67c053efa9d12', 'image/webp', 147, 1, NULL, NULL),
-(307, 'proinf/imagen_67c05660bea40.webp', 'imagen_67b8eaca10e8a', 'image/webp', 147, 2, NULL, NULL),
-(308, 'proinf/imagen_67c05660cef40.jpeg', 'imagen_67bfd5708ee71', 'image/jpeg', 147, 3, NULL, NULL),
-(309, 'proinf/imagen_67c05660cfe13.webp', 'imagen_67c053efa9d12', 'image/webp', 147, 4, NULL, NULL),
-(310, 'proinf/imagen_67c056fe7da6a.jpeg', 'imagen_67c05660cef40', 'image/jpeg', 148, 1, NULL, NULL),
-(311, 'proinf/imagen_67c056fe7eba9.webp', 'imagen_67b8eaca10e8a', 'image/webp', 148, 2, NULL, NULL),
-(312, 'proinf/imagen_67c056fe8ee7b.webp', 'imagen_67c053efa9d12', 'image/webp', 148, 3, NULL, NULL),
-(313, 'proinf/imagen_67c056fe9db61.jpeg', 'imagen_67c05660cef40', 'image/jpeg', 148, 4, NULL, NULL),
-(314, 'proinf/imagen_67c05775f2dc2.jpg', 'imagen_67b8eaca29b3b', 'image/jpeg', 149, 1, NULL, NULL),
-(315, 'proinf/imagen_67c05776087e8.jpeg', 'imagen_67c056fe9db61', 'image/jpeg', 149, 2, NULL, NULL),
-(316, 'proinf/imagen_67c057760976d.webp', 'imagen_67c05576dd0f4', 'image/webp', 149, 3, NULL, NULL),
-(317, 'proinf/imagen_67c0577619a98.jpg', 'imagen_67b8eaca29b3b', 'image/jpeg', 149, 4, NULL, NULL),
-(321, 'proinf/imagen_67c0694b01407.jpg', 'imagen_67c0577619a98', 'image/jpeg', 151, 1, NULL, NULL),
-(322, 'proinf/imagen_67c06992a5150.jpg', 'imagen_67c0577619a98', 'image/jpeg', 152, 1, NULL, NULL),
-(323, 'proinf/imagen_67c069e0a99a7.jpg', 'imagen_67c0577619a98', 'image/jpeg', 153, 1, NULL, NULL),
-(324, 'proinf/imagen_67c06a5f5b8e9.jpg', 'imagen_67c0577619a98', 'image/jpeg', 154, 1, NULL, NULL),
-(325, 'proinf/imagen_67c06a8cdb4e9.jpg', 'imagen_67c0577619a98', 'image/jpeg', 155, 1, NULL, NULL),
-(326, 'proinf/imagen_67c06b148b278.jpg', 'imagen_67c0577619a98', 'image/jpeg', 156, 1, NULL, NULL),
-(327, 'proinf/imagen_67c06b149f4ab.jpg', 'Articulo_10', 'image/jpeg', 157, 1, NULL, NULL),
-(364, 'proinf/imagen_67c06b5816287.jpg', 'imagen_67c06b5816287', 'proinf/imagen_67c06b', 159, 1, NULL, NULL),
-(370, 'proinf/imagen_67c067da9a9f0.webp', 'imagen_67c067da9a9f0', 'proinf/imagen_67c067', 150, 1, NULL, NULL),
-(371, 'proinf/imagen_67c067daab362.jpeg', 'imagen_67c067daab362', 'proinf/imagen_67c067', 150, 2, NULL, NULL),
-(372, 'proinf/imagen_67c067daac3cc.webp', 'imagen_67c067daac3cc', 'proinf/imagen_67c067', 150, 3, NULL, NULL),
-(373, 'proinf/imagen_67c08e8a6e17d.jpg', 'imagen_67c08e8a6e17d', 'proinf/imagen_67c08e', 158, 1, NULL, NULL),
-(374, 'proinf/imagen_67c08fe5ea6a3.jpg', 'imagen_67c08fe5ea6a3', 'proinf/imagen_67c08f', 158, 2, NULL, NULL),
-(375, 'proinf/imagen_67c0910ed54d9.jpg', 'imagen_67c0910ed54d9', 'proinf/imagen_67c091', 158, 3, NULL, NULL),
-(376, 'proinf/imagen_67c0916553d25.jpg', 'imagen_67c0916553d25', 'proinf/imagen_67c091', 158, 4, NULL, NULL),
-(377, 'proinf/imagen_67c092b206792.jpg', 'imagen_67c092b206792', 'proinf/imagen_67c092', 158, 5, NULL, NULL),
-(378, 'proinf/imagen_67c0946e85d7b.jpg', 'imagen_67c07d652fbc8', 'image/jpeg', 158, 6, NULL, NULL);
+(293, 'IMG/publicidad/publicidad_67ba0297c2697.jpg', 'publicidad_67ba0297c2697.jpg', 'jpg', NULL, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -592,29 +516,7 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `feccreat`, `fecupdate`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`, `temporada`) VALUES
-(137, 'Camiseta Selección A', 37800, 25, NULL, 30000, 'Camiseta de la selección argentina del año 2024 para hombre talla M.', '2025-02-21 21:02:24', '2025-02-27 02:16:59', NULL, NULL, 'inactivo', 0, 1, 10, NULL),
-(138, 'Camiseta Selección A', 37800, 25, NULL, 30000, 'Camiseta de la selección argentina del año 2024 para hombre talla M.', '2025-02-21 21:06:18', '2025-02-21 21:10:01', NULL, NULL, 'inactivo', 0, 1, 0, NULL),
-(139, 'Tenis Nike Deportivo', 181500, 10, NULL, 150000, 'Tenis para hombre color blanco con negro diseñados para el deporte', '2025-02-21 21:06:18', '2025-02-27 02:16:59', NULL, NULL, 'inactivo', 5, 1, 1, NULL),
-(140, 'Camisa Argentina 202', 37800, 25, NULL, 30000, 'Camisa de la selección argentina año 2024 para hombre talla M', '2025-02-21 21:09:05', '2025-02-21 21:10:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(141, 'Camisa Selección Argentina Año 2024 Hombre', 24800, 20, NULL, 20000, 'Camiseta de la selección argentina del año 2024 para hombre talla M.', '2025-02-27 02:20:37', '2025-02-27 03:01:21', '2025-02-26 05:00:00', '2025-02-27 05:00:00', 'inactivo', 2, 1, 1, NULL),
-(142, 'Camisa Selección Argentina Año 2024 Hombre', 24, 7, NULL, 20, 'fgdhgfhdfg', '2025-02-27 02:59:49', '2025-02-27 03:01:21', '2025-02-26 05:00:00', '2025-02-26 05:00:00', 'inactivo', 4, 1, 0, NULL),
-(143, 'prefdvdsg', 57, 6, NULL, 45, 'dvsdfa', '2025-02-27 03:01:04', '2025-02-27 03:01:21', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(144, 'Camisa Selección Argentina Año 2024 Hombre', 6, 8, NULL, 5, '54', '2025-02-27 03:01:53', '2025-02-27 12:03:26', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(145, 'Camisa Selección Argentina Año 2024 Hombre', 25, 7, NULL, 20, 'Camisa azul', '2025-02-27 12:00:47', '2025-02-27 12:03:22', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(146, 'Camisa Selección Argentina Año 2024 Hombre', 4, 3, NULL, 3, 'fdsgdfsg', '2025-02-27 12:07:19', '2025-02-27 12:10:39', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(147, 'Camisa Selección Argentina Año 2024 Hombre', 3, 2, NULL, 2, 'fdfgdsfg', '2025-02-27 12:11:12', '2025-02-27 12:13:19', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(148, 'Camisa Selección Argentina Año 2024 Hombre', 306, 1, NULL, 243, 'dsgfdfgsfdg', '2025-02-27 12:13:50', '2025-02-27 12:15:17', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(149, 'Camisa Selección Argentina Año 2024 Hombre', 3, 2, NULL, 2, 'xczvzvb', '2025-02-27 12:15:50', '2025-02-27 12:20:55', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(150, 'Camisa Selección Argentina Año 2024 Hombre', 29, 2, NULL, 23, 'dfgsdf', '2025-02-27 13:25:46', '2025-02-27 13:25:46', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 1, 0, NULL),
-(151, 'Tenis Nike Blancos ', 174000, 10, NULL, 150000, 'Zapatos deportivos color blanco con negro, diseñados para condiciones extremas.', '2025-02-27 13:31:55', '2025-02-27 13:39:53', NULL, NULL, 'inactivo', 10, 1, 0, NULL),
-(152, 'Tenis Nike Blancos ', 174000, 10, NULL, 150000, 'Zapatos deportivos color blanco con negro, diseñados para condiciones extremas.', '2025-02-27 13:33:06', '2025-02-27 13:39:53', NULL, NULL, 'inactivo', 10, 1, 0, NULL),
-(153, 'Tenis Nike Blancos ', 174000, 10, NULL, 150000, 'Zapatos deportivos color blanco con negro, diseñados para condiciones extremas.', '2025-02-27 13:34:24', '2025-02-27 13:39:53', NULL, NULL, 'inactivo', 10, 1, 0, NULL),
-(154, 'Tenis Nike Blancos ', 174000, 10, NULL, 150000, 'Zapatos deportivos color blanco con negro, diseñados para condiciones extremas.', '2025-02-27 13:36:31', '2025-02-27 13:39:53', NULL, NULL, 'inactivo', 10, 1, 0, NULL),
-(155, 'Tenis Nike Blancos ', 174000, 10, NULL, 150000, 'Zapatos deportivos color blanco con negro, diseñados para condiciones extremas.', '2025-02-27 13:37:16', '2025-02-27 13:39:53', NULL, NULL, 'inactivo', 10, 1, 0, NULL),
-(156, 'Tenis Nike Blancos ', 174000, 10, NULL, 150000, 'Zapatos deportivos color blanco con negro, diseñados para condiciones extremas.', '2025-02-27 13:39:32', '2025-02-27 13:39:53', NULL, NULL, 'inactivo', 10, 1, 0, NULL),
-(157, 'Camiseta bicolor Hombre', 37800, 12, NULL, 30000, 'Camiseta casual, elegante color verde y beige.', '2025-02-27 13:39:32', '2025-02-27 13:39:53', NULL, NULL, 'inactivo', 0, 1, 0, NULL),
-(158, 'Tenis Nike Blancos/negros', 174000, 10, NULL, 150000, 'Zapatos deportivos color blanco con negro, diseñados para condiciones extremas.', '2025-02-27 13:40:40', '2025-02-27 14:19:31', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 10, 1, 0, NULL),
-(159, 'Camiseta bicolor Hombre', 37800, 12, NULL, 30000, 'Camiseta casual, elegante color verde y beige.', '2025-02-27 13:40:40', '2025-02-27 16:24:39', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 1, 0, NULL);
+(160, 'Camisa Selección Argentina Año 2024 Hombre', 25200, 7, NULL, 20000, 'Camisa deportiva', '2025-03-01 13:37:42', '2025-03-01 13:42:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -633,29 +535,7 @@ CREATE TABLE `prodxprov` (
 --
 
 INSERT INTO `prodxprov` (`idpro`, `idprov`, `idprodprv`) VALUES
-(137, 82, 68),
-(138, 82, 69),
-(139, 82, 70),
-(140, 82, 71),
-(141, 82, 72),
-(142, 82, 73),
-(143, 82, 74),
-(144, 82, 75),
-(145, 82, 76),
-(146, 82, 77),
-(147, 82, 78),
-(148, 82, 79),
-(149, 82, 80),
-(150, 82, 81),
-(151, 82, 82),
-(152, 82, 83),
-(153, 82, 84),
-(154, 82, 85),
-(155, 82, 86),
-(156, 82, 87),
-(157, 82, 88),
-(158, 82, 89),
-(159, 82, 90);
+(160, 82, 91);
 
 -- --------------------------------------------------------
 
@@ -667,23 +547,21 @@ CREATE TABLE `proveedor` (
   `idprov` int(5) NOT NULL,
   `nomprov` varchar(20) DEFAULT NULL,
   `dirrecprov` varchar(20) DEFAULT NULL,
-  `url` varchar(100) DEFAULT NULL,
-  `estado` varchar(20) DEFAULT NULL,
+  `urlt` varchar(100) DEFAULT NULL,
   `nit` varchar(20) DEFAULT NULL,
   `idubi` int(5) DEFAULT NULL,
   `idusu` int(5) DEFAULT NULL,
   `desprv` varchar(100) DEFAULT NULL,
-  `saldo` decimal(10,2) DEFAULT 0.00
+  `saldo` decimal(10,2) DEFAULT 0.00,
+  `estprv` varchar(15) DEFAULT 'activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `proveedor`
 --
 
-INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `url`, `estado`, `nit`, `idubi`, `idusu`, `desprv`, `saldo`) VALUES
-(82, 'DavidX', 'Vereda la balsa call', '', NULL, '2121', 25, 20, 'Todo lo que quieres a tu alcance', 17984.96),
-(83, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00),
-(84, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00);
+INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `urlt`, `nit`, `idubi`, `idusu`, `desprv`, `saldo`, `estprv`) VALUES
+(82, 'DavidX', 'Calle 34 Bloque 4', 'shoop.com', '454112', 15001, 20, 'Todo lo que quieres a tu alcance y en un solo lugar', 0.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1962,7 +1840,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idusu`, `nomusu`, `apeusu`, `docusu`, `emausu`, `celusu`, `genusu`, `dirrecusu`, `tipdoc`, `idval`, `idubi`, `feccreate`, `fecupdate`, `fotpef`, `idpef`, `pasusu`, `estusu`, `token_recuperacion`, `token_expira`, `esteli`) VALUES
 (16, 'David', 'Soriano', 101564, 'admin@gmail.com', '3186274255', 'M', NULL, 'CC', NULL, 15322, '2024-11-27 21:20:01', '2025-02-13 02:21:53', NULL, 2, '$2y$10$aGcbgN7SK.mxZRsTEfI3jeOcW7sueH9H4d.vRli3ouesWF6NG.SS6', 'Activo', NULL, NULL, 0),
-(20, 'DavidX', 'ss', 104544, 'davidx@gmail.com', '45674658', 'M', 'Vereda la balsa', 'CC', NULL, 47030, '2024-12-13 23:20:35', '2025-02-18 16:02:55', NULL, 1, '$2y$10$rkzjvt6ZirdI5g2OKCyyeONzPP9T1vd0oTb3iJXoaWDh3AyA.ajnG', 'Activo', '89fc8200fefff72640e1770ae9050ced307e8e6fe4d1253d93d5dc1e3d4e2bbff1196eef608d6e2333763e263f765ada1598', '2025-02-17 10:38:43', 1),
+(20, 'DavidX', 'ss', 104544, 'davidx@gmail.com', '45674658', 'M', 'Vereda la balsa', 'CC', NULL, 47030, '2024-12-13 23:20:35', '2025-03-01 15:17:04', NULL, 1, '$2y$10$rkzjvt6ZirdI5g2OKCyyeONzPP9T1vd0oTb3iJXoaWDh3AyA.ajnG', 'Inactivo', '89fc8200fefff72640e1770ae9050ced307e8e6fe4d1253d93d5dc1e3d4e2bbff1196eef608d6e2333763e263f765ada1598', '2025-02-17 10:38:43', 1),
 (27, 'Juan David', 'Soriano Cicua', 1049794389, 'davidscicua314@gmail.com', '3186274255', 'M', 'Vereda la balsa calle 9a Sur', 'CC', NULL, 25175, '2025-02-17 14:41:33', '2025-02-28 14:45:19', NULL, 1, '$2y$10$/9So.AzckXsDGT3q/jvKZeBcom9Pgt.CP9OIBEuSP6xWV7TeuL19C', 'Activo', NULL, NULL, 0);
 
 -- --------------------------------------------------------
@@ -2291,7 +2169,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=379;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=380;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2339,19 +2217,19 @@ ALTER TABLE `pqr`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
+  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT de la tabla `prodxprov`
 --
 ALTER TABLE `prodxprov`
-  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `idprov` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `idprov` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestas_pqr`

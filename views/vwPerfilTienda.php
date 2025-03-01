@@ -75,12 +75,12 @@
                     </form>
                 </div>
 
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <h5>❌ Eliminar mi cuenta</h5>
                     <p>Si eliges esta opción, tu cuenta y todos tus datos serán eliminados permanentemente. Esta acción
                         no se puede deshacer.</p>
                     <button type="button" class="btn btn-danger" id="btnEliminar">Eliminar cuenta</button>
-                </div>
+                </div> -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
