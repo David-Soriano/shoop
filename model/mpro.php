@@ -199,7 +199,7 @@ class Mpro
     public function getOnePrd()
     {
         $res = "";
-        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.precio, p.pordescu, p.productvend, p.cantidad, img.imgpro, p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo, prov.nomprov, prov.dirrecprov, prov.url, prov.estado, prov.desprv FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE idpro = :idpro ORDER BY ordimg ASC LIMIT 1) AS img ON p.idpro = img.idpro LEFT JOIN prodxprov AS pp ON p.idpro = pp.idpro LEFT JOIN proveedor AS prov ON pp.idprov = prov.idprov WHERE p.idpro = :idpro AND p.estado = 'activo';";
+        $sql = "SELECT p.idpro, p.nompro, p.descripcion, p.valorunitario, p.precio, p.pordescu, p.productvend, p.cantidad, img.imgpro, p.precio - (p.precio * (p.pordescu / 100)) AS valor_con_descuento, CASE WHEN DATEDIFF(NOW(), p.feccreat) <= 20 THEN 1 ELSE 0 END AS es_nuevo, prov.nomprov, prov.dirrecprov, prov.urlt, prov.estado, prov.desprv FROM producto AS p LEFT JOIN (SELECT idpro, imgpro FROM imagen WHERE idpro = :idpro ORDER BY ordimg ASC LIMIT 1) AS img ON p.idpro = img.idpro LEFT JOIN prodxprov AS pp ON p.idpro = pp.idpro LEFT JOIN proveedor AS prov ON pp.idprov = prov.idprov WHERE p.idpro = :idpro AND p.estado = 'activo';";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -828,23 +828,51 @@ class Mpro
         }
     }
     public function deleteProducto()
-    {
-        $sql = "UPDATE producto SET estado = 'inactivo' WHERE idpro = :idpro";
+{
+    $sqlUpdate = "UPDATE producto SET estado = 'inactivo' WHERE idpro = :idpro";
+    $sqlSelectImages = "SELECT imgpro FROM imagen WHERE idpro = :idpro";
+    $sqlDeleteImagesDB = "DELETE FROM imagen WHERE idpro = :idpro";
 
-        try {
-            $modelo = new Conexion();
-            $conexion = $modelo->getConexion();
-            $stmt = $conexion->prepare($sql);
+    try {
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
 
-            $idpro = $this->getIdpro();
+        // 1. Cambiar el estado del producto a "inactivo"
+        $stmt = $conexion->prepare($sqlUpdate);
+        $idpro = $this->getIdpro();
+        $stmt->bindParam(':idpro', $idpro, PDO::PARAM_INT);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            // 2. Obtener imágenes asociadas al producto
+            $stmt = $conexion->prepare($sqlSelectImages);
             $stmt->bindParam(':idpro', $idpro, PDO::PARAM_INT);
+            $stmt->execute();
+            $imagenes = $stmt->fetchAll(PDO::FETCH_COLUMN); // Obtener solo los nombres de archivo con ruta
 
-            return $stmt->execute() && $stmt->rowCount() > 0;
-        } catch (PDOException $e) {
-            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
-            return false;
+            // 3. Eliminar archivos de imagen del directorio
+            foreach ($imagenes as $imagen) {
+                $rutaImagen = 'C:/xampp/htdocs/SHOOP/' . $imagen; // Ajustar ruta base del servidor
+                if (file_exists($rutaImagen)) {
+                    unlink($rutaImagen); // Eliminar archivo físico
+                }
+            }
+
+            // 4. Eliminar registros de imágenes en la base de datos
+            $stmt = $conexion->prepare($sqlDeleteImagesDB);
+            $stmt->bindParam(':idpro', $idpro, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return true;
         }
+
+        return false;
+    } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        return false;
     }
+}
+
     public function getProductosSugeridos($idusu = null)
     {
         $res = [];

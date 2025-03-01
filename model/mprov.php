@@ -4,7 +4,7 @@ class Mprov
     private $idprov;
     private $nomprov;
     private $dirrecprov;
-    private $url;
+    private $urlt;
     private $estado;
     private $nit;
     private $idubi;
@@ -43,13 +43,13 @@ class Mprov
     }
 
     // Getter y Setter para url
-    public function getUrl()
+    public function getUrlt()
     {
-        return $this->url;
+        return $this->urlt;
     }
-    public function setUrl($url)
+    public function setUrlt($urlt)
     {
-        $this->url = $url;
+        $this->urlt = $urlt;
     }
 
     // Getter y Setter para estado
@@ -112,8 +112,8 @@ class Mprov
     public function saveProv()
     {
         $res = NULL;
-        $sql = "INSERT INTO proveedor(nomprov, idusu, dirrecprov, idubi, url, nit, desprv, estado) 
-                VALUES (:nomprov, :idusu, :dirrecprov, :idubi, :url, :nit, :desprv, :estado)";
+        $sql = "INSERT INTO proveedor(nomprov, idusu, dirrecprov, idubi, urlt, nit, desprv, estado) 
+                VALUES (:nomprov, :idusu, :dirrecprov, :idubi, :urlt, :nit, :desprv, :estado)";
 
         try {
             // Establecer la conexión con la base de datos
@@ -126,7 +126,7 @@ class Mprov
             $idusu = $this->getIdusu();
             $dirrecprov = $this->getDirrecprov();
             $idubi = $this->getIdubi();
-            $url = $this->getUrl();
+            $url = $this->getUrlt();
             $nit = $this->getNit();
             $desprv = $this->getDesprv();
             $estado = $this->getEstado();
@@ -136,7 +136,7 @@ class Mprov
                 'idusu' => $idusu,
                 'dirrecprov' => $dirrecprov,
                 'idubi' => $idubi,
-                'url' => $url,
+                'urlt' => $url,
                 'nit' => $nit,
                 'desprv' => $desprv,
                 'estado' => $estado,
@@ -147,7 +147,7 @@ class Mprov
             $result->bindParam(':idusu', $idusu, PDO::PARAM_INT);
             $result->bindParam(':dirrecprov', $dirrecprov, PDO::PARAM_STR);
             $result->bindParam(':idubi', $idubi, PDO::PARAM_INT);
-            $result->bindParam(':url', $url, PDO::PARAM_STR);
+            $result->bindParam(':urlt', $url, PDO::PARAM_STR);
             $result->bindParam(':nit', $nit, PDO::PARAM_STR);
             $result->bindParam(':desprv', $desprv, PDO::PARAM_STR);
             $result->bindParam(':estado', $estado, PDO::PARAM_INT);
@@ -243,5 +243,175 @@ class Mprov
             echo "Error al insertar prodxprv. Inténtalo más tarde.";
         }
         return $res;
+    }
+    public function updateProv()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+
+            $sql = "UPDATE proveedor SET nomprov = :nomprov, desprv = :desprv WHERE idprov = :idprov";
+            $stmt = $conexion->prepare($sql);
+
+            // Obtener valores del objeto
+            $nomprov = $this->getNomprov();
+            $desprv = $this->getDesprv();
+            $idprov = $this->getIdprov();
+
+            // Asignar valores a la consulta preparada
+            $stmt->bindValue(':idprov', $idprov, PDO::PARAM_INT);
+            $stmt->bindValue(':nomprov', $nomprov, PDO::PARAM_STR);
+            $stmt->bindValue(':desprv', $desprv, PDO::PARAM_STR);
+
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                return $stmt->rowCount() > 0;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            return "Error al actualizar el proveedor. Inténtalo más tarde.";
+        }
+    }
+
+    public function updateProvDtg()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+
+            $sql = "UPDATE proveedor SET urlt = :urlt, nit = :nit WHERE idprov = :idprov";
+            $stmt = $conexion->prepare($sql);
+
+            // Obtener valores del objeto
+            $urlt = $this->getUrlt();
+            $nit = $this->getNit();
+            $idprov = $this->getIdprov();
+
+            // Asignar valores a la consulta preparada
+            $stmt->bindValue(':idprov', $idprov, PDO::PARAM_INT);
+            $stmt->bindValue(':urlt', $urlt, PDO::PARAM_STR);
+            $stmt->bindValue(':nit', $nit, PDO::PARAM_STR);
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                return $stmt->rowCount() > 0;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            return "Error al actualizar el proveedor. Inténtalo más tarde.";
+        }
+    }
+    public function updateProvDir()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+
+            $sql = "UPDATE proveedor SET dirrecprov	 = :dirrecprov	,idubi = :idubi WHERE idprov = :idprov";
+            $stmt = $conexion->prepare($sql);
+
+            // Obtener valores del objeto
+            $dirrecprov = $this->getDirrecprov();
+            $idubi = $this->getIdubi();
+            $idprov = $this->getIdprov();
+
+            // Asignar valores a la consulta preparada
+            $stmt->bindValue(':idprov', $idprov, PDO::PARAM_INT);
+            $stmt->bindValue(':dirrecprov', $dirrecprov, PDO::PARAM_STR);
+            $stmt->bindValue(':idubi', $idubi, PDO::PARAM_INT);
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                return $stmt->rowCount() > 0;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            return "Error al actualizar el proveedor. Inténtalo más tarde.";
+        }
+    }
+    public function inactivarPrv()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+
+            $sql = 'UPDATE proveedor SET estprv = "inactivo" WHERE idprov = :idprov';
+            $stmt = $conexion->prepare($sql);
+
+            // Obtener valores del objeto
+            $idprov = $this->getIdprov();
+
+            // Asignar valores a la consulta preparada
+            $stmt->bindValue(':idprov', $idprov, PDO::PARAM_INT);
+
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                return $stmt->rowCount() > 0;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            return "Error al actualizar el proveedor. Inténtalo más tarde.";
+        }
+    }
+    public function activarPrv()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+
+            $sql = 'UPDATE proveedor SET estprv = "activo" WHERE idusu = :idusu';
+            $stmt = $conexion->prepare($sql);
+
+            // Obtener valores del objeto
+            $idusu = $this->getIdusu();
+
+            // Asignar valores a la consulta preparada
+            $stmt->bindValue(':idusu', $idusu, PDO::PARAM_INT);
+
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                return $stmt->rowCount() > 0;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            return "Error al actualizar el proveedor. Inténtalo más tarde.";
+        }
+    }
+    public function eliminarPrv()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+
+            // Verificar si el proveedor tiene pedidos asociados
+            $sqlCheck = 'SELECT COUNT(*) FROM pedido WHERE idprov = :idprov';
+            $stmtCheck = $conexion->prepare($sqlCheck);
+            $idprov = $this->getIdprov();
+            $stmtCheck->bindValue(':idprov', $idprov, PDO::PARAM_INT);
+            $stmtCheck->execute();
+            $tienePedidos = $stmtCheck->fetchColumn(); // Obtiene el número de pedidos
+
+            if ($tienePedidos > 0) {
+                return false; // Indica que no se puede eliminar porque tiene pedidos
+            }
+
+            // Si no tiene pedidos, proceder con la eliminación
+            $sqlDelete = 'DELETE FROM proveedor WHERE idprov = :idprov';
+            $stmtDelete = $conexion->prepare($sqlDelete);
+            $stmtDelete->bindValue(':idprov', $idprov, PDO::PARAM_INT);
+
+            return $stmtDelete->execute() && $stmtDelete->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            return false; // Indica error en la ejecución
+        }
     }
 }

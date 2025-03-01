@@ -61,3 +61,222 @@ Datos enviados a la consulta: Array
     [desprv] => 
     [estado] => 
 )
+Formulario enviado con POST: Array
+(
+    [nomusu] => DavidS
+    [desprv] => Todo lo que quieres a tu alcance
+    [idprov] => 82
+    [oper] => editPrv1
+)
+Formulario enviado con POST: Array
+(
+    [nomusu] => DavidX
+    [desprv] => Todo lo que quieres a tu alcance
+    [idprov] => 82
+    [oper] => editPrv1
+)
+Formulario enviado con POST: Array
+(
+    [nomprov] => DavidX
+    [desprv] => Todo lo que quieres a tu alcance
+    [idprov] => 82
+    [oper] => editPrv1
+)
+Formulario enviado con POST: Array
+(
+    [nomprov] => DavidX
+    [desprv] => Todo lo que quieres a tu alcance y en un solo lugar
+    [idprov] => 82
+    [oper] => editPrv1
+)
+Formulario enviado con POST: Array
+(
+    [url] => shoop
+    [nit] => 4541
+    [idprov] => 82
+    [oper] => editProv2
+)
+Datos enviados a la consulta: Array
+(
+    [nomprov] => 
+    [idusu] => 
+    [dirrecprov] => 
+    [idubi] => 
+    [url] => shoop
+    [nit] => 4541
+    [desprv] => 
+    [estado] => 
+)
+Formulario enviado con POST: Array
+(
+    [url] => shoop
+    [nit] => 4541
+    [idprov] => 82
+    [oper] => editProv2
+)
+Datos enviados a la consulta: Array
+(
+    [nomprov] => 
+    [idusu] => 
+    [dirrecprov] => 
+    [idubi] => 
+    [url] => shoop
+    [nit] => 4541
+    [desprv] => 
+    [estado] => 
+)
+Formulario enviado con POST: Array
+(
+    [url] => shoop
+    [nit] => 4541
+    [idprov] => 82
+    [oper] => editPrv2
+)
+Formulario enviado con POST: Array
+(
+    [url] => shoop
+    [nit] => 4541
+    [idprov] => 82
+    [oper] => editPrv2
+)
+Formulario enviado con POST: Array
+(
+    [url] => shoop
+    [nit] => 4541
+    [idprov] => 82
+    [oper] => editPrv2
+)
+Formulario enviado con POST: Array
+(
+    [urlt] => shoop
+    [nit] => 454444
+    [idprov] => 82
+    [oper] => editPrv2
+)
+Formulario enviado con POST: Array
+(
+    [urlt] => shoop
+    [nit] => 454112
+    [idprov] => 82
+    [oper] => editPrv2
+)
+Formulario enviado con POST: Array
+(
+    [urlt] => shoop
+    [nit] => 454112
+    [idprov] => 82
+    [oper] => editPrv2
+)
+Formulario enviado con POST: Array
+(
+    [urlt] => shoop
+    [nit] => 454112
+    [idprov] => 82
+    [oper] => editPrv2
+)
+Formulario enviado con POST: Array
+(
+    [urlt] => shoop
+    [nit] => 454112
+    [idprov] => 82
+    [oper] => editPrv2
+)
+Formulario enviado con POST: Array
+(
+    [urlt] => shoop.com
+    [nit] => 454112
+    [idprov] => 82
+    [oper] => editPrv2
+)
+Formulario enviado con POST: Array
+(
+    [dirrecusu] => Vereda la balsa
+    [depart] => 25
+    [ciudad] => 25175
+    [oper] => editPrv3
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [dirrecusu] => Vereda la balsa
+    [depart] => 25
+    [ciudad] => 25175
+    [oper] => editPrv3
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [dirrecusu] => Vereda la balsa
+    [depart] => 15
+    [ciudad] => 15001
+    [oper] => editPrv3
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [dirrecusu] => Vereda la balsa calle 9a Sur
+    [depart] => 15
+    [ciudad] => 15001
+    [oper] => editPrv3
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [dirrecusu] => Vereda la balsa calle 9a Sur
+    [depart] => 15
+    [ciudad] => 15001
+    [oper] => editPrv3
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [dirrecusu] => Vereda la balsa calle 9a Sur
+    [depart] => 15
+    [ciudad] => 15001
+    [oper] => editPrv3
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [dirrecusu] => Vereda la balsa calle 9a Sur
+    [depart] => 15
+    [ciudad] => 15001
+    [oper] => editPrv3
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [dirrecprov] => Calle 34 Bloque 4
+    [depart] => 15
+    [ciudad] => 15001
+    [oper] => editPrv3
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [dirrecprov] => Calle 34 Bloque 4
+    [depart] => 15
+    [ciudad] => 15001
+    [oper] => editPrv3
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [oper] => inactivar
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [oper] => reactivar
+    [idusu] => 20
+)
+Formulario enviado con POST: Array
+(
+    [oper] => inactivar
+    [idprov] => 82
+)
+Formulario enviado con POST: Array
+(
+    [oper] => reactivar
+    [idusu] => 20
+)

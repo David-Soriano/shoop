@@ -484,7 +484,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 function cargarContenido(url) {
-    console.log("Intentando cargar: " + url);
     
     // Ocultar el menú
     $(".bx-conf-pef").hide();

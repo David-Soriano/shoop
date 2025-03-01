@@ -1,8 +1,8 @@
 <?php
-if(session_status() == PHP_SESSION_NONE){
+if (session_status() == PHP_SESSION_NONE) {
     ini_set('session.cookie_httponly', 1); // Evita que JavaScript acceda a las cookies
-ini_set('session.cookie_secure', 1); // Solo permite el envío de cookies a través de HTTPS
-ini_set('session.cookie_samesite', 'Strict');
+    ini_set('session.cookie_secure', 1); // Solo permite el envío de cookies a través de HTTPS
+    ini_set('session.cookie_samesite', 'Strict');
 }
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -57,7 +57,8 @@ $dtAllPedidos = $mped->getPedidos($_SESSION['idprov']);
 
 //se utiliza vwpanpro
 $saldo = $prov->traerSaldo($idProveedor);
-function getDtProv($idprov){
+function getDtProv($idprov)
+{
     $prov = new Mprov();
     $prov->setIdprov($idprov);
     return $prov->getOneProv();
@@ -78,6 +79,23 @@ if ($idusus) {
     if (!$idProveedor) {
         header("Location: ../views/vwRegPrv.php");
         exit();
+    } else {
+        // Conectar a la base de datos
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+
+        // Consultar el estado del proveedor
+        $sql = "SELECT estprv FROM proveedor WHERE idprov = :idprov";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindValue(':idprov', $idProveedor, PDO::PARAM_INT);
+        $stmt->execute();
+        $proveedor = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($proveedor && $proveedor['estprv'] === 'inactivo') {
+            // Redirigir a una vista donde se le pregunte si quiere reactivar la cuenta
+            header("Location: ../views/vwRegPrv.php?inc=1");
+            exit();
+        }
     }
 
     if ($ope === 'save') {
@@ -184,7 +202,7 @@ if ($idusus) {
 
             var_dump($imagenesActualizadas);
             // **Procesar imágenes nuevas**
-            
+
             $archivosValidos = [];
             foreach ($_FILES['imgpro']['name'] as $key => $nombreArchivo) {
                 if (!empty($nombreArchivo) && $_FILES['imgpro']['error'][$key] === UPLOAD_ERR_OK) {
@@ -197,7 +215,7 @@ if ($idusus) {
                 }
             }
             var_dump($archivosValidos);
-            
+
             if (!empty($archivosValidos)) {
 
                 $ruta = '../proinf';
@@ -232,7 +250,7 @@ if ($idusus) {
                 }
             }
             var_dump($imagenesActualizadas);
-            
+
             // **Guardar cambios en la base de datos**
             if (!empty($imagenesActualizadas)) {
                 $mpro->updateImagenesProducto($imagenesActualizadas);

@@ -23,8 +23,9 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
     header("Location:vwRegPrv.php");
     exit();
   }
+
   $dtProvData = getDtProv($_SESSION['idprov']);
-  $dtProv = $dtProvData[0];?>
+  $dtProv = $dtProvData[0]; ?>
   <header>
     <div class="row bx-opc-in">
       <div class="col">
@@ -46,6 +47,9 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
     <div class="row bx-wel">
       <div class="col">
         <h1>Hola <?= $dtProv['nomprov'] ?>,</h1>
+        <?php if ($_REQUEST['isn'] == 1) { ?>
+          <h6>Estas de vuelta</h6>
+        <?php } ?>
         <p>Bienvenid<?php if ($_SESSION['genusu'] == 'M') {
           echo "o";
         } else if ($_SESSION['genusu'] == 'M') {
@@ -54,8 +58,8 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
           echo "@" ?> al Portal de Administración</p>
           </div>
           <p>Saldo: $<?= number_format($saldo['saldo'], 2, ",", "."); ?></p>
-        </div>
-      </header>
+    </div>
+  </header>
   <main>
     <div class="container-fluid">
       <div class="row bx-prc">

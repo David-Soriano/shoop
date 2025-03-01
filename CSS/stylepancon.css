@@ -864,6 +864,10 @@ footer {
     border-bottom: 1px solid #bdbbbb;
     margin: 1% 0;
     padding: 1% 0.5%;
+    width: 35%;
+}
+#contenido .form-conf-pef input:focus-visible{
+    outline: none;
 }
 #contenido .form-conf-pef textarea{
     resize: none;
@@ -871,6 +875,10 @@ footer {
     border-radius: 5px;
     padding: 1%;
     margin: 2% 0px;
+    width: 35%;
+}
+#contenido .form-conf-pef textarea:focus-visible{
+    outline: none;
 }
 #contenido .form-conf-pef button {
     position: initial;

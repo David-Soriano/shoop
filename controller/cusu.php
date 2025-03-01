@@ -26,31 +26,48 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 $idubiUsuario = $_SESSION['idubi'] ?? null; // Ciudad del usuario
 
-// Conexión a la BD
-$modelo = new Conexion();
-$conexion = $modelo->getConexion();
+function obtenerUbicacion($idubi) {
+    // Conexión a la BD
+    $modelo = new Conexion();
+    $conexion = $modelo->getConexion();
 
-// Obtener el departamento correspondiente a la ciudad del usuario
-$stmt = $conexion->prepare("SELECT depenubi FROM ubicacion WHERE idubi = :idubi");
-$stmt->bindParam(':idubi', $idubiUsuario, PDO::PARAM_INT);
-$stmt->execute();
-$departamentoID = $stmt->fetchColumn();
+    // Obtener el departamento correspondiente a la ciudad
+    $stmt = $conexion->prepare("SELECT depenubi FROM ubicacion WHERE idubi = :idubi");
+    $stmt->bindParam(':idubi', $idubi, PDO::PARAM_INT);
+    $stmt->execute();
+    $departamentoID = $stmt->fetchColumn();
 
-// Si `depenubi` es 0, significa que `idubiUsuario` ya es un departamento
-if ($departamentoID == 0) {
-    $departamentoID = $idubiUsuario;
+    // Si `depenubi` es 0, significa que `idubi` ya es un departamento
+    if ($departamentoID == 0) {
+        $departamentoID = $idubi;
+    }
+
+    // Obtener todos los departamentos (depenubi = 0)
+    $stmt = $conexion->prepare("SELECT * FROM ubicacion WHERE depenubi = 0");
+    $stmt->execute();
+    $dtDtp = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Obtener ciudades del departamento correspondiente
+    $stmt = $conexion->prepare("SELECT * FROM ubicacion WHERE depenubi = :departamentoID");
+    $stmt->bindParam(':departamentoID', $departamentoID, PDO::PARAM_INT);
+    $stmt->execute();
+    $ciudades = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return [
+        'departamentoID' => $departamentoID,
+        'dtDtp' => $dtDtp,
+        'ciudades' => $ciudades
+    ];
 }
 
-// Obtener departamentos (depenubi = 0)
-$stmt = $conexion->prepare("SELECT * FROM ubicacion WHERE depenubi = 0");
-$stmt->execute();
-$dtDtp = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Ejemplo de uso:
 
-// Obtener ciudades del departamento seleccionado
-$stmt = $conexion->prepare("SELECT * FROM ubicacion WHERE depenubi = :departamentoID");
-$stmt->bindParam(':departamentoID', $departamentoID, PDO::PARAM_INT);
-$stmt->execute();
-$ciudades = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$ubicacion = obtenerUbicacion($idubiUsuario);
+
+// Ahora puedes acceder a los datos retornados
+$departamentoID = $ubicacion['departamentoID'];
+$dtDtp = $ubicacion['dtDtp'];
+$ciudades = $ubicacion['ciudades'];
 
 
 if ($ope == "save") {
@@ -135,9 +152,6 @@ if ($ope == "save") {
     $usu->setIdusu($_SESSION['idusu']);
     $usu->setDirrecusu($dirrecusu);
     $usu->setIdubi($idubi);
-    var_dump($dirrecusu);
-    var_dump($_SESSION['idusu']);
-    var_dump($idubi);
 
     if ($usu->editDireccion()) {
         updateSession();
