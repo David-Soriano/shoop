@@ -12,6 +12,10 @@ $mpqr = new Mpqr();
 $dtPqr = $mpqr->getAllPqr();
 $dtImg = $admin->getImgItem();
 $dtPag = $admin->getPaginas();
+$dtProductVend = $admin->getProdtVend() ?? 0;
+$dtComision = $admin->getValorComis() ?? 0;
+$dtClientes = $admin->getClientReg() ?? 0;
+$dtPedEnv = $admin->getPedEnv() ?? 0;
 function getPagAdm($pg){
     $pag = new Mpag();
     return $pag->getOne($pg, 2, null);

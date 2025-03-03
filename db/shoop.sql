@@ -86,6 +86,27 @@ INSERT INTO `carrito` (`idcar`, `idusu`, `fecha_creacion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `comisiones`
+--
+
+CREATE TABLE `comisiones` (
+  `idcomis` int(11) NOT NULL,
+  `idcom` int(11) NOT NULL,
+  `monto_total` decimal(10,2) NOT NULL,
+  `comision` decimal(10,2) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `comisiones`
+--
+
+INSERT INTO `comisiones` (`idcomis`, `idcom`, `monto_total`, `comision`, `fecha`) VALUES
+(2, 20, 30000.00, 2100.00, '2025-03-03 15:24:18');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `compra`
 --
 
@@ -99,6 +120,13 @@ CREATE TABLE `compra` (
   `idped` int(11) DEFAULT NULL,
   `fechareg` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`idcom`, `tiproduct`, `cantidad`, `preciocom`, `idubi`, `idusu`, `idped`, `fechareg`) VALUES
+(20, 'Moda', '1', '37800', 47030, 20, 45, '2025-03-03 10:24:18');
 
 -- --------------------------------------------------------
 
@@ -144,6 +172,13 @@ CREATE TABLE `detallecompra` (
   `idcom` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detallecompra`
+--
+
+INSERT INTO `detallecompra` (`iddell`, `subtotal`, `iva`, `total`, `idpro`, `direccomp`, `idcom`) VALUES
+(20, 31764.7, 5700, 37800, 163, 'Vereda la balsa', 20);
+
 -- --------------------------------------------------------
 
 --
@@ -173,6 +208,13 @@ CREATE TABLE `detalle_pedido` (
   `direccion` varchar(255) NOT NULL,
   `idubi` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_pedido`
+--
+
+INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`, `mpago`, `npago`, `direccion`, `idubi`) VALUES
+(43, 45, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030);
 
 -- --------------------------------------------------------
 
@@ -251,7 +293,8 @@ INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`,
 (286, 'IMG/publicidad/publicidad_67ba0055acc80.jpg', 'publicidad_67ba0055acc80.jpg', 'jpg', NULL, 1, 1, NULL),
 (290, 'IMG/publicidad/publicidad_67ba00f4e5c5b.jpg', 'publicidad_67ba00f4e5c5b.jpg', 'jpg', NULL, 1, 1, NULL),
 (291, 'IMG/publicidad/publicidad_67ba012e5c66c.jpg', 'publicidad_67ba012e5c66c.jpg', 'jpg', NULL, 1, 1, NULL),
-(293, 'IMG/publicidad/publicidad_67ba0297c2697.jpg', 'publicidad_67ba0297c2697.jpg', 'jpg', NULL, 1, 1, NULL);
+(293, 'IMG/publicidad/publicidad_67ba0297c2697.jpg', 'publicidad_67ba0297c2697.jpg', 'jpg', NULL, 1, 1, NULL),
+(382, 'proinf/imagen_67c5c23df3c84.webp', 'zapato1_9d84893e-b872-49ad-a07e-46687ca6ef25_1080x', 'image/webp', 163, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -432,7 +475,7 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idped`, `idusu`, `total`, `fecha`, `estped`) VALUES
-(43, 20, 24304.00, '2025-02-27 02:22:30', 'Recibido');
+(45, 20, 37800.00, '2025-03-03 15:23:43', 'Recibido');
 
 -- --------------------------------------------------------
 
@@ -516,7 +559,10 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valorunitario`, `descripcion`, `feccreat`, `fecupdate`, `fechiniofer`, `fechfinofer`, `estado`, `pordescu`, `idval`, `productvend`, `temporada`) VALUES
-(160, 'Camisa Selección Argentina Año 2024 Hombre', 25200, 7, NULL, 20000, 'Camisa deportiva', '2025-03-01 13:37:42', '2025-03-01 13:42:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL);
+(160, 'Camisa Selección Argentina Año 2024 Hombre', 25200, 7, NULL, 20000, 'Camisa deportiva', '2025-03-01 13:37:42', '2025-03-01 13:42:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
+(161, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón deportiva año 2024', '2025-03-03 14:50:58', '2025-03-03 14:52:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
+(162, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón deportiva año 2024', '2025-03-03 14:50:58', '2025-03-03 14:51:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
+(163, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón ', '2025-03-03 14:52:46', '2025-03-03 15:24:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 1, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -535,7 +581,10 @@ CREATE TABLE `prodxprov` (
 --
 
 INSERT INTO `prodxprov` (`idpro`, `idprov`, `idprodprv`) VALUES
-(160, 82, 91);
+(160, 82, 91),
+(161, 82, 92),
+(162, 82, 93),
+(163, 82, 94);
 
 -- --------------------------------------------------------
 
@@ -561,7 +610,7 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `urlt`, `nit`, `idubi`, `idusu`, `desprv`, `saldo`, `estprv`) VALUES
-(82, 'DavidX', 'Calle 34 Bloque 4', 'shoop.com', '454112', 15001, 20, 'Todo lo que quieres a tu alcance y en un solo lugar', 0.00, 'activo');
+(82, 'DavidX', 'Calle 34 Bloque 4', 'shoop.com', '454112', 15001, 20, 'Todo lo que quieres a tu alcance y en un solo lugar', 30000.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1840,7 +1889,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idusu`, `nomusu`, `apeusu`, `docusu`, `emausu`, `celusu`, `genusu`, `dirrecusu`, `tipdoc`, `idval`, `idubi`, `feccreate`, `fecupdate`, `fotpef`, `idpef`, `pasusu`, `estusu`, `token_recuperacion`, `token_expira`, `esteli`) VALUES
 (16, 'David', 'Soriano', 101564, 'admin@gmail.com', '3186274255', 'M', NULL, 'CC', NULL, 15322, '2024-11-27 21:20:01', '2025-02-13 02:21:53', NULL, 2, '$2y$10$aGcbgN7SK.mxZRsTEfI3jeOcW7sueH9H4d.vRli3ouesWF6NG.SS6', 'Activo', NULL, NULL, 0),
-(20, 'DavidX', 'ss', 104544, 'davidx@gmail.com', '45674658', 'M', 'Vereda la balsa', 'CC', NULL, 47030, '2024-12-13 23:20:35', '2025-03-01 15:17:04', NULL, 1, '$2y$10$rkzjvt6ZirdI5g2OKCyyeONzPP9T1vd0oTb3iJXoaWDh3AyA.ajnG', 'Inactivo', '89fc8200fefff72640e1770ae9050ced307e8e6fe4d1253d93d5dc1e3d4e2bbff1196eef608d6e2333763e263f765ada1598', '2025-02-17 10:38:43', 1),
+(20, 'DavidX', 'ss', 104544, 'davidx@gmail.com', '45674658', 'M', 'Vereda la balsa', 'CC', NULL, 47030, '2024-12-13 23:20:35', '2025-03-03 14:47:38', NULL, 1, '$2y$10$rkzjvt6ZirdI5g2OKCyyeONzPP9T1vd0oTb3iJXoaWDh3AyA.ajnG', 'Activo', '89fc8200fefff72640e1770ae9050ced307e8e6fe4d1253d93d5dc1e3d4e2bbff1196eef608d6e2333763e263f765ada1598', '2025-02-17 10:38:43', 1),
 (27, 'Juan David', 'Soriano Cicua', 1049794389, 'davidscicua314@gmail.com', '3186274255', 'M', 'Vereda la balsa calle 9a Sur', 'CC', NULL, 25175, '2025-02-17 14:41:33', '2025-02-28 14:45:19', NULL, 1, '$2y$10$/9So.AzckXsDGT3q/jvKZeBcom9Pgt.CP9OIBEuSP6xWV7TeuL19C', 'Activo', NULL, NULL, 0);
 
 -- --------------------------------------------------------
@@ -1896,6 +1945,13 @@ ALTER TABLE `caracteristicas`
 ALTER TABLE `carrito`
   ADD PRIMARY KEY (`idcar`),
   ADD KEY `idusu` (`idusu`);
+
+--
+-- Indices de la tabla `comisiones`
+--
+ALTER TABLE `comisiones`
+  ADD PRIMARY KEY (`idcomis`),
+  ADD KEY `idcom` (`idcom`);
 
 --
 -- Indices de la tabla `compra`
@@ -2112,10 +2168,16 @@ ALTER TABLE `carrito`
   MODIFY `idcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `comisiones`
+--
+ALTER TABLE `comisiones`
+  MODIFY `idcomis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -2133,7 +2195,7 @@ ALTER TABLE `detallecarrito`
 -- AUTO_INCREMENT de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  MODIFY `iddell` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `iddell` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `detallefavoritos`
@@ -2145,7 +2207,7 @@ ALTER TABLE `detallefavoritos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `devolucionreembolso`
@@ -2169,7 +2231,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=380;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2199,7 +2261,7 @@ ALTER TABLE `pagxperfil`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
@@ -2217,13 +2279,13 @@ ALTER TABLE `pqr`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT de la tabla `prodxprov`
 --
 ALTER TABLE `prodxprov`
-  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
@@ -2288,6 +2350,12 @@ ALTER TABLE `caracteristicas`
 --
 ALTER TABLE `carrito`
   ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`idusu`) REFERENCES `usuario` (`idusu`);
+
+--
+-- Filtros para la tabla `comisiones`
+--
+ALTER TABLE `comisiones`
+  ADD CONSTRAINT `comisiones_ibfk_1` FOREIGN KEY (`idcom`) REFERENCES `compra` (`idcom`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `compra`

@@ -179,6 +179,84 @@ class Madmin
         }
     }
     
-
-
+    public function getProdtVend(){
+        $res = 0;  // Inicializar en 0 por si hay errores
+        $sql = "SELECT SUM(cantidad) AS total FROM compra;"; 
+    
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $row = $result->fetch(PDO::FETCH_ASSOC); // Obtener solo una fila
+    
+            if ($row && isset($row['total'])) {
+                $res = $row['total']; // Extraer el valor directamente
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage(), 3, "C:/xampp/htdocs/SHOOP/errors/error_log.log");
+            echo "Error al obtener productos más vendidos.";
+        }
+    
+        return $res;  // Devolver un número, no un array
+    }
+    public function getValorComis(){
+        $res = 0;  // Inicializar en 0 por si hay errores
+        $sql = "SELECT SUM(comision) AS comision FROM comisiones;";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $row = $result->fetch(PDO::FETCH_ASSOC); // Obtener solo una fila
+    
+            if ($row && isset($row['comision'])) {
+                $res = $row['comision']; // Extraer el valor directamente
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage(), 3, "C:/xampp/htdocs/SHOOP/errors/error_log.log");
+            echo "Error al obtener la comisión.";
+        }
+    
+        return $res;
+    }    
+    public function getClientReg(){
+        $res = 0;  // Inicializar en 0 por si hay errores
+        $sql = "SELECT COUNT(*) AS clientes_registrados FROM usuario WHERE idpef = 1;";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $row = $result->fetch(PDO::FETCH_ASSOC); // Obtener solo una fila
+    
+            if ($row && isset($row['clientes_registrados'])) {
+                $res = $row['clientes_registrados']; // Extraer el valor directamente
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage(), 3, "C:/xampp/htdocs/SHOOP/errors/error_log.log");
+            echo "Error al obtener clientes registrados.";
+        }
+    
+        return $res;
+    } 
+    public function getPedEnv(){
+        $res = 0;  // Inicializar en 0 por si hay errores
+        $sql = "SELECT COUNT(*) AS pedidos_enviados FROM pedido WHERE estped = 'Recibido';";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->execute();
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            if ($row && isset($row['pedidos_enviados'])) {
+                $res = $row['pedidos_enviados']; // Extraer el valor directamente
+            }
+            
+        } catch (Exception $e) {
+            error_log($e->getMessage(), 3, "C:/xampp/htdocs/SHOOP/errors/error_log.log");
+            echo "Error al obtener pedidos enviados.";
+        }
+        return $res;
+    }
 }

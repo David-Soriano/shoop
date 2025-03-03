@@ -11,7 +11,8 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
   <link rel="stylesheet" href="../CSS/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../CSS/stylepancon.css">
-  <title>Panel de control</title>
+  <link rel="shortcut icon" href="../IMG/lg_vendedores.png" type="image/x-icon">
+  <title>Vendedores</title>
 </head>
 
 <body>
@@ -47,7 +48,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
     <div class="row bx-wel">
       <div class="col">
         <h1>Hola <?= $dtProv['nomprov'] ?>,</h1>
-        <?php if ($_REQUEST['isn'] == 1) { ?>
+        <?php if (isset($_REQUEST['isn']) && $_REQUEST['isn'] == 1) { ?>
           <h6>Estas de vuelta</h6>
         <?php } ?>
         <p>Bienvenid<?php if ($_SESSION['genusu'] == 'M') {
@@ -55,7 +56,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
         } else if ($_SESSION['genusu'] == 'M') {
           echo "a";
         } else
-          echo "@" ?> al Portal de Administración</p>
+          echo "@" ?> al Portal de Vendedores</p>
           </div>
           <p>Saldo: $<?= number_format($saldo['saldo'], 2, ",", "."); ?></p>
     </div>

@@ -52,6 +52,7 @@ if ($status == 4 && $idusu > 0 && $total > 0) {
         if (json_last_error() === JSON_ERROR_NONE && is_array($productos) && is_array($ubicacion)) {
             $stmtDetalle = $conn->prepare("INSERT INTO detalle_pedido (idped, idpro, cantidad, precio, mpago, npago, direccion, idubi) 
                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmAccCantidad = $conn->prepare("UPDATE producto SET cantidad = cantidad - ? WHERE idpro = ?");
                                    enviarFactura($_SESSION['emausu'], $_SESSION['nomusu'], $productos, $total, $ubicacion['direccion'], $idfactura);
             foreach ($productos as $producto) {
                 if (isset($producto['id'], $producto['cantidad'], $producto['precio'])) {
@@ -61,6 +62,8 @@ if ($status == 4 && $idusu > 0 && $total > 0) {
 
                     // Ejecutar la consulta con los valores correspondientes
                     $stmtDetalle->execute([$idPedido, $producto['id'], $producto['cantidad'], $producto['precio'], $mpago, $npago, $direccion, $idubi]);
+                    // Disminuir la cantidad en stock
+                    $stmAccCantidad->execute([$producto['cantidad'], $producto['id']]);
                 }
             }
             $conn->commit();

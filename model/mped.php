@@ -174,7 +174,7 @@ class Pedido
     function getOne()
     {
         $res = NULL;
-        $sql = "SELECT p.idped, p.idusu, p.total, p.fecha, p.estped, dp.idpro, dp.cantidad, dp.idubi, dp.direccion, pr.nompro, v.nomval FROM pedido AS p INNER JOIN detalle_pedido AS dp ON p.idped = dp.idped INNER JOIN producto AS pr ON dp.idpro = pr.idpro INNER JOIN valor AS v ON pr.idval = v.idval WHERE p.idped = :idped";
+        $sql = "SELECT p.idped, p.idusu, p.total, p.fecha, p.estped, dp.idpro, dp.cantidad, dp.idubi, dp.direccion, pr.nompro, pr.valorunitario, v.nomval FROM pedido AS p INNER JOIN detalle_pedido AS dp ON p.idped = dp.idped INNER JOIN producto AS pr ON dp.idpro = pr.idpro INNER JOIN valor AS v ON pr.idval = v.idval WHERE p.idped = :idped";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();

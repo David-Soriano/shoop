@@ -401,7 +401,7 @@ function updatePedData(idped, idprov, ope) {
     })
         .then(async response => {
             const rawText = await response.text();
-
+            console.log(rawText);
             if (!response.ok) {
                 throw new Error('Error en la respuesta: ' + response.status);
             }
@@ -805,8 +805,10 @@ function obtenerImagenesExistentes() {
     return imagenes;
 }
 
-document.getElementById("imgpro").addEventListener("change", function () {
-    console.log("Archivos seleccionados:", selectedFiles);
+window.addEventListener('DOMContentLoaded', function () {
+    document.getElementById("imgpro").addEventListener("change", function () {
+        console.log("Archivos seleccionados:", selectedFiles);
+    });
 });
 
 function limpiarModal() {

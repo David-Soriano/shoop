@@ -32,39 +32,34 @@ const totalData = calculateTotals(salesData);
 
 // Función para actualizar el gráfico
 const updateChart = (timeframe) => {
-    Highcharts.chart('container', {
-        title: {
-            text: 'Ventas Totales'
-        },
-        subtitle: {
-            text: `Intervalo: ${timeframe}`
-        },
-        yAxis: {
-            title: {
-                text: 'Ventas'
+    fetch(`../controller/get_sales_data.php?timeframe=${timeframe}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error("Error:", data.error);
+                return;
             }
-        },
-        xAxis: {
-            categories: timeframe === 'Anual'
-                ? ['2016', '2017', '2018', '2019', '2020', '2021']
-                : timeframe === 'Mensual'
-                    ? ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio']
-                    : timeframe === 'Semanal'
-                        ? ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6']
-                        : ['Lun', 'Mar', 'Miérc', 'Juev', 'Vier', 'Sáb', 'Dom']
-        },
-        series: [
-            {
-                name: 'Total',
-                data: totalData[timeframe]
-            }
-        ]
-    });
+
+            const categories = data.map(item => item.periodo);
+            const salesData = data.map(item => parseFloat(item.ventas));
+
+            Highcharts.chart('container', {
+                title: { text: 'Ventas Totales' },
+                subtitle: { text: `Intervalo: ${timeframe}` },
+                yAxis: { title: { text: 'Ventas' } },
+                xAxis: { categories },
+                series: [{ name: 'Total', data: salesData }]
+            });
+
+            document.getElementById('summary').innerHTML = generateSummary(timeframe, salesData);
+        })
+        .catch(error => console.error("Error al obtener datos:", error));
 };
 
-// Función para generar texto automático
-function generateSummary(timeframe) {
-    const sales = totalData[timeframe]; // Usar los datos totales
+// Función para generar el resumen de ventas
+function generateSummary(timeframe, sales) {
+    if (sales.length === 0) return "<p>No hay datos disponibles.</p>";
+
     const totalSales = sales.reduce((sum, value) => sum + value, 0);
     const maxSales = Math.max(...sales);
     const minSales = Math.min(...sales);
@@ -74,34 +69,22 @@ function generateSummary(timeframe) {
 
     return `
         <h5>Resumen de Ventas (${timeframe}):</h5>
-
-        <div class="bx-des-gf">
         <ul>
-            <li>Total de ventas: <b>${totalSales.toLocaleString()}</b> unidades</li>
-            <li>Mayor venta: <b>${maxSales.toLocaleString()}</b> unidades en el período ${maxIndex + 1}</li>
-            <li>Menor venta: <b>${minSales.toLocaleString()}</b> unidades en el período ${minIndex + 1}</li>
+            <li>Total de ventas: <b>${totalSales.toLocaleString()}</b></li>
+            <li>Mayor venta: <b>${maxSales.toLocaleString()}</b> en ${maxIndex + 1}</li>
+            <li>Menor venta: <b>${minSales.toLocaleString()}</b> en ${minIndex + 1}</li>
+            <li>Crecimiento: <b>${growth}%</b></li>
         </ul>
-        <div class="bx-crec-tv">
-            <img src="../IMG/grafico-de-linea.png" alt="">
-            <h4>${growth}%</h4>
-            <p>Crecimiento</p>
-            </div>
-        </div>
     `;
 }
 
 // Inicializar gráfico con datos anuales
-updateChart('Anual');
+window.addEventListener('DOMContentLoaded', () => {
+    updateChart('Anual');
 
-// Cambiar intervalo al seleccionar una opción
-// Generar texto inicial para el resumen (predeterminado: Anual)
-document.getElementById('summary').innerHTML = generateSummary('Anual');
-
-// Cambiar intervalo al seleccionar una opción
-document.getElementById('timeframe').addEventListener('change', function () {
-    const selectedTimeframe = this.value;
-    updateChart(selectedTimeframe);
-    document.getElementById('summary').innerHTML = generateSummary(selectedTimeframe);
+    document.getElementById('timeframe').addEventListener('change', function () {
+        updateChart(this.value);
+    });
 });
 
 

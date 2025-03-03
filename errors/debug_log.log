@@ -280,3 +280,107 @@ Formulario enviado con POST: Array
     [oper] => reactivar
     [idusu] => 20
 )
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: 
+Id Pedido: 44
+EStado Ped: En Reparto
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: Array
+(
+    [idped] => 44
+    [idprov] => 82
+    [ope] => recibir
+)
+
+Recibido: Array
+(
+    [idped] => 44
+    [idprov] => 82
+    [ope] => recibir
+)
+
+Recibido: Array
+(
+    [idped] => 44
+    [idprov] => 82
+    [ope] => recibir
+)
+
+Recibido: Array
+(
+    [idped] => 44
+    [idprov] => 82
+    [ope] => recibir
+)
+
+Recibido: 
+Id Pedido: 44
+EStado Ped: 
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: 
+Id Pedido: 44
+EStado Ped: En Reparto
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: Array
+(
+    [idped] => 44
+    [idprov] => 82
+    [ope] => recibir
+)
+
+Recibido: 
+Id Pedido: 44
+EStado Ped: En Reparto
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: Array
+(
+    [idped] => 44
+    [idprov] => 82
+    [ope] => recibir
+)
+
+Recibido: 
+Id Pedido: 44
+EStado Ped: En Reparto
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: Array
+(
+    [idped] => 44
+    [idprov] => 82
+    [ope] => recibir
+)
+
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: 
+Id Pedido: 45
+EStado Ped: En Reparto
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: Array
+(
+    [idped] => 45
+    [idprov] => 82
+    [ope] => recibir
+)
+

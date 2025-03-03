@@ -52,10 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         // Calcular el total, comisiones, IVA, etc., si es necesario
                         $total = floatval($pedidoData['total']);
-                        $comision = $total * 0.07;
+                        $comision = $pedidoData['valorunitario'] * 0.07;
                         $ivaPorcentaje = 0.19;
                         $subtotal = $total / (1 + $ivaPorcentaje);
-                        $iva = $total * $ivaPorcentaje;
+                        $iva = $pedidoData['valorunitario'] * $ivaPorcentaje;
 
                         // Actualizar saldo del proveedor (esto depende de la lógica de tu aplicación)
                         $modelo = new Conexion();
@@ -84,6 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         // Guardar los detalles de la compra
                         $compra->saveDetalleCompra();
+
+                        $stmComisión = $conn->prepare("INSERT INTO comisiones( idcom, monto_total, comision) VALUES (?,?,?)");
+                        $stmComisión->execute([$idcom, $pedidoData['valorunitario'], $comision]);
 
                         // Actualizar cantidad vendida
                         $idpro = $pedidoData['idpro'];

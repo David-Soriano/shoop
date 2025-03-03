@@ -140,6 +140,22 @@ class Compra
     public function setIva($iva){
         $this->iva = $iva;
     }
+    public function getOneCm(){
+        $sql = "SELECT idcom, tiproduct, cantidad, preciocom FROM compra WHERE idusu = :idusu";
+        try{
+            $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $result = $conexion->prepare($sql);
+        $idusu = $this->getIdusu(); // Obtener el ID del usuario
+        $result->bindValue(':idusu', $idusu, PDO::PARAM_INT);
+        $result->execute();
+        $res = $result->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al obtener las compras. Inténtalo más tarde.";
+        }
+        return $res;
+    }
     // Método para obtener las compras del usuario
     public function getComPar()
     {
