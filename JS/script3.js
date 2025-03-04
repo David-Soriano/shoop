@@ -169,66 +169,77 @@ document.getElementById('timeframeSelect').addEventListener('change', function (
     updateChartCt(this.value);
 });
 
-//HEATMAP
 // Función para obtener datos de ventas desde PHP
 async function fetchSalesData() {
     const response = await fetch('../controller/get_sales_data.php?mode=heatmap');
     const salesData = await response.json();
 
-    console.log("Datos recibidos:", salesData);
+    console.log("Datos sin procesar:", salesData); // Depuración: Ver datos originales
 
-    // Si la respuesta contiene más de un array, tomamos el primero (el heatmap)
-    if (Array.isArray(salesData) && Array.isArray(salesData[0])) {
-        return salesData[0].map(item => ({
-            date: item.date,
-            sales: item.value // Ajustar la clave según los datos devueltos
-        }));
-    }
+    const processedData = salesData.map(item => {
+        // Crear la fecha a partir del timestamp
+        const date = new Date(item.date);
+        console.log("Fecha original (local):", date); // Depuración: Ver fecha original en huso horario local
 
-    return salesData.map(item => ({
-        date: item.date,
-        sales: item.value
-    }));
+        // Normalizar la fecha al inicio del día en UTC
+        const normalizedDate = Date.UTC(
+            date.getUTCFullYear(),
+            date.getUTCMonth(),
+            date.getUTCDate()
+        );
+        console.log("Fecha normalizada (UTC):", new Date(normalizedDate)); // Depuración: Ver fecha normalizada en UTC
+
+        return {
+            date: normalizedDate,
+            sales: item.value || 0
+        };
+    });
+
+    console.log("Datos procesados en fetchSalesData:", processedData); // Depuración: Ver datos procesados
+    return processedData;
 }
 
-
-// Función para generar los datos para el heatmap
 async function generateChartData() {
     const salesData = await fetchSalesData();
-
-    // Convertimos los datos al formato del heatmap
-    const firstWeekday = new Date(salesData[0].date).getDay();
-    const emptyTilesFirst = firstWeekday;
     const chartData = [];
+    const weekdays = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
 
-    for (let emptyDay = 0; emptyDay < emptyTilesFirst; emptyDay++) {
+    if (salesData.length === 0) return [];
+
+    let minDate = new Date(salesData[0].date);
+    // Ajustar la fecha base al inicio del día en UTC
+    minDate = new Date(Date.UTC(
+        minDate.getUTCFullYear(),
+        minDate.getUTCMonth(),
+        minDate.getUTCDate()
+    ));
+    console.log("Fecha mínima (inicio del día UTC):", minDate); // Depuración: Ver fecha mínima
+
+    let currentDate = new Date(minDate);
+    let salesMap = new Map(salesData.map(d => [d.date, d.sales]));
+    console.log("Mapa de ventas:", salesMap); // Depuración: Ver mapa de ventas
+
+    while (currentDate.getTime() <= salesData[salesData.length - 1].date) {
+        let dateKey = currentDate.getTime();
+        let sales = salesMap.get(dateKey) || 0;
+
+        console.log("Fecha actual en el bucle (UTC):", currentDate); // Depuración: Ver fecha actual en el bucle
+        console.log("Ventas para la fecha actual:", sales); // Depuración: Ver ventas para la fecha actual
+
         chartData.push({
-            x: emptyDay,
-            y: 5,
-            value: null,
-            date: null,
-            custom: { empty: true }
-        });
-    }
-
-    for (let i = 0; i < salesData.length; i++) {
-        const date = salesData[i].date;
-        const sales = salesData[i].sales;
-        const xCoordinate = (emptyTilesFirst + i) % 7;
-        const yCoordinate = Math.floor((firstWeekday + i) / 7);
-
-        chartData.push({
-            x: xCoordinate,
-            y: 5 - yCoordinate,
+            x: currentDate.getUTCDay(), // Día de la semana en UTC (0 = Dom, 6 = Sáb)
+            y: Math.floor((currentDate - minDate) / (7 * 24 * 60 * 60 * 1000)), // Semana correcta
             value: sales,
-            date: new Date(date).getTime(),
-            custom: { monthDay: i + 1 }
+            date: dateKey,
+            custom: { day: weekdays[currentDate.getUTCDay()] }
         });
+
+        currentDate.setUTCDate(currentDate.getUTCDate() + 1); // Avanzar un día en UTC
     }
 
+    console.log("Datos procesados para el gráfico:", chartData); // Depuración: Ver datos finales
     return chartData;
 }
-
 
 // Crear el gráfico después de obtener los datos
 generateChartData().then(chartData => {
@@ -244,7 +255,10 @@ generateChartData().then(chartData => {
             categories: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
             title: { text: 'Día de la Semana' }
         },
-        yAxis: { visible: false },
+        yAxis: { 
+            title: { text: 'Semanas' },
+            reversed: true
+        },
         colorAxis: {
             min: 0,
             stops: [
@@ -270,6 +284,4 @@ generateChartData().then(chartData => {
             }
         }]
     });
-    
 });
-

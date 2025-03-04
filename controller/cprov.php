@@ -78,7 +78,7 @@ if ($oper == "editPrv1") {
 }
 
 if ($res) {
-    $_SESSION['idprov'] = $res['idprov'];
+    $_SESSION['idprov'] = $res;
     header("Location: ../views/vwpanpro.php");
 } else {
     echo "Error al registrar el proveedor";

@@ -74,7 +74,8 @@
                 <div id="container2"></div>
 
             </figure>
-            <select id="timeframeSelect">
+            <label for="timeframeSelect">Intervalo de tiempo:</label>
+            <select id="timeframeSelect" class="form-select">
                 <option value="Anual">Anual</option>
                 <option value="Mensual">Mensual</option>
                 <option value="Semanal">Semanal</option>

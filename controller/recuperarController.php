@@ -15,7 +15,8 @@ if (isset($_GET['token'])) {
     // Verificar si el token está presente en la URL
 
     $token = $_GET['token'];
-    $query = "SELECT idusu FROM usuario WHERE token_recuperacion = :token AND token_expira > NOW()";
+    $query = "SELECT idusu FROM usuario WHERE token_recuperacion = :token AND token_
+    expira > NOW()";
     $stmt = $db->prepare($query);
     $stmt->bindParam(':token', $token, PDO::PARAM_STR);
     $stmt->execute();
@@ -233,6 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['correo'])) {
                 $mail->send();
                 echo json_encode(['success' => true, 'message' => 'Correo enviado con éxito.']);
             } catch (Exception $e) {
+                error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
                 echo json_encode(['success' => false, 'message' => 'Error al enviar el correo.']);
             }
         } else {

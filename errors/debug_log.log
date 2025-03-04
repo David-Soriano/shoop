@@ -418,3 +418,87 @@ Recibido: Array
     [ope] => recibir
 )
 
+Formulario enviado con POST: Array
+(
+    [nomprov] => Juan David
+    [idusu] => 27
+    [dirrecprov] => Chia
+    [idubi] => 25
+    [url] => 
+    [nit] => 
+    [desprv] => dkadkñsdf
+    [estado] => activo
+)
+Datos enviados a la consulta: Array
+(
+    [nomprov] => Juan David
+    [idusu] => 27
+    [dirrecprov] => Chia
+    [idubi] => 25
+    [urlt] => 
+    [nit] => 
+    [desprv] => dkadkñsdf
+)
+Formulario enviado con POST: Array
+(
+    [nomprov] => Juan David
+    [idusu] => 27
+    [dirrecprov] => Chia
+    [idubi] => 25
+    [url] => 
+    [nit] => 
+    [desprv] => dkadkñsdf
+    [estado] => activo
+)
+Datos enviados a la consulta: Array
+(
+    [nomprov] => Juan David
+    [idusu] => 27
+    [dirrecprov] => Chia
+    [idubi] => 25
+    [urlt] => 
+    [nit] => 
+    [desprv] => dkadkñsdf
+)
+Formulario enviado con POST: Array
+(
+    [nomprov] => Juan David
+    [idusu] => 27
+    [dirrecprov] => Chia
+    [idubi] => 25
+    [url] => 
+    [nit] => 
+    [desprv] => dkadkñsdf
+    [estado] => activo
+)
+Datos enviados a la consulta: Array
+(
+    [nomprov] => Juan David
+    [idusu] => 27
+    [dirrecprov] => Chia
+    [idubi] => 25
+    [urlt] => 
+    [nit] => 
+    [desprv] => dkadkñsdf
+)
+Formulario enviado con POST: Array
+(
+    [nomprov] => Juan David
+    [idusu] => 27
+    [dirrecprov] => Chia
+    [idubi] => 25
+    [url] => 
+    [nit] => 
+    [desprv] => dkadkñsdf
+    [estado] => activo
+)
+Datos enviados a la consulta: Array
+(
+    [nomprov] => Juan David
+    [idusu] => 27
+    [dirrecprov] => Chia
+    [idubi] => 25
+    [urlt] => 
+    [nit] => 
+    [desprv] => dkadkñsdf
+)
