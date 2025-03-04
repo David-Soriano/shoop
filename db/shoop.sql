@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS shoop;
 CREATE DATABASE shoop;
 USE shoop;
 
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -63,6 +64,14 @@ CREATE TABLE `caracteristicas` (
   `descripcioncr` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `caracteristicas`
+--
+
+INSERT INTO `caracteristicas` (`idcar`, `idpro`, `descripcioncr`) VALUES
+(52, 164, 'Color: beige, naranja, gris'),
+(53, 164, 'Es inalámbrico: Si');
+
 -- --------------------------------------------------------
 
 --
@@ -102,7 +111,9 @@ CREATE TABLE `comisiones` (
 --
 
 INSERT INTO `comisiones` (`idcomis`, `idcom`, `monto_total`, `comision`, `fecha`) VALUES
-(2, 20, 30000.00, 2100.00, '2025-03-03 15:24:18');
+(2, 20, 30000.00, 2100.00, '2025-03-03 15:24:18'),
+(3, 21, 350000.00, 24500.00, '2025-03-04 16:14:53'),
+(4, 22, 350000.00, 24500.00, '2025-03-04 16:19:51');
 
 -- --------------------------------------------------------
 
@@ -126,7 +137,9 @@ CREATE TABLE `compra` (
 --
 
 INSERT INTO `compra` (`idcom`, `tiproduct`, `cantidad`, `preciocom`, `idubi`, `idusu`, `idped`, `fechareg`) VALUES
-(20, 'Moda', '1', '37800', 47030, 20, 45, '2025-03-03 10:24:18');
+(20, 'Moda', '1', '37800', 47030, 20, 45, '2025-03-03 10:24:18'),
+(21, 'Tecnología', '1', '296800', 47030, 20, 46, '2025-03-04 11:14:53'),
+(22, 'Tecnología', '1', '296800', 25175, 27, 47, '2025-03-04 11:19:51');
 
 -- --------------------------------------------------------
 
@@ -177,7 +190,9 @@ CREATE TABLE `detallecompra` (
 --
 
 INSERT INTO `detallecompra` (`iddell`, `subtotal`, `iva`, `total`, `idpro`, `direccomp`, `idcom`) VALUES
-(20, 31764.7, 5700, 37800, 163, 'Vereda la balsa', 20);
+(20, 31764.7, 5700, 37800, 163, 'Vereda la balsa', 20),
+(21, 249412, 66500, 296800, 164, 'Vereda la balsa', 21),
+(22, 249412, 66500, 296800, 164, 'Vereda la balsa calle 9a Sur', 22);
 
 -- --------------------------------------------------------
 
@@ -214,7 +229,9 @@ CREATE TABLE `detalle_pedido` (
 --
 
 INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`, `mpago`, `npago`, `direccion`, `idubi`) VALUES
-(43, 45, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030);
+(43, 45, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
+(44, 46, 164, 1, 296800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
+(45, 47, 164, 1, 296800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175);
 
 -- --------------------------------------------------------
 
@@ -294,7 +311,8 @@ INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`,
 (290, 'IMG/publicidad/publicidad_67ba00f4e5c5b.jpg', 'publicidad_67ba00f4e5c5b.jpg', 'jpg', NULL, 1, 1, NULL),
 (291, 'IMG/publicidad/publicidad_67ba012e5c66c.jpg', 'publicidad_67ba012e5c66c.jpg', 'jpg', NULL, 1, 1, NULL),
 (293, 'IMG/publicidad/publicidad_67ba0297c2697.jpg', 'publicidad_67ba0297c2697.jpg', 'jpg', NULL, 1, 1, NULL),
-(382, 'proinf/imagen_67c5c23df3c84.webp', 'zapato1_9d84893e-b872-49ad-a07e-46687ca6ef25_1080x', 'image/webp', 163, 1, NULL, NULL);
+(382, 'proinf/imagen_67c5c23df3c84.webp', 'zapato1_9d84893e-b872-49ad-a07e-46687ca6ef25_1080x', 'image/webp', 163, 1, NULL, NULL),
+(383, 'proinf/imagen_67c7265505f93.jpg', 'k68-mechanical-gaming-keyboard-60percent-wireless-', 'image/jpeg', 164, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -475,7 +493,9 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idped`, `idusu`, `total`, `fecha`, `estped`) VALUES
-(45, 20, 37800.00, '2025-03-03 15:23:43', 'Recibido');
+(45, 20, 37800.00, '2025-03-03 15:23:43', 'Recibido'),
+(46, 20, 296800.00, '2025-03-04 16:13:44', 'Recibido'),
+(47, 27, 296800.00, '2025-03-04 16:18:42', 'Recibido');
 
 -- --------------------------------------------------------
 
@@ -562,7 +582,8 @@ INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valor
 (160, 'Camisa Selección Argentina Año 2024 Hombre', 25200, 7, NULL, 20000, 'Camisa deportiva', '2025-03-01 13:37:42', '2025-03-01 13:42:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
 (161, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón deportiva año 2024', '2025-03-03 14:50:58', '2025-03-03 14:52:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
 (162, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón deportiva año 2024', '2025-03-03 14:50:58', '2025-03-03 14:51:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(163, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón ', '2025-03-03 14:52:46', '2025-03-03 15:24:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 1, 2, NULL);
+(163, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón ', '2025-03-03 14:52:46', '2025-03-03 15:24:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 1, 2, NULL),
+(164, 'Teclado Mecánico K68', 371000, 6, NULL, 350000, 'Teclado con switches red color combinado inalámbrico. ', '2025-03-04 16:12:05', '2025-03-04 16:19:51', '2025-03-04 05:00:00', '2025-03-04 05:00:00', 'activo', 20, 2, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -584,7 +605,8 @@ INSERT INTO `prodxprov` (`idpro`, `idprov`, `idprodprv`) VALUES
 (160, 82, 91),
 (161, 82, 92),
 (162, 82, 93),
-(163, 82, 94);
+(163, 82, 94),
+(164, 82, 95);
 
 -- --------------------------------------------------------
 
@@ -610,7 +632,7 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `urlt`, `nit`, `idubi`, `idusu`, `desprv`, `saldo`, `estprv`) VALUES
-(82, 'DavidX', 'Calle 34 Bloque 4', 'shoop.com', '454112', 15001, 20, 'Todo lo que quieres a tu alcance y en un solo lugar', 30000.00, 'activo');
+(82, 'DavidX', 'Calle 34 Bloque 4', 'shoop.com', '454112', 15001, 20, 'Todo lo que quieres a tu alcance y en un solo lugar', 441600.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -2159,7 +2181,7 @@ ALTER TABLE `busquedas`
 -- AUTO_INCREMENT de la tabla `caracteristicas`
 --
 ALTER TABLE `caracteristicas`
-  MODIFY `idcar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `idcar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `carrito`
@@ -2171,13 +2193,13 @@ ALTER TABLE `carrito`
 -- AUTO_INCREMENT de la tabla `comisiones`
 --
 ALTER TABLE `comisiones`
-  MODIFY `idcomis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idcomis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -2195,7 +2217,7 @@ ALTER TABLE `detallecarrito`
 -- AUTO_INCREMENT de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  MODIFY `iddell` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `iddell` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `detallefavoritos`
@@ -2207,7 +2229,7 @@ ALTER TABLE `detallefavoritos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `devolucionreembolso`
@@ -2231,7 +2253,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2261,7 +2283,7 @@ ALTER TABLE `pagxperfil`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
@@ -2279,13 +2301,13 @@ ALTER TABLE `pqr`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT de la tabla `prodxprov`
 --
 ALTER TABLE `prodxprov`
-  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `idprodprv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`

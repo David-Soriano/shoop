@@ -384,3 +384,37 @@ Recibido: Array
     [ope] => recibir
 )
 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: 
+Id Pedido: 46
+EStado Ped: En Reparto
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: Array
+(
+    [idped] => 46
+    [idprov] => 82
+    [ope] => recibir
+)
+
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: 
+Id Pedido: 47
+EStado Ped: En Reparto
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: Array
+(
+    [idped] => 47
+    [idprov] => 82
+    [ope] => recibir
+)
+
