@@ -502,3 +502,70 @@ Datos enviados a la consulta: Array
     [nit] => 
     [desprv] => dkadkñsdf
 )
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: 
+Id Pedido: 48
+EStado Ped: Enviado
+Operación: 
+Recibido: 
+Id Pedido: 48
+EStado Ped: Enviado
+Operación: 
+Recibido: 
+Id Pedido: 48
+EStado Ped: Enviado
+Operación: 
+Recibido: 
+Id Pedido: 48
+EStado Ped: Enviado
+Operación: 
+Recibido: 
+Id Pedido: 48
+EStado Ped: Enviado
+Operación: 
+Recibido: 
+Id Pedido: 48
+EStado Ped: En Reparto
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: Array
+(
+    [idped] => 48
+    [idprov] => 82
+    [ope] => recibir
+)
+
+Recibido: Array
+(
+    [idped] => 48
+    [idprov] => 82
+    [ope] => recibir
+)
+
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Id Pedido: 
+EStado Ped: 
+Operación: 
+Recibido: 
+Id Pedido: 49
+EStado Ped: Enviado
+Operación: 
+Recibido: 
+Id Pedido: 49
+EStado Ped: En Reparto
+Operación: 

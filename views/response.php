@@ -77,164 +77,101 @@ if ($status == 4 && $idusu > 0 && $total > 0) {
     }
 }
 
-error_log("Estado de la transacción: " . json_encode($_REQUEST));
+function enviarFactura($correo, $nombreCliente, $productos, $total, $direccion, $idfactura) {
+    $productosHtml = '';
+    foreach ($productos as $producto) {
+        $productosHtml .= "<tr>
+            <td>{$producto['nombre']}</td>
+            <td>{$producto['cantidad']}</td>
+            <td>{$producto['precio']}</td>
+        </tr>";
+    }
 
-function enviarFactura($correo, $nombreCliente, $productos, $total, $direccion, $idfactura){
+    $cuerpoHtml = "
+    <html>
+    <head>
+        <style>
+        .invoice-box { max-width: 800px; margin: auto; padding: 30px; border: 1px solid #eee; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); font-size: 16px; font-family: 'Helvetica Neue', Arial, sans-serif; color: #555; }
+        .invoice-box table { width: 100%; text-align: left; }
+        .invoice-box table td { padding: 5px; vertical-align: top; }
+        .invoice-box table tr.heading td { background: #eee; border-bottom: 1px solid #ddd; font-weight: bold; }
+        .invoice-box table tr.item td { border-bottom: 1px solid #eee; }
+        .invoice-box table tr.total td:nth-child(3) { border-top: 2px solid #eee; font-weight: bold; text-align: right; }
+        .banner { text-align: center; margin-bottom: 20px; }
+        .banner img { max-width: 100px; }
+        </style>
+    </head>
+    <body>
+        <div class='invoice-box'>
+        <div class='banner'>
+            <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='Shoop, Inc'>
+        </div>
+        <table>
+            <tr class='top'>
+                <td colspan='2'>
+                    <table>
+                        <tr>
+                            <td><h2>Factura de Compra</h2></td>
+                            <td>Fecha: " . date('d-m-Y') . "<br>Número de Factura: {$idfactura}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class='information'>
+                <td colspan='2'>
+                    <table>
+                        <tr><td><h4>Detalles de la Tienda</h4>SHOOP, Inc.<br>www.shoop.com<br>Chía, Colombia</td></tr>
+                        <tr><td><h4>Detalles del Cliente</h4>Nombre: {$nombreCliente}<br>Correo: {$correo}<br>Dirección: {$direccion}</td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class='heading'><td>Producto</td><td>Cantidad</td><td>Precio</td></tr>
+            {$productosHtml}
+            <tr class='total'><td></td><td></td><td>Total: $" . number_format($total, 2, ",", ".") . "</td></tr>
+        </table>
+        <br>
+        <h3>Consejos y Recomendaciones</h3>
+        <p>Gracias por tu compra. Te recomendamos revisar nuestros nuevos productos y ofertas especiales.</p>
+        <p>Si tienes alguna pregunta, no dudes en contactarnos a través de nuestro correo de soporte.</p>
+        <p>¡Esperamos verte pronto!</p>
+        </div>
+    </body>
+    </html>";
+
+    enviarCorreo($correo, 'Factura de Compra', $cuerpoHtml, 'toshoop2024@gmail.com');
+}
+
+function enviarCorreo($correoDestino, $asunto, $cuerpoHtml, $copiaOculta = null) {
     $mail = new PHPMailer(true);
     $mail->CharSet = 'UTF-8';
-    try{
+
+    try {
         $mail->isSMTP();
-        $mail->Host ='smtp.gmail.com';
+        $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = MAIL_USER;
         $mail->Password = MAIL_PASS;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
+
         $mail->setFrom(MAIL_USER, 'Soporte SHOOP');
-        $mail->addAddress($correo);
+        $mail->addAddress($correoDestino);
         $mail->addReplyTo(MAIL_USER, 'Equipo SHOOP');
-        $mail->isHTML(true);
-        $mail->Subject = 'Factura de Compra';
-        $mail->addBCC('toshoop2024@gmail.com');
-        
-        $productosHtml = '';
-        foreach ($productos as $producto) {
-            $productosHtml .= "<tr>
-                <td>{$producto['nombre']}</td>
-                <td>{$producto['cantidad']}</td>
-                <td>{$producto['precio']}</td>
-            </tr>";
+
+        if ($copiaOculta) {
+            $mail->addBCC($copiaOculta);
         }
 
-        $mail->Body = "
-        <html>
-        <head>
-            <style>
-            .invoice-box {
-                max-width: 800px;
-                margin: auto;
-                padding: 30px;
-                border: 1px solid #eee;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-                font-size: 16px;
-                line-height: 24px;
-                font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-                color: #555;
-            }
-            .invoice-box table {
-                width: 100%;
-                line-height: inherit;
-                text-align: left;
-            }
-            .invoice-box table td {
-                padding: 5px;
-                vertical-align: top;
-            }
-            .invoice-box table tr td:nth-child(3) {
-                text-align: right;
-            }
-            .invoice-box table tr.top table td {
-                padding-bottom: 20px;
-            }
-            .invoice-box table tr.information table td {
-                padding-bottom: 40px;
-            }
-            .invoice-box table tr.heading td {
-                background: #eee;
-                border-bottom: 1px solid #ddd;
-                font-weight: bold;
-            }
-            .invoice-box table tr.details td {
-                padding-bottom: 20px;
-            }
-            .invoice-box table tr.item td {
-                border-bottom: 1px solid #eee;
-            }
-            .invoice-box table tr.item.last td {
-                border-bottom: none;
-            }
-            .invoice-box table tr.total td:nth-child(2) {
-                border-top: 2px solid #eee;
-                font-weight: bold;
-            }
-            .banner {
-                text-align: center;
-                margin-bottom: 20px;
-            }
-            .banner img {
-                max-width: 100px;
-            }
-            </style>
-        </head>
-        <body>
-            <div class='invoice-box'>
-            <div class='banner'>
-                <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='Shoop, Inc'>
-            </div>
-            <table>
-                <tr class='top'>
-                <td colspan='2'>
-                    <table>
-                    <tr>
-                        <td class='title'>
-                        <h2>Factura de Compra</h2>
-                        </td>
-                        <td>
-                        Fecha: " . date('d-m-Y') . "<br>
-                        Número de Factura: {$idfactura}
-                        </td>
-                    </tr>
-                    </table>
-                </td>
-                </tr>
-                <tr class='information'>
-                <td colspan='2'>
-                    <table>
-                    <tr>
-                        <td>
-                        <h4>Detalles de la Tienda</h4>
-                        SHOOP, Inc.<br>
-                        www.shoop.com<br>
-                        Chía, Colombia
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        <h4>Detalles del Cliente</h4>
-                        Nombre: {$nombreCliente}<br>
-                        Correo: {$correo}<br>
-                        Dirección: {$direccion}
-                        </td>
-                    </tr>
-                    </table>
-                </td>
-                </tr>
-                <tr class='heading'>
-                <td>Producto</td>
-                <td>Cantidad</td>
-                <td>Precio</td>
-                </tr>
-                {$productosHtml}
-                <tr class='total'>
-                <td></td>
-                <td></td>
-                <td>Total: $". number_format($total, 2, ",", ".") ."</td>
-                </tr>
-            </table>
-            <br>
-            <h3>Consejos y Recomendaciones</h3>
-            <p>Gracias por tu compra. Te recomendamos revisar nuestros nuevos productos y ofertas especiales.</p>
-            <p>Si tienes alguna pregunta, no dudes en contactarnos a través de nuestro correo de soporte.</p>
-            <p>¡Esperamos verte pronto!</p>
-            </div>
-        </body>
-        </html>";
+        $mail->isHTML(true);
+        $mail->Subject = $asunto;
+        $mail->Body = $cuerpoHtml;
 
         $mail->send();
-    } catch(\Exception $e){
+    } catch (\Exception $e) {
         error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
     }
 }
+
 ?>
 
 <!DOCTYPE html>

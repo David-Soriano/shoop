@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Estado de tu Pedido</title>
+
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+        }
+
+        main {
+            width: 65%;
+        }
+
+        .header {
+            padding: 5% 0;
+        }
+
+        .header img {
+            width: 45%;
+        }
+
+        .header .bx-user {
+            text-align: end;
+            font-size: 14px;
+            margin: auto;
+            font-weight: 400;
+        }
+
+        .bx-ini {
+            background: #FFF;
+            border-radius: 5px;
+            padding: 4% 2%;
+            border-radius: 6px;
+            border-right-width: 1px;
+            border-top-width: 1px;
+            border-bottom-width: 2px;
+            border-left-width: 0;
+            border-style: solid;
+            border-color: #e5e5e5;
+            border-left: 4px solid rgb(0, 166, 80);
+        }
+
+        .bx-ini_inf {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bx-ini_inf p {
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+            font-size: 17px;
+            color: #1a1a1a;
+        }
+
+        .bx-ini img {
+            width: 40%;
+        }
+
+        .bx-body {
+            padding: 3%;
+            background: #FFF;
+            margin-top: 4%;
+            border-radius: 6px;
+            border-right-width: 1px;
+            border-top-width: 1px;
+            border-bottom-width: 2px;
+            border-left-width: 1px;
+            border-style: solid;
+            border-color: #e5e5e5;
+        }
+
+        .bx-body_ini {
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        .bx-body h6 {
+            font-size: 20px;
+        }
+
+        .bx-body_dt .ico {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .bx-body_dt .ico i {
+            font-size: 25px;
+        }
+
+        .bx-body_dt .dt .dir {
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .bx-body_dt .dt .tel {
+            font-weight: 400;
+            color: gray;
+        }
+
+        .footer {
+            padding: 5% 0;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='container'>
+        <main>
+            <div class="row header">
+                <div class="col-5">
+                    <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='Shoop, Inc'>
+                </div>
+                <div class="col bx-user">
+                    DAVIDSCICUA314
+                </div>
+            </div>
+            <div class="row bx-ini">
+                <div class="col-8 bx-ini_inf">
+                    <p>En camino Pulsar 180 UG kit arras...</p>
+                    <h5>Llega el fevha</h5>
+                </div>
+                <div class="col">
+                    <img src="https://dummyimage.com/600x200/000/fff.png&text=Prueba" alt="producto">
+                </div>
+            </div>
+            <div class="row bx-body">
+                <div class="col">
+                    <p class="bx-body_ini">El pedido fue enviado y muy pronto llegará a tu destino. Te avisaremos cuando
+                        esté cerca.</p>
+                    <h6>Detalles del envío:</h6>
+                    <div>
+                        <div class="row bx-body_dt">
+                            <div class="col-1 ico"><i class="bi bi-geo-alt"></i></div>
+                            <div class="col dt">
+                                <p class="dir">Dirección</p>
+                                <p class="tel">Teléfono</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row footer">
+                <div class="col">
+                    <p>Si tienes preguntas, responde este correo o contáctanos en nuestro soporte.</p>
+                    <p>&copy; 2025 SHOOP, Inc.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

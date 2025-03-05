@@ -1,0 +1,14 @@
+[05-Mar-2025 15:52:00 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\shoop\config\config.php:9
+Stack trace:
+#0 C:\xampp\htdocs\shoop\controller\cped.php(6): require_once()
+#1 C:\xampp\htdocs\shoop\views\vwTusPedidos.php(2): include_once('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\shoop\home.php(39): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\shoop\config\config.php on line 9
+[05-Mar-2025 15:52:04 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../vendor/autoload.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\shoop\config\config.php:9
+Stack trace:
+#0 C:\xampp\htdocs\shoop\controller\cped.php(6): require_once()
+#1 C:\xampp\htdocs\shoop\views\vwTusPedidos.php(2): include_once('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\shoop\home.php(39): include('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\shoop\config\config.php on line 9

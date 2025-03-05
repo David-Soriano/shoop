@@ -229,7 +229,7 @@ class Pedido
     function getPedidos($idprov)
     {
         $res = NULL;
-        $sql = "SELECT pr.idprov, pxp.idpro, pxp.idprodprv, p.nompro, p.precio, p.pordescu, dp.iddet, dp.idped, dp.cantidad, ped.idusu, ped.total, ped.fecha, ped.estped, i.imgpro, i.nomimg FROM proveedor pr INNER JOIN prodxprov pxp ON pr.idprov = pxp.idprov INNER JOIN producto p ON pxp.idpro = p.idpro INNER JOIN detalle_pedido dp ON p.idpro = dp.idpro INNER JOIN pedido ped ON dp.idped = ped.idped LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON p.idpro = i.idpro WHERE pr.idprov = :idprov;";
+        $sql = "SELECT pr.idprov, pxp.idpro, pxp.idprodprv, p.nompro, p.precio, p.pordescu, dp.iddet, dp.idped, dp.cantidad, ped.idusu, ped.total, ped.fecha, ped.estped, i.imgpro, i.nomimg FROM proveedor pr INNER JOIN prodxprov pxp ON pr.idprov = pxp.idprov INNER JOIN producto p ON pxp.idpro = p.idpro INNER JOIN detalle_pedido dp ON p.idpro = dp.idpro INNER JOIN pedido ped ON dp.idped = ped.idped LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON p.idpro = i.idpro WHERE pr.idprov = :idprov ORDER BY ped.fecha DESC;";
 
         try {
             $modelo = new Conexion();
@@ -279,6 +279,23 @@ class Pedido
             echo "Error. Intentalo más tarde";
             return false;
         }
+    }
+    function getDatosUsuario(){
+        $res = NULL;
+        $sql = "SELECT u.idusu, u.nomusu, u.apeusu, u.emausu, u.dirrecusu, u.celusu, p.idped, p.idusu, p.total, dp.iddet, dp.idpro, dp.cantidad, pr.nompro FROM usuario AS u INNER JOIN pedido AS p  ON p.idusu = u.idusu INNER JOIN detalle_pedido  AS dp ON p.idped = dp.idped INNER JOIN producto AS pr ON dp.idpro = pr.idpro WHERE p.idped = :idped;";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $idped = $this->getIdped();
+            $result->bindValue(':idped', $idped);
+            $result->execute();
+            $res = $result->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error. Intentalo mas tarde";
+        }
+        return $res;
     }
 }
 ?>
