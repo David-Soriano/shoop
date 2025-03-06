@@ -1,5 +1,4 @@
 <?php
-error_log("Formulario enviado con POST: " . print_r($_POST, true), 3, 'C:/xampp/htdocs/SHOOP/errors/debug_log.log');
 // die("Se recibió el formulario.");
 require_once "../model/conexion.php";
 require_once("../model/mprov.php");

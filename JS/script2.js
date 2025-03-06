@@ -102,7 +102,6 @@ function añadirImagenes() {
             .then(response => response.text())
             .then(data => {
                 console.log("Respuesta del servidor:", data);
-                alert("Formulario enviado correctamente");
                 window.location.reload();
             })
             .catch(error => console.error("Error en el envío:", error));

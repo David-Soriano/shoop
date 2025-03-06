@@ -31,9 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
 
-    // Depuración: Verificar si se recibe el JSON
-    file_put_contents('C:/xampp\htdocs/SHOOP/errors/debug_log.log', "Recibido: " . print_r($data, true) . "\n", FILE_APPEND);
-
     if (isset($data['idped']) && isset($data['ope'])) {
         $idped = intval($data['idped']); // Convertir a entero por seguridad
         $ope = $data['ope']; // Obtener la operación
@@ -51,9 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($resultado) {
                     try {
-                        $asunto = "¡Tu pedido ha sido entregado!";
-                        $cuerpoHtml = generarCorreoPedido($dtDtosUser['nomusu'], "Recibido");
-                        enviarCorreo($dtDtosUser['emausu'], $asunto, $cuerpoHtml);
+                       enviarCorreoEstadoPedido($dtDtosUser['emausu'], 'Recibido', $dtDtosUser['nompro'], $dtDtosUser['dirrecusu'], $dtDtosUser['celusu']);
                         // Obtener los datos del pedido y compra
                         $pedidoData = $pedido->getOne(); // Datos del pedido
                         $compra = new Compra();
@@ -136,7 +131,7 @@ if ($idpedido || $idusu) {
     $pedido->setIdped($idpedido);
     $dtOnePed = $pedido->getOne();
     $dtDtosUser = $pedido->getDatosUsuario();
-    
+
     $pedido->setIdped($idpedido);
     $pedido->setIdusu($idusu);
     $pedido->setEstped($estadop);
@@ -170,7 +165,7 @@ function actualizarPedidoYGuardarCompra($pedido, $estped, $correo, $nompro, $dir
                 break;
 
             case 'En Reparto':
-                
+                enviarCorreoEstadoPedido($correo, $estped, $nompro, $direccion, $celusu);
                 break;
         }
 
@@ -188,72 +183,101 @@ function enviarCorreoEstadoPedido($correoDestino, $estado, $producto, $direccion
 
     $cuerpoHtml = "<!DOCTYPE html>
 <html lang='es'>
+
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Estado de tu Pedido</title>
     <style>
-        .container { display: flex; justify-content: center; align-items: center; background: #f5f5f5; }
-        main { width: 65%; }
-        .header { padding: 5% 0; }
+        .container { padding: 7%; background: #f0f7f6; text-align: center; }
+        main { width: 65%; margin: 0 auto; background: #fff; padding: 20px; border-radius: 6px; border: 1px solid #e5e5e5; }
+        table { border-collapse: collapse; width: 100%; }
         .header img { width: 45%; }
-        .bx-user { text-align: end; font-size: 14px; font-weight: 400; }
-        .bx-ini { background: #FFF; border-radius: 5px; padding: 4% 2%; border-left: 4px solid rgb(0, 166, 80); }
-        .bx-ini_inf p { font-size: 17px; color: #1a1a1a; }
-        .bx-ini img { width: 40%; }
-        .bx-body { padding: 3%; background: #FFF; margin-top: 4%; border-radius: 6px; border: 1px solid #e5e5e5; }
-        .bx-body_ini { font-size: 17px; font-weight: 400; }
-        .bx-body h6 { font-size: 20px; }
-        .bx-body_dt .ico { display: flex; flex-direction: column; align-items: center; }
-        .bx-body_dt .ico i { font-size: 25px; }
         .footer { padding: 5% 0; color: gray; }
     </style>
 </head>
+
 <body>
     <div class='container'>
         <main>
-            <div class='header'>
-                <div style='width: 50%; float: left;'>
-                    <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='Shoop, Inc'>
-                </div>
-                <div style='width: 50%; float: right; text-align: right;' class='bx-user'>$usuario</div>
-                <div style='clear: both;'></div>
-            </div>
-            <div class='bx-ini'>
-                <div style='width: 65%; float: left;' class='bx-ini_inf'>
-                    <p>$estado $producto</p>
-                    <h5>Llegará pronto</h5>
-                </div>
-                <div style='width: 35%; float: right;'>
-                    <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='producto'>
-                </div>
-                <div style='clear: both;'></div>
-            </div>
-            <div class='bx-body'>
-                <p class='bx-body_ini'>El pedido fue enviado y muy pronto llegará a tu destino. Te avisaremos cuando esté cerca.</p>
-                <h6>Detalles del envío:</h6>
-                <div class='bx-body_dt'>
-                    <div style='width: 10%; float: left; text-align: center;' class='ico'>
-                        <i class='bi bi-geo-alt'></i>
-                    </div>
-                    <div style='width: 90%; float: left;' class='dt'>
-                        <p class='dir'>$direccion</p>
-                        <p class='tel'>$telefono</p>
-                    </div>
-                    <div style='clear: both;'></div>
-                </div>
-            </div>
-            <div class='footer'>
+            <!-- Encabezado -->
+            <table role='presentation' width='100%'>
+                <tr>
+                    <td align='left'>
+                        <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='Shoop, Inc' style='width: 25%; display: block;'>
+                    </td>
+                    <td align='right' style='font-size: 14px; font-weight: 400;'>$usuario</td>
+                </tr>
+            </table>
+
+            <!-- Estado del Pedido -->
+            <table role='presentation' width='100%' style='display: block; background: #FFF; border-radius: 5px; padding: 4% 2%; border-left: 4px solid rgb(250, 78, 105); margin: 3% 0;'>
+                <tr'>
+                    <td width='65%' style='font-size: 17px; color: #1a1a1a; text-align: justify;'>
+                        <p style='margin: 0 0 14px 0;'>$estado $producto</p>
+                        <h5 style='text-align: justify; font-size: 14px; margin: 0;'>";
+                        if ($estado == 'Recibido') {
+                            $cuerpoHtml .= "Recibiste tu Compra";
+                        } else{
+                            $cuerpoHtml .= "Llegará pronto";
+                        }
+                        $cuerpoHtml .= "</h5>
+                    </td>
+                    <td width='35%'>
+                        <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='producto' style='width: 100%; max-width: 150px; display: block; margin: auto;'>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Detalles del envío -->
+            <table role='presentation' width='100%' style='display: block; padding: 3%; background: #FFF; margin-top: 4%; border-radius: 6px; border: 1px solid #e5e5e5;'>
+                <tr>
+                    <td style='font-size: 17px; font-weight: 400; text-align: justify;'>";
+                    if ($estado == 'Enviado') {
+                        $cuerpoHtml .= "El pedido fue enviado y muy pronto llegará a tu destino. Te avisaremos cuando esté cerca.";
+                    } else if ($estado == 'En Reparto') {
+                        $cuerpoHtml .= "Nuestro repartidor está en tu zona. Prepárate para recibir tu pedido en cualquier momento.";
+                    } else if ($estado == 'Recibido') {
+                        $cuerpoHtml .= "Tu pedido ha sido entregado con éxito. Esperamos que lo disfrutes.";
+                    }
+
+$cuerpoHtml .="</td>
+            </tr>
+                <tr>
+                    <td style='font-size: 20px; margin: 0; text-align: justify;'><b>Detalles del envío:</b></td>
+                </tr>
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <table role='presentation' width='100%'>
+                            <tr>
+                                <td width='10%' style='text-align: center; font-size: 25px;'>📍</td>
+                                <td width='90%' style='text-align: justify; font-size: 17px;'>
+                                    <p style='font-size: 19px;'>$direccion</p>
+                                    <p style='color: gray; font-size: 14px;'>Cel: $telefono</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Pie de página -->
+            <div class='footer' style='text-align: justify;'>
                 <p>Si tienes preguntas, responde este correo o contáctanos en nuestro soporte.</p>
                 <p>&copy; 2025 SHOOP, Inc.</p>
             </div>
         </main>
     </div>
 </body>
-</html>
-";
 
-    enviarCorreo($correoDestino, 'Estado de tu pedido', $cuerpoHtml);
+</html>";
+
+    if($estado == "Recibido"){
+        $asunto = "Hola, ¡Llegué!";
+    } else{
+        $asunto = "Estado del pedido";
+    }
+    enviarCorreo($correoDestino, $asunto, $cuerpoHtml);
 }
 
 
