@@ -140,7 +140,7 @@ include "../controller/cusu.php"; ?>
                                     <p><i class="bi bi-question-circle-fill"></i> El usuario es su correo electrónico.</p>
                                     <input type="hidden" name="idpef" value="1">
                                     <input type="hidden" name="ope" value="save">
-                                    <div class="g-recaptcha" data-sitekey="6Ldez-wqAAAAAJrl2TYRMsj3J5tCtRUW6O3cVI8T"></div>
+                                    <!-- <div class="g-recaptcha" data-sitekey="6Ldez-wqAAAAAJrl2TYRMsj3J5tCtRUW6O3cVI8T"></div> -->
                                     <input type="submit" value="Registrar" class="btn mt-4" id="btn-registrar">
                                 </form>
                             </div>
