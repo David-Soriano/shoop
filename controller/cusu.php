@@ -26,7 +26,8 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 $idubiUsuario = $_SESSION['idubi'] ?? null; // Ciudad del usuario
 
-function obtenerUbicacion($idubi) {
+function obtenerUbicacion($idubi)
+{
     // Conexión a la BD
     $modelo = new Conexion();
     $conexion = $modelo->getConexion();
@@ -71,6 +72,42 @@ $ciudades = $ubicacion['ciudades'];
 
 
 if ($ope == "save") {
+    $recaptchaResponse = $_POST["g-recaptcha-response"]; // Capturar la respuesta de reCAPTCHA
+
+    if (empty($recaptchaResponse)) {
+        echo "Error: Debe completar el reCAPTCHA.";
+        exit();
+    }
+
+    // Clave secreta de Google reCAPTCHA
+    $secretKey = "6Ldez-wqAAAAANQnW__8FhdjVEwTIeVfwagEIDNnY";
+    $url = "https://www.google.com/recaptcha/api/siteverify";
+
+    // Datos para enviar a la API de Google
+    $data = [
+        "secret" => $secretKey,
+        "response" => $recaptchaResponse,
+        "remoteip" => $_SERVER["REMOTE_ADDR"]
+    ];
+
+    // Hacer la solicitud a Google
+    $options = [
+        "http" => [
+            "header" => "Content-type: application/x-www-form-urlencoded",
+            "method" => "POST",
+            "content" => http_build_query($data)
+        ]
+    ];
+    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    $responseData = json_decode($result, true);
+
+    if (!$responseData["success"]) {
+        echo "Error: reCAPTCHA no válido.";
+        exit();
+    }
+
+    // Si el reCAPTCHA es válido, continuar con el registro
     if ($isCorreo) {
         echo "El usuario ya se ha registrado anteriormente. Intente de nuevo";
     } else {
@@ -159,7 +196,7 @@ if ($ope == "save") {
     } else {
         header("Location: ../home.php?pg=15&msj=2");
     }
-} else if ($ope == "inactivar"){
+} else if ($ope == "inactivar") {
     $usu->setIdusu($idusu);
     if ($usu->inactivarUsu()) {
         session_destroy();
@@ -168,7 +205,7 @@ if ($ope == "save") {
     } else {
         header("Location: ../home.php?pg=15&msj=2");
     }
-} else if ($ope == "activar"){
+} else if ($ope == "activar") {
     $usu->setIdusu($idusu);
     if ($usu->activarUsu()) {
         header("Location: ../home.php?pg=15&msj=1");

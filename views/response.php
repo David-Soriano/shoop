@@ -104,7 +104,7 @@ function enviarFactura($correo, $nombreCliente, $productos, $total, $direccion, 
     <body>
         <div class='invoice-box'>
         <div class='banner'>
-            <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='Shoop, Inc'>
+            <img src='https://shoop.ct.ws/IMG/Logo_Fijo.png' alt='Shoop, Inc'>
         </div>
         <table>
             <tr class='top'>
@@ -120,7 +120,7 @@ function enviarFactura($correo, $nombreCliente, $productos, $total, $direccion, 
             <tr class='information'>
                 <td colspan='2'>
                     <table>
-                        <tr><td><h4>Detalles de la Tienda</h4>SHOOP, Inc.<br>www.shoop.com<br>Chía, Colombia</td></tr>
+                        <tr><td><h4>Detalles de la Tienda</h4>SHOOP, Inc.<br><a href='https://shoop.ct.ws/'>shoop.ct.ws/</a><br>Chía, Colombia</td></tr>
                         <tr><td><h4>Detalles del Cliente</h4>Nombre: {$nombreCliente}<br>Correo: {$correo}<br>Dirección: {$direccion}</td></tr>
                     </table>
                 </td>

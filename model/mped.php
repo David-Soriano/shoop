@@ -282,7 +282,7 @@ class Pedido
     }
     function getDatosUsuario(){
         $res = NULL;
-        $sql = "SELECT u.idusu, u.nomusu, u.apeusu, u.emausu, u.dirrecusu, u.celusu, p.idped, p.idusu, p.total, dp.iddet, dp.idpro, dp.cantidad, pr.nompro FROM usuario AS u INNER JOIN pedido AS p  ON p.idusu = u.idusu INNER JOIN detalle_pedido  AS dp ON p.idped = dp.idped INNER JOIN producto AS pr ON dp.idpro = pr.idpro WHERE p.idped = :idped;";
+        $sql = "SELECT u.idusu, u.nomusu, u.apeusu, u.emausu, u.dirrecusu, u.celusu, p.idped, p.idusu, p.total, dp.iddet, dp.idpro, dp.cantidad, pr.nompro, i.imgpro FROM usuario AS u INNER JOIN pedido AS p  ON p.idusu = u.idusu INNER JOIN detalle_pedido  AS dp ON p.idped = dp.idped INNER JOIN producto AS pr ON dp.idpro = pr.idpro INNER JOIN (SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON pr.idpro = i.idpro WHERE p.idped = :idped;";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();

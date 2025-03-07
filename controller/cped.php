@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($resultado) {
                     try {
-                       enviarCorreoEstadoPedido($dtDtosUser['emausu'], 'Recibido', $dtDtosUser['nompro'], $dtDtosUser['dirrecusu'], $dtDtosUser['celusu']);
+                       enviarCorreoEstadoPedido($dtDtosUser['emausu'], 'Recibido', $dtDtosUser['nompro'], $dtDtosUser['dirrecusu'], $dtDtosUser['celusu'], $dtDtosUser['imgpro']);  
                         // Obtener los datos del pedido y compra
                         $pedidoData = $pedido->getOne(); // Datos del pedido
                         $compra = new Compra();
@@ -140,7 +140,7 @@ if ($idpedido || $idusu) {
     $dtCompras = $compra->getCompras($_SESSION['idusu']);
 
     // Actualizar el estado del pedido y guardar la compra
-    actualizarPedidoYGuardarCompra($pedido, $estadop, $dtDtosUser['emausu'], $dtDtosUser['nompro'], $dtDtosUser['dirrecusu'], $dtDtosUser['celusu']);
+    actualizarPedidoYGuardarCompra($pedido, $estadop, $dtDtosUser['emausu'], $dtDtosUser['nompro'], $dtDtosUser['dirrecusu'], $dtDtosUser['celusu'], $dtDtosUser['imgpro']);
 }
 
 
@@ -154,18 +154,18 @@ function segEnv($idped)
 }
 
 // Método para actualizar el estado del pedido y guardar la compra y su detalle
-function actualizarPedidoYGuardarCompra($pedido, $estped, $correo, $nompro, $direccion, $celusu)
+function actualizarPedidoYGuardarCompra($pedido, $estped, $correo, $nompro, $direccion, $celusu, $img)
 {
     try {
         $pedido->updatePedido($estped);
 
         switch ($estped) {
             case 'Enviado':
-                enviarCorreoEstadoPedido($correo, $estped, $nompro, $direccion, $celusu);
+                enviarCorreoEstadoPedido($correo, $estped, $nompro, $direccion, $celusu, $img);
                 break;
 
             case 'En Reparto':
-                enviarCorreoEstadoPedido($correo, $estped, $nompro, $direccion, $celusu);
+                enviarCorreoEstadoPedido($correo, $estped, $nompro, $direccion, $celusu, $img);
                 break;
         }
 
@@ -177,7 +177,7 @@ function actualizarPedidoYGuardarCompra($pedido, $estped, $correo, $nompro, $dir
     }
 }
 
-function enviarCorreoEstadoPedido($correoDestino, $estado, $producto, $direccion, $telefono)
+function enviarCorreoEstadoPedido($correoDestino, $estado, $producto, $direccion, $telefono, $img)
 {
     $usuario = explode('@', $correoDestino)[0]; // Obtener el nombre del usuario antes del @
 
@@ -204,7 +204,7 @@ function enviarCorreoEstadoPedido($correoDestino, $estado, $producto, $direccion
             <table role='presentation' width='100%'>
                 <tr>
                     <td align='left'>
-                        <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='Shoop, Inc' style='width: 25%; display: block;'>
+                        <img src='https://shoop.ct.ws/IMG/Logo_Fijo.png' alt='Shoop, Inc' style='width: 25%; display: block;'>
                     </td>
                     <td align='right' style='font-size: 14px; font-weight: 400;'>$usuario</td>
                 </tr>
@@ -224,7 +224,7 @@ function enviarCorreoEstadoPedido($correoDestino, $estado, $producto, $direccion
                         $cuerpoHtml .= "</h5>
                     </td>
                     <td width='35%'>
-                        <img src='https://dummyimage.com/600x200/000/fff.png&text=Prueba' alt='producto' style='width: 100%; max-width: 150px; display: block; margin: auto;'>
+                        <img src='https://shoop.ct.ws/$img' alt='Producto' style='width: 100%; max-width: 150px; display: block; margin: auto;'>
                     </td>
                 </tr>
             </table>
