@@ -174,12 +174,9 @@ async function fetchSalesData() {
     const response = await fetch('../controller/get_sales_data.php?mode=heatmap');
     const salesData = await response.json();
 
-    console.log("Datos sin procesar:", salesData); // Depuración: Ver datos originales
-
     const processedData = salesData.map(item => {
         // Crear la fecha a partir del timestamp
         const date = new Date(item.date);
-        console.log("Fecha original (local):", date); // Depuración: Ver fecha original en huso horario local
 
         // Normalizar la fecha al inicio del día en UTC
         const normalizedDate = Date.UTC(
@@ -187,15 +184,12 @@ async function fetchSalesData() {
             date.getUTCMonth(),
             date.getUTCDate()
         );
-        console.log("Fecha normalizada (UTC):", new Date(normalizedDate)); // Depuración: Ver fecha normalizada en UTC
 
         return {
             date: normalizedDate,
             sales: item.value || 0
         };
     });
-
-    console.log("Datos procesados en fetchSalesData:", processedData); // Depuración: Ver datos procesados
     return processedData;
 }
 
@@ -213,18 +207,13 @@ async function generateChartData() {
         minDate.getUTCMonth(),
         minDate.getUTCDate()
     ));
-    console.log("Fecha mínima (inicio del día UTC):", minDate); // Depuración: Ver fecha mínima
 
     let currentDate = new Date(minDate);
     let salesMap = new Map(salesData.map(d => [d.date, d.sales]));
-    console.log("Mapa de ventas:", salesMap); // Depuración: Ver mapa de ventas
 
     while (currentDate.getTime() <= salesData[salesData.length - 1].date) {
         let dateKey = currentDate.getTime();
         let sales = salesMap.get(dateKey) || 0;
-
-        console.log("Fecha actual en el bucle (UTC):", currentDate); // Depuración: Ver fecha actual en el bucle
-        console.log("Ventas para la fecha actual:", sales); // Depuración: Ver ventas para la fecha actual
 
         chartData.push({
             x: currentDate.getUTCDay(), // Día de la semana en UTC (0 = Dom, 6 = Sáb)
@@ -237,7 +226,6 @@ async function generateChartData() {
         currentDate.setUTCDate(currentDate.getUTCDate() + 1); // Avanzar un día en UTC
     }
 
-    console.log("Datos procesados para el gráfico:", chartData); // Depuración: Ver datos finales
     return chartData;
 }
 

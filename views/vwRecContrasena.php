@@ -20,7 +20,6 @@ document.getElementById("recuperar-form").addEventListener("submit", function(ev
     event.preventDefault();
     
     let correo = document.getElementById("correo").value;
-    console.log('Correo:', correo); // Depuración para verificar que se captura el correo
 
     fetch('../controller/recuperarController.php', {
         method: "POST",
@@ -28,11 +27,9 @@ document.getElementById("recuperar-form").addEventListener("submit", function(ev
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     })
     .then(response => {
-        console.log('Response:', response); // Depuración para verificar la respuesta del servidor
         return response.json();
     })
     .then(data => {
-        console.log('Data:', data); // Depuración para verificar el objeto JSON recibido
         document.getElementById("mensaje").innerText = data.message;
     })
     .catch(error => {

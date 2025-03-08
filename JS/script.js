@@ -201,7 +201,6 @@ document.querySelectorAll('.btn-buy').forEach(button => {
             cantidad: cantidad,
             imagen: this.getAttribute('data-imagen')
         };
-        console.log(producto);        // Enviar datos al servidor
         fetch('controller/resPago.php', {
             method: 'POST',
             headers: {
@@ -386,7 +385,6 @@ window.addEventListener('load', () => {
                 let data = await response.json();
 
                 if (data.success) {
-                    console.log(`Producto eliminado correctamente: ID ${idpro}`);
                     location.reload();
                 } else {
                     console.error('Error al eliminar el favorito:', data.error || 'No se pudo eliminar.');
@@ -421,42 +419,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Asignar la cantidad al atributo data-cantidad del botón
             btnAddCart.setAttribute("data-cantidad", cantidad);
-            console.log(`Cantidad actualizada: ${cantidad}`); // Depuración
         });
     }
-
-    document.getElementById("formPago").addEventListener("submit", async function (event) {
-        event.preventDefault(); // Evita el envío automático
-
-        let productos = [];
-        document.querySelectorAll(".producto-carrito").forEach(item => {
-            productos.push({
-                id: item.dataset.idpro,
-                nombre: item.dataset.nombre,
-                cantidad: item.dataset.cantidad,
-                precio: item.dataset.precio,
-                imagen: item.dataset.imagen // Asegúrate de tener este atributo en el HTML
+    let formPago = document.getElementById("formPago");
+    if(formPago){
+        formPago.addEventListener("submit", async function (event) {
+            event.preventDefault(); // Evita el envío automático
+    
+            let productos = [];
+            document.querySelectorAll(".producto-carrito").forEach(item => {
+                productos.push({
+                    id: item.dataset.idpro,
+                    nombre: item.dataset.nombre,
+                    cantidad: item.dataset.cantidad,
+                    precio: item.dataset.precio,
+                    imagen: item.dataset.imagen // Asegúrate de tener este atributo en el HTML
+                });
             });
-        });
-
-        try {
-            let response = await fetch("controller/resPago.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(productos)
-            });
-
-            let data = await response.json();
-
-            if (data.status === "success") {
-                window.location.href = "home.php?pg=9"; // Redirige a la página de pago
-            } else {
-                alert(data.message);
+    
+            try {
+                let response = await fetch("controller/resPago.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(productos)
+                });
+    
+                let data = await response.json();
+    
+                if (data.status === "success") {
+                    window.location.href = "home.php?pg=9"; // Redirige a la página de pago
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error("Error en la solicitud:", error);
             }
-        } catch (error) {
-            console.error("Error en la solicitud:", error);
-        }
-    });
+        });
+    }
 
     document.querySelectorAll('.btn-eli-pcar').forEach(boton => {
         boton.addEventListener('click', function (event) {
@@ -501,7 +500,6 @@ function cargarContenido(url) {
             $("#contenido").html(botonVolver + data);
         },
         error: function(xhr, status, error) {
-            console.log("Error:", status, error);
             $("#contenido").html("<p>Error al cargar el contenido.</p>");
         }
     });

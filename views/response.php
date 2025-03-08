@@ -32,8 +32,6 @@ $message = ($status == 4) ? "¡Pago aprobado!" : "Hubo un problema con el pago."
 if ($status == 4 && $idusu > 0 && $total > 0) {
     try {
         $conn->beginTransaction();
-
-        $carrito->limpiarCarrito($idusu);
         // Insertar en la tabla pedido
         $stmt = $conn->prepare("INSERT INTO pedido (idusu, total, fecha, estped) VALUES (?, ?, NOW(), 'Aprobado')");
         $stmt->execute([$idusu, $total]);
@@ -41,32 +39,48 @@ if ($status == 4 && $idusu > 0 && $total > 0) {
         $idPedido = $conn->lastInsertId(); // Obtener el ID del pedido insertado
 
         // Insertar en la tabla detalle_pedido
-        $productosJson = $_REQUEST['extra1'] ?? ''; // Recibir JSON de productos
+        $idOrdenTemporal = $_REQUEST['extra1'] ?? '';
         $ubicacionJson = $_REQUEST['extra2'] ?? '';
+        if (empty($idOrdenTemporal) || !is_numeric($idOrdenTemporal)) {
+            die("Error: ID de orden inválido.");
+        }
+
+        $stmt = $conn->prepare("SELECT productos FROM ordenes_temporales WHERE idord = ?");
+        $stmt->execute([$idOrdenTemporal]);
+        $productosJson = $stmt->fetchColumn();
+
         $productos = json_decode($productosJson, true);
         $ubicacion = json_decode($ubicacionJson, true);
+
         if (json_last_error() !== JSON_ERROR_NONE) {
             error_log("Error al decodificar JSON de ubicación: " . json_last_error_msg(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
         }
 
         if (json_last_error() === JSON_ERROR_NONE && is_array($productos) && is_array($ubicacion)) {
+
             $stmtDetalle = $conn->prepare("INSERT INTO detalle_pedido (idped, idpro, cantidad, precio, mpago, npago, direccion, idubi) 
                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             $stmAccCantidad = $conn->prepare("UPDATE producto SET cantidad = cantidad - ? WHERE idpro = ?");
-                                   enviarFactura($_SESSION['emausu'], $_SESSION['nomusu'], $productos, $total, $ubicacion['direccion'], $idfactura);
+
             foreach ($productos as $producto) {
                 if (isset($producto['id'], $producto['cantidad'], $producto['precio'])) {
+
                     // Obtener dirección e idubi de la ubicación decodificada
                     $direccion = isset($ubicacion['direccion']) ? $ubicacion['direccion'] : '';
                     $idubi = isset($ubicacion['idubi']) ? $ubicacion['idubi'] : null;
 
                     // Ejecutar la consulta con los valores correspondientes
                     $stmtDetalle->execute([$idPedido, $producto['id'], $producto['cantidad'], $producto['precio'], $mpago, $npago, $direccion, $idubi]);
+
                     // Disminuir la cantidad en stock
                     $stmAccCantidad->execute([$producto['cantidad'], $producto['id']]);
                 }
             }
             $conn->commit();
+            $carrito->limpiarCarrito($idusu);
+            enviarFactura($_SESSION['emausu'], $_SESSION['nomusu'], $productos, $total, $ubicacion['direccion'], $idfactura);
+            $stmt = $conn->prepare("DELETE FROM ordenes_temporales WHERE idusu = ?");
+            $stmt->execute([$idusu]);
         } else {
             throw new Exception("Error al decodificar JSON de productos: " . json_last_error_msg());
         }
@@ -77,7 +91,8 @@ if ($status == 4 && $idusu > 0 && $total > 0) {
     }
 }
 
-function enviarFactura($correo, $nombreCliente, $productos, $total, $direccion, $idfactura) {
+function enviarFactura($correo, $nombreCliente, $productos, $total, $direccion, $idfactura)
+{
     $productosHtml = '';
     foreach ($productos as $producto) {
         $productosHtml .= "<tr>
@@ -141,7 +156,8 @@ function enviarFactura($correo, $nombreCliente, $productos, $total, $direccion, 
     enviarCorreo($correo, 'Factura de Compra', $cuerpoHtml, 'toshoop2024@gmail.com');
 }
 
-function enviarCorreo($correoDestino, $asunto, $cuerpoHtml, $copiaOculta = null) {
+function enviarCorreo($correoDestino, $asunto, $cuerpoHtml, $copiaOculta = null)
+{
     $mail = new PHPMailer(true);
     $mail->CharSet = 'UTF-8';
 
@@ -194,7 +210,7 @@ function enviarCorreo($correoDestino, $asunto, $cuerpoHtml, $copiaOculta = null)
         </div>
     </div>
     <script>
-        setTimeout(function() {
+        setTimeout(function () {
             window.location.href = "http://localhost/shoop/home.php?pg=17&idusu=<?= urlencode($idusu) ?>";
         }, 5000);
     </script>

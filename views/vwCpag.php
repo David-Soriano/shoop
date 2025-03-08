@@ -402,7 +402,6 @@
                     // Convertir la imagen a formato Blob (archivo)
                     canvas.toBlob(function (blob) {
                         resizedFile = new File([blob], file.name, { type: "image/jpeg" });
-                        console.log("✅ Imagen redimensionada lista para subir.");
                     }, "image/jpeg", 0.9); // Calidad 90%
                 };
             }

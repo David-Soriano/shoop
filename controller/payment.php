@@ -1,16 +1,29 @@
 <?php
 include 'config.php';
 session_start();
-
+require_once '../model/conexion.php';
+$modelo = new Conexion();
+$conn = $modelo->getConexion();
 // Recibir y decodificar productos
-$productosJson = $_REQUEST['product'] ?? '';
+$productosJson = $_REQUEST['product'] ?? '[]';
+$productosArray = json_decode($productosJson, true);
 $ubicacionJson = $_REQUEST['ubicacion'] ?? '';
 // $productos = json_decode($productosJson, true);
 // $ubicacion = json_decode($ubicacionJson, true);
+
+if (!is_array($productosArray) || empty($productosArray)) {
+    die("Error: No hay productos en la orden.");
+}
 // Validaciones básicas
 if (!isset($_POST['amount'], $_POST['descripcion'])) {
     die("Error: Falta información de pago.");
 }
+
+// Guardar la orden en la BD
+$stmt = $conn->prepare("INSERT INTO ordenes_temporales (idusu, productos, total) VALUES (?, ?, ?)");
+$stmt->execute([$_SESSION['idusu'], json_encode($productosArray, JSON_UNESCAPED_UNICODE), $_POST['amount']]);
+
+$idOrdenTemporal = $conn->lastInsertId();
 
 $amount = number_format((float) $_POST['amount'], 2, '.', ''); // Asegurar formato decimal correcto
 $descripcion = htmlspecialchars($_POST['descripcion'], ENT_QUOTES, 'UTF-8');
@@ -46,7 +59,7 @@ $signature = md5($signatureString);
         <input name="buyerEmail" type="hidden" value="<?= $_SESSION['emausu'] ?>">
         <input type="hidden" name="responseUrl" value="<?= PAYU_RESPONSE_URL; ?>">
         <input type="hidden" name="confirmationUrl" value="<?= PAYU_CONFIRMATION_URL; ?>">
-        <input type="hidden" name="extra1" value='<?= htmlspecialchars($productosJson, ENT_QUOTES, 'UTF-8'); ?>'>
+        <input type="hidden" name="extra1" value='<?= htmlspecialchars($idOrdenTemporal, ENT_QUOTES, 'UTF-8'); ?>'>
         <input type="hidden" name="extra2" value='<?= htmlspecialchars($ubicacionJson, ENT_QUOTES, 'UTF-8'); ?>'>
     </form>
 

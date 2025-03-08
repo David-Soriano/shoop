@@ -200,9 +200,6 @@ if ($idusus) {
                 }
             }
 
-            var_dump($imagenesActualizadas);
-            // **Procesar imágenes nuevas**
-
             $archivosValidos = [];
             foreach ($_FILES['imgpro']['name'] as $key => $nombreArchivo) {
                 if (!empty($nombreArchivo) && $_FILES['imgpro']['error'][$key] === UPLOAD_ERR_OK) {
@@ -214,7 +211,6 @@ if ($idusus) {
                     ];
                 }
             }
-            var_dump($archivosValidos);
 
             if (!empty($archivosValidos)) {
 
@@ -249,7 +245,6 @@ if ($idusus) {
                     }
                 }
             }
-            var_dump($imagenesActualizadas);
 
             // **Guardar cambios en la base de datos**
             if (!empty($imagenesActualizadas)) {
@@ -261,7 +256,7 @@ if ($idusus) {
             }
 
             if ($mpro->updateProducto()) {
-                header("Location: ../views/vwpanpro.php?vw=001");
+                header("Location: ../views/vwpanpro.php?vw=23");
                 exit();
             } else {
                 echo "Error al actualizar el producto.";

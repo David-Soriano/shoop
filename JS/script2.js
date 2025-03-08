@@ -89,7 +89,6 @@ function añadirImagenes() {
             }
         }
         selectedFiles = selectedFiles.filter(file => file.name && file.size > 0);
-        console.log("Archivos seleccionados antes de enviar:", selectedFiles);
         // Agregar las imágenes de `selectedFiles` al `formData` en el nuevo orden
         selectedFiles.forEach((file) => {
             formData.append("imgpro[]", file);
@@ -101,7 +100,6 @@ function añadirImagenes() {
         })
             .then(response => response.text())
             .then(data => {
-                console.log("Respuesta del servidor:", data);
                 window.location.reload();
             })
             .catch(error => console.error("Error en el envío:", error));
@@ -109,7 +107,7 @@ function añadirImagenes() {
 }
 
 
-function eliminarImagen(index, existente = false) {
+function eliminarImagen(index, existente = true) {
     if (existente) {
         // Contenedor de imágenes existentes
         const imageExistContainer = document.getElementById('image_exist');
@@ -260,7 +258,6 @@ function actualizarTabla4() {
 function buttonsTable() {
     document.getElementById('editButton').addEventListener('click', function () {
         const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
-        console.log(selectedIds);
         if (selectedIds.length > 0) {
             const idProParam = selectedIds.join(',');  // Convierte los IDs a una cadena separada por comas
             fetchProductData('idpro', idProParam); // Pasa la cadena como parámetro
@@ -283,85 +280,104 @@ function buttonsTable() {
     });
 }
 function buttonsTablePedidos() {
-    document.getElementById('editButton2').addEventListener('click', function () {
-        const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
-        if (selectedIds.length > 0) {
-            const idProParam = selectedIds.join(',');  // Convierte los IDs a una cadena separada por comas
-            fetchProductData('idped', idProParam); // Pasa la cadena como parámetro
-            const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
-            modalElement.show();
-        } else {
-            alert("Selecciona al menos un pedido para editar.");
-        }
-    });
-    document.getElementById('deleteButton2').addEventListener('click', function () {
-        const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
-        if (selectedIds.length > 0) {
-            if (confirm('¿Desea cancelar este pedido?')) {
-                const idProParam = selectedIds.join(','); // Convertir los IDs en una cadena separada por comas
-                updatePedData(idProParam, "cancelar"); // Llamar a la función de eliminación
+    let eb2 = document.getElementById('editButton2');
+    if (eb2) {
+        eb2.addEventListener('click', function () {
+            const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
+            if (selectedIds.length > 0) {
+                const idProParam = selectedIds.join(',');  // Convierte los IDs a una cadena separada por comas
+                fetchProductData('idped', idProParam); // Pasa la cadena como parámetro
+                const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
+                modalElement.show();
+            } else {
+                alert("Selecciona al menos un pedido para editar.");
             }
-        } else {
-            alert("Selecciona al menos un producto para eliminar.");
-        }
-    });
+        });
+    }
+    let db2 = document.getElementById('deleteButton2');
+    if (db2) {
+        db2.addEventListener('click', function () {
+            const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
+            if (selectedIds.length > 0) {
+                if (confirm('¿Desea cancelar este pedido?')) {
+                    const idProParam = selectedIds.join(','); // Convertir los IDs en una cadena separada por comas
+                    updatePedData(idProParam, "cancelar"); // Llamar a la función de eliminación
+                }
+            } else {
+                alert("Selecciona al menos un producto para eliminar.");
+            }
+        });
+    }
 }
 function buttonsTablePaginas() {
-    document.getElementById('editButton30').addEventListener('click', function () {
-        const selectedIds = getSelectedProductIds();
-        if (selectedIds.length > 0) {
-            const idProParam = selectedIds.join(',');
-            fetchProductData('idpag', idProParam);
-            const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
-            modalElement.show();
-        } else {
-            alert("Selecciona al menos una página para editar.");
-        }
-    });
-    document.getElementById('deleteButton30').addEventListener('click', function () {
-        const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
-        if (selectedIds.length > 0) {
-            if (confirm('¿Desea eliminar esta página?')) {
+    let eb30 = document.getElementById('editButton30');
+    if (eb30) {
+        eb30.addEventListener('click', function () {
+            const selectedIds = getSelectedProductIds();
+            if (selectedIds.length > 0) {
                 const idProParam = selectedIds.join(',');
-                borrarPag(idProParam);
+                fetchProductData('idpag', idProParam);
+                const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
+                modalElement.show();
+            } else {
+                alert("Selecciona al menos una página para editar.");
             }
-        } else {
-            alert("Selecciona al menos una página para eliminar.");
-        }
-    });
+        });
+    }
+    let db30 = document.getElementById('deleteButton30');
+    if (db30) {
+        db30.addEventListener('click', function () {
+            const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
+            if (selectedIds.length > 0) {
+                if (confirm('¿Desea eliminar esta página?')) {
+                    const idProParam = selectedIds.join(',');
+                    borrarPag(idProParam);
+                }
+            } else {
+                alert("Selecciona al menos una página para eliminar.");
+            }
+        });
+    }
 }
 function buttonsTableUsers() {
-    document.getElementById('editButton40').addEventListener('click', function () {
-        const selectedIds = getSelectedProductIds();
-        if (selectedIds.length > 0) {
-            const idProParam = selectedIds.join(',');
-            fetchProductData('idusu', idProParam);
-            const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
-            modalElement.show();
-        } else {
-            alert("Selecciona al menos un usuario para editar.");
-        }
-    });
-    document.getElementById('deleteButton40').addEventListener('click', function () {
-        const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
-        if (selectedIds.length > 0) {
-            if (confirm('¿Desea eliminar este usuario?')) {
+    let eb40 = document.getElementById('editButton40');
+    if (eb40) {
+        eb40.addEventListener('click', function () {
+            const selectedIds = getSelectedProductIds();
+            if (selectedIds.length > 0) {
                 const idProParam = selectedIds.join(',');
-                borrarUser(idProParam);
+                fetchProductData('idusu', idProParam);
+                const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
+                modalElement.show();
+            } else {
+                alert("Selecciona al menos un usuario para editar.");
             }
-        } else {
-            alert("Selecciona al menos un usuario para eliminar.");
-        }
-    });
+        });
+    }
+    let db40 = document.getElementById('deleteButton40');
+    if (db40) {
+        db40.addEventListener('click', function () {
+            const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
+            if (selectedIds.length > 0) {
+                if (confirm('¿Desea eliminar este usuario?')) {
+                    const idProParam = selectedIds.join(',');
+                    borrarUser(idProParam);
+                }
+            } else {
+                alert("Selecciona al menos un usuario para eliminar.");
+            }
+        });
+    }
 }
 function recibirPedido() {
     let btn = document.getElementById("btn-rec-ped");
-    let idped = btn.dataset.idped;
-    let idprov = btn.dataset.idprov;
-    btn.addEventListener('click', () => {
-        console.log("click");
-        updatePedData(idped, idprov, 'recibir'); // Aquí pasamos 'recibir' como operación
-    })
+    if (btn) {
+        let idped = btn.dataset.idped;
+        let idprov = btn.dataset.idprov;
+        btn.addEventListener('click', () => {
+            updatePedData(idped, idprov, 'recibir'); // Aquí pasamos 'recibir' como operación
+        });
+    }
 }
 function deleteProductData(idpro) {
 
@@ -400,7 +416,6 @@ function updatePedData(idped, idprov, ope) {
     })
         .then(async response => {
             const rawText = await response.text();
-            console.log(rawText);
             if (!response.ok) {
                 throw new Error('Error en la respuesta: ' + response.status);
             }
@@ -475,63 +490,69 @@ function borrarUser(idusu) {
         });
 }
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector("[data-bs-target='#exampleModalperf']").addEventListener("click", function () {
-        fetch("../controller/cperf.php")
-            .then(response => response.json())
-            .then(data => {
-                let modalBodyCliente = document.querySelector("#exampleModalperf .bx-pagi-client");
-                let modalBodyAdmin = document.querySelector("#exampleModalperf .bx-pagi-admin");
-                modalBodyCliente.innerHTML = "";
-                modalBodyAdmin.innerHTML = "";
+    let element = document.querySelector("[data-bs-target='#exampleModalperf']");
+    if (element) {
+        element.addEventListener("click", function () {
+            fetch("../controller/cperf.php")
+                .then(response => response.json())
+                .then(data => {
+                    let modalBodyCliente = document.querySelector("#exampleModalperf .bx-pagi-client");
+                    let modalBodyAdmin = document.querySelector("#exampleModalperf .bx-pagi-admin");
+                    modalBodyCliente.innerHTML = "";
+                    modalBodyAdmin.innerHTML = "";
 
-                let clientes = data.filter(page => page.idpef == 1);
-                let admins = data.filter(page => page.idpef == 2);
+                    let clientes = data.filter(page => page.idpef == 1);
+                    let admins = data.filter(page => page.idpef == 2);
 
-                clientes.forEach(page => {
-                    let checked = page.tiene_permiso ? "checked" : "";
-                    modalBodyCliente.innerHTML += `
-                        <div class='mb-3'>
-                            <input type='checkbox' class='permiso' data-perfil='1' value='${page.idpag}' ${checked}>
-                            <label>${page.nompag}</label>
-                        </div>`;
+                    clientes.forEach(page => {
+                        let checked = page.tiene_permiso ? "checked" : "";
+                        modalBodyCliente.innerHTML += `
+                            <div class='mb-3'>
+                                <input type='checkbox' class='permiso' data-perfil='1' value='${page.idpag}' ${checked}>
+                                <label>${page.nompag}</label>
+                            </div>`;
+                    });
+
+                    admins.forEach(page => {
+                        let checked = page.tiene_permiso ? "checked" : "";
+                        modalBodyAdmin.innerHTML += `
+                            <div class='mb-3'>
+                                <input type='checkbox' class='permiso' data-perfil='2' value='${page.idpag}' ${checked}>
+                                <label>${page.nompag}</label>
+                            </div>`;
+                    });
                 });
-
-                admins.forEach(page => {
-                    let checked = page.tiene_permiso ? "checked" : "";
-                    modalBodyAdmin.innerHTML += `
-                        <div class='mb-3'>
-                            <input type='checkbox' class='permiso' data-perfil='2' value='${page.idpag}' ${checked}>
-                            <label>${page.nompag}</label>
-                        </div>`;
-                });
-            });
-    });
+        });
+    }
 
     // Guardar los cambios de permisos
-    document.getElementById("guardarPermisos").addEventListener("click", function () {
-        let permisos = [];
+    let guardarPermisos = document.getElementById("guardarPermisos")
+    if (guardarPermisos) {
+        guardarPermisos.addEventListener("click", function () {
+            let permisos = [];
 
-        document.querySelectorAll(".permiso").forEach(checkbox => {
-            permisos.push({
-                idpag: checkbox.value,
-                idpef: checkbox.dataset.perfil,
-                tiene_permiso: checkbox.checked ? 1 : 0
+            document.querySelectorAll(".permiso").forEach(checkbox => {
+                permisos.push({
+                    idpag: checkbox.value,
+                    idpef: checkbox.dataset.perfil,
+                    tiene_permiso: checkbox.checked ? 1 : 0
+                });
             });
-        });
 
-        fetch("../controller/cperf.php", {
-            method: "POST",
-            body: JSON.stringify({ permisos: permisos }),
-            headers: { "Content-Type": "application/json" }
-        })
-            .then(response => response.json())
-            .then(result => {
-                alert(result.message);
+            fetch("../controller/cperf.php", {
+                method: "POST",
+                body: JSON.stringify({ permisos: permisos }),
+                headers: { "Content-Type": "application/json" }
             })
-            .catch(error => {
-                console.error("Error:", error);
-            });
-    });
+                .then(response => response.json())
+                .then(result => {
+                    alert(result.message);
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        });
+    }
 });
 
 
@@ -570,7 +591,6 @@ function fetchProductData(param, id) {
 
 // Función que llena el modal con los datos obtenidos
 function populateModal(data) {
-    console.log(data);
     if (data && Array.isArray(data) && data.length > 0) {
         const product = data[0]; // Tomar el primer producto
         // Llenar los campos del formulario con los datos
@@ -726,7 +746,6 @@ function populateModal(data) {
         }
     } else {
         console.error('No se encontraron datos para el producto.');
-        alert('No se encontraron datos para el producto. Verifica el ID.');
     }
 }
 
@@ -746,7 +765,6 @@ function actualizarOrdenImagenes() {
 
     // **Obtener imágenes existentes**
     const imagenesExistentes = obtenerImagenesExistentes();
-    console.log("Existentes", imagenesExistentes);
 
     // **Agregar imágenes existentes como inputs ocultos**
     imagenesExistentes.forEach((imgpro) => {
@@ -756,13 +774,7 @@ function actualizarOrdenImagenes() {
         inputHidden.value = imgpro;
         formulario.appendChild(inputHidden);
     });
-    console.log(document.querySelectorAll('input[name="imagenesExistentes[]"]'));
 
-    console.log("Imágenes existentes añadidas al formulario.");
-    imagenesExistentes.forEach((imgpro) => {
-        console.log("Imagen existente añadida:", imgpro);
-    });
-    
     // **🔹 Manejo de archivos nuevos**
     const validFiles = selectedFiles.filter(file => file.size > 0);
 
@@ -772,7 +784,6 @@ function actualizarOrdenImagenes() {
             campo.remove();
         }
     });
-    console.log("Formulario actualizado:", formulario.innerHTML);
 
     // **Agregar archivos nuevos sin eliminar `#imgpro`**
     validFiles.forEach((file) => {
@@ -785,10 +796,7 @@ function actualizarOrdenImagenes() {
         inputFile.files = dt.files;
 
         formulario.appendChild(inputFile);
-        console.log("Input oculto agregado:", inputHidden);
     });
-
-    console.log("selectedFiles después del filtrado: ", validFiles);
 }
 
 
@@ -803,12 +811,6 @@ function obtenerImagenesExistentes() {
     });
     return imagenes;
 }
-
-window.addEventListener('DOMContentLoaded', function () {
-    document.getElementById("imgpro").addEventListener("change", function () {
-        console.log("Archivos seleccionados:", selectedFiles);
-    });
-});
 
 function limpiarModal() {
     // Limpiar campos del formulario
@@ -953,36 +955,38 @@ jQuery(function ($) {
 document.addEventListener('DOMContentLoaded', function () {
     var modeSwitch = document.querySelector('.mode-switch');
 
-    modeSwitch.addEventListener('click', function () {
-        document.documentElement.classList.toggle('dark');
-        modeSwitch.classList.toggle('active');
-    });
+    if (modeSwitch) {
+        modeSwitch.addEventListener('click', function () {
+            document.documentElement.classList.toggle('dark');
+            modeSwitch.classList.toggle('active');
+        });
 
-    var listView = document.querySelector('.list-view');
-    var gridView = document.querySelector('.grid-view');
-    var projectsList = document.querySelector('.project-boxes');
+        var listView = document.querySelector('.list-view');
+        var gridView = document.querySelector('.grid-view');
+        var projectsList = document.querySelector('.project-boxes');
 
-    listView.addEventListener('click', function () {
-        gridView.classList.remove('active');
-        listView.classList.add('active');
-        projectsList.classList.remove('jsGridView');
-        projectsList.classList.add('jsListView');
-    });
+        listView.addEventListener('click', function () {
+            gridView.classList.remove('active');
+            listView.classList.add('active');
+            projectsList.classList.remove('jsGridView');
+            projectsList.classList.add('jsListView');
+        });
 
-    gridView.addEventListener('click', function () {
-        gridView.classList.add('active');
-        listView.classList.remove('active');
-        projectsList.classList.remove('jsListView');
-        projectsList.classList.add('jsGridView');
-    });
+        gridView.addEventListener('click', function () {
+            gridView.classList.add('active');
+            listView.classList.remove('active');
+            projectsList.classList.remove('jsListView');
+            projectsList.classList.add('jsGridView');
+        });
 
-    document.querySelector('.messages-btn').addEventListener('click', function () {
-        document.querySelector('.messages-section').classList.add('show');
-    });
+        document.querySelector('.messages-btn').addEventListener('click', function () {
+            document.querySelector('.messages-section').classList.add('show');
+        });
 
-    document.querySelector('.messages-close').addEventListener('click', function () {
-        document.querySelector('.messages-section').classList.remove('show');
-    });
+        document.querySelector('.messages-close').addEventListener('click', function () {
+            document.querySelector('.messages-section').classList.remove('show');
+        });
+    }
 });
 
 
