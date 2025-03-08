@@ -20,6 +20,9 @@ function valida($usu, $psw)
         red("inactivo"); // Usuario inactivo
     } elseif (!password_verify($psw, $user['pasusu'])) {
         red("password"); // Error por contraseña incorrecta
+    } elseif ($user['estusu'] === "Pendiente") {
+        header("Location: ../views/vwConfCorr.php");
+        exit;
     } else {
         ini_set('session.cookie_httponly', 1);
         ini_set('session.cookie_secure', 1);

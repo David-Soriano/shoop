@@ -25,7 +25,6 @@ $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 $vrf = isset($_REQUEST['vrf']) ? $_REQUEST['vrf'] : NULL;
 $usu = new Musu();
 
-
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -75,6 +74,8 @@ $departamentoID = $ubicacion['departamentoID'];
 $dtDtp = $ubicacion['dtDtp'];
 $ciudades = $ubicacion['ciudades'];
 
+$isCorreo = $usu->verificarCorreo($emausu);
+
 
 if ($ope == "save") {
     // $recaptchaResponse = $_POST["g-recaptcha-response"]; // Capturar la respuesta de reCAPTCHA
@@ -115,8 +116,7 @@ if ($ope == "save") {
     // Si el reCAPTCHA es válido, continuar con el registro
     if ($isCorreo) {
         echo "El usuario ya se ha registrado anteriormente. Intente de nuevo";
-    } else if($vrf == 1) {
-        echo "Hola";
+    } else {
         $usu->setNomusu($nomusu);
         $usu->setApeusu($apeusu);
         $usu->setTipdoc($tipdoc);
@@ -128,18 +128,11 @@ if ($ope == "save") {
         $usu->setDirrecusu($dirrecusu);
         $usu->setIdpef($idpef);
         $hashedPassword = password_hash($pasusu, PASSWORD_DEFAULT); // Hashear la contraseña
+        $usu->setEstusu("Pendiente");
         $usu->setPasusu($hashedPassword);
 
         $res = $usu->saveUsu();
-        if ($res == 2) {
-            header("Location: ../views/admin.php?pg=31&error=4");
-            exit();
-        }
-
-        // Si no es 2, redirige a la misma página
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit();
-    } else{
+        $link = "http://localhost/shoop/controller/cusu.php?ope=verify&emausu=" . urlencode($emausu) ;
         $body = "<html>
     <head>
         <style>
@@ -252,12 +245,12 @@ if ($ope == "save") {
                 <h1>¡Hola, $nomusu!</h1>
                 <p>Hemos recibido una solicitud para registrarte en nuestra plataforma. Para ingresar debes verificar el correo electrónico <strong>$emausu</strong>.</p>
                 <p>Para ingresar da click en el siguiente botón para comprobar su correo electrónico y continuar con el registro:</p>
-                <a href='http://localhost/shoop/controller/cusu.php?ope=save&vrf=1' class='btn'>Verificar Correo</a>
+                <a href='$link' class='btn'>Verificar Correo</a>
 
                 <p>Si no puedes confirmar haciendo click en el botón de arriba, copia el siguiente enlace en la barra de direcciones de tu navegador:</p>
                 <p class='link'>
-                    <a href='http://localhost/shoop/controller/cusu.php?ope=save&vrf=1'>
-                        http://localhost/shoop/controller/cusu.php?ope=save&vrf=1
+                    <a href='$link'>
+                        $link
                     </a>
                 </p>
 
@@ -268,36 +261,55 @@ if ($ope == "save") {
         </div>
     </body>
     </html>";
-    $mail = new PHPMailer(true);
-    $mail->CharSet = 'UTF-8';
+        $mail = new PHPMailer(true);
+        $mail->CharSet = 'UTF-8';
 
-    try {
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = MAIL_USER;
-        $mail->Password = MAIL_PASS;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = MAIL_USER;
+            $mail->Password = MAIL_PASS;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
 
-        $mail->setFrom(MAIL_USER, 'Soporte SHOOP');
-        $mail->addAddress($emausu);
-        $mail->addReplyTo(MAIL_USER, 'Equipo SHOOP');
+            $mail->setFrom(MAIL_USER, 'Soporte SHOOP');
+            $mail->addAddress($emausu);
+            $mail->addReplyTo(MAIL_USER, 'Equipo SHOOP');
 
-        $mail->isHTML(true);
-        $mail->Subject = "Verificación de Correo";
-        $mail->Body = $body;
-        if($mail->send()){
-            header("Location: ../views/vwConfCorr.php");
-            exit;
-        } else{
-            echo "No fue posible enviar el correo";
+            $mail->isHTML(true);
+            $mail->Subject = "Verificación de Correo";
+            $mail->Body = $body;
+            if ($mail->send()) {
+                header("Location: ../views/vwConfCorr.php");
+                exit;
+            } else {
+                echo "No fue posible enviar el correo";
+            }
+        } catch (\Exception $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
         }
-    } catch (\Exception $e) {
-        error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        if ($res == 2) {
+            header("Location: ../views/admin.php?pg=31&error=4");
+            exit();
+        }
     }
+} elseif($ope == 'verify'){
+    $modelo = new Conexion();
+    $conexion = $modelo->getConexion();
+    $emausu = $_GET['emausu'] ?? null;
+    
+    $stmt = $conexion->prepare("UPDATE usuario SET estusu = 'Activo' WHERE emausu = :emausu");
+    $stmt->bindParam(':emausu', $emausu, PDO::PARAM_STR);
+    $stmt->execute();
+    if($stmt->rowCount() > 0){
+        header("Location: ../views/vwLogin.php?err=vrfok");
+        exit();
+    } else {
+        echo "No se pudo verificar el correo";
     }
-} else if ($ope == 'eliUs') {
+}
+else if ($ope == 'eliUs') { 
     header("Content-Type: application/json");
     $usu->setIdusu($idusu);
 

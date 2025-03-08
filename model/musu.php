@@ -190,8 +190,8 @@ class Musu
     }
     function saveUsu()
     {
-        $sql = "INSERT INTO usuario(nomusu, apeusu, tipdoc, docusu, emausu, celusu, genusu, idubi, dirrecusu, idpef, pasusu) 
-        VALUES (:nomusu, :apeusu, :tipdoc, :docusu, :emausu, :celusu, :genusu, :idubi, :dirrecusu, :idpef, :pasusu)";
+        $sql = "INSERT INTO usuario(nomusu, apeusu, tipdoc, docusu, emausu, celusu, genusu, idubi, dirrecusu, idpef, estusu, pasusu) 
+        VALUES (:nomusu, :apeusu, :tipdoc, :docusu, :emausu, :celusu, :genusu, :idubi, :dirrecusu, :idpef, :estusu, :pasusu)";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
@@ -207,6 +207,7 @@ class Musu
             $idubi = $this->getIdubi();
             $dirrecusu = $this->getDirrecusu();
             $idpef = $this->getIdpef();
+            $estusu = $this->getEstusu();
             $pasusu = $this->getPasusu();
 
             $result->bindParam(':nomusu', $nomusu, PDO::PARAM_STR);
@@ -219,6 +220,7 @@ class Musu
             $result->bindParam(':idubi', $idubi, PDO::PARAM_INT);
             $result->bindParam(':dirrecusu', $dirrecusu, PDO::PARAM_STR);
             $result->bindParam(':idpef', $idpef, PDO::PARAM_INT);
+            $result->bindParam(':estusu', $estusu, PDO::PARAM_STR);
             $result->bindParam(':pasusu', $pasusu, PDO::PARAM_STR);
 
             $result->execute();

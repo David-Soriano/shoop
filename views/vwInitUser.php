@@ -23,6 +23,8 @@ include "../controller/cusu.php"; ?>
                                         echo "<p class='msjErr'>Por favor, ingrese el correo y la contraseña</p>";
                                     } elseif ($err == 'inactivo') {
                                         echo "<p class='msjErr'>El usuario está inactivo</p>";
+                                    } elseif ($err == 'vrfok') {
+                                        echo "<p class='msjErr'>Cuenta activada exitosamente.</p>";
                                     }
                                     ?>
 
