@@ -919,6 +919,22 @@ UNION ALL
     FROM producto AS p
     LEFT JOIN imagen AS i ON p.idpro = i.idpro
     WHERE p.estado = 'activo'
+    AND p.idpro NOT IN (
+        SELECT DISTINCT p1.idpro
+        FROM producto AS p1
+        LEFT JOIN carrito AS c1 ON c1.idusu = COALESCE(:idusu, 0)
+        LEFT JOIN detallecarrito AS dc1 ON dc1.idcar = c1.idcar AND dc1.idpro = p1.idpro
+        LEFT JOIN favoritos AS f1 ON f1.idusu = COALESCE(:idusu, 0)
+        LEFT JOIN detallefavoritos AS df1 ON df1.idfav = f1.idfav AND df1.idpro = p1.idpro
+        LEFT JOIN busquedas AS b1 ON (COALESCE(:idusu, 0) > 0 AND b1.idusu = :idusu AND p1.nompro LIKE CONCAT('%', b1.termino_busqueda, '%')) 
+        WHERE p1.estado = 'activo'
+        AND (
+            p1.idval = (SELECT idval FROM producto WHERE idpro = :idpro) 
+            OR EXISTS (SELECT 1 FROM detallecarrito AS dc1 WHERE dc1.idpro = p1.idpro AND dc1.idcar = c1.idcar)
+            OR EXISTS (SELECT 1 FROM detallefavoritos AS df1 WHERE df1.idpro = p1.idpro AND df1.idfav = f1.idfav)
+            OR EXISTS (SELECT 1 FROM busquedas AS b1 WHERE b1.idusu = :idusu AND p1.nompro LIKE CONCAT('%', b1.termino_busqueda, '%'))
+        )
+    )
     ORDER BY RAND()
     LIMIT 10
 )

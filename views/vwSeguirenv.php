@@ -43,21 +43,24 @@ $dtSegEnv = segEnv($idped);
                         <img src="<?= $dts['imgpro']; ?>" alt="<?= $dts['nomimg']; ?>" class="img-thumbnail img-sg-env">
                         <p class="bx-seg-env_catg"><?= $dts['nomval']; ?></p>
                     </div>
-                <?php } ?>
+                    <?php $estado = $dts['estped'];
+                    $idpro = $dts['idpro'];
+                } ?>
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <a href="#" class="btn btn-outline-danger">Detalles</a>
                     <?php //foreach ($dtSegEnv as $dts) {
-                        if ($dts['estped'] != "Recibido" && $dts['estped'] != "Cancelado") { ?>
-                            <?php if ($dts['estped'] != "En Tránsito" && $dts['estped'] != "En Reparto" && $dts['estped'] != "Recibido") { ?>
-                                <a href="#" class="btn btn-link">Cancelar pedido</a>
-                            <?php } ?>
-                            <?php if ($dts['estped'] == "En Reparto") { ?>
-                                <a href="#" class="btn btn-outline-success" id="btn-rec-ped" data-idped="<?= $dts['idped'] ?>"
-                                    data-idprov="<?= $dts['idprov'] ?>">Recibido</a>
-                            <?php } ?>
-                        <?php }
-                    //} ?>
-
+                    
+                        if ($estado != "En Tránsito" && $estado != "En Reparto" && $estado != "Recibido") { ?>
+                        <a href="#" class="btn btn-link">Cancelar pedido</a>
+                    <?php }
+                        if ($dts['estped'] == "En Reparto") { ?>
+                        <a href="#" class="btn btn-outline-success" id="btn-rec-ped" data-idped="<?= $dts['idped'] ?>"
+                            data-idprov="<?= $estado ?>">Recibido</a>
+                    <?php }
+                        if ($estado == "Recibido") { ?>
+                        <a href="home.php?pg=37&idpro=<?=$idpro?>" class="btn btn-outline-success" id="btn-rec-ped">Calificar</a>
+                    <?php }
+                        //} ?>
                 </div>
             <?php } ?>
         </div>

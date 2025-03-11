@@ -2366,3 +2366,39 @@ form button {
     width: auto;
     height: auto;
 }
+
+.bx-stars i{
+    font-size: 35px;
+    color: #f4a857;
+}
+
+.bx-stars p{
+    font-size: 11px;
+}
+
+.bx-opinion textarea{
+    height: 100px;
+    resize: none;
+    width: 100%;
+    border: 1px solid #c8c6c6;
+    border-radius: 5px;
+    padding: 2%;
+    margin: 4% 0;
+}
+
+.bx-opinion textarea:focus-visible{
+    outline: none;
+    border: 1px solid #f7705e;
+}
+.bx-calificar .form-cal{
+    padding: 0;
+    width: auto;
+    background: none;
+    box-shadow: none;
+}
+
+.bx-calificar .form-cal button{
+    position: initial;
+    width: auto;
+    height: auto;
+}
