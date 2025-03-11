@@ -6,6 +6,6 @@
     insertText("Algunos Productos Similares", $dtProdSugeCatego, 1);
     require_once ("vwCarPrd.php");
     require_once ("vwDesPrd.php");
-    mostrarReviews($idpro)?>
+    mostrarReviews($_REQUEST['idpro'])?>
 
 </div>

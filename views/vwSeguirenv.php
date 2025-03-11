@@ -58,7 +58,7 @@ $dtSegEnv = segEnv($idped);
                             data-idprov="<?= $estado ?>">Recibido</a>
                     <?php }
                         if ($estado == "Recibido") { ?>
-                        <a href="home.php?pg=37&idpro=<?=$idpro?>" class="btn btn-outline-success" id="btn-rec-ped">Calificar</a>
+                        <a href="home.php?pg=37&idpro=<?=$idpro?>" class="btn btn-outline-success">Calificar</a>
                     <?php }
                         //} ?>
                 </div>

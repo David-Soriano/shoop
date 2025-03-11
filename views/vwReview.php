@@ -2,7 +2,7 @@
 <?php if (!empty($reviews)) : ?>
     <ul>
         <?php foreach ($reviews as $review) : ?>
-            <li><strong><?php echo htmlspecialchars($review['nombre']); ?></strong>: 
+            <li><strong><?php echo htmlspecialchars($review['nomusu']); ?></strong>: 
                 <?php echo htmlspecialchars($review['comentario']); ?> - <strong><?php echo $review['rating']; ?>/5</strong>
             </li>
         <?php endforeach; ?>

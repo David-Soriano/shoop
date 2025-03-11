@@ -114,7 +114,7 @@ class Mrev
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
-            $sql = "SELECT r.*, u.nombre FROM review r JOIN usuario u ON r.idusu = u.idusu WHERE r.idpro = :idpro ORDER BY r.fecha DESC";
+            $sql = "SELECT r.*, u.nomusu FROM review r JOIN usuario u ON r.idusu = u.idusu WHERE r.idpro = :idpro ORDER BY r.fecha DESC";
             $stmt = $conexion->prepare($sql);
             $idpro = $this->getIdpro();
             $stmt->bindParam(':idpro', $idpro);

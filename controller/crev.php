@@ -9,7 +9,6 @@ $idusu = isset($_POST['idusu'])? $_POST['idusu'] : null;
 $rating = isset($_POST['rating'])? $_POST['rating'] : null;
 $comentario = isset($_POST['comentario'])? $_POST['comentario'] : null;
 
-var_dump($_POST);
 agregarReview($idpro, $idusu, $rating, $comentario);
 function agregarReview($idpro, $idusu, $rating, $comentario) {
     $mrev = new Mrev();
@@ -18,9 +17,8 @@ function agregarReview($idpro, $idusu, $rating, $comentario) {
     $mrev->setRating($rating);
     $mrev->setComentario($comentario);
     if ($mrev->agregarReview()) {
-        echo "Review agregada correctamente.";
-    } else {
-        echo "No puedes dejar una review sin haber comprado el producto.";
+        header('Location: ../home.php?pg=37');
+        exit;
     }
 }
 

@@ -261,7 +261,11 @@ h6 span {
     color: #038be6d1;
 }
 
-
+@media screen and (max-width: 1300px) {
+    .rec-con{
+        width: 45vh;
+    }
+}
 #bx-rec-corr form input[type='email'],
 #bx-rec-corr form input[type='password'],
 #bx-cam-con form input[type='password'] {
