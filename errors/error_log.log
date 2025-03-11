@@ -3,3 +3,4 @@ Intentando agregar review: idpro=163, idusu=27Número de compras encontradas: 3R
 [11-Mar-2025 19:25:11 Europe/Berlin] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\shoop\views\vwReview.php on line 5
 [11-Mar-2025 19:25:26 Europe/Berlin] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\shoop\views\vwReview.php on line 5
 [11-Mar-2025 19:25:29 Europe/Berlin] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\shoop\views\vwReview.php on line 5
+[11-Mar-2025 22:59:57 Europe/Berlin] PHP Warning:  Undefined array key "idprov" in C:\xampp\htdocs\shoop\controller\cpancon.php on line 56
