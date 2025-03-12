@@ -113,7 +113,10 @@ CREATE TABLE `comisiones` (
 INSERT INTO `comisiones` (`idcomis`, `idcom`, `monto_total`, `comision`, `fecha`) VALUES
 (2, 20, 30000.00, 2100.00, '2025-03-03 15:24:18'),
 (3, 21, 350000.00, 24500.00, '2025-03-04 16:14:53'),
-(4, 22, 350000.00, 24500.00, '2025-03-04 16:19:51');
+(4, 22, 350000.00, 24500.00, '2025-03-04 16:19:51'),
+(5, 23, 30000.00, 2100.00, '2025-03-05 14:53:03'),
+(6, 24, 30000.00, 2100.00, '2025-03-06 15:05:05'),
+(7, 25, 30000.00, 2100.00, '2025-03-06 15:10:13');
 
 -- --------------------------------------------------------
 
@@ -139,7 +142,10 @@ CREATE TABLE `compra` (
 INSERT INTO `compra` (`idcom`, `tiproduct`, `cantidad`, `preciocom`, `idubi`, `idusu`, `idped`, `fechareg`) VALUES
 (20, 'Moda', '1', '37800', 47030, 20, 45, '2025-03-03 10:24:18'),
 (21, 'Tecnología', '1', '296800', 47030, 20, 46, '2025-03-04 11:14:53'),
-(22, 'Tecnología', '1', '296800', 25175, 27, 47, '2025-03-04 11:19:51');
+(22, 'Tecnología', '1', '296800', 25175, 27, 47, '2025-03-04 11:19:51'),
+(23, 'Moda', '1', '37800', 25175, 27, 48, '2025-03-05 09:53:03'),
+(24, 'Moda', '1', '37800', 25175, 27, 49, '2025-03-06 10:05:05'),
+(25, 'Moda', '1', '37800', 25175, 27, 49, '2025-03-06 10:10:13');
 
 -- --------------------------------------------------------
 
@@ -169,6 +175,14 @@ CREATE TABLE `detallecarrito` (
   `precar` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detallecarrito`
+--
+
+INSERT INTO `detallecarrito` (`iddetcar`, `idcar`, `idpro`, `cantidad`, `precar`) VALUES
+(22, 3, 163, 1, 37800),
+(23, 3, 164, 1, 296800);
+
 -- --------------------------------------------------------
 
 --
@@ -192,7 +206,10 @@ CREATE TABLE `detallecompra` (
 INSERT INTO `detallecompra` (`iddell`, `subtotal`, `iva`, `total`, `idpro`, `direccomp`, `idcom`) VALUES
 (20, 31764.7, 5700, 37800, 163, 'Vereda la balsa', 20),
 (21, 249412, 66500, 296800, 164, 'Vereda la balsa', 21),
-(22, 249412, 66500, 296800, 164, 'Vereda la balsa calle 9a Sur', 22);
+(22, 249412, 66500, 296800, 164, 'Vereda la balsa calle 9a Sur', 22),
+(23, 31764.7, 5700, 37800, 163, 'Vereda la balsa calle 9a Sur', 23),
+(24, 31764.7, 5700, 37800, 163, 'Vereda la balsa calle 9a Sur', 24),
+(25, 31764.7, 5700, 37800, 163, 'Vereda la balsa calle 9a Sur', 25);
 
 -- --------------------------------------------------------
 
@@ -231,7 +248,12 @@ CREATE TABLE `detalle_pedido` (
 INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`, `mpago`, `npago`, `direccion`, `idubi`) VALUES
 (43, 45, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
 (44, 46, 164, 1, 296800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa', 47030),
-(45, 47, 164, 1, 296800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175);
+(45, 47, 164, 1, 296800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175),
+(46, 48, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175),
+(47, 49, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175),
+(48, 50, 164, 1, 296800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175),
+(49, 53, 164, 1, 296800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175),
+(50, 53, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175);
 
 -- --------------------------------------------------------
 
@@ -311,8 +333,8 @@ INSERT INTO `imagen` (`idimag`, `imgpro`, `nomimg`, `tipimg`, `idpro`, `ordimg`,
 (290, 'IMG/publicidad/publicidad_67ba00f4e5c5b.jpg', 'publicidad_67ba00f4e5c5b.jpg', 'jpg', NULL, 1, 1, NULL),
 (291, 'IMG/publicidad/publicidad_67ba012e5c66c.jpg', 'publicidad_67ba012e5c66c.jpg', 'jpg', NULL, 1, 1, NULL),
 (293, 'IMG/publicidad/publicidad_67ba0297c2697.jpg', 'publicidad_67ba0297c2697.jpg', 'jpg', NULL, 1, 1, NULL),
-(382, 'proinf/imagen_67c5c23df3c84.webp', 'zapato1_9d84893e-b872-49ad-a07e-46687ca6ef25_1080x', 'image/webp', 163, 1, NULL, NULL),
-(383, 'proinf/imagen_67c7265505f93.jpg', 'k68-mechanical-gaming-keyboard-60percent-wireless-', 'image/jpeg', 164, 1, NULL, NULL);
+(383, 'proinf/imagen_67c7265505f93.jpg', 'k68-mechanical-gaming-keyboard-60percent-wireless-', 'image/jpeg', 164, 1, NULL, NULL),
+(387, 'proinf/imagen_67c5c23df3c84.webp', 'imagen_67c5c23df3c84', 'proinf/imagen_67c5c2', 163, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -350,6 +372,20 @@ INSERT INTO `menu` (`idmen`, `nombre`, `url`, `ordmen`, `estmen`, `url2`, `subme
 (11, 'Favoritos', 'index.php?pg=002', 11, NULL, 'home.php?pg=002', 0, 2, 'bi bi-heart', NULL),
 (12, 'Carro Compras', 'index.php?pg=003', 12, NULL, 'home.php?pg=003', 0, 2, 'bi bi-basket3', NULL),
 (13, 'Icono User', NULL, 0, NULL, NULL, 0, 3, 'bi bi-person-circle', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ordenes_temporales`
+--
+
+CREATE TABLE `ordenes_temporales` (
+  `idord` int(11) NOT NULL,
+  `idusu` int(11) NOT NULL,
+  `productos` text NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -406,7 +442,8 @@ INSERT INTO `pagina` (`idpag`, `nompag`, `rutpag`, `mospag`, `icopag`, `lugpag`,
 (32, 'Balances', 'views/vwBal.php', NULL, NULL, NULL, 'Activo', 1),
 (33, 'Control Productos', 'views/vwProdC.php', NULL, NULL, NULL, 'Activo', 1),
 (34, 'Página Prueba', 'views/vwpáginaprueba.php', NULL, 'bi bi-123', 0, 'Activo', 1),
-(36, 'Perfil Proveedor', 'views/vwPerfilTienda.php', NULL, NULL, 2, 'Activo', 1);
+(36, 'Perfil Proveedor', 'views/vwPerfilTienda.php', NULL, NULL, 2, 'Activo', 1),
+(37, 'Calificar', 'views/vwCalPrd.php', NULL, NULL, NULL, 'Activo', 1);
 
 -- --------------------------------------------------------
 
@@ -472,7 +509,8 @@ INSERT INTO `pagxperfil` (`idpag`, `idpef`, `idperpf`) VALUES
 (26, 1, 30),
 (27, 1, 31),
 (28, 1, 35),
-(36, 1, 36);
+(36, 1, 36),
+(37, 1, 37);
 
 -- --------------------------------------------------------
 
@@ -493,9 +531,13 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idped`, `idusu`, `total`, `fecha`, `estped`) VALUES
-(45, 20, 37800.00, '2025-03-03 15:23:43', 'Recibido'),
+(45, 20, 37800.00, '2025-03-03 15:23:43', 'Enviado'),
 (46, 20, 296800.00, '2025-03-04 16:13:44', 'Recibido'),
-(47, 27, 296800.00, '2025-03-04 16:18:42', 'Recibido');
+(47, 27, 296800.00, '2025-03-04 16:18:42', 'Recibido'),
+(48, 27, 37800.00, '2025-03-05 14:05:12', 'Recibido'),
+(49, 27, 37800.00, '2025-03-05 17:01:13', 'Recibido'),
+(50, 27, 296800.00, '2025-03-07 12:48:09', 'En Tránsito'),
+(53, 27, 334600.00, '2025-03-08 14:32:07', 'Enviado');
 
 -- --------------------------------------------------------
 
@@ -582,8 +624,8 @@ INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valor
 (160, 'Camisa Selección Argentina Año 2024 Hombre', 25200, 7, NULL, 20000, 'Camisa deportiva', '2025-03-01 13:37:42', '2025-03-01 13:42:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
 (161, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón deportiva año 2024', '2025-03-03 14:50:58', '2025-03-03 14:52:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
 (162, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón deportiva año 2024', '2025-03-03 14:50:58', '2025-03-03 14:51:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(163, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón ', '2025-03-03 14:52:46', '2025-03-03 15:24:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 1, 2, NULL),
-(164, 'Teclado Mecánico K68', 371000, 6, NULL, 350000, 'Teclado con switches red color combinado inalámbrico. ', '2025-03-04 16:12:05', '2025-03-04 16:19:51', '2025-03-04 05:00:00', '2025-03-04 05:00:00', 'activo', 20, 2, 2, NULL);
+(163, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 9, NULL, 30000, 'Camisa de algodón ', '2025-03-03 14:52:46', '2025-03-08 14:32:07', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 1, 5, NULL),
+(164, 'Teclado Mecánico K68', 371000, 4, NULL, 350000, 'Teclado con switches red color combinado inalámbrico. ', '2025-03-04 16:12:05', '2025-03-08 14:32:07', '2025-03-04 05:00:00', '2025-03-04 05:00:00', 'activo', 20, 2, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -632,7 +674,7 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `urlt`, `nit`, `idubi`, `idusu`, `desprv`, `saldo`, `estprv`) VALUES
-(82, 'DavidX', 'Calle 34 Bloque 4', 'shoop.com', '454112', 15001, 20, 'Todo lo que quieres a tu alcance y en un solo lugar', 441600.00, 'activo');
+(82, 'DavidX', 'Calle 34 Bloque 4', 'shoop.com', '454112', 15001, 20, 'Todo lo que quieres a tu alcance y en un solo lugar', 531600.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -676,6 +718,13 @@ CREATE TABLE `review` (
   `comentario` text DEFAULT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `review`
+--
+
+INSERT INTO `review` (`idrev`, `idpro`, `idusu`, `rating`, `comentario`, `fecha`) VALUES
+(2, 163, 27, 5, 'Buena calidad y envío rápido. Recomendado', '2025-03-11 16:58:18');
 
 -- --------------------------------------------------------
 
@@ -1912,7 +1961,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idusu`, `nomusu`, `apeusu`, `docusu`, `emausu`, `celusu`, `genusu`, `dirrecusu`, `tipdoc`, `idval`, `idubi`, `feccreate`, `fecupdate`, `fotpef`, `idpef`, `pasusu`, `estusu`, `token_recuperacion`, `token_expira`, `esteli`) VALUES
 (16, 'David', 'Soriano', 101564, 'admin@gmail.com', '3186274255', 'M', NULL, 'CC', NULL, 15322, '2024-11-27 21:20:01', '2025-02-13 02:21:53', NULL, 2, '$2y$10$aGcbgN7SK.mxZRsTEfI3jeOcW7sueH9H4d.vRli3ouesWF6NG.SS6', 'Activo', NULL, NULL, 0),
 (20, 'DavidX', 'ss', 104544, 'davidx@gmail.com', '45674658', 'M', 'Vereda la balsa', 'CC', NULL, 47030, '2024-12-13 23:20:35', '2025-03-03 14:47:38', NULL, 1, '$2y$10$rkzjvt6ZirdI5g2OKCyyeONzPP9T1vd0oTb3iJXoaWDh3AyA.ajnG', 'Activo', '89fc8200fefff72640e1770ae9050ced307e8e6fe4d1253d93d5dc1e3d4e2bbff1196eef608d6e2333763e263f765ada1598', '2025-02-17 10:38:43', 1),
-(27, 'Juan David', 'Soriano Cicua', 1049794389, 'davidscicua314@gmail.com', '3186274255', 'M', 'Vereda la balsa calle 9a Sur', 'CC', NULL, 25175, '2025-02-17 14:41:33', '2025-02-28 14:45:19', NULL, 1, '$2y$10$/9So.AzckXsDGT3q/jvKZeBcom9Pgt.CP9OIBEuSP6xWV7TeuL19C', 'Activo', NULL, NULL, 0);
+(27, 'Juan David', 'Soriano Cicua', 1049794389, 'davidscicua314@gmail.com', '3186274255', 'M', 'Vereda la balsa calle 9a Sur', 'CC', NULL, 25175, '2025-02-17 14:41:33', '2025-03-12 12:50:06', NULL, 1, '$2y$10$/9So.AzckXsDGT3q/jvKZeBcom9Pgt.CP9OIBEuSP6xWV7TeuL19C', 'Activo', '0e531ff392b9cc636fab49e55a76b30a9c3e9013bb9666b48dedc016059b730f67552ce69140f0fe4e41e77a4aeb1df26de8', '2025-03-12 08:50:06', 0),
+(30, 'David', 'Soriano', 1049794389, 'toshoop2024@gmail.com', '3111111111', 'M', 'vereda la balsa', 'CC', NULL, 25175, '2025-03-08 01:35:53', '2025-03-08 01:39:17', NULL, 1, '$2y$10$cdQ2QD2WzMU7JrHZ3iZcpOB1LtZMr0BIZ4ywO23kZz4QnbuP1PHWS', 'Activo', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2059,6 +2109,13 @@ ALTER TABLE `menu`
   ADD PRIMARY KEY (`idmen`);
 
 --
+-- Indices de la tabla `ordenes_temporales`
+--
+ALTER TABLE `ordenes_temporales`
+  ADD PRIMARY KEY (`idord`),
+  ADD KEY `fk_ordenes_usuarios` (`idusu`);
+
+--
 -- Indices de la tabla `pagina`
 --
 ALTER TABLE `pagina`
@@ -2193,13 +2250,13 @@ ALTER TABLE `carrito`
 -- AUTO_INCREMENT de la tabla `comisiones`
 --
 ALTER TABLE `comisiones`
-  MODIFY `idcomis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idcomis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -2211,13 +2268,13 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detallecarrito`
 --
 ALTER TABLE `detallecarrito`
-  MODIFY `iddetcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `iddetcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  MODIFY `iddell` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `iddell` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `detallefavoritos`
@@ -2229,7 +2286,7 @@ ALTER TABLE `detallefavoritos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `devolucionreembolso`
@@ -2253,7 +2310,7 @@ ALTER TABLE `favoritos`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
+  MODIFY `idimag` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=388;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -2262,10 +2319,16 @@ ALTER TABLE `menu`
   MODIFY `idmen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT de la tabla `ordenes_temporales`
+--
+ALTER TABLE `ordenes_temporales`
+  MODIFY `idord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
@@ -2277,13 +2340,13 @@ ALTER TABLE `pago`
 -- AUTO_INCREMENT de la tabla `pagxperfil`
 --
 ALTER TABLE `pagxperfil`
-  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
@@ -2325,7 +2388,7 @@ ALTER TABLE `respuestas_pqr`
 -- AUTO_INCREMENT de la tabla `review`
 --
 ALTER TABLE `review`
-  MODIFY `idrev` bigint(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idrev` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `submenu`
@@ -2343,7 +2406,7 @@ ALTER TABLE `ubicacion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusu` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idusu` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `valor`
@@ -2435,6 +2498,12 @@ ALTER TABLE `favoritos`
 ALTER TABLE `imagen`
   ADD CONSTRAINT `fk_imagen_pagina` FOREIGN KEY (`urlimg`) REFERENCES `pagina` (`idpag`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`idpro`) REFERENCES `producto` (`idpro`);
+
+--
+-- Filtros para la tabla `ordenes_temporales`
+--
+ALTER TABLE `ordenes_temporales`
+  ADD CONSTRAINT `fk_ordenes_usuarios` FOREIGN KEY (`idusu`) REFERENCES `usuario` (`idusu`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `pago`
