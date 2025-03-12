@@ -24,7 +24,7 @@ class Mrev
     public function getRating()
     {
         return $this->rating;
-    }  
+    }
     public function getComentario()
     {
         return $this->comentario;
@@ -62,52 +62,71 @@ class Mrev
 
 
     public function agregarReview()
-{
-    try {
-        $modelo = new Conexion();
-        $conexion = $modelo->getConexion();
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
 
-        // Obtener valores
-        $idpro = $this->getIdpro();
-        $idusu = $this->getIdusu();
-        $rating = $this->getRating();
-        $comentario = $this->getComentario();
+            // Obtener valores
+            $idpro = $this->getIdpro();
+            $idusu = $this->getIdusu();
+            $rating = $this->getRating();
+            $comentario = $this->getComentario();
 
-        // Verificar si el usuario ha comprado el producto
-        $sql = "SELECT COUNT(*) FROM compra AS c 
+            // Verificar si el usuario ha comprado el producto
+            $sql = "SELECT COUNT(*) FROM compra AS c 
                 INNER JOIN detallecompra AS dc ON dc.idcom = c.idcom 
                 WHERE c.idusu = :idusu AND dc.idpro = :idpro";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bindParam(':idusu', $idusu, PDO::PARAM_INT);
-        $stmt->bindParam(':idpro', $idpro, PDO::PARAM_INT);
-        $stmt->execute();
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindParam(':idusu', $idusu, PDO::PARAM_INT);
+            $stmt->bindParam(':idpro', $idpro, PDO::PARAM_INT);
+            $stmt->execute();
 
-        $compras = $stmt->fetchColumn();
+            $compras = $stmt->fetchColumn();
 
-        if ($compras > 0) {
-            // Insertar la review
-            $sql2 = "INSERT INTO review (idpro, idusu, rating, comentario) 
+            if ($compras > 0) {
+                // Insertar la review
+                $sql2 = "INSERT INTO review (idpro, idusu, rating, comentario) 
                      VALUES (:idpro, :idusu, :rating, :comentario)";
-            $stmt2 = $conexion->prepare($sql2);
-            $stmt2->bindParam(':idpro', $idpro, PDO::PARAM_INT);
-            $stmt2->bindParam(':idusu', $idusu, PDO::PARAM_INT);
-            $stmt2->bindParam(':rating', $rating, PDO::PARAM_INT);
-            $stmt2->bindParam(':comentario', $comentario, PDO::PARAM_STR);
-            $stmt2->execute();
+                $stmt2 = $conexion->prepare($sql2);
+                $stmt2->bindParam(':idpro', $idpro, PDO::PARAM_INT);
+                $stmt2->bindParam(':idusu', $idusu, PDO::PARAM_INT);
+                $stmt2->bindParam(':rating', $rating, PDO::PARAM_INT);
+                $stmt2->bindParam(':comentario', $comentario, PDO::PARAM_STR);
+                $stmt2->execute();
 
-            if ($stmt2->rowCount() > 0) {
-                return true;
-            } else {
-                error_log("Error al insertar review", 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+                if ($stmt2->rowCount() > 0) {
+                    return true;
+                } else {
+                    error_log("Error al insertar review", 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+                }
             }
+        } catch (Exception $e) {
+            error_log("Error en agregarReview: " . $e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
         }
-    } catch (Exception $e) {
-        error_log("Error en agregarReview: " . $e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+
+        return false;
     }
 
-    return false;
-}
-
+    public function updateReview(){
+        try{
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $sql = "UPDATE review SET rating = :rating, comentario = :comentario WHERE idrev = :idrev";
+            $stmt = $conexion->prepare($sql);
+            $idrev = $this->getIdrev();
+            $rating = $this->getRating();
+            $comentario = $this->getComentario();
+            $stmt->bindParam(':idrev', $idrev, PDO::PARAM_INT);
+            $stmt->bindParam(':rating', $rating, PDO::PARAM_INT);
+            $stmt->bindParam(':comentario', $comentario, PDO::PARAM_STR);
+            $stmt->execute();
+            if($stmt->rowCount() > 0) return true;
+        } catch (PDOException $e){
+            error_log("Error en updateReview: ". $e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            return false;
+        }
+    }
 
     public function obtenerReviews()
     {
@@ -121,7 +140,23 @@ class Mrev
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
-            error_log( $e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            return false;
+        }
+    }
+    public function getOneReview()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $sql = "SELECT r.*, u.nomusu FROM review r JOIN usuario u ON r.idusu = u.idusu WHERE u.idusu = :idusu";
+            $stmt = $conexion->prepare($sql);
+            $idusu = $this->getIdusu();
+            $stmt->bindParam(':idusu', $idusu);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
             return false;
         }
     }

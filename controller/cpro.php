@@ -1,11 +1,15 @@
 <?php
 
 include "model/mpro.php";
+include "model/mrev.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $mpro = new Mpro();
+
+$mrev = new Mrev();
+
 $idpro = isset($_REQUEST['idpro']) ? $_REQUEST['idpro'] : NULL;
 $cg = isset($_REQUEST['cg']) ? $_REQUEST['cg'] : NULL;
 
@@ -41,6 +45,9 @@ $dtInfPrd = $mpro->getOnePrd();
 $dtCarprd = $mpro->getCarPrd();
 $dtImgpro = $mpro->getImagesByProduct($idpro);
 $dtSliders = $mpro->getImagesByProduct(NULL, 1);
+
+$mrev->setIdusu($_SESSION['idusu']);
+$dtReview = $mrev->getOneReview();
 
 $dtProdsSuge = $mpro->getProductosSugeridos($_SESSION['idusu'] ?? null);
 $dtProdSugeCatego = $mpro->getProductosPorCategoria($idpro);

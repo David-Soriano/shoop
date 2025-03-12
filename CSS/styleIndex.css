@@ -1675,6 +1675,8 @@ form button {
 .bx-tusped-gen {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .bx-tusped-gen-n2 {
@@ -2274,7 +2276,8 @@ form button {
     width: 100%;
 }
 
-.bx-conf-pef, .bx-conf-pef-bx {
+.bx-conf-pef,
+.bx-conf-pef-bx {
     flex-wrap: wrap;
     gap: 3%;
     margin: 2% 0;
@@ -2335,7 +2338,7 @@ form button {
     height: 80vh;
 }
 
-.bx-conf-pef-prin #contenido{
+.bx-conf-pef-prin #contenido {
     margin: 5% 0;
 }
 
@@ -2347,36 +2350,40 @@ form button {
     font-weight: 400;
 }
 
-.bx-conf-pef-prin #contenido .btn-vol-pf:active{
+.bx-conf-pef-prin #contenido .btn-vol-pf:active {
     border: none;
 }
-.bx-conf-pef-prin #contenido .btn-vol-pf:hover{
+
+.bx-conf-pef-prin #contenido .btn-vol-pf:hover {
     border-bottom: 1px solid;
 }
-.bx-content-pf{
+
+.bx-content-pf {
     background: #fff;
     padding: 2%;
     border-radius: 7px;
 }
-#contenido .form-conf-pef{
+
+#contenido .form-conf-pef {
     box-shadow: none;
 }
-#contenido .form-conf-pef button{
+
+#contenido .form-conf-pef button {
     position: initial;
     width: auto;
     height: auto;
 }
 
-.bx-stars i{
+.bx-stars i {
     font-size: 35px;
     color: #f4a857;
 }
 
-.bx-stars p{
+.bx-stars p {
     font-size: 11px;
 }
 
-.bx-opinion textarea{
+.bx-opinion textarea {
     height: 100px;
     resize: none;
     width: 100%;
@@ -2386,18 +2393,19 @@ form button {
     margin: 4% 0;
 }
 
-.bx-opinion textarea:focus-visible{
+.bx-opinion textarea:focus-visible {
     outline: none;
     border: 1px solid #f7705e;
 }
-.bx-calificar .form-cal{
+
+.bx-calificar .form-cal {
     padding: 0;
     width: auto;
     background: none;
     box-shadow: none;
 }
 
-.bx-calificar .form-cal button{
+.bx-calificar .form-cal button {
     position: initial;
     width: auto;
     height: auto;

@@ -79,21 +79,131 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['correo'])) {
                 $mail->Password = MAIL_PASS;
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
-                $mail->setFrom(MAIL_USER, 'Soporte');
+                $mail->setFrom(MAIL_USER, MAIL_FROM_NAME);
                 $mail->addAddress($correo);
                 $mail->isHTML(true);
                 $mail->Subject = 'Recuperación de Contraseña';
                 $mail->Body = "
     <html>
+    <head>
+        <style>
+            .email-wrapper {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .email-container {
+                width: 100%;
+                background-color: #ffffff;
+                border: 1px solid #ddd;
+                padding: 20px;
+                border-radius: 8px;
+            }
+
+            h1 {
+                color: inherit;
+                font-size: 24px;
+            }
+
+            .btn {
+                display: inline-block;
+                background-color: #3CB179;
+                color: white !important;
+                padding: 12px 24px;
+                text-decoration: none;
+                border-radius: 5px;
+                margin: 20px 0;
+                font-weight: bold;
+            }
+
+            .btn:hover {
+                background-color: #2e8c63;
+                color: white;
+            }
+
+
+            a:hover {
+                color:rgb(223, 113, 93);
+                text-decoration: underline;
+            }
+
+            .link {
+                word-wrap: break-word;
+            }
+
+            .footer {
+                font-size: 12px;
+                margin-top: 20px;
+            }
+
+            /* Estilos para el modo claro (light mode) */
+            @media (prefers-color-scheme: light) {
+                body {
+                    background-color: #f4f4f4;
+                    color: #333;
+                }
+
+                .email-container {
+                    background-color: #ffffff;
+                    border-color: #ddd;
+                }
+
+                .footer {
+                    color: #777;
+                }
+            }
+
+            /* Estilos para el modo oscuro (dark mode) */
+            @media (prefers-color-scheme: dark) {
+                body {
+                    background-color: #181818;
+                    color: #e0e0e0;
+                }
+
+                .email-container {
+                    background-color: #2b2b2b;
+                    border-color: #444;
+                }
+
+                .footer {
+                    color: #aaa;
+                }
+
+                a {
+                    color: #78e08f;
+                }
+
+                a:hover {
+                    color: #58b67f;
+                }
+
+                .btn {
+                    background-color: #78e08f;
+                    color: #181818;
+                }
+
+                .btn:hover {
+                    background-color: #58b67f;
+                    color: #181818;
+                }
+            }
+        </style>
+    </head>
     <body>
-        <h1>¡Hola, $nomusu!</h1>
-        <p>Para restablecer tu contraseña, usa el siguiente enlace:</p>
-        <form action='http://localhost/shoop/views/vwCamCont.php' method='POST'>
-            <input type='hidden' name='token' value='$token'>
-            <button type='submit' style='background:#3CB179;color:white;padding:10px;border:none;'>Restablecer Contraseña</button>
-        </form>
-        <p>Si no puedes hacer clic en el botón, copia y pega este enlace en tu navegador:</p>
-        <p>http://localhost/shoop/views/vwCamCont.php</p>
+        <div class ='email-wrapper'>
+            <div class ='email-container'>
+                <h1>¡Hola, $nomusu!</h1>
+                <p>Hemos recibido una solicitud para restablecer la contraseña asociada con tu cuenta de SHOOP <strong>$correo</strong>.</p>
+                <p>Para confirmar esta solicitud y asignar una nueva contraseña haz clic en el botón a continuación:</p>
+                <form action='http://localhost/shoop/views/vwCamCont.php' method='POST'>
+                    <input type='hidden' name='token' value='$token'>
+                    <button class='btn' type='submit' style='background:#3CB179;color:white;padding:10px;border:none;'>Restablecer Contraseña</button>
+                </form>
+                <p><strong>Importante:</strong> Si no reconoces esta solicitud, te recomendamos verificar la seguridad de tu cuenta de correo electrónico de inmediato.<br> Para cualquier inquietud sobre la seguridad de tu cuenta SHOOP, no dudes en contactarnos a través de <a href='mailto:toshoop2024@gmail.com'>toshoop2024@gmail.com</a>.</p>
+                <p>Gracias,<br>El equipo de SHOOP</p>
+            </div>
+        </div>
     </body>
     </html>
 ";
