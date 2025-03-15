@@ -130,9 +130,9 @@ p {
     font-size: 13px;
 }
 
-.nav-item:hover .men-vrt {
+/* .nav-item:hover .men-vrt {
     display: block;
-}
+} */
 
 .men-vrt li {
     padding: 5%;
@@ -2409,4 +2409,222 @@ form button {
     position: initial;
     width: auto;
     height: auto;
+}
+
+@media screen and (max-width: 500px) {
+    .cont:hover input {
+        width: 156px;
+        font-size: 12px;
+    }
+
+    .btns {
+        position: absolute;
+        right: 9px;
+        top: 7px;
+        width: 43px;
+        height: 43px;
+    }
+
+    .btns svg {
+        position: absolute;
+        top: 11px;
+        right: 10px;
+    }
+
+    .carousel {
+        height: 23vh;
+    }
+
+    .carousel-inner,
+    .carousel-item,
+    .carousel-item img {
+        height: 100%;
+    }
+
+    .bx-tsec {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bx-mr-prd.vistos a {
+        min-height: auto !important;
+    }
+
+    .bx-apart.bx-apart_views {
+        width: 100%;
+        margin: 4% 0;
+    }
+
+    .bx-art-sg {
+        width: 100%;
+    }
+
+    .bx-apart_p2 .bx-item {
+        width: 100px;
+        height: 15vh;
+    }
+
+    .inf-artc h6 {
+        font-size: 12px;
+    }
+
+    .bx-item #val-sindes {
+        font-size: 10px;
+    }
+
+    .inf-tot-prc p {
+        font-size: 14px;
+    }
+
+    .bx-item .inf-tot-prc #inf-val-des {
+        font-size: 11px;
+    }
+
+    .nav-men {
+        margin-top: 4%;
+    }
+
+    header {
+        padding: 1%;
+    }
+
+    .ico-items a {
+        margin-right: 55%;
+    }
+
+    .icons .ico-items {
+        margin-right: 100%;
+    }
+
+    .ico-items a i {
+        font-size: 17px;
+    }
+
+    .nav-item {
+        font-size: 12px;
+    }
+
+    .men-vrt {
+        padding: 0;
+        width: 40%;
+    }
+
+    .bx-items-carr-comp h4 {
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .bx-items-carr-comp p {
+        text-align: center;
+    }
+
+    .bx-items-carr-comp img {
+        width: 120%;
+    }
+
+    .bx-mr-prd_nompro {
+        display: flex;
+        flex-wrap: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 12px;
+    }
+
+    .bx-mr-prd a {
+        min-height: 26vh !important;
+        max-height: 26vh !important;
+        font-size: 10px;
+    }
+
+    .bx-mr-prd.bx-mr-prd-gene_sec a {
+        max-width: 16vh;
+        min-width: 16vh;
+    }
+
+    .bx-mr-prd_precio {
+        font-size: 14px;
+    }
+
+    .bx-mr-prd_pordesc {
+        font-size: 10px;
+    }
+
+    .bx-mr-prd_del {
+        font-size: 10px;
+    }
+
+    .bx-mr-prd a img {
+        width: 82%;
+    }
+
+    .bx-mr-prd-gene {
+        margin: auto;
+        margin-top: 10%;
+    }
+
+    .bx-items-carr-comp.bx-pagos .col-6 {
+        width: 100%;
+    }
+
+    .btn-success.btn-pago {
+        width: auto;
+    }
+
+    .container .form-pago button {
+        position: initial;
+    }
+
+    .bx-res-tot-pag {
+        margin: 4% 0px;
+    }
+
+    .inf-perfil div {
+        width: 36%;
+    }
+
+    .bx-tusped-gen-n2 {
+        width: 100%;
+    }
+
+    footer {
+        width: 104%;
+    }
+
+    .bx_tusped-nompro {
+        display: flex;
+        flex-wrap: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .bx-dt-pr-ped {
+        width: 42%;
+    }
+
+    .bx_tusped-est-ped,
+    .bx_tusped-ult-acc {
+        font-size: 12px;
+    }
+
+    .bx_tusped-nompro {
+        font-size: 10px;
+    }
+
+    .bx_tusped-btn-sg-ev {
+        width: auto;
+        line-height: normal;
+        font-size: 10px;
+        height: 28px;
+    }
+    .bx_tusped-img{
+        width: 25%;
+    }
+    .bx_tusped img{
+        width: 100%;
+    }
+    .bx_tusped-fech {
+        font-size: 10px;
+    }
 }

@@ -91,7 +91,7 @@ $ubicacion = [
                                 value="<?= htmlspecialchars(json_encode($carrito, JSON_UNESCAPED_UNICODE), ENT_QUOTES, 'UTF-8'); ?>">
                             <input type="hidden" name="ubicacion"
                                 value="<?= htmlspecialchars(json_encode($ubicacion, JSON_UNESCAPED_UNICODE), ENT_QUOTES, 'UTF-8'); ?>">
-                            <button type="submit" class="btn btn-success">Realizar Pago</button>
+                            <button type="submit" class="btn btn-success btn-pago">Realizar Pago</button>
                         </form>
                     </div>
                 </div>

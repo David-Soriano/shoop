@@ -3,7 +3,7 @@
         <?php
         foreach ($dtMenu as $menuItem): ?>
             <li class="nav-item">
-                <a href="<?= $isLoggedIn ? $menuItem['url2'] : $menuItem['url']; ?>"><?= $menuItem['nombre'] ?></a>
+                <a href="<?= !empty($isLoggedIn ? $menuItem['url2'] : $menuItem['url']) ? ($isLoggedIn ? $menuItem['url2'] : $menuItem['url']) : '#'; ?>"><?= $menuItem['nombre'] ?></a>
                 <?php if (!empty($menuItem['submenus'])): ?>
                     <ul class="men-vrt">
                         <?php foreach ($menuItem['submenus'] as $subMenuItem): ?>

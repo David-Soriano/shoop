@@ -46,7 +46,7 @@ $dtCarprd = $mpro->getCarPrd();
 $dtImgpro = $mpro->getImagesByProduct($idpro);
 $dtSliders = $mpro->getImagesByProduct(NULL, 1);
 
-$mrev->setIdusu($_SESSION['idusu']);
+$mrev->setIdusu($_SESSION['idusu'] ?? null);
 $dtReview = $mrev->getOneReview();
 
 $dtProdsSuge = $mpro->getProductosSugeridos($_SESSION['idusu'] ?? null);

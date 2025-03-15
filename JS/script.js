@@ -531,6 +531,35 @@ $(document).ready(function () {
     });
 });
 
+function desplegarMenu() {
+    let mainItems = document.querySelectorAll('.nav-item');
+
+    mainItems.forEach((item) => {
+        let submenu = item.querySelector('.men-vrt'); // Buscar el submenú dentro del nav-item
+
+        item.addEventListener('click', (event) => {
+            event.stopPropagation(); // Evitar que el evento de document lo cierre inmediatamente
+
+            // Cerrar otros submenús antes de abrir el actual
+            document.querySelectorAll('.men-vrt').forEach(menu => {
+                if (menu !== submenu) menu.style.display = 'none';
+            });
+
+            // Alternar la visibilidad del submenú correspondiente
+            if (submenu) {
+                submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+            }
+        });
+    });
+
+    // Ocultar todos los submenús al hacer clic fuera de ellos
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.men-vrt').forEach(menu => menu.style.display = 'none');
+    });
+}
+
+
+
 // ======= Cargar todas las configuraciones al inicio =======
 window.addEventListener('load', () => {
     setupSearch();
@@ -541,6 +570,7 @@ window.addEventListener('load', () => {
     setupMaxQuantity();
     setupBoxToggle();
     setupDataTable();
+    desplegarMenu();
 });
 window.addEventListener('load', () => {
     setupInputSearch();
