@@ -22,7 +22,7 @@
                                 <div class="col-2 bx_tusped-img">
                                     <img src="<?= $dtf['imgpro'] ?>" alt="<?= $dtf['nompro'] ?>">
                                 </div>
-                                <div class="col">
+                                <div class="col bx-tusped-inf">
                                     <div class="bx_tusped-inf-nompro bx-favor-inf-nompro">
                                         <div>
                                             <p class="bx_tusped-nompro bx-favor-nompro"><?= $dtf['nompro'] ?></p>

@@ -26,12 +26,18 @@ $dtSegEnv = segEnv($idped);
                         <?php foreach ($estados as $estado) {
                             if ($dts['estped'] != "Cancelado") {
                                 $activeClass = ($dts['estped'] == $estado) ? 'dot-active' : '';
-                                ?>
-                                <div class="me-3 text-center">
-                                    <span class="dot <?= $activeClass; ?>"></span>
-                                    <p class="small"><?= $estado; ?></p>
-                                </div>
-                            <?php } else {
+                                if ($dts['estped'] == 'Pendiente Reembolso') {
+                                    echo "<p>El pedido esta pendiente de reembolso</p>";
+                                    break;
+                                } else {
+                                    ?>
+                                    <div class="me-3 text-center">
+                                        <span class="dot <?= $activeClass; ?>"></span>
+                                        <p class="small"><?= $estado; ?></p>
+                                    </div>
+                                <?php
+                                }
+                            } else {
                                 echo "<p>El pedido fue CANCELADO</p>";
                                 break;
                             }
@@ -50,7 +56,7 @@ $dtSegEnv = segEnv($idped);
                     <a href="#" class="btn btn-outline-danger">Detalles</a>
                     <?php //foreach ($dtSegEnv as $dts) {
                     
-                        if ($estado != "En Tránsito" && $estado != "En Reparto" && $estado != "Recibido") { ?>
+                        if ($estado != "En Tránsito" && $estado != "En Reparto" && $estado != "Recibido" && $estado != "Pendiente Reembolso") { ?>
                         <a href="#" class="btn btn-link">Cancelar pedido</a>
                     <?php }
                         if ($dts['estped'] == "En Reparto") { ?>
@@ -58,7 +64,8 @@ $dtSegEnv = segEnv($idped);
                             data-idprov="<?= $estado ?>">Recibido</a>
                     <?php }
                         if ($estado == "Recibido") { ?>
-                        <a href="home.php?pg=37&idpro=<?=$idpro?>" class="btn btn-outline-success">Calificar</a>
+                        <a href="home.php?pg=38&idped=<?= $idped ?>">Devolver</a>
+                        <a href="home.php?pg=37&idpro=<?= $idpro ?>" class="btn btn-outline-success">Calificar</a>
                     <?php }
                         //} ?>
                 </div>

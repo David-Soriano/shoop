@@ -13,7 +13,7 @@
                         <input type="text" name="nomusu" id="nomusu" placeholder="Ej. David Gomez" required>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row bx-form-suport_corr-qj">
                     <div class="col">
                         <label for="emausu">Correo Electrònico</label>
                         <input type="email" name="emausu" id="emausu" placeholder="correo@example.com" required>

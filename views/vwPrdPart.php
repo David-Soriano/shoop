@@ -1,5 +1,5 @@
 <div class="row bx-cont-inf d-flex justify-content-center">
-    <section class="col-6 section">
+    <section class="col-md-6 section">
         <div class="row bx-fot-art">
             <div class="col-2">
                 <div class="row bx-min-fot min-img">

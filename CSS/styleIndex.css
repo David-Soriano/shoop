@@ -2336,6 +2336,7 @@ form button {
     display: flex;
     align-content: space-between;
     height: 80vh;
+    justify-content: center;
 }
 
 .bx-conf-pef-prin #contenido {
@@ -2411,6 +2412,18 @@ form button {
     height: auto;
 }
 
+.bx-seg-env .form-dev{
+    box-shadow: none;
+}
+
+.bx-seg-env .form-dev button{
+    position: initial;
+    width: auto;
+    height: auto;
+    background: transparent;
+    color: #ea4949;
+    font-weight: 500;
+}
 @media screen and (max-width: 500px) {
     .cont:hover input {
         width: 156px;
@@ -2461,7 +2474,7 @@ form button {
 
     .bx-apart_p2 .bx-item {
         width: 100px;
-        height: 15vh;
+        height: 22vh;
     }
 
     .inf-artc h6 {
@@ -2519,7 +2532,7 @@ form button {
     }
 
     .bx-items-carr-comp img {
-        width: 120%;
+        width: 100%;
     }
 
     .bx-mr-prd_nompro {
@@ -2618,13 +2631,82 @@ form button {
         font-size: 10px;
         height: 28px;
     }
-    .bx_tusped-img{
+
+    .bx_tusped-img {
         width: 25%;
     }
-    .bx_tusped img{
+
+    .bx_tusped img {
         width: 100%;
     }
+
     .bx_tusped-fech {
         font-size: 10px;
+    }
+
+    .bx-suport {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bx-suport_text {
+        width: 100%;
+        padding: 8%;
+    }
+
+    .bx-suport_text p {
+        font-size: 14px;
+    }
+
+    .bx-form-suport_corr-qj {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bx-mr-prd_descrip p {
+        text-align: justify;
+    }
+
+    .bx_tusped-det-com {
+        width: 37%;
+    }
+
+    .bx-prp-carr-comp {
+        flex-direction: column;
+    }
+
+    .product {
+        padding: 4px;
+    }
+
+    .product p {
+        text-align: justify;
+    }
+
+    .product span {
+        font-size: 12px;
+    }
+
+    .bx-a-car h6 {
+        font-size: 12px;
+    }
+
+    .bx-a-car del {
+        font-size: 9px;
+    }
+
+    .bx-items-carr-comp .product-details_prec-fin {
+        font-size: 11px;
+    }
+
+    .product-actions {
+        padding: 0;
+        justify-content: center;
+    }
+    .bx-tusped-inf{
+        width: 10%;
+    }
+    .bx-txt-prd {
+        min-height: 54vh;
     }
 }

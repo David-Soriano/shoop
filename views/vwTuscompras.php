@@ -33,7 +33,7 @@
                     <div class="row bx_tusped-dtp">
                         <div class="col-2 bx_tusped-img"><img src="<?= $dtpd['imgpro'] ?>" alt="<?= $dtpd['nompro'] ?>">
                         </div>
-                        <div class="col">
+                        <div class="col bx_tusped-det-com">
                             <p class="bx_tusped-est-ped"><?= $dtpd['estped'] ?></p>
                             <p class="bx_tusped-ult-acc">Ultima Acción</p>
                             <div class="bx_tusped-inf-nompro">

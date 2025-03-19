@@ -2,7 +2,7 @@
     <div class="row bx-conf-pef-prin">
         <div class="row">
             <div class="row bx-conf-pef-bx">
-                <div class="col-4 bx-conf-pef-cont">
+                <div class="col-md-4 col-sm bx-conf-pef-cont">
                     <div class="row bx-conf-pef-ini">
                         <div class="col-2 circle">
                             <p><?= $iniciales = strtoupper(substr($_SESSION['nomusu'], 0, 1) . substr($_SESSION['apeusu'], 0, 1)); ?>
@@ -28,10 +28,10 @@
                 }?>
             </div>
             <div class="row bx-conf-pef">
-                <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('views/vwInfo-Personal.php')">
+                <a href="#" class="col-md-3 bx-conf-pef-item" onclick="cargarContenido('views/vwInfo-Personal.php')">
                     <h5>Información Personal</h5>
                 </a>
-                <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('views/vwDatos-Cuenta.php')">
+                <a href="#" class="col-md-3 bx-conf-pef-item" onclick="cargarContenido('views/vwDatos-Cuenta.php')">
                     <h5>Datos de tu Cuenta</h5>
                 </a>
                 <!-- <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('views/vwSeguridad.php')">
@@ -40,7 +40,7 @@
                 <!-- <a href="#" class="col-3 bx-conf-pef-item">
                     <h5>Formas de Pago</h5>
                 </a> -->
-                <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('views/vwDirecciones.php')">
+                <a href="#" class="col-md-3 bx-conf-pef-item" onclick="cargarContenido('views/vwDirecciones.php')">
                     <h5>Direcciones</h5>
                 </a>
             </div>
