@@ -13,11 +13,13 @@ require_once '../model/mpancon.php';
 require_once '../model/mprov.php';
 require_once '../model/mpro.php';
 require_once '../model/mped.php';
+require_once '../model/mdev.php';
 
 $control = new Mpancon();
 $prov = new Mprov();
 $mpro = new Mpro();
 $mped = new Pedido();
+$mdev = new Mdev();
 
 $idusus = $_SESSION['idusu'] ?? null;
 $idProveedor = $idusus ? $prov->existeProveedor($idusus) : null;
@@ -54,6 +56,7 @@ $totalPages = ceil($totalResults / $resultsPerPage);
 
 $dtAllPrd = $mpro->getAllPrd($idProveedor, $resultsPerPage, $offset);
 $dtAllPedidos = $mped->getPedidos($_SESSION['idprov']);
+$dtDevol = $mdev->getDevs($_SESSION['idprov']);
 
 //se utiliza vwpanpro
 $saldo = $prov->traerSaldo($idProveedor);

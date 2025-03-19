@@ -90,5 +90,63 @@ class Mdev
             return false;
         }
     }
+
+    public function getDevs($idprov){
+        $sql = "SELECT 
+    pr.idprov, 
+    pxp.idpro, 
+    pxp.idprodprv, 
+    p.nompro, 
+    p.precio, 
+    p.pordescu, 
+    dp.iddet, 
+    dp.idped, 
+    dp.cantidad, 
+    ped.idusu, 
+    ped.total, 
+    ped.fecha, 
+    ped.estped, 
+    i.imgpro, 
+    i.nomimg,
+    dr.iddevo, 
+    dr.idped AS idped_devo, 
+    dr.idpro AS idpro_devo, 
+    dr.motivo, 
+    dr.fechasolicitud, 
+    dr.estado, 
+    dr.fechaprocesamiento, 
+    dr.montoreembolso
+FROM proveedor pr 
+INNER JOIN prodxprov pxp ON pr.idprov = pxp.idprov 
+INNER JOIN producto p ON pxp.idpro = p.idpro 
+INNER JOIN detalle_pedido dp ON p.idpro = dp.idpro 
+INNER JOIN pedido ped ON dp.idped = ped.idped 
+LEFT JOIN (
+    SELECT idpro, imgpro, nomimg 
+    FROM imagen 
+    WHERE (idpro, ordimg) IN (
+        SELECT idpro, MIN(ordimg) 
+        FROM imagen 
+        GROUP BY idpro
+    )
+) i ON p.idpro = i.idpro
+LEFT JOIN devolucionreembolso dr ON ped.idped = dr.idped
+WHERE pr.idprov = :idprov
+  AND dr.iddevo IS NOT NULL  -- Solo traer los pedidos que tienen devolución/reembolso
+ORDER BY ped.fecha DESC;
+";
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $result = $conexion->prepare($sql);
+            $result->bindValue(':idprov', $idprov);
+            $result->execute();
+            $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+            echo "Error al ver los reembolsos. Inténtalo más tarde";
+        }
+        return $res;
+    }
     
 }

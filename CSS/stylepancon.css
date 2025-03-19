@@ -859,17 +859,20 @@ footer {
     flex-direction: column;
     align-items: flex-start;
 }
-#contenido .form-conf-pef input{
+
+#contenido .form-conf-pef input {
     border: none;
     border-bottom: 1px solid #bdbbbb;
     margin: 1% 0;
     padding: 1% 0.5%;
     width: 35%;
 }
-#contenido .form-conf-pef input:focus-visible{
+
+#contenido .form-conf-pef input:focus-visible {
     outline: none;
 }
-#contenido .form-conf-pef textarea{
+
+#contenido .form-conf-pef textarea {
     resize: none;
     border: 1px solid #c3c3c3;
     border-radius: 5px;
@@ -877,11 +880,34 @@ footer {
     margin: 2% 0px;
     width: 35%;
 }
-#contenido .form-conf-pef textarea:focus-visible{
+
+#contenido .form-conf-pef textarea:focus-visible {
     outline: none;
 }
+
 #contenido .form-conf-pef button {
     position: initial;
     width: auto;
     height: auto;
+}
+
+@media screen and (max-width: 500px) {
+    header {
+        height: 24vh;
+    }
+    .bx-slider,
+    .bx-apartados {
+        position: initial;
+        display: flex;
+        gap: 12%;
+        margin: 1% auto;
+    }
+
+    .bx-prc {
+        flex-direction: column;
+    }
+
+    .bx-slider .nav {
+        display: none;
+    }
 }

@@ -64,11 +64,14 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
   <main>
     <div class="container-fluid">
       <div class="row bx-prc">
-        <div class="bx-slider col-2">
+        <div class="bx-slider col-md-2 col-sm-8 col-10">
           <h5>Ordenes</h5>
           <ul class="nav flex-column">
             <li class="nav-item">
               <a class="nav-link text-black" href="vwpanpro.php?vw=25">Listado de Pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-black" href="vwpanpro.php?vw=39">Reembolsos</a>
             </li>
           </ul>
           <h5>Inventario</h5>
