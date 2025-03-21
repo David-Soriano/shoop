@@ -2,7 +2,7 @@
     <div class="row bx-conf-pef-prin">
         <div class="row">
             <div class="row bx-conf-pef-bx">
-                <div class="col-4 bx-conf-pef-cont">
+                <div class="col-sm-4 col bx-conf-pef-cont">
                     <div class="row bx-conf-pef-ini">
                         <div class="col-2 circle">
                             <p><?= $iniciales = strtoupper(substr($dtProv['nomprov'], 0, 1)); ?>
@@ -28,10 +28,10 @@
                 } ?>
             </div>
             <div class="row bx-conf-pef">
-                <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('../views/vwInfo-general.php')">
+                <a href="#" class="col-sm-3 col bx-conf-pef-item" onclick="cargarContenido('../views/vwInfo-general.php')">
                     <h5>Información General</h5>
                 </a>
-                <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('../views/vwDatos-tienda.php')">
+                <a href="#" class="col-sm-3 col bx-conf-pef-item" onclick="cargarContenido('../views/vwDatos-tienda.php')">
                     <h5>Datos de tu Tienda</h5>
                 </a>
                 <!-- <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('views/vwSeguridad.php')">
@@ -40,7 +40,7 @@
                 <!-- <a href="#" class="col-3 bx-conf-pef-item">
                     <h5>Formas de Pago</h5>
                 </a> -->
-                <a href="#" class="col-3 bx-conf-pef-item" onclick="cargarContenido('../views/vwDirecciones-Prv.php')">
+                <a href="#" class="col-sm-3 col bx-conf-pef-item" onclick="cargarContenido('../views/vwDirecciones-Prv.php')">
                     <h5>Direcciones</h5>
                 </a>
             </div>

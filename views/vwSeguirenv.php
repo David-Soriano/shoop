@@ -22,7 +22,7 @@ $dtSegEnv = segEnv($idped);
                 // Array con los estados posibles
                 $estados = ["Aprobado", "Enviado", "En Tránsito", "En Reparto", "Recibido"];
                 ?>
-                    <div class="d-flex align-items-center mt-5">
+                    <div class="d-flex align-items-center mt-5 bx-dot">
                         <?php foreach ($estados as $estado) {
                             if ($dts['estped'] != "Cancelado") {
                                 $activeClass = ($dts['estped'] == $estado) ? 'dot-active' : '';
@@ -52,7 +52,7 @@ $dtSegEnv = segEnv($idped);
                     <?php $estado = $dts['estped'];
                     $idpro = $dts['idpro'];
                 } ?>
-                <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="d-flex justify-content-between align-items-center mt-5 mt-sm-3">
                     <a href="#" class="btn btn-outline-danger">Detalles</a>
                     <?php //foreach ($dtSegEnv as $dts) {
                     

@@ -20,6 +20,10 @@
                 <div class="row">
                     <?php if (isset($dtInfPrd)) {
                         foreach ($dtInfPrd as $dtinf) { ?>
+                            <div class="col-2 bx-ico-favo">
+                                <i class="bi bi-heart" id="heart-icon" data-idusu="<?php if (!empty($_SESSION['idusu']))
+                                    echo $_SESSION['idusu']; ?>" data-idpro="<?= $dtinf['idpro'] ?>" title="Favorito"></i>
+                            </div>
                             <div class="col bx-car-prd">
                                 <p><?php if ($dtinf['es_nuevo']) { ?>Nuevo | <?php }
                                 echo $dtinf['productvend']; ?> vendidos</p>
@@ -27,6 +31,7 @@
                             </div>
                         <?php }
                     } ?>
+
                 </div>
             </aside>
             <?php if (isset($dtInfPrd)) {
@@ -46,10 +51,9 @@
                         <div class="bx-compu">
                             <section>
                                 <div class="bx-ico-favo">
-                                    <i class="bi bi-heart" id="heart-icon"
-                                        data-idusu="<?php if (!empty($_SESSION['idusu']))
-                                            echo $_SESSION['idusu']; ?>"
-                                        data-idpro="<?= $dtinf['idpro'] ?>"></i>
+                                    <i class="bi bi-heart" id="heart-icon" data-idusu="<?php if (!empty($_SESSION['idusu']))
+                                        echo $_SESSION['idusu']; ?>" data-idpro="<?= $dtinf['idpro'] ?>"
+                                        title="Favorito"></i>
                                 </div>
                                 <p><?php if ($dtinf['es_nuevo']) { ?>Nuevo | <?php }
                                 echo $dtinf['productvend']; ?> vendidos</p>
@@ -94,7 +98,7 @@
                     </div>
                     <div class="col-5 bx-btns-comp">
                         <p>Stock disponible: <span><?= $dtinf['cantidad']; ?></span></p>
-                        <p>Cantidad: <input type="number" id="cantidad" data-max="<?= $dtinf['cantidad']; ?>" value="1"></p>
+                        <p>Cantidad: <input type="number" class="inp-cantidad-prd" id="cantidad" data-max="<?= $dtinf['cantidad']; ?>" value="1"></p>
 
                         <?php if ($dtinf['cantidad'] > 0) { ?>
                             <button id="btn-buy" class="btn-buy" data-id="<?= $dtinf['idpro']; ?>"
@@ -103,10 +107,9 @@
                                     href="<?php echo $isLoggedIn ? "home.php?pg=9&idpro=" . $dtinf['idpro'] : "views/vwLogin.php"; ?>">Lo
                                     quiero </a></button>
                             <button id="btn-add-carr" class="add-to-cart" data-idpro="<?= $dtinf['idpro']; ?>"
-                                data-precio="<?= $valorConDescuento; ?>" data-cantidad="1"
-                                data-idusu="<?php if (!empty($_SESSION['idusu']))
-                                    echo $_SESSION['idusu']; ?>"
-                                title="Añadir al carrito"><i class="bi bi-cart2"></i></button>
+                                data-precio="<?= $valorConDescuento; ?>" data-cantidad="1" data-idusu="<?php if (!empty($_SESSION['idusu']))
+                                      echo $_SESSION['idusu']; ?>" title="Añadir al carrito"><i
+                                    class="bi bi-cart2"></i></button>
                         <?php } else { ?>
                             <h5>AGOTADO</h5>
                         <?php } ?>
@@ -147,11 +150,16 @@
                     </div>
                     <div class="col-10 bx-btns-comp">
                         <p>Stock disponible: <span><?= $dtinf['cantidad']; ?></span></p>
-                        <p>Cantidad: <span>1</span></p>
-                        <button id="btn-buy"><a
-                                href="<?php echo $isLoggedIn ? "home.php?pg=9&idpro=" . $dtinf['idpro'] : "views/vwLogin.php"; ?>">Lo
-                                quiero </a></button>
-                        <button id="btn-add-carr" title="Añadir al carrito"><i class="bi bi-cart2"></i></button>
+                        <p>Cantidad: <input type="number" class="inp-cantidad-prd" id="cantidad" data-max="<?= $dtinf['cantidad']; ?>" value="1"></p>
+                        <button id="btn-buy" class="btn-buy" data-id="<?= $dtinf['idpro']; ?>"
+                                data-nombre="<?= $dtinf['nompro']; ?>" data-precio="<?= $valorConDescuento; ?>"
+                                data-imagen="<?= $dtinf['imgpro']; ?>"><a
+                                    href="<?php echo $isLoggedIn ? "home.php?pg=9&idpro=" . $dtinf['idpro'] : "views/vwLogin.php"; ?>">Lo
+                                    quiero </a></button>
+                        <button id="btn-add-carr" class="add-to-cart" data-idpro="<?= $dtinf['idpro']; ?>"
+                            data-precio="<?= $valorConDescuento; ?>" data-cantidad="1" data-idusu="<?php if (!empty($_SESSION['idusu']))
+                                  echo $_SESSION['idusu']; ?>" title="Añadir al carrito"><i
+                                class="bi bi-cart2"></i></button>
                         <div class="col">
                             <h6>Información de la Tienda</h6>
                             <div class="col">

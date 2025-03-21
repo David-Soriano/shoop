@@ -2,7 +2,6 @@ DROP DATABASE IF EXISTS shoop;
 CREATE DATABASE shoop;
 USE shoop;
 
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -181,7 +180,8 @@ CREATE TABLE `detallecarrito` (
 
 INSERT INTO `detallecarrito` (`iddetcar`, `idcar`, `idpro`, `cantidad`, `precar`) VALUES
 (22, 3, 163, 1, 37800),
-(23, 3, 164, 1, 296800);
+(23, 3, 164, 1, 296800),
+(25, 2, 164, 1, 296800);
 
 -- --------------------------------------------------------
 
@@ -222,6 +222,14 @@ CREATE TABLE `detallefavoritos` (
   `idfav` bigint(11) DEFAULT NULL,
   `idpro` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `detallefavoritos`
+--
+
+INSERT INTO `detallefavoritos` (`iddetfav`, `idfav`, `idpro`) VALUES
+(50, 50, 163),
+(54, 54, 164);
 
 -- --------------------------------------------------------
 
@@ -268,9 +276,16 @@ CREATE TABLE `devolucionreembolso` (
   `motivo` varchar(255) NOT NULL,
   `fechasolicitud` timestamp NOT NULL DEFAULT current_timestamp(),
   `estado` varchar(50) DEFAULT 'Pendiente',
-  `fechaprocesamiento` timestamp NULL DEFAULT NULL,
+  `fechaprocesamiento` datetime DEFAULT NULL,
   `montoreembolso` float DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `devolucionreembolso`
+--
+
+INSERT INTO `devolucionreembolso` (`iddevo`, `idped`, `idpro`, `motivo`, `fechasolicitud`, `estado`, `fechaprocesamiento`, `montoreembolso`) VALUES
+(4, 49, 163, 'Llegó en mal estado', '2025-03-19 15:39:01', 'pendiente', NULL, 37800);
 
 -- --------------------------------------------------------
 
@@ -301,6 +316,14 @@ CREATE TABLE `favoritos` (
   `idusu` int(5) DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `favoritos`
+--
+
+INSERT INTO `favoritos` (`idfav`, `idusu`, `fecha_creacion`) VALUES
+(50, 27, '2025-03-19 19:19:11'),
+(54, 20, '2025-03-20 21:31:49');
 
 -- --------------------------------------------------------
 
@@ -362,7 +385,7 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`idmen`, `nombre`, `url`, `ordmen`, `estmen`, `url2`, `submen`, `lugmen`, `icomen`, `isUser`) VALUES
 (1, 'Categorías', NULL, 1, NULL, NULL, 1, 0, NULL, NULL),
 (2, 'Nosotros', 'index.php?pg=5', 2, NULL, 'home.php?pg=5', 0, 0, NULL, NULL),
-(3, 'Ayuda/PQR', 'index.php?pg=8', 3, NULL, 'home.php?pg=8', 1, 0, NULL, NULL),
+(3, 'Ayuda/PQR', NULL, 3, NULL, NULL, 1, 0, NULL, NULL),
 (4, 'Iniciar Sesión', 'views/vwLogin.php', 4, 0, 'views/vwLogin.php', 0, 0, NULL, NULL),
 (6, 'Vender', NULL, 6, 1, 'views/vwpanpro.php?vw=25', 0, 0, NULL, NULL),
 (7, 'Cerrar Sesión', 'views/vwExit.php', 10, 1, NULL, 0, 1, NULL, NULL),
@@ -435,7 +458,7 @@ INSERT INTO `pagina` (`idpag`, `nompag`, `rutpag`, `mospag`, `icopag`, `lugpag`,
 (24, 'Subir Productos', 'views/vwven.php', NULL, NULL, 2, 'Activo', 1),
 (25, 'Lista de pedidos', 'views/vwListPed.php', NULL, NULL, 2, 'Activo', 1),
 (26, 'Panel Control WC', 'views/vwDefPan.php', NULL, NULL, 2, 'Activo', 1),
-(27, 'PQR prv', 'views/vista_pqr.php', NULL, NULL, 2, 'Activo', 1),
+(27, 'Balances Prv', 'views/vwBalPrv.php', NULL, NULL, 2, 'Activo', 1),
 (28, 'Seguir Envío', 'views/vwSeguirenv.php', NULL, NULL, NULL, 'Activo', 1),
 (30, 'Ver paginas', 'views/vwCpag.php', NULL, NULL, NULL, 'Activo', 1),
 (31, 'Lista Usuarios', 'views/vwUserT.php', NULL, NULL, NULL, 'Activo', 1),
@@ -443,7 +466,9 @@ INSERT INTO `pagina` (`idpag`, `nompag`, `rutpag`, `mospag`, `icopag`, `lugpag`,
 (33, 'Control Productos', 'views/vwProdC.php', NULL, NULL, NULL, 'Activo', 1),
 (34, 'Página Prueba', 'views/vwpáginaprueba.php', NULL, 'bi bi-123', 0, 'Activo', 1),
 (36, 'Perfil Proveedor', 'views/vwPerfilTienda.php', NULL, NULL, 2, 'Activo', 1),
-(37, 'Calificar', 'views/vwCalPrd.php', NULL, NULL, NULL, 'Activo', 1);
+(37, 'Calificar', 'views/vwCalPrd.php', NULL, NULL, NULL, 'Activo', 1),
+(38, 'Devolución', 'views/vwDevolv.php', NULL, NULL, NULL, 'Activo', 1),
+(39, 'Lista Reembolsos', 'views/vwListDev.php', NULL, NULL, 2, 'Activo', 1);
 
 -- --------------------------------------------------------
 
@@ -510,7 +535,9 @@ INSERT INTO `pagxperfil` (`idpag`, `idpef`, `idperpf`) VALUES
 (27, 1, 31),
 (28, 1, 35),
 (36, 1, 36),
-(37, 1, 37);
+(37, 1, 37),
+(38, 1, 38),
+(39, 1, 39);
 
 -- --------------------------------------------------------
 
@@ -523,7 +550,7 @@ CREATE TABLE `pedido` (
   `idusu` int(5) NOT NULL,
   `total` decimal(10,2) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
-  `estped` varchar(20) DEFAULT NULL
+  `estped` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -535,7 +562,7 @@ INSERT INTO `pedido` (`idped`, `idusu`, `total`, `fecha`, `estped`) VALUES
 (46, 20, 296800.00, '2025-03-04 16:13:44', 'Recibido'),
 (47, 27, 296800.00, '2025-03-04 16:18:42', 'Recibido'),
 (48, 27, 37800.00, '2025-03-05 14:05:12', 'Recibido'),
-(49, 27, 37800.00, '2025-03-05 17:01:13', 'Recibido'),
+(49, 27, 37800.00, '2025-03-05 17:01:13', 'Pendiente Reembolso'),
 (50, 27, 296800.00, '2025-03-07 12:48:09', 'En Tránsito'),
 (53, 27, 334600.00, '2025-03-08 14:32:07', 'Enviado');
 
@@ -2268,7 +2295,7 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detallecarrito`
 --
 ALTER TABLE `detallecarrito`
-  MODIFY `iddetcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `iddetcar` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `detallecompra`
@@ -2280,7 +2307,7 @@ ALTER TABLE `detallecompra`
 -- AUTO_INCREMENT de la tabla `detallefavoritos`
 --
 ALTER TABLE `detallefavoritos`
-  MODIFY `iddetfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `iddetfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
@@ -2292,7 +2319,7 @@ ALTER TABLE `detalle_pedido`
 -- AUTO_INCREMENT de la tabla `devolucionreembolso`
 --
 ALTER TABLE `devolucionreembolso`
-  MODIFY `iddevo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iddevo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `dominio`
@@ -2304,7 +2331,7 @@ ALTER TABLE `dominio`
 -- AUTO_INCREMENT de la tabla `favoritos`
 --
 ALTER TABLE `favoritos`
-  MODIFY `idfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `idfav` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `imagen`
@@ -2328,7 +2355,7 @@ ALTER TABLE `ordenes_temporales`
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `idpag` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
@@ -2340,7 +2367,7 @@ ALTER TABLE `pago`
 -- AUTO_INCREMENT de la tabla `pagxperfil`
 --
 ALTER TABLE `pagxperfil`
-  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `idperpf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`

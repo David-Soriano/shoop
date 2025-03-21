@@ -6,11 +6,11 @@
         <h5>Completa el formulario</h5>
         <form class="marco" name="frm1" action="../controller/cpancon.php" method="POST" enctype="multipart/form-data">
             <div class="row bx-inp-inf">
-                <div class="col">
-                    <input type="text" name="nompro" placeholder="Nombre del artículo" required>
+                <div class="col-sm col-12">
+                    <input class="formven_inp" type="text" name="nompro" placeholder="Nombre del artículo" required>
                 </div>
-                <div class="col">
-                    <textarea name="descripcion" placeholder="Añade una descripción" required></textarea>
+                <div class="col-sm col-12">
+                    <textarea class="formven_inp tx" name="descripcion" placeholder="Añade una descripción" required></textarea>
                 </div>
             </div>
             <div class="row">

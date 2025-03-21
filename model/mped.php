@@ -229,7 +229,7 @@ class Pedido
     function getPedidos($idprov)
     {
         $res = NULL;
-        $sql = "SELECT pr.idprov, pxp.idpro, pxp.idprodprv, p.nompro, p.precio, p.pordescu, dp.iddet, dp.idped, dp.cantidad, ped.idusu, ped.total, ped.fecha, ped.estped, i.imgpro, i.nomimg FROM proveedor pr INNER JOIN prodxprov pxp ON pr.idprov = pxp.idprov INNER JOIN producto p ON pxp.idpro = p.idpro INNER JOIN detalle_pedido dp ON p.idpro = dp.idpro INNER JOIN pedido ped ON dp.idped = ped.idped LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON p.idpro = i.idpro WHERE pr.idprov = :idprov ORDER BY ped.fecha DESC;";
+        $sql = "SELECT pr.idprov, pxp.idpro, pxp.idprodprv, p.nompro, p.precio, p.pordescu, dp.iddet, dp.idped, dp.cantidad, ped.idusu, ped.total, ped.fecha, ped.estped, i.imgpro, i.nomimg FROM proveedor pr INNER JOIN prodxprov pxp ON pr.idprov = pxp.idprov INNER JOIN producto p ON pxp.idpro = p.idpro INNER JOIN detalle_pedido dp ON p.idpro = dp.idpro INNER JOIN pedido ped ON dp.idped = ped.idped LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON p.idpro = i.idpro WHERE pr.idprov = :idprov AND ped.estped <> 'Pendiente Reembolso' ORDER BY ped.fecha DESC;";
 
         try {
             $modelo = new Conexion();

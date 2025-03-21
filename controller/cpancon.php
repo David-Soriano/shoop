@@ -50,15 +50,22 @@ $control->getIdPrv($idusus);
 // Obtener el total de productos del proveedor
 $totalResults = $idProveedor ? $mpro->getCantPrd($idProveedor) : 0;
 $totalPedidos = $mped->getTotalPed();
+$totalReem = $mdev->getTotalReem();
 
 $totalPed = ceil($totalPedidos / $resultsPerPage);
 $totalPages = ceil($totalResults / $resultsPerPage);
+$totalReem = ceil($totalReem / $resultsPerPage);
 
 $dtAllPrd = $mpro->getAllPrd($idProveedor, $resultsPerPage, $offset);
 $dtAllPedidos = $mped->getPedidos($_SESSION['idprov']);
 $dtDevol = $mdev->getDevs($_SESSION['idprov']);
 
-//se utiliza vwpanpro
+$prov->setIdprov($idProveedor);
+$dtTotalProductVend = $prov->getTotalProdProv();
+$dtTotalComCul = $prov->getTotalComCul();
+$dtTotalClientPt = $prov->getTotalClientPotent();
+$dtTotalPedsPrv = $prov->getTotalPedsPrv();
+
 $saldo = $prov->traerSaldo($idProveedor);
 function getDtProv($idprov)
 {
@@ -70,9 +77,11 @@ function getDtProv($idprov)
 $start = $offset + 1;
 $end = min($offset + $resultsPerPage, $totalResults);
 $end2 = min($offset + $resultsPerPage, $totalPedidos);
+$end3 = min($offset + $resultsPerPage, $totalReem);
 
 $recordsMessage = "Mostrando: <b>{$start}-{$end}</b> de <b>{$totalResults}</b> resultados";
 $recordsMessage2 = "Mostrando: <b>{$start}-{$end2}</b> de <b>{$totalPedidos}</b> resultados";
+$recordsMessage3 = "Mostrando: <b>{$start}-{$end3}</b> de <b>{$totalReem}</b> resultados";
 
 $caracteristicas = $_POST['descripcioncr'] ?? [];
 $res = "";

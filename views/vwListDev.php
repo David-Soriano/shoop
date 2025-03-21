@@ -41,7 +41,7 @@
                                 <div class="result-header">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <div class="records"><?php echo $recordsMessage2; ?></div>
+                                            <div class="records"><?php echo $recordsMessage3; ?></div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="result-actions">

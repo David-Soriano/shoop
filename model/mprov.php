@@ -411,4 +411,48 @@ class Mprov
             return false; // Indica error en la ejecución
         }
     }
+    function getTotalProdProv(){
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $query = "SELECT SUM(c.cantidad) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov;";
+        $stmt = $conexion->prepare($query);
+        $idprov = $this->getIdprov();
+        $stmt->bindValue(':idprov', $idprov);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total'];
+    }
+    function getTotalComCul(){
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $query = "SELECT SUM(c.cantidad) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN pedido AS pd ON c.idped = pd.idped INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov AND pd.estped = 'Recibido';";
+        $stmt = $conexion->prepare($query);
+        $idprov = $this->getIdprov();
+        $stmt->bindValue(':idprov', $idprov);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total'];
+    }
+    function getTotalClientPotent(){
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $query = "SELECT COUNT(DISTINCT c.idusu) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN pedido AS pd ON c.idped = pd.idped INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov;";
+        $stmt = $conexion->prepare($query);
+        $idprov = $this->getIdprov();
+        $stmt->bindValue(':idprov', $idprov);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total'];
+    }
+    function getTotalPedsPrv(){
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $query = "SELECT COUNT(DISTINCT pd.idped) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN pedido AS pd ON c.idped = pd.idped INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov;";
+        $stmt = $conexion->prepare($query);
+        $idprov = $this->getIdprov();
+        $stmt->bindValue(':idprov', $idprov);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total'];
+    }
 }

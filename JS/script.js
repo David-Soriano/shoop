@@ -130,17 +130,18 @@ function setupProductNavigation() {
 
 // ======= Funciones relacionadas con cantidad máxima =======
 function setupMaxQuantity() {
-    const cantidadInput = document.getElementById("cantidad");
-    if (cantidadInput) {
-        const maxCantidad = parseInt(cantidadInput.getAttribute("data-max"), 10);
-        cantidadInput.addEventListener("input", function () {
-            if (parseInt(cantidadInput.value, 10) > maxCantidad) {
-                cantidadInput.value = maxCantidad; // Restringe al valor máximo si se excede
+    const cantidadInputs = document.querySelectorAll(".inp-cantidad-prd");
+    
+    cantidadInputs.forEach(input => {
+        const maxCantidad = parseInt(input.getAttribute("data-max"), 10);
+
+        input.addEventListener("input", function () {
+            if (parseInt(input.value, 10) > maxCantidad) {
+                input.value = maxCantidad; // Restringe al valor máximo si se excede
             }
         });
-    }
+    });
 }
-
 // ======= Función para ocultar y mostrar box de opciones =======
 function setupBoxToggle() {
     const btnPrf = document.getElementById("btnPrf");
@@ -270,9 +271,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data.success) { // Asegúrate de que el servidor envía "success: true" en la respuesta
                     let btn = document.getElementById("btn-add-carr");
-                    if (btn) {
-                        btn.style.backgroundColor = "#00a650"; // Cambiar color a verde
-                        btn.innerHTML = '<i class="bi bi-cart-check" style="color: #FFF"></i>'; // Cambiar icono
+                    if (button) {
+                        button.style.backgroundColor = "#00a650"; // Cambiar color a verde
+                        button.innerHTML = '<i class="bi bi-cart-check" style="color: #FFF"></i>'; // Cambiar icono
                     }
                 }
             })

@@ -10,80 +10,97 @@ class Mdev
     private $fechaprocesamiento;
     private $montoreembolso;
 
-    public function getIddevo(){
+    public function getIddevo()
+    {
         return $this->iddevo;
     }
-    public function setIddevo($iddevo){
+    public function setIddevo($iddevo)
+    {
         $this->iddevo = $iddevo;
     }
-    public function getIdped(){
+    public function getIdped()
+    {
         return $this->idped;
     }
-    public function setIdped($idped){
+    public function setIdped($idped)
+    {
         $this->idped = $idped;
     }
-    public function getIdpro(){
+    public function getIdpro()
+    {
         return $this->idpro;
     }
-    public function setIdpro($idpro){
+    public function setIdpro($idpro)
+    {
         $this->idpro = $idpro;
     }
-    public function getMotivo(){
+    public function getMotivo()
+    {
         return $this->motivo;
     }
-    public function setMotivo($motivo){
+    public function setMotivo($motivo)
+    {
         $this->motivo = $motivo;
     }
-    public function getFechasolicitud(){
+    public function getFechasolicitud()
+    {
         return $this->fechasolicitud;
     }
-    public function setFechasolicitud($fechasolicitud){
+    public function setFechasolicitud($fechasolicitud)
+    {
         $this->fechasolicitud = $fechasolicitud;
     }
-    public function getEstado(){
+    public function getEstado()
+    {
         return $this->estado;
     }
-    public function setEstado($estado){
+    public function setEstado($estado)
+    {
         $this->estado = $estado;
     }
-    public function getFechaprocesamiento(){
+    public function getFechaprocesamiento()
+    {
         return $this->fechaprocesamiento;
     }
-    public function setFechaprocesamiento($fechaprocesamiento){
+    public function setFechaprocesamiento($fechaprocesamiento)
+    {
         $this->fechaprocesamiento = $fechaprocesamiento;
     }
-    public function getMontoreembolso(){
+    public function getMontoreembolso()
+    {
         return $this->montoreembolso;
     }
-    public function setMontoreembolso($montoreembolso){
+    public function setMontoreembolso($montoreembolso)
+    {
         $this->montoreembolso = $montoreembolso;
     }
 
 
-    public function saveDev() {
+    public function saveDev()
+    {
         $sql = "INSERT INTO devolucionreembolso (idped, idpro, motivo, estado, montoreembolso) 
                 VALUES (:idped, :idpro, :motivo, 'pendiente', :montoreembolso)";
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
             $result = $conexion->prepare($sql);
-    
+
             $idped = $this->getIdped();
             $idpro = $this->getIdpro();
             $motivo = $this->getMotivo();
             $monto = $this->getMontoreembolso();
-    
+
             $result->bindParam(':idped', $idped, PDO::PARAM_INT);
             $result->bindParam(':idpro', $idpro, PDO::PARAM_INT);
             $result->bindParam(':motivo', $motivo, PDO::PARAM_STR);
             $result->bindParam(':montoreembolso', $monto, PDO::PARAM_STR);
-    
+
             $result->execute();
-    
+
             if ($result->rowCount() > 0) {
                 return true;
             }
-    
+
         } catch (PDOException $e) {
             error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
             echo "Error al guardar la solicitud. Inténtalo más tarde";
@@ -91,7 +108,8 @@ class Mdev
         }
     }
 
-    public function getDevs($idprov){
+    public function getDevs($idprov)
+    {
         $sql = "SELECT 
     pr.idprov, 
     pxp.idpro, 
@@ -148,5 +166,16 @@ ORDER BY ped.fecha DESC;
         }
         return $res;
     }
-    
+
+    function getTotalReem()
+    {
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+        $query = "SELECT COUNT(*) AS total FROM devolucionreembolso"; 
+        $stmt = $conexion->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total'];
+    }
+
 }

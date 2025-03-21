@@ -24,7 +24,7 @@ header {
 
 @media screen and (max-width:2000px) {
     header {
-        height: 20vh;
+        height: 28vh;
     }
 }
 
@@ -891,23 +891,182 @@ footer {
     height: auto;
 }
 
+.col_half {
+    width: 49%;
+}
+
+.col_third {
+    width: 32%;
+}
+
+.col_fourth {
+    width: 23.5%;
+}
+
+.col_fifth {
+    width: 18.4%;
+}
+
+.col_sixth {
+    width: 15%;
+}
+
+.col_three_fourth {
+    width: 74.5%;
+}
+
+.col_twothird {
+    width: 66%;
+}
+
+.col_half,
+.col_third,
+.col_twothird,
+.col_fourth,
+.col_three_fourth,
+.col_fifth {
+    position: relative;
+    display: inline;
+    display: inline-block;
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 20px;
+}
+
+.end {
+    margin-right: 0 !important;
+}
+
+/* Column Grids End */
+
+.wrapper {
+    width: 800px;
+    margin: 30px auto;
+    position: relative;
+}
+
+.counter {
+    background-color: #ffffff;
+    padding: 20px 0;
+    border-radius: 5px;
+}
+
+.count-title {
+    font-size: 40px;
+    font-weight: normal;
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.count-text {
+    font-size: 13px;
+    font-weight: normal;
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.bi-bal {
+    margin: 0 auto;
+    float: none;
+    display: table;
+    color: #4ad1e5;
+    font-size: 22px;
+}
+
+.bx-des-gf {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.bx-des-gf img {
+    width: 12%;
+}
+
+.bx-des-gf ul {
+    width: 100%;
+}
+
+.bx-crec-tv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 @media screen and (max-width: 500px) {
     header {
         height: 24vh;
     }
+
+    .container-fluid {
+        display: flex;
+        justify-content: center;
+    }
+
     .bx-slider,
     .bx-apartados {
         position: initial;
         display: flex;
         gap: 12%;
         margin: 1% auto;
+        margin: 1% 0;
+        width: 98%;
     }
-
+    .bx-apartados{
+        gap: 0;
+    }
     .bx-prc {
         flex-direction: column;
+        width: 100%;
+        align-items: center;
     }
 
     .bx-slider .nav {
         display: none;
+        position: absolute;
+        top: 29%;
+        background: #FFF;
+        left: 29%;
+        border-radius: 5px;
+        width: 38%;
+        box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, .12);
+        z-index: 30;
+    }
+
+    .menu-title {
+        cursor: pointer;
+    }
+
+    .bx-subprd {
+        flex-direction: column;
+    }
+
+    .marco {
+        margin: 6% 0;
+    }
+
+    .formven_inp {
+        width: 100%;
+    }
+
+    .formven_inp.tx {
+        margin-top: 3%;
+    }
+
+    #formven input {
+        width: 100%;
+    }
+
+    footer {
+        width: 103%;
+    }
+    .dropdown-menu{
+        background: rgb(255, 255, 255) !important;
+    }
+    .bx-opc-in .btn-pf-adm a{
+        color: #000;
     }
 }

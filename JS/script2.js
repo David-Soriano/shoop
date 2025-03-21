@@ -1046,9 +1046,54 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+function navResponsive() {
+    let menTit = document.querySelectorAll('.menu-title');
+    let menus = document.querySelectorAll('.menu-title + ul');
+
+    if (window.matchMedia("(max-width: 500px)").matches) {
+        // Ocultar los menús en pantallas pequeñas
+        menus.forEach(ul => ul.style.display = 'none');
+
+        // Eliminar eventos previos para evitar duplicados
+        menTit.forEach(title => {
+            title.replaceWith(title.cloneNode(true));
+        });
+
+        // Reasignar eventos de clic a los nuevos elementos clonados
+        document.querySelectorAll('.menu-title').forEach(title => {
+            title.addEventListener('click', () => {
+                let nextUl = title.nextElementSibling;
+                
+                if (nextUl && nextUl.tagName === 'UL') {
+                    // Cerrar todos los otros menús antes de abrir el actual
+                    menus.forEach(ul => {
+                        if (ul !== nextUl) ul.style.display = 'none';
+                    });
+
+                    // Alternar visibilidad del menú clickeado
+                    nextUl.style.display = nextUl.style.display === 'none' || nextUl.style.display === '' ? 'block' : 'none';
+                }
+            });
+        });
+
+    } else {
+        // En pantallas grandes, restaurar los menús a 'display: flex'
+        menus.forEach(ul => {
+            ul.style.display = 'flex';
+        });
+    }
+}
+
+// Ejecutar la función cada vez que cambie el tamaño de la pantalla
+function checkScreenSize() {
+    navResponsive();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+    navResponsive();
     buttonsTablePaginas();
 })
+window.addEventListener('resize', checkScreenSize);
 document.addEventListener('DOMContentLoaded', function () {
     buttonsTableUsers();
 })

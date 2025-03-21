@@ -1,1 +1,55 @@
-✅ Favorito eliminado correctamente para usuario ID = 27, producto ID = 163✅ Favorito eliminado correctamente: ID Usuario = 27, ID Producto = 163
+✅ Favorito eliminado correctamente para usuario ID = 27, producto ID = 163✅ Favorito eliminado correctamente: ID Usuario = 27, ID Producto = 163✅ Favorito eliminado correctamente para usuario ID = 20, producto ID = 164✅ Favorito eliminado correctamente: ID Usuario = 20, ID Producto = 164✅ Favorito eliminado correctamente para usuario ID = 20, producto ID = 164✅ Favorito eliminado correctamente: ID Usuario = 20, ID Producto = 164✅ Favorito eliminado correctamente para usuario ID = 20, producto ID = 164✅ Favorito eliminado correctamente: ID Usuario = 20, ID Producto = 164[21-Mar-2025 00:04:24 Europe/Berlin] PHP Warning:  Undefined array key "idprov" in C:\xampp\htdocs\shoop\controller\cpancon.php on line 58
+[21-Mar-2025 00:04:24 Europe/Berlin] PHP Warning:  Undefined array key "idprov" in C:\xampp\htdocs\shoop\controller\cpancon.php on line 59
+[21-Mar-2025 00:10:30 Europe/Berlin] PHP Warning:  Undefined array key "idprov" in C:\xampp\htdocs\shoop\controller\cpancon.php on line 58
+[21-Mar-2025 00:10:30 Europe/Berlin] PHP Warning:  Undefined array key "idprov" in C:\xampp\htdocs\shoop\controller\cpancon.php on line 59
+[21-Mar-2025 00:10:51 Europe/Berlin] PHP Warning:  Undefined array key "idprov" in C:\xampp\htdocs\shoop\controller\cpancon.php on line 58
+[21-Mar-2025 00:10:51 Europe/Berlin] PHP Warning:  Undefined array key "idprov" in C:\xampp\htdocs\shoop\controller\cpancon.php on line 59
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'HAVING ped.estped <> 'Pendiente Reembolso'' at line 1[21-Mar-2025 14:32:22 Europe/Berlin] PHP Warning:  Undefined variable $pqrs in C:\xampp\htdocs\shoop\views\vista_pqr.php on line 14
+[21-Mar-2025 14:32:22 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\shoop\views\vista_pqr.php on line 14
+[21-Mar-2025 15:18:21 Europe/Berlin] PHP Warning:  include(../views/vwBalPrv.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\shoop\views\vwpanpro.php on line 105
+[21-Mar-2025 15:18:21 Europe/Berlin] PHP Warning:  include(): Failed opening '../views/vwBalPrv.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\shoop\views\vwpanpro.php on line 105
+[21-Mar-2025 15:19:19 Europe/Berlin] PHP Warning:  Undefined variable $dtProductVend in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 4
+[21-Mar-2025 15:19:19 Europe/Berlin] PHP Warning:  Undefined variable $dtComision in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 10
+[21-Mar-2025 15:19:19 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 15:19:19 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 15:20:00 Europe/Berlin] PHP Warning:  Undefined variable $dtProductVend in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 4
+[21-Mar-2025 15:20:00 Europe/Berlin] PHP Warning:  Undefined variable $dtComision in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 10
+[21-Mar-2025 15:20:00 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 15:20:00 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 15:20:35 Europe/Berlin] PHP Warning:  Undefined variable $dtProductVend in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 4
+[21-Mar-2025 15:20:35 Europe/Berlin] PHP Warning:  Undefined variable $dtComision in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 10
+[21-Mar-2025 15:20:35 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 15:20:35 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 15:23:43 Europe/Berlin] PHP Warning:  Undefined variable $dtProductVend in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 4
+[21-Mar-2025 15:23:43 Europe/Berlin] PHP Warning:  Undefined variable $dtComision in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 10
+[21-Mar-2025 15:23:43 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 15:23:43 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 15:24:47 Europe/Berlin] PHP Warning:  Undefined variable $dtProductVend in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 4
+[21-Mar-2025 15:24:47 Europe/Berlin] PHP Warning:  Undefined variable $dtComision in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 10
+[21-Mar-2025 15:24:47 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 15:24:47 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 15:26:23 Europe/Berlin] PHP Warning:  Undefined variable $dtProductVend in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 4
+[21-Mar-2025 15:26:23 Europe/Berlin] PHP Warning:  Undefined variable $dtComision in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 10
+[21-Mar-2025 15:26:23 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 15:26:23 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 15:27:19 Europe/Berlin] PHP Warning:  Undefined variable $dtProductVend in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 4
+[21-Mar-2025 15:27:19 Europe/Berlin] PHP Warning:  Undefined variable $dtComision in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 10
+[21-Mar-2025 15:27:19 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 15:27:19 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 15:27:40 Europe/Berlin] PHP Warning:  Undefined variable $dtProductVend in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 4
+[21-Mar-2025 15:27:40 Europe/Berlin] PHP Warning:  Undefined variable $dtComision in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 10
+[21-Mar-2025 15:27:40 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 15:27:40 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 15:30:36 Europe/Berlin] PHP Warning:  Undefined variable $dtProductVend in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 4
+[21-Mar-2025 15:30:36 Europe/Berlin] PHP Warning:  Undefined variable $dtComision in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 10
+[21-Mar-2025 15:30:36 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 15:30:36 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 15:54:42 Europe/Berlin] PHP Warning:  Undefined variable $dtComision in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 10
+[21-Mar-2025 15:54:42 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 15:54:42 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 16:09:47 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 16:09:47 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 16:17:46 Europe/Berlin] PHP Warning:  Undefined variable $dtClientes in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 16
+[21-Mar-2025 16:17:46 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 16:18:22 Europe/Berlin] PHP Warning:  Undefined variable $dtPedEnv in C:\xampp\htdocs\shoop\views\vwBalPrv.php on line 22
+[21-Mar-2025 16:25:11 Europe/Berlin] PHP Warning:  Undefined array key "total" in C:\xampp\htdocs\shoop\model\mprov.php on line 456

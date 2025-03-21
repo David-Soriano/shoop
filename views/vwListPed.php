@@ -8,11 +8,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="row no-gutters">
-                                    <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+                                    <div class="col-lg-8 col-md-6 col-sm-12 col-9 p-0">
                                         <input type="text" placeholder="Buscar..." class="form-control" id="search"
                                             name="search" oninput="actualizarTabla4()">
                                     </div>
-                                    <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+                                    <div class="col-lg-1 col-md-3 col-sm-12 col-2 p-0">
                                         <div class="btn btn-base">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

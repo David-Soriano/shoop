@@ -65,7 +65,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
     <div class="container-fluid">
       <div class="row bx-prc">
         <div class="bx-slider col-md-2 col-sm-8 col-10">
-          <h5>Ordenes</h5>
+          <h5 class="menu-title">Ordenes</h5>
           <ul class="nav flex-column">
             <li class="nav-item">
               <a class="nav-link text-black" href="vwpanpro.php?vw=25">Listado de Pedidos</a>
@@ -74,19 +74,21 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
               <a class="nav-link text-black" href="vwpanpro.php?vw=39">Reembolsos</a>
             </li>
           </ul>
-          <h5>Inventario</h5>
+
+          <h5 class="menu-title">Inventario</h5>
           <ul class="nav flex-column">
             <li class="nav-item">
               <a class="nav-link text-black" href="vwpanpro.php?vw=23">Almacén</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-black" href="vwpanpro.php?vw=24">Añadir Nuevos Articulos</a>
+              <a class="nav-link text-black" href="vwpanpro.php?vw=24">Añadir Nuevos Artículos</a>
             </li>
           </ul>
-          <h5>PQRs</h5>
+
+          <h5 class="menu-title">Balances</h5>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link text-black" href="vwpanpro.php?vw=27">PQRs</a>
+              <a class="nav-link text-black" href="vwpanpro.php?vw=27">Información</a>
             </li>
           </ul>
         </div>
@@ -114,6 +116,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../JS/script2.js"></script>
+  <script src="../JS/script3.js"></script>
 </body>
 
 </html>

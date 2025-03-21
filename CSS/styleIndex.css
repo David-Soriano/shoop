@@ -2412,11 +2412,11 @@ form button {
     height: auto;
 }
 
-.bx-seg-env .form-dev{
+.bx-seg-env .form-dev {
     box-shadow: none;
 }
 
-.bx-seg-env .form-dev button{
+.bx-seg-env .form-dev button {
     position: initial;
     width: auto;
     height: auto;
@@ -2424,6 +2424,7 @@ form button {
     color: #ea4949;
     font-weight: 500;
 }
+
 @media screen and (max-width: 500px) {
     .cont:hover input {
         width: 156px;
@@ -2601,7 +2602,7 @@ form button {
     }
 
     footer {
-        width: 104%;
+        width: 102.5%;
     }
 
     .bx_tusped-nompro {
@@ -2668,7 +2669,7 @@ form button {
     }
 
     .bx_tusped-det-com {
-        width: 37%;
+        width: 28%;
     }
 
     .bx-prp-carr-comp {
@@ -2703,10 +2704,30 @@ form button {
         padding: 0;
         justify-content: center;
     }
-    .bx-tusped-inf{
+
+    .bx-tusped-inf {
         width: 10%;
     }
+
     .bx-txt-prd {
         min-height: 54vh;
+    }
+
+    .bx-dot div {
+        height: 10%;
+    }
+
+    .bx-seg-env-minf {
+        flex-direction: column;
+    }
+
+    .bx-seg-env-minf_det-com,
+    .bx-seg-env-minf_inf-comp {
+        margin-bottom: 4%;
+    }
+
+    .bx-ico-favo {
+        position: absolute;
+        left: 88%;
     }
 }

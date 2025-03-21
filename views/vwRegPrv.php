@@ -67,8 +67,8 @@ if ($idProveedor && $proveedor == "activo") {
                             <label for="nomprov">Nombre del Proveedor:</label>
                             <input type="text" name="nomprov" id="nomprov" value="<?= $nomusu ?>" required>
                             <input type="hidden" name="idusu" value="<?= $idusu ?>">
-
                             <button class="btn" type="button" onclick="nextStep(2)">Siguiente</button>
+                            <a href="../home.php" class="btn">Volver al inicio</a>
                         </div>
 
                         <div id="step2" style="display:none;">
@@ -88,12 +88,14 @@ if ($idProveedor && $proveedor == "activo") {
                             <label for="url">URL de la Página (opcional):</label>
                             <input type="url" name="url" id="url">
 
+                            <button class="btn" type="button" onclick="nextStep(1)">Volver</button>
                             <button class="btn" type="button" onclick="nextStep(3)">Siguiente</button>
                         </div>
 
                         <div id="step3" style="display:none;">
                             <label for="nit">NIT del Proveedor (opcional):</label>
                             <input type="text" name="nit" id="nit">
+                            <button class="btn" type="button" onclick="nextStep(2)">Volver</button>
                             <button class="btn" type="button" onclick="nextStep(4)">Siguiente</button>
                         </div>
 
@@ -101,12 +103,12 @@ if ($idProveedor && $proveedor == "activo") {
                             <label for="desprv">Descripción del Proveedor:</label>
                             <textarea name="desprv" id="desprv" required></textarea>
                             <input type="hidden" name="estado" value="activo">
+                            <button class="btn" type="button" onclick="nextStep(3)">Volver</button>
                             <button class="btn btn-primary" type="submit">Registrar Proveedor</button>
                         </div>
                     </form>
                 </div>
             </div>
-
         <?php } ?>
     </div>
 

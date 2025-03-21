@@ -28,40 +28,42 @@ $ubicacion = [
 
                     <!-- Tabla de productos -->
                     <h2 class="text-center">Resumen de Pago</h2>
-                    <table class="table table-bordered mt-4">
-                        <thead>
-                            <tr>
-                                <th>Imagen</th>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Precio Unitario</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $total = 0; // Inicializar total antes del bucle
-                            $descripciones = []; // Para guardar la descripción de todos los productos
-                            ?>
-
-                            <?php foreach ($carrito as $item) { ?>
+                    <div class="table-responsive">
+                        <table class="table table-bordered mt-4">
+                            <thead>
                                 <tr>
-                                    <td><img src="<?= $item['imagen']; ?>" alt="<?= $item['nombre']; ?>"
-                                            style="width: 50px;"></td>
-                                    <td><?= $item['nombre']; ?></td>
-                                    <td><?= $item['cantidad']; ?></td>
-                                    <td>$<?= number_format($item['precio'], 0, ",", "."); ?></td>
-                                    <td>$<?= number_format($item['cantidad'] * $item['precio'], 0, ",", "."); ?></td>
+                                    <th>Imagen</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Total</th>
                                 </tr>
-
+                            </thead>
+                            <tbody>
                                 <?php
-                                $total += $item['cantidad'] * $item['precio']; // Acumular el total
-                                $descripciones[] = $item['nombre']; // Agregar nombre del producto a la descripción
+                                $total = 0;
+                                $descripciones = [];
                                 ?>
-                            <?php } ?>
 
-                        </tbody>
-                    </table>
+                                <?php foreach ($carrito as $item) { ?>
+                                    <tr>
+                                        <td><img src="<?= $item['imagen']; ?>" alt="<?= $item['nombre']; ?>"
+                                                style="width: 50px;"></td>
+                                        <td><?= $item['nombre']; ?></td>
+                                        <td><?= $item['cantidad']; ?></td>
+                                        <td>$<?= number_format($item['precio'], 0, ",", "."); ?></td>
+                                        <td>$<?= number_format($item['cantidad'] * $item['precio'], 0, ",", "."); ?></td>
+                                    </tr>
+
+                                    <?php
+                                    $total += $item['cantidad'] * $item['precio'];
+                                    $descripciones[] = $item['nombre'];
+                                    ?>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+
 
                     <!-- Opciones adicionales -->
                     <div class="border p-3 mt-4" style="background-color: #f9f9f9; border-radius: 8px;">
