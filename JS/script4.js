@@ -8,9 +8,8 @@ const calculateTotals = (data) => {
     }, {});
 };
 
-// Función para actualizar el gráfico
-const updateChart = (timeframe) => {
-    fetch(`../controller/get_sales_data.php?timeframe=${timeframe}`)
+const updateChart = (timeframe, idprov) => {
+    fetch(`../controller/get_sales_data_prov.php?timeframe=${timeframe}&idprov=${idprov}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -33,6 +32,25 @@ const updateChart = (timeframe) => {
         })
         .catch(error => console.error("Error al obtener datos:", error));
 };
+
+// Obtener `idprov` de la URL o de otro lugar donde lo tengas almacenado
+if (idprov) {
+    console.log("ID del proveedor:", idprov);
+    updateChart('Anual', idprov);
+    updateChartCt('Anual', idprov);
+} else {
+    console.error("No se encontró idprov en la sesión.");
+}
+
+
+// Inicializar gráfico con datos anuales para el proveedor
+window.addEventListener('DOMContentLoaded', () => {
+    updateChart('Anual', idprov);
+
+    document.getElementById('timeframe').addEventListener('change', function () {
+        updateChart(this.value, idprov);
+    });
+});
 
 // Función para generar el resumen de ventas
 function generateSummary(timeframe, sales) {
@@ -58,7 +76,7 @@ function generateSummary(timeframe, sales) {
             <img src="../IMG/grafico-de-linea.png" alt="">
             <h4>${growth}%</h4>
             <p>Crecimiento</p>
-            </div>
+        </div>
         </div>
     `;
 }
@@ -72,12 +90,9 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
-
-// Data retrieved https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature
-const updateChartCt = (timeframe) => {
-    fetch(`../controller/get_sales_data.php?timeframe=${timeframe}&groupByCategory=true`)
+// Función para actualizar el gráfico de ventas por categoría
+const updateChartCt = (timeframe, idprov) => {
+    fetch(`../controller/get_sales_data_prov.php?timeframe=${timeframe}&groupByCategory=true&idprov=${idprov}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -85,7 +100,6 @@ const updateChartCt = (timeframe) => {
                 return;
             }
 
-            // Generar gráfico con Highcharts (solo mostrando el total en dinero)
             Highcharts.chart('container2', {
                 chart: { type: 'spline' },
                 title: { text: `Ventas Por Categoría (${timeframe})` },
@@ -100,7 +114,6 @@ const updateChartCt = (timeframe) => {
                 series: data.series
             });
 
-            // Procesar datos para obtener información relevante
             let totalVentas = 0;
             let totalCantidadVentas = 0;
             let categoriaMasVendida = { name: '', cantidad: 0 };
@@ -123,7 +136,6 @@ const updateChartCt = (timeframe) => {
                 });
             }
 
-            // Actualizar la descripción con cantidad de ventas y total en dinero
             document.getElementById('summary2').innerHTML = `
                 <h5>Resumen de Ventas (${timeframe}):</h5>
                 <ul>
@@ -137,26 +149,21 @@ const updateChartCt = (timeframe) => {
         .catch(error => console.error("Error al obtener datos:", error));
 };
 
+// Inicializar gráfico con datos anuales para el proveedor
+updateChartCt('Anual', idprov);
 
-
-// Cargar ventas anuales por defecto
-updateChartCt('Anual');
-
-// Cambiar gráfico según selección
 document.getElementById('timeframeSelect').addEventListener('change', function () {
-    updateChartCt(this.value);
+    updateChartCt(this.value, idprov);
 });
+
 
 // Función para obtener datos de ventas desde PHP
 async function fetchSalesData() {
-    const response = await fetch('../controller/get_sales_data.php?mode=heatmap');
+    const response = await fetch('../controller/get_sales_data_prov.php?mode=heatmap');
     const salesData = await response.json();
 
     const processedData = salesData.map(item => {
-        // Crear la fecha a partir del timestamp
         const date = new Date(item.date);
-
-        // Normalizar la fecha al inicio del día en UTC
         const normalizedDate = Date.UTC(
             date.getUTCFullYear(),
             date.getUTCMonth(),
@@ -179,7 +186,6 @@ async function generateChartData() {
     if (salesData.length === 0) return [];
 
     let minDate = new Date(salesData[0].date);
-    // Ajustar la fecha base al inicio del día en UTC
     minDate = new Date(Date.UTC(
         minDate.getUTCFullYear(),
         minDate.getUTCMonth(),
@@ -194,14 +200,14 @@ async function generateChartData() {
         let sales = salesMap.get(dateKey) || 0;
 
         chartData.push({
-            x: currentDate.getUTCDay(), // Día de la semana en UTC (0 = Dom, 6 = Sáb)
-            y: Math.floor((currentDate - minDate) / (7 * 24 * 60 * 60 * 1000)), // Semana correcta
+            x: currentDate.getUTCDay(),
+            y: Math.floor((currentDate - minDate) / (7 * 24 * 60 * 60 * 1000)),
             value: sales,
             date: dateKey,
             custom: { day: weekdays[currentDate.getUTCDay()] }
         });
 
-        currentDate.setUTCDate(currentDate.getUTCDate() + 1); // Avanzar un día en UTC
+        currentDate.setUTCDate(currentDate.getUTCDate() + 1);
     }
 
     return chartData;
@@ -213,41 +219,8 @@ generateChartData().then(chartData => {
         chart: { type: 'heatmap' },
         title: { text: 'Rendimiento de Ventas', align: 'left' },
         subtitle: { text: 'Según el día de la semana', align: 'left' },
-        accessibility: {
-            enabled: false,
-            description: null
-        },
-        xAxis: {
-            categories: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
-            title: { text: 'Día de la Semana' }
-        },
-        yAxis: { 
-            title: { text: 'Semanas' },
-            reversed: true
-        },
-        colorAxis: {
-            min: 0,
-            stops: [
-                [0.2, 'lightblue'],
-                [0.5, '#CBDFC8'],
-                [0.8, '#F3E99E'],
-                [1, '#F9A05C']
-            ],
-            labels: { format: '{value} ventas' }
-        },
-        tooltip: {
-            headerFormat: '',
-            pointFormat: '<b>{point.custom.day}</b>: {point.value} ventas'
-        },
-        series: [{
-            name: 'Ventas',
-            borderWidth: 1,
-            data: chartData,
-            dataLabels: {
-                enabled: true,
-                format: '{point.value} ventas',
-                style: { textOutline: 'none', fontSize: '12px' }
-            }
-        }]
+        xAxis: { categories: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'] },
+        yAxis: { title: { text: 'Semanas' }, reversed: true },
+        series: [{ name: 'Ventas', borderWidth: 1, data: chartData }]
     });
 });

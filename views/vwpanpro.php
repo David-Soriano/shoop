@@ -116,7 +116,7 @@ ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../JS/script2.js"></script>
-  <script src="../JS/script3.js"></script>
+  <script src="../JS/script4.js"></script>
 </body>
 
 </html>
