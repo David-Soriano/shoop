@@ -256,28 +256,34 @@ function actualizarTabla4() {
     actualizarTablaGenerica('../controller/buscTb4.php');
 }
 function buttonsTable() {
-    document.getElementById('editButton').addEventListener('click', function () {
-        const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
-        if (selectedIds.length > 0) {
-            const idProParam = selectedIds.join(',');  // Convierte los IDs a una cadena separada por comas
-            fetchProductData('idpro', idProParam); // Pasa la cadena como parámetro
-            const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
-            modalElement.show();
-        } else {
-            alert("Selecciona al menos un producto para editar.");
-        }
-    });
-    document.getElementById('deleteButton').addEventListener('click', function () {
-        const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
-        if (selectedIds.length > 0) {
-            if (confirm('¿Estás seguro de que deseas eliminar los productos seleccionados?')) {
-                const idProParam = selectedIds.join(','); // Convertir los IDs en una cadena separada por comas
-                deleteProductData(idProParam); // Llamar a la función de eliminación
+    let edb2 = document.getElementById('editButton');
+    if (edb2) {
+        edb2.addEventListener('click', function () {
+            const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
+            if (selectedIds.length > 0) {
+                const idProParam = selectedIds.join(',');  // Convierte los IDs a una cadena separada por comas
+                fetchProductData('idpro', idProParam); // Pasa la cadena como parámetro
+                const modalElement = new bootstrap.Modal(document.getElementById('exampleModal'));
+                modalElement.show();
+            } else {
+                alert("Selecciona al menos un producto para editar.");
             }
-        } else {
-            alert("Selecciona al menos un producto para eliminar.");
-        }
-    });
+        });
+    }
+    let db2 = document.getElementById('deleteButton');
+    if (db2) {
+        db2.addEventListener('click', function () {
+            const selectedIds = getSelectedProductIds(); // Captura los IDs seleccionados
+            if (selectedIds.length > 0) {
+                if (confirm('¿Estás seguro de que deseas eliminar los productos seleccionados?')) {
+                    const idProParam = selectedIds.join(','); // Convertir los IDs en una cadena separada por comas
+                    deleteProductData(idProParam); // Llamar a la función de eliminación
+                }
+            } else {
+                alert("Selecciona al menos un producto para eliminar.");
+            }
+        });
+    }
 }
 function buttonsTablePedidos() {
     let eb2 = document.getElementById('editButton2');
@@ -834,24 +840,26 @@ function limpiarModal() {
 function cerrarModal() {
     // Obtener el modal y el backdrop
     const modalElement = document.getElementById('exampleModal');
-    const modal = new bootstrap.Modal(modalElement);
+    if (modalElement) {
+        const modal = new bootstrap.Modal(modalElement);
 
-    // Evento del botón de cierre
-    const closeButton = document.querySelector('.btn-close');
+        // Evento del botón de cierre
+        const closeButton = document.querySelector('.btn-close');
 
-    closeButton.addEventListener('click', function () {
-        modal.hide();  // Cierra el modal
-    });
+        closeButton.addEventListener('click', function () {
+            modal.hide();  // Cierra el modal
+        });
 
-    // Asegurarte de que el backdrop se elimine cuando el modal se cierra
-    $(modalElement).on('hidden.bs.modal', function () {
-        // Este código se ejecuta después de que el modal se cierra
-        document.body.classList.remove('modal-open');  // Asegúrate de que el fondo no se quede visible
-        const backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) {
-            backdrop.remove();  // Elimina el backdrop manualmente
-        }
-    });
+        // Asegurarte de que el backdrop se elimine cuando el modal se cierra
+        $(modalElement).on('hidden.bs.modal', function () {
+            // Este código se ejecuta después de que el modal se cierra
+            document.body.classList.remove('modal-open');  // Asegúrate de que el fondo no se quede visible
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();  // Elimina el backdrop manualmente
+            }
+        });
+    }
 }
 (function ($) {
     $.fn.countTo = function (options) {
@@ -1063,7 +1071,7 @@ function navResponsive() {
         document.querySelectorAll('.menu-title').forEach(title => {
             title.addEventListener('click', () => {
                 let nextUl = title.nextElementSibling;
-                
+
                 if (nextUl && nextUl.tagName === 'UL') {
                     // Cerrar todos los otros menús antes de abrir el actual
                     menus.forEach(ul => {
@@ -1108,7 +1116,13 @@ document.addEventListener('DOMContentLoaded', function () {
     recibirPedido();
 });
 window.addEventListener('load', () => {
-    document.getElementById('valorunitario').addEventListener('input', calcularPrecio);
-    document.getElementById('pordescu').addEventListener('input', calcularPrecio);
+    let vun = document.getElementById('valorunitario');
+    if (vun) {
+        vun.addEventListener('input', calcularPrecio);
+    }
+    let pdescu = document.getElementById('pordescu');
+    if (pdescu) {
+        pdescu.addEventListener('input', calcularPrecio);
+    }
 });
 

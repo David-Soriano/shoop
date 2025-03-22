@@ -3,10 +3,12 @@ ini_set("display_errors", 0);
 ini_set("log_errors", 1);
 ini_set("error_log", "C:/xampp\htdocs/SHOOP/errors/error_log.log"); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Language" content="es">
+<meta name="language" content="es">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../CSS/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">

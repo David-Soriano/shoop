@@ -996,6 +996,13 @@ footer {
     justify-content: center;
 }
 
+.bx-des-hc,
+.bx-graf-bl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media screen and (max-width: 500px) {
     header {
         height: 24vh;
@@ -1015,9 +1022,11 @@ footer {
         margin: 1% 0;
         width: 98%;
     }
-    .bx-apartados{
+
+    .bx-apartados {
         gap: 0;
     }
+
     .bx-prc {
         flex-direction: column;
         width: 100%;
@@ -1063,10 +1072,12 @@ footer {
     footer {
         width: 103%;
     }
-    .dropdown-menu{
+
+    .dropdown-menu {
         background: rgb(255, 255, 255) !important;
     }
-    .bx-opc-in .btn-pf-adm a{
+
+    .bx-opc-in .btn-pf-adm a {
         color: #000;
     }
 }
