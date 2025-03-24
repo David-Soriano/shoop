@@ -411,48 +411,144 @@ class Mprov
             return false; // Indica error en la ejecución
         }
     }
-    function getTotalProdProv(){
-        $modelo = new Conexion();
-        $conexion = $modelo->getConexion();
-        $query = "SELECT SUM(c.cantidad) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov;";
-        $stmt = $conexion->prepare($query);
-        $idprov = $this->getIdprov();
-        $stmt->bindValue(':idprov', $idprov);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return (int) $result['total'];
+    function getTotalProdProv()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT SUM(c.cantidad) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int) $result['total'];
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
     }
-    function getTotalComCul(){
-        $modelo = new Conexion();
-        $conexion = $modelo->getConexion();
-        $query = "SELECT SUM(c.cantidad) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN pedido AS pd ON c.idped = pd.idped INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov AND pd.estped = 'Recibido';";
-        $stmt = $conexion->prepare($query);
-        $idprov = $this->getIdprov();
-        $stmt->bindValue(':idprov', $idprov);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return (int) $result['total'];
+    function getTotalComCul()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT SUM(c.cantidad) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN pedido AS pd ON c.idped = pd.idped INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov AND pd.estped = 'Recibido';";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int) $result['total'];
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
     }
-    function getTotalClientPotent(){
-        $modelo = new Conexion();
-        $conexion = $modelo->getConexion();
-        $query = "SELECT COUNT(DISTINCT c.idusu) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN pedido AS pd ON c.idped = pd.idped INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov;";
-        $stmt = $conexion->prepare($query);
-        $idprov = $this->getIdprov();
-        $stmt->bindValue(':idprov', $idprov);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return (int) $result['total'];
+    function getTotalClientPotent()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT COUNT(DISTINCT c.idusu) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN pedido AS pd ON c.idped = pd.idped INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int) $result['total'];
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
     }
-    function getTotalPedsPrv(){
-        $modelo = new Conexion();
-        $conexion = $modelo->getConexion();
-        $query = "SELECT COUNT(DISTINCT pd.idped) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN pedido AS pd ON c.idped = pd.idped INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov;";
-        $stmt = $conexion->prepare($query);
-        $idprov = $this->getIdprov();
-        $stmt->bindValue(':idprov', $idprov);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return (int) $result['total'];
+    function getTotalPedsPrv()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT COUNT(DISTINCT pd.idped) AS total FROM compra AS c INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN pedido AS pd ON c.idped = pd.idped INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int) $result['total'];
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
+    }
+    function getProductMVend()
+    {
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT p.idpro, p.nompro, p.productvend, p.idval, v.nomval, i.imgpro FROM producto AS p INNER JOIN valor AS v ON p.idval = v.idval LEFT JOIN imagen AS i ON p.idpro = i.idpro INNER JOIN detallecompra AS dc ON p.idpro = dc.idpro INNER JOIN compra AS c ON dc.idcom = c.idcom INNER JOIN pedido AS pd ON c.idped = pd.idped INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE p.estado = 'activo' AND pv.idprov = :idprov GROUP BY p.idpro, i.imgpro ORDER BY p.productvend DESC LIMIT 5;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
+        return $result;
+    }
+    function ventasMes(){
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT MONTH(pd.fecha) AS mes, SUM(c.cantidad) AS total_ventas, c.preciocom, SUM(c.preciocom) AS valor_tot_ventas FROM pedido AS pd INNER JOIN compra AS c ON pd.idped = c.idped INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro WHERE pxp.idprov = :idprov GROUP BY mes ORDER BY mes ASC;;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
+        return $result;
+    }
+    function ingresosTotales(){
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT SUM(c.cantidad * p.precio) AS ingresos_totales FROM detallecompra AS dc INNER JOIN compra AS c ON dc.idcom = c.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
+        return $result;
+    }
+    function productosMenosVendidos(){
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT p.nompro, SUM(c.cantidad) AS total_vendido FROM compra AS c INNER JOIN detallecompra AS dc ON dc.idcom = c.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov GROUP BY p.idpro ORDER BY total_vendido ASC LIMIT 5;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
+        return $result;
+    }
+    function productosMasVendidos(){
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT p.nompro, SUM(c.cantidad) AS total_vendido FROM compra AS c INNER JOIN detallecompra AS dc ON dc.idcom = c.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov GROUP BY p.idpro ORDER BY total_vendido DESC LIMIT 5;;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
+        return $result;
     }
 }

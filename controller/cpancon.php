@@ -65,6 +65,12 @@ $dtTotalProductVend = $prov->getTotalProdProv();
 $dtTotalComCul = $prov->getTotalComCul();
 $dtTotalClientPt = $prov->getTotalClientPotent();
 $dtTotalPedsPrv = $prov->getTotalPedsPrv();
+$dtMProductVend = $prov->getProductMVend();
+
+$dtVentasMes = $prov->ventasMes();
+$dtIngresosTotales = $prov->IngresosTotales();
+$dtProdMVend = $prov->productosMasVendidos();
+$dtMenVen = $prov->productosMenosVendidos();
 
 $saldo = $prov->traerSaldo($idProveedor);
 function getDtProv($idprov)

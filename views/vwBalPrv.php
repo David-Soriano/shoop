@@ -69,23 +69,85 @@
         </div>
     </div>
 </section>
-<section>
-    <div class="row">
-        <div class="col">
-            <h2>Productos más vendidos</h2>
-            <div class="row">
-                <div class="col">
-                    <img src="" alt="">
+<?php if ($dtMProductVend) { ?>
+    <section>
+        <div class="row mt-5">
+            <div class="col">
+                <h2>Productos más vendidos</h2>
+                <div class="row bx-items-mprdv">
+                    <?php foreach ($dtMProductVend as $dt) { ?>
+                        <div class="col col-sm-2 item-mprdv">
+                            <img src="../<?= $dt['imgpro'] ?>" alt="../<?= $dt['nompro'] ?>">
+                            <div class="bx-items-mprd_bx-ft">
+                                <h5><?= $dt['nompro'] ?></h5>
+                                <div>
+                                    <p class="p-vend">Vendidos: <span><?= $dt['productvend'] ?></span></p>
+                                    <p class="p-cat"><?= $dt['nomval'] ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
+            </div>
+        </div>
+    </section>
+<?php } ?>
+<section>
+    <div class="row mt-5">
+        <div class="col">
+            <h2>Reportes</h2>
+            <div class="row bx-items-mprdv">
+                <div id="chart_div" style="width: 100%; height: 500px;"></div>
+
+                <form action="../controller/reporte_ventas.php" method="POST" id="reporteForm">
+                    <input type="hidden" name="chart_image" id="chart_image">
+                    <input type="hidden" name="idprov" value="<?= $_SESSION['idprov'] ?>">
+                    <!-- Cambia por el id del proveedor -->
+                    <button type="submit" id="reporteBtn">Reporte de Ventas</button>
+                </form>
+
             </div>
         </div>
     </div>
 </section>
-
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     const idprov = "<?php echo $_SESSION['idprov'] ?? ''; ?>";
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Mes', 'Ventas'],
+            <?php foreach ($dtVentasMes as $row) {
+                echo "['" . $row['mes'] . "', " . $row['total_ventas'] . "],";
+            } ?>
+        ]);
+
+        var options = { title: 'Ventas por Mes', curveType: 'function', legend: { position: 'bottom' } };
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+
+        // Escuchar clic en el botón y asegurarse de que la imagen esté lista antes de enviar el formulario
+        document.getElementById('reporteBtn').addEventListener('click', function (event) {
+            event.preventDefault(); // Evita el envío inmediato
+
+            setTimeout(() => {
+                var imgUri = chart.getImageURI();
+                if (imgUri) {
+                    document.getElementById('chart_image').value = imgUri;
+                    console.log("Imagen generada: ", imgUri);
+                    document.getElementById('reporteForm').submit(); // Envía el formulario cuando la imagen esté lista
+                } else {
+                    console.error("No se pudo generar la imagen del gráfico.");
+                }
+            }, 2000); // Espera más tiempo para asegurarse de que la imagen se genere
+        });
+    }
+
 </script>

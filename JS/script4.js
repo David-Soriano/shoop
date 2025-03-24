@@ -77,9 +77,6 @@ if (sales.length > 1) {
     const minSale = Math.min(...sales);
     const maxSale = Math.max(...sales);
 
-    console.log("Menor venta registrada:", minSale);
-    console.log("Mayor venta registrada:", maxSale);
-
     if (minSale !== 0) {  
         growth = ((maxSale - minSale) / minSale * 100).toFixed(2);
     }
