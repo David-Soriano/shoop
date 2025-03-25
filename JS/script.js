@@ -131,7 +131,7 @@ function setupProductNavigation() {
 // ======= Funciones relacionadas con cantidad máxima =======
 function setupMaxQuantity() {
     const cantidadInputs = document.querySelectorAll(".inp-cantidad-prd");
-    
+
     cantidadInputs.forEach(input => {
         const maxCantidad = parseInt(input.getAttribute("data-max"), 10);
 
@@ -267,18 +267,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     cantidad
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) { // Asegúrate de que el servidor envía "success: true" en la respuesta
-                    let btn = document.getElementById("btn-add-carr");
-                    if (button) {
-                        button.style.backgroundColor = "#00a650"; // Cambiar color a verde
-                        button.innerHTML = '<i class="bi bi-cart-check" style="color: #FFF"></i>'; // Cambiar icono
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) { // Asegúrate de que el servidor envía "success: true" en la respuesta
+                        let btn = document.getElementById("btn-add-carr");
+                        if (button) {
+                            button.style.backgroundColor = "#00a650"; // Cambiar color a verde
+                            button.innerHTML = '<i class="bi bi-cart-check" style="color: #FFF"></i>'; // Cambiar icono
+                        }
                     }
-                }
-            })
-            .catch(error => console.error('Error:', error));
-            
+                })
+                .catch(error => console.error('Error:', error));
+
         });
     });
 });
@@ -423,10 +423,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     let formPago = document.getElementById("formPago");
-    if(formPago){
+    if (formPago) {
         formPago.addEventListener("submit", async function (event) {
             event.preventDefault(); // Evita el envío automático
-    
+
             let productos = [];
             document.querySelectorAll(".producto-carrito").forEach(item => {
                 productos.push({
@@ -437,16 +437,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     imagen: item.dataset.imagen // Asegúrate de tener este atributo en el HTML
                 });
             });
-    
+
             try {
                 let response = await fetch("controller/resPago.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(productos)
                 });
-    
+
                 let data = await response.json();
-    
+
                 if (data.status === "success") {
                     window.location.href = "home.php?pg=9"; // Redirige a la página de pago
                 } else {
@@ -484,54 +484,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 function cargarContenido(url) {
-    
+
     // Ocultar el menú
     $(".bx-conf-pef").hide();
-    
+
     $.ajax({
         url: url,
         type: "GET",
-        beforeSend: function() {
+        beforeSend: function () {
             $("#contenido").html("<p>Cargando...</p>");
         },
-        success: function(data) {    
+        success: function (data) {
             // Agregar botón de volver dentro del contenido cargado
             let botonVolver = '<button onclick="volverMenu()" class="btn btn-vol-pf"><i class="bi bi-arrow-bar-left"></i> Volver</button>';
-            
+
             $("#contenido").html(botonVolver + data);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             $("#contenido").html("<p>Error al cargar el contenido.</p>");
         }
     });
 }
 function volverMenu() {
-    $("#contenido").html("");  // Borra el contenido cargado
-    $(".bx-conf-pef").show();  // Muestra el menú
+    $("#contenido").html("");
+    $(".bx-conf-pef").show();
 }
-$(document).ready(function () {
-    $("#depart").change(function () {
-        var departamentoID = $(this).val();
-        if (departamentoID != "") {
-            $.ajax({
-                url: "../controller/cubi.php",
-                type: "POST",
-                data: { idubi: departamentoID },
-                dataType: "json",
-                success: function (data) {
-                    var opciones = '<option value="">Seleccione</option>';
-                    $.each(data, function (index, ciudad) {
-                        opciones += '<option value="' + ciudad.idubi + '">' + ciudad.nomubi + '</option>';
-                    });
-                    $("#ciudad").html(opciones);
-                }
-            });
-        } else {
-            $("#ciudad").html('<option value="">Seleccione un departamento primero</option>');
-        }
+if (document.getElementById('depart')) {
+    $(document).ready(function () {
+        $("#depart").change(function () {
+            var departamentoID = $(this).val();
+            if (departamentoID != "") {
+                $.ajax({
+                    url: "../controller/cubi.php",
+                    type: "POST",
+                    data: { idubi: departamentoID },
+                    dataType: "json",
+                    success: function (data) {
+                        var opciones = '<option value="">Seleccione</option>';
+                        $.each(data, function (index, ciudad) {
+                            opciones += '<option value="' + ciudad.idubi + '">' + ciudad.nomubi + '</option>';
+                        });
+                        $("#ciudad").html(opciones);
+                    }
+                });
+            } else {
+                $("#ciudad").html('<option value="">Seleccione un departamento primero</option>');
+            }
+        });
     });
-});
 
+}
 function desplegarMenu() {
     let mainItems = document.querySelectorAll('.nav-item');
 
@@ -558,8 +560,6 @@ function desplegarMenu() {
         document.querySelectorAll('.men-vrt').forEach(menu => menu.style.display = 'none');
     });
 }
-
-
 
 // ======= Cargar todas las configuraciones al inicio =======
 window.addEventListener('load', () => {
