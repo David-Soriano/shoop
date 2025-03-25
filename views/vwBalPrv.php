@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <div class="row bx-graf-bl">
+    <div class="row bx-graf-bl b2">
         <div class="col bx-des-hc">
             <p class="highcharts-description" id="summary2">Aquí va la descripción...</p>
         </div>
@@ -92,18 +92,16 @@
         </div>
     </section>
 <?php } ?>
-<section>
+<section style="width: 90%;">
     <div class="row mt-5">
         <div class="col">
             <h2>Reportes</h2>
             <div class="row bx-items-mprdv">
-                <div id="chart_div" style="width: 100%; height: 500px;"></div>
 
                 <form action="../controller/reporte_ventas.php" method="POST" id="reporteForm">
-                    <input type="hidden" name="chart_image" id="chart_image">
                     <input type="hidden" name="idprov" value="<?= $_SESSION['idprov'] ?>">
                     <!-- Cambia por el id del proveedor -->
-                    <button type="submit" id="reporteBtn">Reporte de Ventas</button>
+                    <button type="submit" id="reporteBtn"><i class="bi bi-file-earmark-spreadsheet"></i> Reporte de Ventas</button>
                 </form>
 
             </div>
@@ -117,37 +115,5 @@
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     const idprov = "<?php echo $_SESSION['idprov'] ?? ''; ?>";
-
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Mes', 'Ventas'],
-            <?php foreach ($dtVentasMes as $row) {
-                echo "['" . $row['mes'] . "', " . $row['total_ventas'] . "],";
-            } ?>
-        ]);
-
-        var options = { title: 'Ventas por Mes', curveType: 'function', legend: { position: 'bottom' } };
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-
-        // Escuchar clic en el botón y asegurarse de que la imagen esté lista antes de enviar el formulario
-        document.getElementById('reporteBtn').addEventListener('click', function (event) {
-            event.preventDefault(); // Evita el envío inmediato
-
-            setTimeout(() => {
-                var imgUri = chart.getImageURI();
-                if (imgUri) {
-                    document.getElementById('chart_image').value = imgUri;
-                    console.log("Imagen generada: ", imgUri);
-                    document.getElementById('reporteForm').submit(); // Envía el formulario cuando la imagen esté lista
-                } else {
-                    console.error("No se pudo generar la imagen del gráfico.");
-                }
-            }, 2000); // Espera más tiempo para asegurarse de que la imagen se genere
-        });
-    }
 
 </script>

@@ -1051,6 +1051,13 @@ footer {
     min-height: 34%;
 }
 
+#reporteBtn{
+    border: 1px solid gray;
+    border-radius: 5px;
+    background: #FFF;
+    padding: 5px;
+    width: 175px;
+}
 @media screen and (max-width: 500px) {
     header {
         height: 24vh;
@@ -1116,7 +1123,21 @@ footer {
     #formven input {
         width: 100%;
     }
-
+    .wrapper{
+        width: 100%;
+    }
+    .bx-des-gf{
+        flex-direction: column;
+    }
+    .bx-graf-bl{
+        flex-direction: column;
+    }
+    .bx-graf-bl.b2{
+        flex-direction: column-reverse;
+    }
+    .bx-items-mprdv .item-mprdv {
+        min-height: 30vh;
+    }
     footer {
         width: 103%;
     }

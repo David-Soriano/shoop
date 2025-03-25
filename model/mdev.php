@@ -107,6 +107,51 @@ class Mdev
             return false;
         }
     }
+    function updateDev()
+{
+    $sql = "UPDATE devolucionreembolso SET estado = :estado WHERE idped = :idped";
+
+    try {
+        $modelo = new Conexion();
+        $conexion = $modelo->getConexion();
+
+        if (!$conexion) {
+            throw new PDOException("Error al conectar con la base de datos.");
+        }
+
+        $result = $conexion->prepare($sql);
+
+        $idped = $this->getIdped();
+        $estado = $this->getEstado();
+
+        if ($idped === null || $estado === null) {
+            throw new Exception("ID de pedido o estado son inválidos.");
+        }
+
+        $result->bindParam(':idped', $idped, PDO::PARAM_INT);
+        $result->bindParam(':estado', $estado, PDO::PARAM_STR);
+        
+        if (!$result->execute()) {
+            throw new PDOException("Error al ejecutar la consulta.");
+        }
+
+        if ($result->rowCount() > 0) {
+            return true;
+        } else {
+            throw new Exception("No se actualizó ninguna fila. Verifica si el ID existe y el estado es diferente.");
+        }
+
+    } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        echo "Error SQL: " . $e->getMessage();
+        return false;
+    } catch (Exception $e) {
+        error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
 
     public function getDevs($idprov)
     {
@@ -171,7 +216,7 @@ ORDER BY ped.fecha DESC;
     {
         $modelo = new Conexion();
         $conexion = $modelo->getConexion();
-        $query = "SELECT COUNT(*) AS total FROM devolucionreembolso"; 
+        $query = "SELECT COUNT(*) AS total FROM devolucionreembolso";
         $stmt = $conexion->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -7,9 +7,6 @@ $groupByCategory = isset($_GET['groupByCategory']) && $_GET['groupByCategory'] =
 $mode = $_GET['mode'] ?? 'default';
 $idprov = $_GET['idprov'] ?? null; // ID del proveedor opcional
 
-$logFile = 'C:/xampp/htdocs/SHOOP/errors/debug_log.log'; // Archivo de log
-file_put_contents($logFile, "=== NUEVA EJECUCIÓN ===\n", FILE_APPEND); // Separador en log
-
 try {
     $conexion = new Conexion();
     $db = $conexion->getConexion();
@@ -95,8 +92,6 @@ try {
     $sql = str_replace("{select_fields}", $selectFields, $baseQuery);
     $sql = str_replace("{periodo_field}", $periodoField, $sql);
     $sql .= " $joinCategory $whereClause $groupBy ORDER BY periodo;";
-
-   
     $stmt = $db->prepare($sql);
     if ($idprov)
         $stmt->bindParam(':idprov', $idprov, PDO::PARAM_INT);

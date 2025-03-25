@@ -495,7 +495,37 @@ class Mprov
         try {
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
-            $query = "SELECT MONTH(pd.fecha) AS mes, SUM(c.cantidad) AS total_ventas, c.preciocom, SUM(c.preciocom) AS valor_tot_ventas FROM pedido AS pd INNER JOIN compra AS c ON pd.idped = c.idped INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro WHERE pxp.idprov = :idprov GROUP BY mes ORDER BY mes ASC;;";
+            $query = "SELECT MONTH(pd.fecha) AS mes, SUM(c.cantidad) AS total_ventas, c.preciocom, SUM(c.preciocom) AS valor_tot_ventas FROM pedido AS pd INNER JOIN compra AS c ON pd.idped = c.idped INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro WHERE pxp.idprov = :idprov GROUP BY mes ORDER BY mes ASC;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
+        return $result;
+    }
+    function ventasSemana(){
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT YEAR(c.fechareg) AS anio, WEEK(c.fechareg, 1) AS semana, SUM(c.cantidad) AS total_ventas, SUM(c.preciocom) AS valor_tot_ventas FROM pedido AS pd INNER JOIN compra AS c ON pd.idped = c.idped INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro WHERE pxp.idprov = :idprov GROUP BY anio, semana ORDER BY anio ASC, semana ASC;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
+        return $result;
+    }
+    function ventasDia(){
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT DATE(c.fechareg) AS dia, SUM(c.cantidad) AS total_ventas, SUM(c.preciocom) AS valor_tot_ventas FROM pedido AS pd INNER JOIN compra AS c ON pd.idped = c.idped INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro WHERE pxp.idprov = :idprov GROUP BY dia ORDER BY dia ASC;";
             $stmt = $conexion->prepare($query);
             $idprov = $this->getIdprov();
             $stmt->bindValue(':idprov', $idprov);
@@ -541,6 +571,36 @@ class Mprov
             $modelo = new Conexion();
             $conexion = $modelo->getConexion();
             $query = "SELECT p.nompro, SUM(c.cantidad) AS total_vendido FROM compra AS c INNER JOIN detallecompra AS dc ON dc.idcom = c.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov WHERE pv.idprov = :idprov GROUP BY p.idpro ORDER BY total_vendido DESC LIMIT 5;;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
+        return $result;
+    }
+    function cantReembolsos(){
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT COUNT(*) FROM ( SELECT DISTINCT dr.iddevo FROM pedido AS pd INNER JOIN devolucionreembolso AS dr ON pd.idped = dr.idped INNER JOIN compra AS c ON pd.idped = c.idped INNER JOIN detallecompra AS dc ON c.idcom = dc.idcom INNER JOIN producto AS p ON dc.idpro = p.idpro INNER JOIN prodxprov AS pxp ON p.idpro = pxp.idpro WHERE pxp.idprov = :idprov ) AS subquery;";
+            $stmt = $conexion->prepare($query);
+            $idprov = $this->getIdprov();
+            $stmt->bindValue(':idprov', $idprov);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
+        }
+        return $result;
+    }
+    function ventasCategoría(){
+        try {
+            $modelo = new Conexion();
+            $conexion = $modelo->getConexion();
+            $query = "SELECT v.nomval AS categoria, DATE_FORMAT(c.fechareg, '%a') AS periodo, COUNT(c.idcom) AS cantidad_ventas, SUM(c.preciocom) AS ventas FROM compra c INNER JOIN pedido pd ON c.idped = pd.idped INNER JOIN detalle_pedido dp ON pd.idped = dp.idped INNER JOIN producto p ON dp.idpro = p.idpro INNER JOIN prodxprov pxp ON p.idpro = pxp.idpro INNER JOIN valor v ON p.idval = v.idval WHERE pxp.idprov = :idprov GROUP BY categoria, periodo ORDER BY periodo;";
             $stmt = $conexion->prepare($query);
             $idprov = $this->getIdprov();
             $stmt->bindValue(':idprov', $idprov);

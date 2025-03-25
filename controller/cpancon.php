@@ -68,10 +68,15 @@ $dtTotalPedsPrv = $prov->getTotalPedsPrv();
 $dtMProductVend = $prov->getProductMVend();
 
 $dtVentasMes = $prov->ventasMes();
+$dtVentasSemana = $prov->ventasSemana();
+$dtVentasDia = $prov->ventasDia();
+
 $dtIngresosTotales = $prov->IngresosTotales();
 $dtProdMVend = $prov->productosMasVendidos();
 $dtMenVen = $prov->productosMenosVendidos();
-
+$dtCantReem = $prov->cantReembolsos();
+$dtVentasCatego = $prov->ventasCategoría();
+$dtProvRp = $prov->getOneProv();
 $saldo = $prov->traerSaldo($idProveedor);
 function getDtProv($idprov)
 {

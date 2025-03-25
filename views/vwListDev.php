@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-    <h5 class="title-items-panel">Reembolsos Pendientes</h5>
+        <h5 class="title-items-panel">Reembolsos Pendientes</h5>
         <div class="col-lg-12 card-margin">
             <div class="card search-form">
                 <div class="card-body p-0">
@@ -123,8 +123,8 @@
                                         <div class="table-options-bar mt-3 d-flex justify-content-end">
                                             <button type="button" class="btn me-2" id="editButton2" title="Editar"><i
                                                     class="bi bi-pen-fill"></i></button>
-                                            <button class="" id="deleteButton2" title="Cancelar" name="ope" value="cancel"><i
-                                                    class="bi bi-x-circle-fill"></i>
+                                            <button class="" id="deleteButton2" title="Cancelar" name="ope"
+                                                value="cancel"><i class="bi bi-x-circle-fill"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -175,29 +175,25 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form enctype="multipart/form-data" method="POST" id="formUpdatePed" action="../controller/cped.php">
+                <form enctype="multipart/form-data" method="POST" id="formUpdatePed" action="../controller/cdev.php">
                     <div class="row bx-st-ped">
                         <div class="col bx-st-ped_st">
                             <div>
-                                <i class="bi bi-send"></i>
-                                <label for="estped">Enviar</label>
-                                <input type="radio" name="estped" id="Enviar" value="Enviado">
+                                <i class="bi bi-check2-circle"></i>
+                                <label for="estado">Aprobar</label>
+                                <input type="radio" name="estado"  value="Reembolso En Proceso">
                             </div>
                             <div>
-                                <i class="bi bi-truck"></i>
-                                <label for="estped">En Tránsito</label>
-                                <input type="radio" name="estped" id="Transito" value="En Tránsito">
-                            </div>
-                            <div>
-                                <i class="bi bi-person-walking"></i>
-                                <label for="estped">En Reparto</label>
-                                <input type="radio" name="estped" id="Reparto" value="En Reparto">
+                                <i class="bi bi-bag-check"></i>
+                                <label for="estado">Finalizar</label>
+                                <input type="radio" name="estado" value="Devuelto">
                             </div>
                         </div>
                         <p id="msj-ped"></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" value="" name="idped2">
+                        <input type="hidden" name="ope" value="edi">
                         <input class="btn" type="submit" value="Actualizar">
                     </div>
                 </form>

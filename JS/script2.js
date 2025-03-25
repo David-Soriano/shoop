@@ -640,6 +640,10 @@ function populateModal(data) {
             idpaagInput.value = product.idpag;
         }
         // Verificar si el input 'idped' existe antes de actualizarlo
+        const idpedsInput = document.querySelector('[name="idped"]');
+        if (idpedsInput) {
+            idpedsInput.value = product.idped;
+        }
         const idpedInput = document.querySelector('[name="idped2"]');
         if (idpedInput) {
             idpedInput.value = product.idped;
