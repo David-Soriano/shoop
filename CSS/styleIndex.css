@@ -2606,8 +2606,12 @@ form button {
 
     footer {
         width: 102.5%;
+        height: auto;
+        padding: 4%;
     }
-
+    footer .col-sm-3{
+        margin: 2% 0;
+    }
     .bx_tusped-nompro {
         display: flex;
         flex-wrap: nowrap;

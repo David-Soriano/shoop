@@ -192,7 +192,7 @@ class Pedido
     function getPedPar()
     {
         $res = NULL;
-        $sql = "SELECT u.idusu, p.idped, p.fecha, p.total, p.estped, dp.iddet, dp.idpro, dp.cantidad, dp.precio AS precio_pedido, pr.nompro, pr.precio AS precio_producto, pr.tipro, pr.valorunitario, pr.descripcion, i.imgpro, i.nomimg, pv.nomprov FROM usuario u JOIN pedido p ON u.idusu = p.idusu JOIN detalle_pedido dp ON p.idped = dp.idped JOIN producto pr ON dp.idpro = pr.idpro LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON pr.idpro = i.idpro LEFT JOIN proveedor pv ON pv.idusu = u.idusu WHERE u.idusu = :idusu AND p.estped <> 'Recibido' ORDER BY p.fecha DESC; ";
+        $sql = "SELECT u.idusu, cp.fechareg, p.idped, p.fecha, p.total, p.estped, dp.iddet, dp.idpro, dp.cantidad, dp.precio AS precio_pedido, pr.nompro, pr.precio AS precio_producto, pr.tipro, pr.valorunitario, pr.descripcion, i.imgpro, i.nomimg, pv.nomprov FROM usuario u INNER JOIN compra AS cp ON u.idusu = cp.idusu JOIN pedido p ON u.idusu = p.idusu JOIN detalle_pedido dp ON p.idped = dp.idped JOIN producto pr ON dp.idpro = pr.idpro LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON pr.idpro = i.idpro LEFT JOIN proveedor pv ON pv.idusu = u.idusu WHERE u.idusu = :idusu AND p.estped <> 'Recibido' ORDER BY p.fecha DESC; ";
 
         try {
             $modelo = new Conexion();
@@ -211,7 +211,7 @@ class Pedido
     function seguirEnvio($idped)
     {
         $res = NULL;
-        $sql = "SELECT p.idped, p.idusu, p.total, p.fecha, p.estped, dp.iddet, dp.idped, dp.idpro, dp.cantidad, dp.precio AS precio_pedido, dp.mpago, dp.npago, pr.idpro, pr.nompro, pr.precio AS precio_producto, pr.pordescu, pr.idval, v.nomval, i.imgpro, i.nomimg, (pr.precio * (pr.pordescu / 100)) AS valor_descuento, (pr.precio - (pr.precio * (pr.pordescu / 100))) AS precio_final, pv.idprov, pv.nomprov, pv.desprv FROM pedido p INNER JOIN detalle_pedido dp ON p.idped = dp.idped INNER JOIN producto pr ON pr.idpro = dp.idpro INNER JOIN valor v ON v.idval = pr.idval INNER JOIN prodxprov AS pxp ON pxp.idpro = pr.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON pr.idpro = i.idpro WHERE p.idped = :idped;";
+        $sql = "SELECT p.idped, p.idusu, p.total, p.fecha, p.estped, dp.iddet, dp.idped, dp.idpro, dp.cantidad, dp.precio AS precio_pedido, dp.mpago, dp.npago, cp.fechareg, pr.idpro, pr.nompro, pr.precio AS precio_producto, pr.pordescu, pr.idval, v.nomval, i.imgpro, i.nomimg, (pr.precio * (pr.pordescu / 100)) AS valor_descuento, (pr.precio - (pr.precio * (pr.pordescu / 100))) AS precio_final, pr.valorunitario, pv.idprov, pv.nomprov, pv.desprv FROM pedido p INNER JOIN detalle_pedido dp ON p.idped = dp.idped INNER JOIN compra AS cp ON p.idped = cp.idped INNER JOIN producto pr ON pr.idpro = dp.idpro INNER JOIN valor v ON v.idval = pr.idval INNER JOIN prodxprov AS pxp ON pxp.idpro = pr.idpro INNER JOIN proveedor AS pv ON pxp.idprov = pv.idprov LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON pr.idpro = i.idpro WHERE p.idped = :idped;";
 
         try {
             $modelo = new Conexion();

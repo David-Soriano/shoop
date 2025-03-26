@@ -16,7 +16,21 @@ $dtSegEnv = segEnv($idped);
                             </div>
                         </div>
                         <?php if ($dts['estped'] == "Recibido") {
-                            echo "<p>Recibiste la compra el día 1 de Enero</p>";
+                            $fecha = "2025-03-26 09:55:02";
+                            $fecha_formateada = date("d F", strtotime($fecha));
+                            
+                            // Convertir el mes a español
+                            $meses = [
+                                "January" => "enero", "February" => "febrero", "March" => "marzo", "April" => "abril",
+                                "May" => "mayo", "June" => "junio", "July" => "julio", "August" => "agosto",
+                                "September" => "septiembre", "October" => "octubre", "November" => "noviembre", "December" => "diciembre"
+                            ];
+                            
+                            $fecha_formateada = str_replace(array_keys($meses), array_values($meses), $fecha_formateada);
+                            
+                            // Agregar "de" correctamente
+                            echo "<p>Recibiste la compra el día " . str_replace(" ", " de ", $fecha_formateada) . "</p>";                            
+                            
                         }
                 }
                 // Array con los estados posibles
@@ -67,7 +81,7 @@ $dtSegEnv = segEnv($idped);
                     <?php }
                         if ($dts['estped'] == "En Reparto") { ?>
                         <a href="#" class="btn btn-outline-success" id="btn-rec-ped" data-idped="<?= $dts['idped'] ?>"
-                            data-idprov="<?= $estado ?>">Recibido</a>
+                            data-idprov="<?= $dts['idprov'] ?>">Recibido</a>
                     <?php }
                         if ($estado == "Recibido") { ?>
                         <a href="home.php?pg=38&idped=<?= $idped ?>">Devolver</a>
@@ -168,7 +182,7 @@ $dtSegEnv = segEnv($idped);
                         <div class="row">
                             <div class="col-1 bx-seg-env-minf_inf-comp-ico"><i class="bi bi-receipt"></i></div>
                             <div class="col-11 bx-seg-env-minf_inf-comp-des">
-                                <p><?= $dtsd['nompro'] ?></p><a href="#">Descargar Factura</a>
+                                <p><?= $dtsd['nompro'] ?></p><a href="views/vwFactura.php?idped=<?= $dtsd['idped']?>">Descargar Factura</a>
                             </div>
                         </div>
                     </div>

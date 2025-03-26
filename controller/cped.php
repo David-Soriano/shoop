@@ -19,6 +19,7 @@ $idpedido = isset($_REQUEST['idped2']) ? intval($_REQUEST['idped2']) : NULL;
 $estadop = isset($_REQUEST['estped']) ? $_REQUEST['estped'] : NULL;
 
 $data = json_decode(file_get_contents("php://input"), true);
+logError("Data: " . json_encode($data));
 
 if (isset($data['estped'])) {
     $estadoPedido = $data['estped'];
@@ -48,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($resultado) {
                     try {
-                       enviarCorreoEstadoPedido($dtDtosUser['emausu'], 'Recibido', $dtDtosUser['nompro'], $dtDtosUser['dirrecusu'], $dtDtosUser['celusu'], $dtDtosUser['imgpro']);  
+                        enviarCorreoEstadoPedido($dtDtosUser['emausu'], 'Recibido', $dtDtosUser['nompro'], $dtDtosUser['dirrecusu'], $dtDtosUser['celusu'], $dtDtosUser['imgpro']);
                         // Obtener los datos del pedido y compra
                         $pedidoData = $pedido->getOne(); // Datos del pedido
                         $compra = new Compra();
@@ -66,10 +67,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $conn = $modelo->getConexion();
                         $total_sin_iva_comision = $total - $iva - $comision;
 
-
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                         $stmProveedor = $conn->prepare("UPDATE proveedor SET saldo = saldo + ? WHERE idprov = ?");
                         $stmProveedor->execute([$total_sin_iva_comision, $data['idprov']]);
 
+                        // Verificar si se actualizó el saldo
+                        if ($stmProveedor->rowCount() > 0) {
+                            logError("Saldo actualizado correctamente para idprov: {$data['idprov']}, monto: {$total_sin_iva_comision}");
+                        } else {
+                            logError("No se actualizó el saldo. ID no encontrado o saldo sin cambios. ID: {$data['idprov']}, Monto: {$total_sin_iva_comision}");
+                        }
                         // Guardar los datos de la compra
                         $compra->setTiproduct($pedidoData['nomval']);
                         $compra->setCantidad($pedidoData['cantidad']);
@@ -213,12 +220,12 @@ function enviarCorreoEstadoPedido($correoDestino, $estado, $producto, $direccion
                     <td width='65%' style='font-size: 17px; color: #1a1a1a; text-align: justify;'>
                         <p style='margin: 0 0 14px 0;'>$estado $producto</p>
                         <h5 style='text-align: justify; font-size: 14px; margin: 0;'>";
-                        if ($estado == 'Recibido') {
-                            $cuerpoHtml .= "Recibiste tu Compra";
-                        } else{
-                            $cuerpoHtml .= "Llegará pronto";
-                        }
-                        $cuerpoHtml .= "</h5>
+    if ($estado == 'Recibido') {
+        $cuerpoHtml .= "Recibiste tu Compra";
+    } else {
+        $cuerpoHtml .= "Llegará pronto";
+    }
+    $cuerpoHtml .= "</h5>
                     </td>
                     <td width='35%'>
                         <img src='https://shoop.ct.ws/$img' alt='Producto' style='width: 100%; max-width: 150px; display: block; margin: auto;'>
@@ -230,15 +237,15 @@ function enviarCorreoEstadoPedido($correoDestino, $estado, $producto, $direccion
             <table role='presentation' width='100%' style='display: block; padding: 3%; background: #FFF; margin-top: 4%; border-radius: 6px; border: 1px solid #e5e5e5;'>
                 <tr>
                     <td style='font-size: 17px; font-weight: 400; text-align: justify;'>";
-                    if ($estado == 'Enviado') {
-                        $cuerpoHtml .= "El pedido fue enviado y muy pronto llegará a tu destino. Te avisaremos cuando esté cerca.";
-                    } else if ($estado == 'En Reparto') {
-                        $cuerpoHtml .= "Nuestro repartidor está en tu zona. Prepárate para recibir tu pedido en cualquier momento.";
-                    } else if ($estado == 'Recibido') {
-                        $cuerpoHtml .= "Tu pedido ha sido entregado con éxito. Esperamos que lo disfrutes.";
-                    }
+    if ($estado == 'Enviado') {
+        $cuerpoHtml .= "El pedido fue enviado y muy pronto llegará a tu destino. Te avisaremos cuando esté cerca.";
+    } else if ($estado == 'En Reparto') {
+        $cuerpoHtml .= "Nuestro repartidor está en tu zona. Prepárate para recibir tu pedido en cualquier momento.";
+    } else if ($estado == 'Recibido') {
+        $cuerpoHtml .= "Tu pedido ha sido entregado con éxito. Esperamos que lo disfrutes.";
+    }
 
-$cuerpoHtml .="</td>
+    $cuerpoHtml .= "</td>
             </tr>
                 <tr>
                     <td style='font-size: 20px; margin: 0; text-align: justify;'><b>Detalles del envío:</b></td>
@@ -269,9 +276,9 @@ $cuerpoHtml .="</td>
 
 </html>";
 
-    if($estado == "Recibido"){
+    if ($estado == "Recibido") {
         $asunto = "Hola, ¡Llegué!";
-    } else{
+    } else {
         $asunto = "Estado del pedido";
     }
     enviarCorreo($correoDestino, $asunto, $cuerpoHtml);
@@ -309,6 +316,13 @@ function enviarCorreo($correoDestino, $asunto, $cuerpoHtml, $copiaOculta = null)
     } catch (\Exception $e) {
         error_log($e->getMessage(), 3, 'C:/xampp/htdocs/SHOOP/errors/error_log.log');
     }
+}
+
+function logError($message)
+{
+    $logFile = "C:/xampp/htdocs/SHOOP/errors/debug_log.log";
+    $timestamp = date("Y-m-d H:i:s");
+    file_put_contents($logFile, "[$timestamp] $message" . PHP_EOL, FILE_APPEND);
 }
 
 
