@@ -114,8 +114,8 @@ INSERT INTO `comisiones` (`idcomis`, `idcom`, `monto_total`, `comision`, `fecha`
 (3, 21, 350000.00, 24500.00, '2025-03-04 16:14:53'),
 (4, 22, 350000.00, 24500.00, '2025-03-04 16:19:51'),
 (5, 23, 30000.00, 2100.00, '2025-03-05 14:53:03'),
-(6, 24, 30000.00, 2100.00, '2025-03-06 15:05:05'),
-(7, 25, 30000.00, 2100.00, '2025-03-06 15:10:13');
+(7, 25, 30000.00, 2100.00, '2025-03-06 15:10:13'),
+(12, 30, 30000.00, 2100.00, '2025-03-26 14:55:02');
 
 -- --------------------------------------------------------
 
@@ -143,8 +143,8 @@ INSERT INTO `compra` (`idcom`, `tiproduct`, `cantidad`, `preciocom`, `idubi`, `i
 (21, 'Tecnología', '1', '296800', 47030, 20, 46, '2025-03-04 11:14:53'),
 (22, 'Tecnología', '1', '296800', 25175, 27, 47, '2025-03-04 11:19:51'),
 (23, 'Moda', '1', '37800', 25175, 27, 48, '2025-03-05 09:53:03'),
-(24, 'Moda', '1', '37800', 25175, 27, 49, '2025-03-06 10:05:05'),
-(25, 'Moda', '1', '37800', 25175, 27, 49, '2025-03-06 10:10:13');
+(25, 'Moda', '1', '37800', 25175, 27, 49, '2025-03-06 10:10:13'),
+(30, 'Moda', '1', '37800', 25175, 27, 54, '2025-03-26 09:55:02');
 
 -- --------------------------------------------------------
 
@@ -179,8 +179,6 @@ CREATE TABLE `detallecarrito` (
 --
 
 INSERT INTO `detallecarrito` (`iddetcar`, `idcar`, `idpro`, `cantidad`, `precar`) VALUES
-(22, 3, 163, 1, 37800),
-(23, 3, 164, 1, 296800),
 (25, 2, 164, 1, 296800);
 
 -- --------------------------------------------------------
@@ -208,8 +206,8 @@ INSERT INTO `detallecompra` (`iddell`, `subtotal`, `iva`, `total`, `idpro`, `dir
 (21, 249412, 66500, 296800, 164, 'Vereda la balsa', 21),
 (22, 249412, 66500, 296800, 164, 'Vereda la balsa calle 9a Sur', 22),
 (23, 31764.7, 5700, 37800, 163, 'Vereda la balsa calle 9a Sur', 23),
-(24, 31764.7, 5700, 37800, 163, 'Vereda la balsa calle 9a Sur', 24),
-(25, 31764.7, 5700, 37800, 163, 'Vereda la balsa calle 9a Sur', 25);
+(25, 31764.7, 5700, 37800, 163, 'Vereda la balsa calle 9a Sur', 25),
+(30, 31764.7, 5700, 37800, 163, 'Vereda la balsa calle 9a Sur', 30);
 
 -- --------------------------------------------------------
 
@@ -261,7 +259,8 @@ INSERT INTO `detalle_pedido` (`iddet`, `idped`, `idpro`, `cantidad`, `precio`, `
 (47, 49, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175),
 (48, 50, 164, 1, 296800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175),
 (49, 53, 164, 1, 296800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175),
-(50, 53, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175);
+(50, 53, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175),
+(51, 54, 163, 1, 37800.00, 'VISA', 'CREDIT_CARD', 'Vereda la balsa calle 9a Sur', 25175);
 
 -- --------------------------------------------------------
 
@@ -285,7 +284,7 @@ CREATE TABLE `devolucionreembolso` (
 --
 
 INSERT INTO `devolucionreembolso` (`iddevo`, `idped`, `idpro`, `motivo`, `fechasolicitud`, `estado`, `fechaprocesamiento`, `montoreembolso`) VALUES
-(4, 49, 163, 'Llegó en mal estado', '2025-03-19 15:39:01', 'pendiente', NULL, 37800);
+(4, 49, 163, 'Llegó en mal estado', '2025-03-19 15:39:01', 'Devuelto', NULL, 37800);
 
 -- --------------------------------------------------------
 
@@ -562,9 +561,10 @@ INSERT INTO `pedido` (`idped`, `idusu`, `total`, `fecha`, `estped`) VALUES
 (46, 20, 296800.00, '2025-03-04 16:13:44', 'Recibido'),
 (47, 27, 296800.00, '2025-03-04 16:18:42', 'Recibido'),
 (48, 27, 37800.00, '2025-03-05 14:05:12', 'Recibido'),
-(49, 27, 37800.00, '2025-03-05 17:01:13', 'Pendiente Reembolso'),
+(49, 27, 37800.00, '2025-03-05 17:01:13', 'Devuelto'),
 (50, 27, 296800.00, '2025-03-07 12:48:09', 'En Tránsito'),
-(53, 27, 334600.00, '2025-03-08 14:32:07', 'Enviado');
+(53, 27, 334600.00, '2025-03-08 14:32:07', 'Enviado'),
+(54, 27, 37800.00, '2025-03-26 14:36:35', 'Recibido');
 
 -- --------------------------------------------------------
 
@@ -651,7 +651,7 @@ INSERT INTO `producto` (`idpro`, `nompro`, `precio`, `cantidad`, `tipro`, `valor
 (160, 'Camisa Selección Argentina Año 2024 Hombre', 25200, 7, NULL, 20000, 'Camisa deportiva', '2025-03-01 13:37:42', '2025-03-01 13:42:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
 (161, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón deportiva año 2024', '2025-03-03 14:50:58', '2025-03-03 14:52:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
 (162, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 2, NULL, 30000, 'Camisa de algodón deportiva año 2024', '2025-03-03 14:50:58', '2025-03-03 14:51:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'inactivo', 0, 1, 0, NULL),
-(163, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 9, NULL, 30000, 'Camisa de algodón ', '2025-03-03 14:52:46', '2025-03-08 14:32:07', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 1, 5, NULL),
+(163, 'Camisa Selección Argentina Año 2024 Hombre', 37800, 8, NULL, 30000, 'Camisa de algodón ', '2025-03-03 14:52:46', '2025-03-26 14:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'activo', 0, 1, 10, NULL),
 (164, 'Teclado Mecánico K68', 371000, 4, NULL, 350000, 'Teclado con switches red color combinado inalámbrico. ', '2025-03-04 16:12:05', '2025-03-08 14:32:07', '2025-03-04 05:00:00', '2025-03-04 05:00:00', 'activo', 20, 2, 2, NULL);
 
 -- --------------------------------------------------------
@@ -701,7 +701,7 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`idprov`, `nomprov`, `dirrecprov`, `urlt`, `nit`, `idubi`, `idusu`, `desprv`, `saldo`, `estprv`) VALUES
-(82, 'DavidX', 'Calle 34 Bloque 4', 'shoop.com', '454112', 15001, 20, 'Todo lo que quieres a tu alcance y en un solo lugar', 531600.00, 'activo');
+(82, 'DavidX', 'Calle 34 Bloque 4', 'shoop.com', '454112', 15001, 20, 'Todo lo que quieres a tu alcance y en un solo lugar', 501600.00, 'activo');
 
 -- --------------------------------------------------------
 
@@ -2277,13 +2277,13 @@ ALTER TABLE `carrito`
 -- AUTO_INCREMENT de la tabla `comisiones`
 --
 ALTER TABLE `comisiones`
-  MODIFY `idcomis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idcomis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -2301,7 +2301,7 @@ ALTER TABLE `detallecarrito`
 -- AUTO_INCREMENT de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  MODIFY `iddell` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `iddell` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `detallefavoritos`
@@ -2313,7 +2313,7 @@ ALTER TABLE `detallefavoritos`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `iddet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `devolucionreembolso`
@@ -2349,7 +2349,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `ordenes_temporales`
 --
 ALTER TABLE `ordenes_temporales`
-  MODIFY `idord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idord` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pagina`
@@ -2373,7 +2373,7 @@ ALTER TABLE `pagxperfil`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `idped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
