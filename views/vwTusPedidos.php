@@ -39,7 +39,7 @@ include_once("controller/cped.php"); ?>
                                 <p class="bx_tusped-est-ped" <?php if ($dtpd['estped'] == "Cancelado") {
                                                                     echo "style='color:red;'";
                                                                 } ?>><?= $dtpd['estped'] ?></p>
-                                <p class="bx_tusped-ult-acc">Ultima Acción</p>
+                                <!-- <p class="bx_tusped-ult-acc">Ultima Acción</p> -->
                                 <div class="bx_tusped-inf-nompro">
                                     <p class="bx_tusped-nompro"><?= $dtpd['nompro'] ?></p>
                                     <p class="bx_tusped-nompro"><?= $dtpd['cantidad'] ?> Unidad</p>

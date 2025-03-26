@@ -102,10 +102,18 @@
                                                                 <div class="widget-26-job-category indicator-wrap bg-soft-success"
                                                                     style="<?php if ($dtp['estped'] == 'Pendiente Reembolso') {
                                                                         echo "background-color: #91f3657a;";
+                                                                    } else if($dtp['estped'] == 'Reembolso En Proceso'){
+                                                                        echo "background-color: #f3c233;";
+                                                                    } else if($dtp['estped'] == 'Devuelto'){
+                                                                        echo "background-color:rgb(130, 198, 253);";
                                                                     }
                                                                     ?>">
                                                                     <i class="indicator" style="<?php if ($dtp['estped'] == 'Pendiente Reembolso') {
                                                                         echo "background-color: #198754;";
+                                                                    } else if($dtp['estped'] == 'Reembolso En Proceso'){
+                                                                        echo "background-color:rgb(196, 147, 1);";
+                                                                    } else if($dtp['estped'] == 'Devuelto'){
+                                                                        echo "background-color:rgb(5, 86, 153);";
                                                                     }
                                                                     ?>"></i>
                                                                     <span><?= $dtp['estped']; ?></span>

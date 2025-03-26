@@ -258,7 +258,7 @@ class Compra
     function getCompras($idusu)
     {
         $res = NULL;
-        $sql = "SELECT u.idusu, c.idcom, c.tiproduct, c.fechareg, c.preciocom, c.cantidad, c.idubi, dc.iddell, dc.idpro, pr.nompro, pr.precio AS precio_producto, pr.tipro, pr.valorunitario, pr.descripcion, i.imgpro, i.nomimg, pv.nomprov, pd.idped, pd.estped FROM usuario u JOIN compra c ON u.idusu = c.idusu JOIN detallecompra dc ON c.idcom = dc.idcom JOIN producto pr ON dc.idpro = pr.idpro LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON pr.idpro = i.idpro LEFT JOIN proveedor pv ON pv.idusu = u.idusu INNER JOIN pedido pd ON c.idped = pd.idped WHERE u.idusu = :idusu AND pd.estped != 'Pendiente Reembolso' ORDER BY c.fechareg DESC;";
+        $sql = "SELECT u.idusu, c.idcom, c.tiproduct, c.fechareg, c.preciocom, c.cantidad, c.idubi, dc.iddell, dc.idpro, pr.nompro, pr.precio AS precio_producto, pr.tipro, pr.valorunitario, pr.descripcion, i.imgpro, i.nomimg, pv.nomprov, pd.idped, pd.estped FROM usuario u JOIN compra c ON u.idusu = c.idusu JOIN detallecompra dc ON c.idcom = dc.idcom JOIN producto pr ON dc.idpro = pr.idpro LEFT JOIN ( SELECT idpro, imgpro, nomimg FROM imagen WHERE (idpro, ordimg) IN ( SELECT idpro, MIN(ordimg) FROM imagen GROUP BY idpro ) ) i ON pr.idpro = i.idpro LEFT JOIN proveedor pv ON pv.idusu = u.idusu INNER JOIN pedido pd ON c.idped = pd.idped WHERE u.idusu = :idusu AND pd.estped != 'Pendiente Reembolso' AND pd.estped != 'Reembolso En Proceso' AND pd.estped != 'Devuelto' ORDER BY c.fechareg DESC;";
 
         try {
             $modelo = new Conexion();

@@ -124,9 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($idpedido || $idusu) {
     $pedido = new pedido();
     $compra = new Compra();
-    file_put_contents('C:/xampp\htdocs/SHOOP/errors/debug_log.log', "Id Pedido: " . print_r($idpedido, true) . "\n", FILE_APPEND);
-    file_put_contents('C:/xampp\htdocs/SHOOP/errors/debug_log.log', "EStado Ped: " . print_r($estadop, true) . "\n", FILE_APPEND);
-    file_put_contents('C:/xampp\htdocs/SHOOP/errors/debug_log.log', "Operación: " . print_r($ope, true) . "\n", FILE_APPEND);
 
     $pedido->setIdped($idpedido);
     $dtOnePed = $pedido->getOne();

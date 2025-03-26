@@ -24,21 +24,27 @@ $dtSegEnv = segEnv($idped);
                 ?>
                     <div class="d-flex align-items-center mt-5 bx-dot">
                         <?php foreach ($estados as $estado) {
-                            if ($dts['estped'] != "Cancelado") {
-                                $activeClass = ($dts['estped'] == $estado) ? 'dot-active' : '';
-                                if ($dts['estped'] == 'Pendiente Reembolso') {
-                                    echo "<p>El pedido esta pendiente de reembolso</p>";
-                                    break;
+                            
+                            if($dts['estped'] != "Pendiente Reembolso" AND $dts['estped'] != "Devuelto"){
+                                if ($dts['estped'] != "Cancelado") {
+                                    $activeClass = ($dts['estped'] == $estado) ? 'dot-active' : '';
+                                    if ($dts['estped'] == 'Pendiente Reembolso') {
+                                        echo "<p>El pedido esta pendiente de reembolso</p>";
+                                        break;
+                                    } else {
+                                        ?>
+                                        <div class="me-3 text-center">
+                                            <span class="dot <?= $activeClass; ?>"></span>
+                                            <p class="small"><?= $estado; ?></p>
+                                        </div>
+                                    <?php
+                                    }
                                 } else {
-                                    ?>
-                                    <div class="me-3 text-center">
-                                        <span class="dot <?= $activeClass; ?>"></span>
-                                        <p class="small"><?= $estado; ?></p>
-                                    </div>
-                                <?php
+                                    echo "<p>El pedido fue CANCELADO</p>";
+                                    break;
                                 }
-                            } else {
-                                echo "<p>El pedido fue CANCELADO</p>";
+                            } else{
+                                echo "<p>El pedido esta en proceso de reembolso o ya se a devuelto</p>";
                                 break;
                             }
                         } ?>
@@ -56,7 +62,7 @@ $dtSegEnv = segEnv($idped);
                     <a href="#" class="btn btn-outline-danger">Detalles</a>
                     <?php //foreach ($dtSegEnv as $dts) {
                     
-                        if ($estado != "En Tránsito" && $estado != "En Reparto" && $estado != "Recibido" && $estado != "Pendiente Reembolso") { ?>
+                        if ($estado != "En Tránsito" && $estado != "En Reparto" && $estado != "Recibido" && $estado != "Pendiente Reembolso"  && $estado != "Devuelto") { ?>
                         <a href="#" class="btn btn-link">Cancelar pedido</a>
                     <?php }
                         if ($dts['estped'] == "En Reparto") { ?>

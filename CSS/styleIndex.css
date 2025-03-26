@@ -354,12 +354,15 @@ footer {
     height: 20vh;
     width: 101%;
 }
-
-.bx-foot-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
+footer form button{
+    position: initial;
+    width: auto;
+    height: auto;
+    border-radius: 5px;
+    background: #000
+}
+footer a{
+    color: #d3d2d2;
 }
 
 .bx-social {
