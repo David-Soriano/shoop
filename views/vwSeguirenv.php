@@ -18,19 +18,28 @@ $dtSegEnv = segEnv($idped);
                         <?php if ($dts['estped'] == "Recibido") {
                             $fecha = "2025-03-26 09:55:02";
                             $fecha_formateada = date("d F", strtotime($fecha));
-                            
+
                             // Convertir el mes a español
                             $meses = [
-                                "January" => "enero", "February" => "febrero", "March" => "marzo", "April" => "abril",
-                                "May" => "mayo", "June" => "junio", "July" => "julio", "August" => "agosto",
-                                "September" => "septiembre", "October" => "octubre", "November" => "noviembre", "December" => "diciembre"
+                                "January" => "enero",
+                                "February" => "febrero",
+                                "March" => "marzo",
+                                "April" => "abril",
+                                "May" => "mayo",
+                                "June" => "junio",
+                                "July" => "julio",
+                                "August" => "agosto",
+                                "September" => "septiembre",
+                                "October" => "octubre",
+                                "November" => "noviembre",
+                                "December" => "diciembre"
                             ];
-                            
+
                             $fecha_formateada = str_replace(array_keys($meses), array_values($meses), $fecha_formateada);
-                            
+
                             // Agregar "de" correctamente
-                            echo "<p>Recibiste la compra el día " . str_replace(" ", " de ", $fecha_formateada) . "</p>";                            
-                            
+                            echo "<p>Recibiste la compra el día " . str_replace(" ", " de ", $fecha_formateada) . "</p>";
+
                         }
                 }
                 // Array con los estados posibles
@@ -38,8 +47,8 @@ $dtSegEnv = segEnv($idped);
                 ?>
                     <div class="d-flex align-items-center mt-5 bx-dot">
                         <?php foreach ($estados as $estado) {
-                            
-                            if($dts['estped'] != "Pendiente Reembolso" AND $dts['estped'] != "Devuelto"){
+
+                            if ($dts['estped'] != "Pendiente Reembolso" and $dts['estped'] != "Devuelto") {
                                 if ($dts['estped'] != "Cancelado") {
                                     $activeClass = ($dts['estped'] == $estado) ? 'dot-active' : '';
                                     if ($dts['estped'] == 'Pendiente Reembolso') {
@@ -51,13 +60,13 @@ $dtSegEnv = segEnv($idped);
                                             <span class="dot <?= $activeClass; ?>"></span>
                                             <p class="small"><?= $estado; ?></p>
                                         </div>
-                                    <?php
+                                        <?php
                                     }
                                 } else {
                                     echo "<p>El pedido fue CANCELADO</p>";
                                     break;
                                 }
-                            } else{
+                            } else {
                                 echo "<p>El pedido esta en proceso de reembolso o ya se a devuelto</p>";
                                 break;
                             }
@@ -73,10 +82,11 @@ $dtSegEnv = segEnv($idped);
                     $idpro = $dts['idpro'];
                 } ?>
                 <div class="d-flex justify-content-between align-items-center mt-5 mt-sm-3">
-                    <a href="#" class="btn btn-outline-danger">Detalles</a>
+                    <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">Detalles</a>
                     <?php //foreach ($dtSegEnv as $dts) {
                     
-                        if ($estado != "En Tránsito" && $estado != "En Reparto" && $estado != "Recibido" && $estado != "Pendiente Reembolso"  && $estado != "Devuelto") { ?>
+                        if ($estado != "En Tránsito" && $estado != "En Reparto" && $estado != "Recibido" && $estado != "Pendiente Reembolso" && $estado != "Devuelto") { ?>
                         <a href="#" class="btn btn-link">Cancelar pedido</a>
                     <?php }
                         if ($dts['estped'] == "En Reparto") { ?>
@@ -175,6 +185,7 @@ $dtSegEnv = segEnv($idped);
             </div>
         </div>
         <?php foreach ($dtSegEnv as $dtsd) {
+            $cantp = $dtsd['total_productos'];
             if ($dtsd['estped'] == "Recibido") { ?>
                 <div class="row bx-seg-env-minf">
                     <div class="col bx-seg-dt bx-seg-env-minf_help bx-seg-env-minf_inf-comp">
@@ -182,7 +193,8 @@ $dtSegEnv = segEnv($idped);
                         <div class="row">
                             <div class="col-1 bx-seg-env-minf_inf-comp-ico"><i class="bi bi-receipt"></i></div>
                             <div class="col-11 bx-seg-env-minf_inf-comp-des">
-                                <p><?= $dtsd['nompro'] ?></p><a href="views/vwFactura.php?idped=<?= $dtsd['idped']?>">Descargar Factura</a>
+                                <p><?= $dtsd['nompro'] ?></p><a href="views/vwFactura.php?idped=<?= $dtsd['idped'] ?>">Descargar
+                                    Factura</a>
                             </div>
                         </div>
                     </div>
@@ -199,3 +211,34 @@ $dtSegEnv = segEnv($idped);
         } ?>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><span><?= $cantp ?></span> Producto(s) En Tu Compra</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php foreach ($dtSegEnv as $dt) { ?>
+                    <a href="home.php?pg=001&idpro=<?= $dt['idpro'] ?>" class="bx-dtp">
+                        <div class="row">
+                            <div class="col-2 bx-dtp-image">
+                                <img src="<?= $dt['imgpro'] ?>" alt="<?= $dt['nompro'] ?>">
+                            </div>
+                            <div class="col">
+                                <p class="p-dtp-nmp"><?= $dt['nompro'] ?></p>
+                                <p class="p-dtp-und"><?= $dt['cantidad'] ?> Unidad</p>
+                            </div>
+                            <div class="col-1">
+                                <i class="bi bi-chevron-compact-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                <?php } ?>
+
+            </div>
+        </div>
+    </div>

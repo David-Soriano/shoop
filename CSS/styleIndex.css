@@ -1683,7 +1683,7 @@ form button {
 }
 
 .bx-tusped-gen-n2 {
-    width: 845px;
+    width: 90%;
 }
 
 .bx_tusped {
@@ -2136,6 +2136,35 @@ form button {
     justify-content: center;
 }
 
+.bx-dtp{
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding: 4% 0;
+    width: 100%;
+}
+.bx-dtp-image{
+    height: 48px;
+    margin-right: 16px;
+    min-width: 48px;
+}
+.bx-dtp-image img{
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+}
+.p-dtp-nmp{
+    color: rgba(0, 0, 0, .9);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.25;
+    margin: 0;
+}
+.p-dtp-und{
+    font-size: 14px;
+    font-weight: 400;
+    margin: 2px 0 0;
+}
 @media screen and (min-width: 1900px) {
     .bx-mr-prd.vistos a img {
         width: 80%;
