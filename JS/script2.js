@@ -381,7 +381,17 @@ function recibirPedido() {
         let idped = btn.dataset.idped;
         let idprov = btn.dataset.idprov;
         btn.addEventListener('click', () => {
-            updatePedData(idped, idprov, 'recibir'); // Aquí pasamos 'recibir' como operación
+            updatePedData(idped, idprov, 'recibir');
+        });
+    }
+}
+function cancelarPedido() {
+    let btn = document.getElementById("btn-can-ped");
+    if (btn) {
+        let idped = btn.dataset.idped;
+        let idprov = btn.dataset.idprov;
+        btn.addEventListener('click', () => {
+            updatePedData(idped, idprov, 'cancelar'); 
         });
     }
 }
@@ -413,6 +423,7 @@ function deleteProductData(idpro) {
         });
 }
 function updatePedData(idped, idprov, ope) {
+    console.log(idped, idprov, ope);
     fetch(`http://localhost/SHOOP/controller/cped.php`, {
         method: 'POST',
         headers: {
@@ -1118,6 +1129,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 document.addEventListener('DOMContentLoaded', function () {
     recibirPedido();
+    cancelarPedido();
 });
 window.addEventListener('load', () => {
     let vun = document.getElementById('valorunitario');

@@ -86,8 +86,9 @@ $dtSegEnv = segEnv($idped);
                         data-bs-target="#staticBackdrop">Detalles</a>
                     <?php //foreach ($dtSegEnv as $dts) {
                     
-                        if ($estado != "En Tránsito" && $estado != "En Reparto" && $estado != "Recibido" && $estado != "Pendiente Reembolso" && $estado != "Devuelto") { ?>
-                        <a href="#" class="btn btn-link">Cancelar pedido</a>
+                        if ($estado != "En Tránsito" && $estado != "En Reparto" && $estado != "Recibido" && $estado != "Pendiente Reembolso" && $estado != "Devuelto" && $estado != "Cancelado") { ?>
+                        <a href="#" class="btn btn-link" id="btn-can-ped" data-idped="<?= $dts['idped'] ?>"
+                        data-idprov="<?= $dts['idprov'] ?>">Cancelar pedido</a>
                     <?php }
                         if ($dts['estped'] == "En Reparto") { ?>
                         <a href="#" class="btn btn-outline-success" id="btn-rec-ped" data-idped="<?= $dts['idped'] ?>"

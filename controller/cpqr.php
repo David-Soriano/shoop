@@ -8,6 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require_once "../vendor/autoload.php";
 
+session_start();
 $idpqr = isset($_POST['idpqr']) ? $_POST['idpqr'] : null;
 $emausu = isset($_POST['emausu']) ? $_POST['emausu'] : null;
 $tippqr = isset($_POST['tippqr']) ? $_POST['tippqr'] : null;

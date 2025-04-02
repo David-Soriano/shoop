@@ -3,7 +3,7 @@
     echo $title; ?></span></h5>
     <div class="row bx-art-sg">
         <button class="btn-direct general lf" id="btn-left"><i class="bi bi-chevron-compact-left"></i></button>
-        <section class="section col d-flex align-items-center bx-mr-prd" id="product-section">
+        <section class="section col d-flex align-items-center bx-mr-prd suge" id="product-section">
             <?php if (!empty($data)) {
                 foreach ($data as $dt) { ?>
                     <a href="<?php if(session_status() === PHP_SESSION_NONE){
