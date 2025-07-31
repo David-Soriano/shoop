@@ -1,6 +1,8 @@
 # 🛒 Shoop - Tienda Online para Comercio Local
 
-![Logo de Shoop](./IMG/Logo_Fijo.jpg)
+🌐 [Ver sitio en línea](https://shoop.ct.ws/)
+
+![Logo de Shoop](./IMG/Logo_Fijo.png)
 
 Shoop es un ecommerce desarrollado como **proyecto de formación en el SENA** con el objetivo de impulsar el **comercio local**. Fue creado para conectar clientes y vendedores, permitir la compra online de productos de pequeños negocios y fortalecer así la economía de las comunidades.
 
@@ -19,7 +21,14 @@ Y a los clientes:
 
 ## 👨‍💻 Rol y equipo
 
-Este proyecto fue desarrollado por un equipo del SENA.  
+Este proyecto fue desarrollado como parte del proceso de formación en el Centro de Desarrollo Agroempresarial por el equipo:
+
+- David Soriano – Desarrollador principal (frontend y backend, integración PayU, lógica de negocio)
+- Dariana Marcela De la Cruz – Apoyo en documentación, pruebas y base de datos
+- Kevin Jhohan Galindo – Apoyo en pruebas, revisión y desarrollo de código, base de datos
+- Thomas Andres Bello – Colaboración en diseño de formularios y estructura
+- Deivid Alejandro Ruiz -  Apoyo en documentación y pruebas
+  
 Yo, **David Soriano**, me encargué de la mayor parte del **desarrollo frontend y backend**, incluyendo:
 
 - Maquetación completa en HTML y CSS
@@ -43,6 +52,18 @@ El equipo colaboró principalmente en:
 - MySQL
 - PayU (modo sandbox)
 - SMTP para envío de correos
+- Bootstrap
+- TCPDF
+- Highchar
+- Composer
+- JQuery
+
+---
+
+## 🔄️ Metodologías de desarrollo
+
+- SCRUM
+- RUP
 
 ---
 
@@ -51,8 +72,11 @@ El equipo colaboró principalmente en:
 - Registro e inicio de sesión de clientes
 - Catálogo dinámico de productos
 - Carrito de compras
+- Favoritos
 - Proceso de compra completo
 - Generación y envío de facturas
+- Balances de compras
+- Reportes de ventas
 - Integración con PayU
 - Base de datos relacional conectada por PHP
 
@@ -62,7 +86,7 @@ El equipo colaboró principalmente en:
 
 - Funcionalidad de mensajes cliente-vendedor
 - Ajustes menores en paneles administrativos
-- Optimización de tablas (ej. vendedores)
+- Optimización de tablas
 - Validaciones adicionales en formularios internos
 
 ---
@@ -74,3 +98,7 @@ _Agrega aquí screenshots si tienes (por ejemplo: página principal, carrito, fa
 ```markdown
 ![Inicio](./assets/captura-inicio.png)
 ![Carrito](./assets/captura-carrito.png)
+```
+## 🤓 Notas de Funcionalidades
+- 👉 Disponible en línea para pruebas funcionales.
+- ⚠️ Versión de pruebas conectada a PayU sandbox. No se realizan pagos reales.
