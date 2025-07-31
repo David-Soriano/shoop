@@ -1,6 +1,7 @@
 # 🛒 Shoop - Tienda Online para Comercio Local
 
 🌐 [Ver sitio en línea](https://shoop.ct.ws/)
+- 👉 Navegador Recomendado: Chrome
 
 ![Logo de Shoop](./IMG/Logo_Fijo.png)
 
@@ -96,10 +97,18 @@ El equipo colaboró principalmente en:
 
 ## 📸 Capturas de pantalla
 
-_Agrega aquí screenshots si tienes (por ejemplo: página principal, carrito, factura, etc.)_
+| Escritorio | Móvil |
+|-----------|-------|
+| ![Escritorio](IMG/Screenshots/Escritorio.png) | ![Móvil](IMG/Screenshots/movil.png) |
 
-![Inicio](./assets/captura-inicio.png)  
-![Carrito](./assets/captura-carrito.png)
+| Carrito | Compras |
+|--------|---------|
+| ![Carrito](IMG/Screenshots/carrito.png) | ![Compras](IMG/Screenshots/compras.png) |
+
+| Info Producto | Envío |
+|---------------|--------|
+| ![Info](IMG/Screenshots/info_prd.png) | ![Envío](IMG/Screenshots/seguir_envio.png) |
+
 
 ---
 
@@ -107,7 +116,50 @@ _Agrega aquí screenshots si tienes (por ejemplo: página principal, carrito, fa
 - 👉 Disponible en línea para pruebas funcionales.
 - ⚠️ Versión de pruebas conectada a PayU sandbox. No se realizan pagos reales.
 - 🌐 Navegador Recomendado: Chrome
-  
+
+## 📦 Instalación local (modo desarrollo)
+
+Sigue estos pasos para ejecutar el proyecto Shoop en tu entorno local usando XAMPP o similar:
+
+1. **Clona el repositorio**
+   Abre tu terminal y ejecuta:
+   ```bash
+   git clone https://github.com/tuusuario/shoop.git
+
+2. **Ubica el proyecto en la carpeta htdocs**
+    Copia la carpeta del proyecto dentro de la ruta:
+    ```bash
+    C:\xampp\htdocs\
+    ```
+3. **Importa la base de datos**
+   - Abre phpMyAdmin desde
+     ```bash
+     http://localhost/phpmyadmin
+   - Crea una base de datos con el nombre que usa tu proyecto (por ejemplo: shoop_db)
+   - Importa el archivo .sql que está en la carpeta /db del proyecto
+
+4. **Configura la conexión a la base de datos**
+    Abre el archivo conexion.php (o donde esté tu conexión) y ajusta según tu configuración local:
+    ```bash
+    $host = 'localhost';
+    $user = 'root';
+    $password = '';
+    $db = 'shoop_db';
+    ```
+
+5. **Activa el servidor**
+    Inicia Apache y MySQL desde el panel de control de XAMPP
+    
+    Abre tu navegador y accede a:
+    ```bash
+    http://localhost/shoop/
+    ```
+
+6. **Listo**
+    Ya puedes navegar el sitio como cliente, registrar productos y probar el flujo de compra completo.
+
+⚠️ Recuerda que la integración con PayU está en modo sandbox (pruebas). No se procesan pagos reales.
+
 ## 📄 Licencia
 - Proyecto académico sin fines comerciales.
 - Desarrollado como parte del proceso formativo del SENA – 2023 / 2025
