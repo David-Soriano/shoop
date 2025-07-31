@@ -88,6 +88,9 @@ El equipo colaboró principalmente en:
 - Ajustes menores en paneles administrativos
 - Optimización de tablas
 - Validaciones adicionales en formularios internos
+- Ayuda con la compra
+- Correo de suscripción
+- Términos y condiciones/Política de privacidad
 
 ---
 
@@ -103,7 +106,8 @@ _Agrega aquí screenshots si tienes (por ejemplo: página principal, carrito, fa
 ## 🤓 Notas de Funcionalidades
 - 👉 Disponible en línea para pruebas funcionales.
 - ⚠️ Versión de pruebas conectada a PayU sandbox. No se realizan pagos reales.
-
+- 🌐 Navegador Recomendado: Chrome
+  
 ## 📄 Licencia
 - Proyecto académico sin fines comerciales.
 - Desarrollado como parte del proceso formativo del SENA – 2023 / 2025
