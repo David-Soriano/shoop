@@ -161,7 +161,7 @@ Sigue estos pasos para ejecutar el proyecto Shoop en tu entorno local usando XAM
 ⚠️ Recuerda que la integración con PayU está en modo sandbox (pruebas). No se procesan pagos reales.
 
 > ⚠️ **Importante**:  
-> Para visualizar correctamente algunas funciones (como pasarela de pago o contenido externo), asegúrate de no tener bloqueadores de anuncios o extensiones similares activas en tu navegador.
+> Para visualizar correctamente algunas funciones (como pasarela de pago, banner de inicio o contenido externo), asegúrate de no tener bloqueadores de anuncios o extensiones similares activas en tu navegador.
 
 > 📝 **Nota**:  
 > El proyecto alojado en este repositorio puede diferir ligeramente en algunas funcionalidades, datos o productos respecto a la versión en línea. Esto se debe a mejoras continuas, pruebas y adaptaciones entre el entorno de desarrollo local y el entorno de producción.
