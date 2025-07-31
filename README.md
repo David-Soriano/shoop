@@ -1,6 +1,6 @@
 # 🛒 Shoop - Tienda Online para Comercio Local
 
-![Logo de Shoop](./assets/logo.png)
+![Logo de Shoop](./IMG/Logo_Fijo.jpg)
 
 Shoop es un ecommerce desarrollado como **proyecto de formación en el SENA** con el objetivo de impulsar el **comercio local**. Fue creado para conectar clientes y vendedores, permitir la compra online de productos de pequeños negocios y fortalecer así la economía de las comunidades.
 
