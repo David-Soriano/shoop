@@ -95,10 +95,15 @@ El equipo colaboró principalmente en:
 
 _Agrega aquí screenshots si tienes (por ejemplo: página principal, carrito, factura, etc.)_
 
-```markdown
-![Inicio](./assets/captura-inicio.png)
+![Inicio](./assets/captura-inicio.png)  
 ![Carrito](./assets/captura-carrito.png)
-```
+
+---
+
 ## 🤓 Notas de Funcionalidades
 - 👉 Disponible en línea para pruebas funcionales.
 - ⚠️ Versión de pruebas conectada a PayU sandbox. No se realizan pagos reales.
+
+## 📄 Licencia
+- Proyecto académico sin fines comerciales.
+- Desarrollado como parte del proceso formativo del SENA – 2023 / 2025
