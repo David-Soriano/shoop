@@ -135,16 +135,16 @@ Sigue estos pasos para ejecutar el proyecto Shoop en tu entorno local usando XAM
    - Abre phpMyAdmin desde
      ```bash
      http://localhost/phpmyadmin
-   - Crea una base de datos con el nombre que usa tu proyecto (por ejemplo: shoop_db)
-   - Importa el archivo .sql que está en la carpeta /db del proyecto
+   - Crea una base de datos con el nombre del proyecto shoop
+   - Importa el archivo shoop.sql que está en la carpeta /db del proyecto
 
 4. **Configura la conexión a la base de datos**
-    Abre el archivo conexion.php (o donde esté tu conexión) y ajusta según tu configuración local:
+    Abre el archivo datos.php en la carpeta model y ajusta según tu configuración local:
     ```bash
     $host = 'localhost';
     $user = 'root';
     $password = '';
-    $db = 'shoop_db';
+    $db = 'shoop';
     ```
 
 5. **Activa el servidor**
